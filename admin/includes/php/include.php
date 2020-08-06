@@ -5,6 +5,7 @@
  */
 
 require_once('includes/php/conn.php');
+require_once('includes/php/salt.php');
 require_once('includes/php/defaults.php');
 require_once('includes/php/creator.php');
 require_once('includes/php/login.php');

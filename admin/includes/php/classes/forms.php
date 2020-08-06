@@ -10,7 +10,7 @@ class Forms extends Queries
 {
     private $required = []; // array of required POST fields
     private $post = null; // POST data sanitized
-    private $salt = '';// SOME SALT \\
+    private $salt = $GLOBALS['salt']; // Password hash salt
 
     // List accepted forms
     private $forms = [

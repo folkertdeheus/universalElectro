@@ -1,2 +1,3 @@
 /admin/includes/php/conn.php
 /admin/includes/php/classes/login.php
+admin/includes/php/salt.php
