@@ -80,25 +80,33 @@ class Forms extends Queries
             return false;
         }
 
+        // Set variables
+        $username = htmlentities($_POST['username']);
+        $password = $_POST['password']; // No need for checking entities because of hash
+
         // Check if the username is unique
         // Fail if not
-        if ($this->countUserByUsername($_POST['username']) != 0) {
+        if ($this->countUserByUsername($username) != 0) {
             return false;
         }
 
         // Hash password
-        $salt = 'BlackbeardOnTheWheel';
-        $password = hash('whirlpool', $salt.$_POST['password']);
+        $salt = '';// SOME SALT \\
+        $password = hash('whirlpool', $salt.$password);
 
         // Insert username
-        $this->insertUser($_POST['username'], $password);
+        $this->insertUser($username, $password);
 
         // Insert log
-        if ($this->countUserByUsername($_POST['username']) == 1) {
+        if ($this->countUserByUsername($username) == 1) {
 
-            $desc = 'Added new user: '.$_POST['username'].' with ID '.$this->getUserByUsername($_POST['username'])['id'].'. By '.user();
+            // Set added description
+            $desc = 'Added new user: '.$username.' with ID '.$this->getUserByUsername($username)['id'].'. By '.user();
+        
         } else {
-            $desc = 'Failed to add new user: '.$_POST['username']. ' by '.user();
+
+            // Set failed description
+            $desc = 'Failed to add new user: '.$username. ' by '.user();
         }
         $this->insertLog('Users', 'Add', $desc);
     }
