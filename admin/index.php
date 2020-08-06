@@ -28,7 +28,7 @@ include('includes/php/include.php');
     <link rel="stylesheet" media="screen and (min-width: 600px) and (max-width: 799px)" href="includes/css/styleSmall.css">
     <link rel="stylesheet" media="screen and (max-width: 599px)" href="includes/css/styleMobile.css">
 
-    <link rel="icon" type="image/png" href="includes/images/logo.png">
+    <link rel="icon" type="image/png" href="../includes/images/logo.png">
 
     <script src="includes/js/adduser.js"></script>
     <script src="includes/js/edituser.js"></script>

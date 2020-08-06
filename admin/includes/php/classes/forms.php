@@ -264,6 +264,9 @@ class Forms extends Queries
 
     /**
      * Edit brand
+     * 
+     * @todo Updating an image without changing the name results in not changing the image, because the check says there's already an entry with the same name
+     * Resolve by checking against ID
      */
     private function editBrand()
     {
@@ -329,7 +332,7 @@ class Forms extends Queries
 
         // Check if brand name is unique
         // If not, stop executing
-        if ($this->countBrandByName($name) != 0) {
+        if ($this->countBrandByNameNotId($name, $id) != 0) {
             return false;
         }
 

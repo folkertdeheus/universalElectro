@@ -205,4 +205,26 @@ class Queries extends Db
     {
         $this->none('UPDATE `brands` SET `name` = ?, `image` = ?, `description` = ?, `website` = ? WHERE `id` = ?', array($name, $image, $description, $website, $id));
     }
+
+    /**
+     * Delete brand
+     * 
+     * @param int $id
+     */
+    public function deleteBrand($id)
+    {
+        $this->none('DELETE FROM `brands` WHERE `id` = ?', array($id));
+    }
+
+    /**
+     * Count brands by name where the id is not the given id
+     * 
+     * @param string $name
+     * @param int $id
+     * @return int
+     */
+    public function countBrandByNameNotId($name, $id)
+    {
+        return $this->one('SELECT COUNT(*) FROM `brands` WHERE `name` = ? AND `id` != ?', array($name, $id));
+    }
 }

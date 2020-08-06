@@ -8,6 +8,21 @@
 // Check if user is logged in when accessing this file
 if (login()) {
 
+    
+    // Check if a brand was deleted
+    if (isset($_GET['delete']) && $_GET['delete'] != null) {
+        
+        // Get brand information
+        $brand = $q->getBrandById($_GET['delete']);
+        
+        // Delete brand
+        $q->deleteBrand($brand['id']);
+        
+        // Insert Log
+        $q->insertLog('Brands', 'Delete', 'Deleted brand '.$brand['name'].' with ID '.$brand['id'].'. By '.user());
+    }
+
+    // Check if a setting is selected
     if (isset($_GET['sub']) && $_GET['sub'] != null) {
 
         switch($_GET['sub']) {
@@ -24,6 +39,7 @@ if (login()) {
             
             case '3':
                 // Delete
+                require_once('includes/pages/shop/brands/delete.php');
                 break;
 
             default:

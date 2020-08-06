@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This page contains the edit user form
+ * This page contains the delete user form
  */
 
 // Check if user is logged in when accessing this file
