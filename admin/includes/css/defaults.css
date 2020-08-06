@@ -1,0 +1,202 @@
+@import url('https://fonts.googleapis.com/css2?family=Oxygen:wght@300;700&family=Roboto&display=swap');
+
+@font-face {
+    src: url('../fonts/lazymonk.ttf');
+    font-family: Lazymonk;
+}
+
+:root {
+    --back: rgba(35, 31, 32, 1);
+    --main: rgba(255, 255, 255, 1);
+    --accent: rgba(0, 164, 225, 1);
+}
+
+html, body {
+    /* Background */
+    background-color: var(--back);
+
+    /* Font */
+    font-family: Roboto;
+    color: var(--accent);
+}
+
+header {
+    /* Font */
+    font-family: Oxygen;
+    color: var(--main);
+}
+
+header span {
+    /* Font */
+    font-weight: bold;
+}
+
+header a:link, header a:visited {
+    /* Font */
+    color: var(--main);
+    text-decoration: none;
+}
+
+header a:hover {
+    /* Font */
+    color: var(--main);
+    text-decoration: none;
+}
+
+.breadcrumbs a:link, .breadcrumbs a:visited {
+    /* Font */
+    color: var(--main);
+    text-decoration: none;
+}
+
+.breadcrumbs a:hover {
+    /* Font */
+    color: var(--accent);
+}
+
+.content {
+    /* Display flex */
+    display: flex;
+    flex-direction: column;
+}
+
+.toolbar {
+    /* Display */
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.toolbar a:link, .toolbar a:visited, .yesnobuttons a:link, .yesnobuttons a:link {
+    /* Display */
+    display: block;
+
+    /* Positioning */
+    padding: 20px;
+    max-width: 100%;
+   
+
+    /* Background */
+    background-color: var(--accent);
+    border-radius: 3px;
+
+    /* Font */
+    color: var(--back);
+
+    /* Animation */
+    transition: 0.5s;
+}
+
+.toolbar a:hover, .yesnobuttons a:hover {
+    /* Background */
+    background-color: var(--back);
+    outline: 1px solid var(--accent);
+    box-shadow: inset 0 0 10px var(--accent);
+
+    /* Font */
+    color: var(--main);
+
+    /* Animation */
+    transition: 0.5s;
+}
+
+.message {
+    /* Positioning */
+    margin-top: 20px;
+    padding: 20px;
+
+    /* Font */
+    text-align: center;
+    color: rgba(255, 0, 0, 1);
+}
+
+input, textarea, label {
+    /* Reset default layout */
+    background: none;
+    border: none;
+
+    /* Font */
+    font-family: Roboto;
+    color: var(--accent);
+    font-size: 20px;
+    padding: 10px;
+
+    /* Background */
+    border-bottom: 1px solid var(--accent);
+}
+
+label {
+    border-bottom: none;
+}
+
+input:focus, textarea:focus {
+    /* Background */
+    border: none;
+    box-shadow: inset 0 0 5px var(--accent);
+}
+
+a:link, a:visited {
+    /* Display */
+    display: block;
+    
+    /* Font */
+    text-decoration: none;
+}
+
+a:hover {
+    /* Display */
+    display: block;
+}
+
+.content table {
+    /* Positioning */
+    width: 100%;
+}
+
+td {
+    /* Positioning */
+    padding: 5px;
+
+    /* Background */
+    border: 1px solid var(--accent);
+}
+
+td img {
+    /* Image sizing */
+    max-width: 40px;
+}
+
+.icon {
+    /* Display */
+    display: inline-block;
+}
+
+.icon img {
+    /* Animation */
+    transition: 0.5s;
+}
+
+.icon img:hover {
+    /* Background */
+    filter: saturate(0) brightness(2.00);
+    transition: 0.5s;
+}
+
+.yesnobuttons {
+    /* Display flex */
+    display: flex;
+    flex-direction: row;
+
+    /* Positioning */
+    margin-top: 20px;
+}
+
+.yesnobuttons a {
+    margin-right: 20px;
+}
+
+main input, main textarea, main label {
+    display: block;
+    width: 400px;
+    margin: 0 auto;
+}

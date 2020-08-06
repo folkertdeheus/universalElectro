@@ -1,0 +1,234 @@
+@import url('https://fonts.googleapis.com/css2?family=Oxygen:wght@300;700&family=Roboto&display=swap');
+
+:root {
+    --grey: rgba(35, 31, 32, 1);
+    --light: rgba(64, 56, 58, 1);
+    --blue: rgba(0, 164, 225, 1);
+    --white: rgba(255, 255, 255, 1);
+
+    --background: url('../images/background.png');
+}
+
+html, body {
+    /* Global margin and padding */
+    margin: 0px;
+    padding: 0px;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+ 
+    /* Global coloring and fonts */
+    background-color: var(--grey);
+    font-family: Roboto;
+
+    /* Displaying */
+    display: grid;
+}
+
+input, textarea {
+    /* Background */
+    border: none;
+    background: none;
+
+    /* Font */
+    font-family: Roboto;
+    font-size: 20px;
+
+    /* Positioning */
+    padding: 5px;
+}
+
+input:focus, textarea:focus {
+    box-shadow: inset 0 0 3px var(--blue);
+}
+
+.quickenquiry {
+    /* Positioning */
+    position: fixed;
+    right: 0px;
+    top: 100px;
+    z-index: 5;
+    padding: 20px;
+
+    /* Background */
+    background-color: var(--blue);
+    border-radius: 2px;
+
+    /* Display flex */
+    display: flex;
+    flex-direction: row;
+
+    /* Font */
+    font-size: 20px;
+    color: var(--white);
+}
+
+.quickenquiry img {
+    width: 50px;
+    max-height: 100%;
+}
+
+.quickenquirybutton {
+    /* Display flex */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    /* Font */
+    color: var(--white);
+    text-align: center;
+
+    /* Positioning */
+    width: 75px;
+}
+
+.quickenquirycontent {
+    /* Display */
+    display: none;
+}
+
+.quickenquiry:hover .quickenquirycontent {
+    display: block;
+}
+
+.quickenquiry:hover .quickenquirybutton {
+    display: none;
+}
+
+.quickenquirycontent form {
+    /* Display grid */
+    display: grid;
+    grid-template-areas:
+        "firstname lastname"
+        "company email"
+        "phone . "
+        "message message"
+        "submit submit";
+}
+
+.qe_firstname {
+    /* Positioning */
+    grid-area: firstname;
+}
+
+.qe_lastname {
+    /* Positioning */
+    grid-area: lastname;
+}
+
+.qe_company {
+    /* Positioning */
+    grid-area: company;
+}
+
+.qe_phone {
+    /* Positioning */
+    grid-area: phone;
+}
+
+.qe_message {
+    /* Positioning */
+    grid-area: message;
+}
+
+.qe_submit {
+    /* Positioning */
+    grid-area: submit;
+}
+
+.quickenquiry input, .quickenquiry textarea {
+    /* Display */
+    display: block;
+
+    /* Positioning */
+    margin: 2px;
+
+    /* Font */
+    color: var(--grey);
+
+    /* Background */
+    background-color: var(--white);
+    border-radius: 2px;
+    border: none;
+}
+
+.quickenquirymessage {
+    /* Font */
+    font-size: 10px;
+
+    /* Positioning */
+    width: 500px;
+}
+
+.container {
+    /* Default display style */
+    display: grid;
+}
+
+header {
+    /* Font style */
+    font-family: 'Oxygen';
+    font-weight: 300;
+}
+
+.language {
+    /* Text */
+    color: var(--blue);
+    text-decoration: underline;
+    display: block;
+    padding: 10px;
+}
+
+.language:hover {
+    cursor: pointer;
+}
+
+.headerimage {
+    /* Header background image */
+    background: var(--background) no-repeat center center; 
+    background-size: cover;
+}
+
+main {
+    /* Background */
+    background-color: var(--white);
+    border-radius: 3px;
+
+    /* Text */
+    padding: 20px;
+    color: var(--grey);
+}
+
+footer {
+    /* White space above footer */
+    margin-top: 20px;
+
+    /* Background */
+    border-top: 1px solid var(--blue);
+}
+
+article {
+    /* Positioning */
+    margin-bottom: 40px;
+
+    /* Text */
+    text-align: justify;
+}
+
+.title {
+    /* Text */
+    color: var(--blue);
+    display: block;
+
+    /* Border */
+    border-bottom: 2px solid var(--blue);
+
+    /* Positioning */
+    padding: 20px;
+    margin-bottom: 20px;
+
+    /* Background */
+    background-color: var(--grey);
+    border-radius: 3px;
+}

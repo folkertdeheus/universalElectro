@@ -1,0 +1,155 @@
+body {
+    /* Display */
+    display: grid;
+    grid-template-columns: 1fr 800px 1fr;
+    grid-template-rows: 200px 50px auto auto;
+    align-content: center;
+    align-items: center;
+}
+
+header {
+    /* Grid positioning */
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+    height: 200px;
+    line-height: 100px;
+
+    /* Font */
+    font-size: 100px;
+}
+
+.breadcrumbs {
+    /* Grid positioning */
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+    width: 100%;
+
+    /* Background */
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+
+    /* Display flex */
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+
+    /* Font */
+    line-height: 50px;
+}
+
+main {
+    /* Grid positioning */
+    grid-column: 2 / 3;
+    grid-row: 3 / 4;
+    margin-top: 20px;
+
+    /* Display grid */
+    display: grid;
+    grid-template-columns: 800px;
+    grid-template-rows: 300px 200px auto;
+}
+
+.content {
+    /* Grid positioning */
+    grid-column: 1 / 3;
+    grid-row: 1 / 4;
+}
+
+.menutop {
+    /* Grid positioning */
+    grid-column: 1 / 3;
+    grid-row: 1 / 2;
+
+    /* Display flex */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.menutop .menublock {
+    /* Background */
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+    background: linear-gradient(to right, var(--back) 80%, var(--accent));
+
+    /* Positioning */
+    width: 300px;
+    padding: 20px;
+
+    /* Display */
+    display: flex;
+    justify-content: space-between;
+}
+
+.menublock a:link, .menublock a:visited {
+    color: var(--accent);
+}
+
+.menublock a:hover {
+    color: var(--main);
+}
+
+.menublock .menuright {
+    color: var(--main);
+}
+
+.menuright a:link, .menuright a:visited {
+    color: var(--main);
+}
+
+.menuright a:hover {
+    color: var(--accent);
+}
+
+.menubottom, .menusettings {
+    /* Grid positioning */
+    grid-column: 1 / 3;
+    grid-row: 2 / 3;
+    margin-top: 20px;
+
+    /* Display flex */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.menubottom .menublock, .menusettings .menublock {
+    /* Background */
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+    background: linear-gradient(to right, var(--back) 80%, var(--accent));
+
+    /* Positioning */
+    width: 160px;
+    padding: 20px;
+
+    /* Display */
+    display: flex;
+    justify-content: space-between;
+}
+
+.menublock {
+    /* Font */
+    font-size: 30px;
+}
+
+.menuright a {
+    /* Font */
+    font-size: 20px;
+    text-align: right;
+
+    /* Positioning */
+    margin: 15px;
+}
+
+.menusettings {
+    /* Grid positioning override on .menubottom */
+    grid-row: 1 / 2;
+}
+
+footer {
+    /* Grid positioning */
+    grid-column: 2 / 3;
+    grid-row: 4 / 5;
+    margin-top: 20px;
+}

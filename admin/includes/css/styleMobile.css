@@ -1,0 +1,133 @@
+body {
+    /* Display */
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+}
+
+header {
+    /* Positioning */
+    height: 100px;
+    line-height: 50px;
+
+    /* Font */
+    font-size: 50px;
+}
+
+.breadcrumbs {
+    /* Grid positioning */
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+    width: 100%;
+
+    /* Background */
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+
+    /* Display flex */
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+
+    /* Font */
+    line-height: 30px;
+}
+
+main {
+    /* Positioning */
+    margin-top: 20px;
+
+    /* Display flex */
+    display: flex;
+    flex-direction: column;
+}
+
+.content input {
+    width: 80vw;
+}
+
+.menutop {
+    /* Display flex */
+    display: flex;
+    flex-direction: column;
+}
+
+.menutop .menublock {
+    /* Background */
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+    background: linear-gradient(to right, var(--back) 80%, var(--accent));
+
+    /* Positioning */
+    width: calc(100%-20px);
+    padding: 20px;
+    margin-bottom: 20px;
+
+    /* Display */
+    display: flex;
+    justify-content: space-between;
+}
+
+.menublock a:link, .menublock a:visited {
+    color: var(--accent);
+}
+
+.menublock a:hover {
+    color: var(--main);
+}
+
+.menublock .menuright {
+    color: var(--main);
+}
+
+.menuright a:link, .menuright a:visited {
+    color: var(--main);
+}
+
+.menuright a:hover {
+    color: var(--accent);
+}
+
+.menubottom, .menusettings {
+    /* Display flex */
+    display: flex;
+    flex-direction: column;
+
+    width: calc(100vw - 20px);
+}
+
+.menubottom .menublock, .menusettings .menublock {
+    /* Background */
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+    background: linear-gradient(to right, var(--back) 80%, var(--accent));
+
+    /* Positioning */
+    width: calc(100%-20px);
+    padding: 20px;
+    margin-bottom: 20px;
+
+    /* Display */
+    display: flex;
+    justify-content: space-between;
+}
+
+.menublock {
+    /* Font */
+    font-size: 30px;
+}
+
+.menuright a {
+    /* Font */
+    font-size: 20px;
+    text-align: right;
+
+    /* Positioning */
+    margin: 15px;
+}
+
+footer {
+    /* Grid positioning */
+    margin-top: 20px;
+}
