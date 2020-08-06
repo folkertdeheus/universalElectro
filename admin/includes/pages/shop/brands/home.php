@@ -28,15 +28,15 @@ if (login()) {
                         <td>Image</td>
                         <td>Description</td>
                         <td>Website</td>
-                        <td></td>
-                        <td></td>
+                        <td class="icon">&nbsp;</td>
+                        <td class="icon">&nbsp;</td>
                     </tr>
 <?php
                     foreach($brands as $brandKey => $brandValue) {
 ?>
                         <tr>
                             <td><?= $brandValue['name']; ?></td>
-                            <td><?= $brandValue['image']; ?></td>
+                            <td><img src="<?= $brandValue['image']; ?>" alt="logo preview" /></td>
                             <td><?= $brandValue['description']; ?></td>
                             <td><?= $brandValue['website']; ?></td>
                             <td class="icon"><a href="index.php?page=2&action=3&sub=2&id=<?= $brandValue['id']; ?>"><img src="includes/images/edit.png" alt="edit" /></a></td>

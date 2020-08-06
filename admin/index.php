@@ -31,6 +31,7 @@ include('includes/php/include.php');
     <link rel="icon" type="image/png" href="includes/images/logo.png">
 
     <script src="includes/js/adduser.js"></script>
+    <script src="includes/js/editbrand.js"></script>
 </head>
 
 <body>

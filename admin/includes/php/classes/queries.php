@@ -180,4 +180,29 @@ class Queries extends Db
     {
         return $this->all('SELECT * FROM `brands` ORDER BY `name` ASC');
     }
+
+    /**
+     * Get brand by id
+     * 
+     * @param int $id
+     * @return array
+     */
+    public function getBrandById($id)
+    {
+        return $this->row('SELECT * FROM `brands` WHERE `id` = ?', array($id));
+    }
+
+    /**
+     * Edit brand
+     * 
+     * @param string $name
+     * @param string $image
+     * @param string $description
+     * @param string $website
+     * @param int $id
+     */
+    public function editBrands($name, $image, $description, $website, $id)
+    {
+        $this->none('UPDATE `brands` SET `name` = ?, `image` = ?, `description` = ?, `website` = ? WHERE `id` = ?', array($name, $image, $description, $website, $id));
+    }
 }

@@ -29,8 +29,8 @@ if (login()) {
                     <tr>
                         <td>ID</td>
                         <td>Username</td>
-                        <td></td>
-                        <td></td>
+                        <td class="icon">&nbsp;</td>
+                        <td class="icon">&nbsp;</td>
                     </tr>
 <?php
                 foreach($users as $userKey => $userValue) {

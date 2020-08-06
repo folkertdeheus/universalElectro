@@ -46,6 +46,28 @@ if (login()) {
                             // Brands
                             echo '&nbsp;>&nbsp;<a href="index.php?page=2&action=3">Brands</a>';
                             
+                            // Check if the sub navigation is set
+                            if (isset($_GET['sub']) && $_GET['sub'] != null) {
+
+                                switch($_GET['sub']) {
+
+                                    case '1':
+                                        // Add
+                                        echo '&nbsp;>&nbsp;<a href="index.php?page=2&action=3&sub=1">Add brand</a>';
+                                        break;
+
+                                    case '2':
+                                        // Edit
+                                        echo '&nbsp;>&nbsp;<a href="index.php?page=2&action=3&sub=2&id='.$_GET['id'].'">Edit brand</a>';
+                                        break;
+
+                                    case '3':
+                                        // Delete
+                                        echo '&nbsp;>&nbsp;<a href="index.php?page=2&action=3&sub=3&id='.$_GET['id'].'">Delete brand</a>';
+                                        break;
+                                }
+                            }
+
                             break;
                     }
                 }

@@ -10,13 +10,14 @@ class Forms extends Queries
 {
     private $required = []; // array of required POST fields
     private $post = null; // POST data sanitized
-    private $salt = $GLOBALS['salt']; // Password hash salt
+    private $salt = null; // Password hash salt, set in constructor
 
     // List accepted forms
     private $forms = [
         'addUser',
         'editUser',
-        'addBrand'
+        'addBrand',
+        'editBrand'
     ];
     
 
@@ -27,6 +28,8 @@ class Forms extends Queries
      */
     function __construct()
     {
+        $this->salt = $GLOBALS['salt'];
+
         if (isset($_POST['form']) && in_array($_POST['form'],$this->forms)) {
             $form = $_POST['form']; // Direct handling isn't allowed, so one variable needed
             $this->$form();
@@ -256,6 +259,96 @@ class Forms extends Queries
 
             // Failed
             $this->insertLog('Brands', 'Add', 'Adding brand '.$name. 'failed. By '.user());
+        }
+    }
+
+    /**
+     * Edit brand
+     */
+    private function editBrand()
+    {
+        // Set required $_POST fields
+        $this->setReq('name');
+
+        // Check if all required items are posted
+        // Fail if not
+        if (!$this->checkReq()) {
+            return false;
+        }
+
+        // Set variables
+        $name = htmlentities($_POST['name']);
+        $description = htmlentities($_POST['description']);
+        $website = htmlentities($_POST['website']);
+        $id = htmlentities($_POST['id']);
+
+        // Upload file
+
+        // File naming
+        $path = '../includes/brands/';
+        $file = basename($_FILES['image']['name']);
+        $filename = pathinfo($file, PATHINFO_FILENAME);
+        $extension = pathinfo($file, PATHINFO_EXTENSION);
+        
+        // Accepted files
+        $acceptedFileTypes = ['jpg', 'jpeg', 'png', 'gif'];
+    
+        // Check if file exists
+        // If exists, rename with number added
+        $base = $filename;
+        
+        // Continue numbering until unique name is found
+        for ($i = 1; file_exists($path.$filename.'.'.$extension); $i++) {
+            $filename = $base.$i;
+        }
+
+        // Check if file is accepted file type
+        // If not, stop executing
+        if (!in_array($extension, $acceptedFileTypes)) {
+            return;
+        }
+
+        // Set destination path
+        $filepath = $path.$filename.'.'.$extension;
+
+        // Upload file
+        if (!move_uploaded_file($_FILES['image']['tmp_name'], $filepath)) {
+            
+            // File upload failed
+            $filesError = null;
+            foreach($_FILES as $value) {
+                $filesError = $filesError.$value.' ';
+            }
+
+            // Insert log
+            $this->insertLog('Brands', 'Edit', 'Edit brand failed, image upload error: '.$filesError.'. By '.user());
+            return;
+        }
+
+        // Continue with database adding
+
+        // Check if brand name is unique
+        // If not, stop executing
+        if ($this->countBrandByName($name) != 0) {
+            return false;
+        }
+
+        // Get original brand data
+        $brand = $this->getBrandById($id);
+
+        // Add brand
+        $this->editBrands($name, $filepath, $description, $website, $id);
+
+        // Insert log
+        if ($this->countBrandByName($name) == 1) {
+
+            // Succes
+            $this->insertLog('Brands', 'Edit', 'Editted brand '.$brand['name'].' to '.$name.' with ID '.$id.'. By '.user());
+        
+        } else {
+
+            // Failed
+            $this->insertLog('Brands', 'Edit', 'Editting brand '.$brand['name']. ' with ID '.$id.' failed. By '.user());
         }
     }
 }

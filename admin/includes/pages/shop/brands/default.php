@@ -19,6 +19,7 @@ if (login()) {
             
             case '2':
                 // Edit
+                require_once('includes/pages/shop/brands/edit.php');
                 break;
             
             case '3':
