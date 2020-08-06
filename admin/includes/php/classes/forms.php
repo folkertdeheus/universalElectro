@@ -10,6 +10,7 @@ class Forms extends Queries
 {
     private $required = []; // array of required POST fields
     private $post = null; // POST data sanitized
+    private $salt = '';// SOME SALT \\
 
     // List accepted forms
     private $forms = [
@@ -91,8 +92,7 @@ class Forms extends Queries
         }
 
         // Hash password
-        $salt = '';// SOME SALT \\
-        $password = hash('whirlpool', $salt.$password);
+        $password = hash('whirlpool', $this->salt.$password);
 
         // Insert username
         $this->insertUser($username, $password);
@@ -127,22 +127,26 @@ class Forms extends Queries
             return false;
         }
 
-        $user = $this->getUserById($_POST['id']);
+        // Set variables
+        $id = htmlentites($_POST['id']);
+        $username = htmlentities($_POST['username']);
+        $user = $this->getUserById($id);
+        $password = $_POST['password'];
+        $rpassword = $_POST['rpassword'];
 
         // Check if password is changed or only the username
-        if (isset($_POST['password']) && $_POST['password'] != null) {
+        if (isset($password) && $password != null) {
 
             // Change password
 
             // Check if password is the same as the repeated password
-            if ($_POST['password'] == $_POST['rpassword']) {
+            if ($password == $rpassword) {
 
                 // Hash password
-                $salt = 'BlackbeardOnTheWheel';
-                $password = hash('whirlpool', $salt.$_POST['password']);
+                $password = hash('whirlpool', $this->salt.$password);
 
                 // Update password
-                $this->updatePassword($password, $_POST['id']);
+                $this->updatePassword($password, $id);
 
                 // Insert log
                 $this->insertLog('Users', 'Edit', 'Editted user password '.$user['username'].' with ID '.$user['id'].'. By '.user());
@@ -157,10 +161,10 @@ class Forms extends Queries
         // Change username
 
         // Check if username is unique. If not, don't change it
-        if ($this->countUserByUsername($_POST['username']) == 0) {
+        if ($this->countUserByUsername($username) == 0) {
             
             // Update username
-            $this->updateUsername($_POST['username'], $_POST['id']);
+            $this->updateUsername($username, $id);
 
             // Insert log
             $this->insertLog('Users', 'Edit', 'Edit user username '.$user['username']. 'with ID '.$user['id'].' changed to '.$_POST['username'].'. By '.user());
@@ -182,6 +186,11 @@ class Forms extends Queries
         if (!$this->checkReq()) {
             return false;
         }
+
+        // Set variables
+        $name = htmlentities($_POST['name']);
+        $description = htmlentities($_POST['description']);
+        $website = htmlentities($_POST['website']);
 
         // Upload file
 
@@ -230,21 +239,23 @@ class Forms extends Queries
 
         // Check if brand name is unique
         // If not, stop executing
-        if ($this->countBrandByName($_POST['name']) != 0) {
+        if ($this->countBrandByName($name) != 0) {
             return false;
         }
 
-        $this->addBrands($_POST['name'], $filepath, $_POST['description'], $_POST['website']);
+        // Add brand
+        $this->addBrands($name, $filepath, $description, $website);
 
         // Insert log
-        if ($this->countBrandByName($_POST['name']) == 1) {
+        if ($this->countBrandByName($name) == 1) {
 
             // Succes
-            $this->insertLog('Brands', 'Add', 'Added brand '.$_POST['name'].' with ID '.$this->getBrandByName($_POST['name'])['id'].'. By '.user());
+            $this->insertLog('Brands', 'Add', 'Added brand '.$name.' with ID '.$this->getBrandByName($name)['id'].'. By '.user());
+        
         } else {
 
             // Failed
-            $this->insertLog('Brands', 'Add', 'Adding brand '.$_POST['name']. 'failed. By '.user());
+            $this->insertLog('Brands', 'Add', 'Adding brand '.$name. 'failed. By '.user());
         }
     }
 }
