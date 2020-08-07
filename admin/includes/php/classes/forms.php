@@ -85,10 +85,8 @@ class Forms extends Queries
 
     /**
      * This function adds a new user of the CMS
-     * 
-     * @return boolean
      */
-    private function addUser()
+    private function addUser() : void
     {
         // Set required $_POST fields
         $this->setReq('username', 'password', 'rpassword');
@@ -96,7 +94,9 @@ class Forms extends Queries
         // Check if all required items are posted
         // Fail if not
         if (!$this->checkReq()) {
-            return false;
+
+            $this->insertLog('Users', 'Add', 'Adding new user failed, required fields are not set. By '.user());
+            return;
         }
 
         // Set variables
@@ -106,35 +106,31 @@ class Forms extends Queries
         // Check if the username is unique
         // Fail if not
         if ($this->countUserByUsername($username) != 0) {
-            return false;
+
+            $this->insertLog('Users', 'Add', 'Adding new user failed, username '.$username.' not unique. By '.user());
+            return;
         }
 
         // Hash password
         $password = hash('whirlpool', $this->salt.$password);
 
-        // Insert username
-        $this->insertUser($username, $password);
+        // Insert user
+        if ($this->insertUser($username, $password) == 1) {
 
-        // Insert log
-        if ($this->countUserByUsername($username) == 1) {
-
-            // Set added description
-            $desc = 'Added new user: '.$username.' with ID '.$this->getUserByUsername($username)['id'].'. By '.user();
+            // Succes
+            $this->insertLog('Users', 'Add', 'Added new user: '.$username.' with ID '.$this->getUserByUsername($username)['id'].'. By '.user());
         
         } else {
 
-            // Set failed description
-            $desc = 'Failed to add new user: '.$username. ' by '.user();
+            // Failed
+            $this->insertLog('Users', 'Add', 'Failed to add new user: '.$username. ' by '.user());
         }
-        $this->insertLog('Users', 'Add', $desc);
     }
 
     /**
      * This functions edits a user of the CMS
-     * 
-     * @return boolean
      */
-    private function editUser()
+    private function editUser() : void
     {
         // Set required $_POST fields
         $this->setReq('username');
@@ -142,11 +138,13 @@ class Forms extends Queries
         // Check if all required items are posted
         // Fail if not
         if (!$this->checkReq()) {
-            return false;
+
+            $this->insertLog('Users', 'Edit', 'Editting user failed, required fields are not set. By '.user());
+            return;
         }
 
         // Set variables
-        $id = htmlentites($_POST['id']);
+        $id = $this->isId($_POST['id']);
         $username = htmlentities($_POST['username']);
         $user = $this->getUserById($id);
         $password = $_POST['password'];
@@ -179,22 +177,30 @@ class Forms extends Queries
         // Change username
 
         // Check if username is unique. If not, don't change it
-        if ($this->countUserByUsername($username) == 0) {
-            
-            // Update username
-            $this->updateUsername($username, $id);
+        if ($this->countUserByUsername($username) != 0) {
 
             // Insert log
+            $this->insertLog('Users', 'Edit', 'Editting user '.$user['username'].' to '.$name.' failed, duplicate username. By '.user());
+            return;
+        }
+            
+        // Update username
+        if ($this->updateUsername($username, $id) == 1) {
+
+            // Succes
             $this->insertLog('Users', 'Edit', 'Edit user username '.$user['username']. 'with ID '.$user['id'].' changed to '.$_POST['username'].'. By '.user());
+        
+        } else {
+
+            // Failed
+            $this->insertLog('Users', 'Edit', 'Edit user username '.$user['username']).' failed. By '.user());
         }
     }
 
     /**
      * Add brand
-     * 
-     * @return boolean
      */
-    private function addBrand()
+    private function addBrand() : void
     {
         // Set required $_POST fields
         $this->setReq('name');
@@ -202,7 +208,9 @@ class Forms extends Queries
         // Check if all required items are posted
         // Fail if not
         if (!$this->checkReq()) {
-            return false;
+
+            $this->insertLog('Brands', 'Add', 'Adding brand failed, required fields are not set. By '.user());
+            return;
         }
 
         // Set variables
@@ -275,10 +283,7 @@ class Forms extends Queries
         }
 
         // Add brand
-        $this->addBrands($name, $filepath, $description, $website);
-
-        // Insert log
-        if ($this->countBrandByName($name) == 1) {
+        if ($this->addBrands($name, $filepath, $description, $website) == 1) {
 
             // Succes
             $this->insertLog('Brands', 'Add', 'Added brand '.$name.' with ID '.$this->getBrandByName($name)['id'].'. By '.user());
@@ -293,7 +298,7 @@ class Forms extends Queries
     /**
      * Edit brand
      */
-    private function editBrand()
+    private function editBrand() : void
     {
         // Set required $_POST fields
         $this->setReq('name');
@@ -301,6 +306,8 @@ class Forms extends Queries
         // Check if all required items are posted
         // Fail if not
         if (!$this->checkReq()) {
+
+            $this->insertLog('Brands', 'Edit', 'Editting brand failed, required fields are not set. By '.user());
             return;
         }
 
@@ -308,7 +315,7 @@ class Forms extends Queries
         $name = htmlentities($_POST['name']);
         $description = htmlentities($_POST['description']);
         $website = htmlentities($_POST['website']);
-        $id = htmlentities($_POST['id']);
+        $id = $this->isId($_POST['id']);
 
         // Upload file
 
@@ -358,17 +365,16 @@ class Forms extends Queries
         // Check if brand name is unique
         // If not, stop executing
         if ($this->countBrandByNameNotId($name, $id) != 0) {
-            return false;
+
+            $this->insertLog('Brands', 'Edit', 'Edit brand failed, new name ('.$name.') is not unique');
+            return;
         }
 
         // Get original brand data
         $brand = $this->getBrandById($id);
 
         // Add brand
-        $this->editBrands($name, $filepath, $description, $website, $id);
-
-        // Insert log
-        if ($this->countBrandByName($name) == 1) {
+        if ($this->editBrands($name, $filepath, $description, $website, $id) == 1) {
 
             // Succes
             $this->insertLog('Brands', 'Edit', 'Editted brand '.$brand['name'].' to '.$name.' with ID '.$id.'. By '.user());
@@ -393,7 +399,6 @@ class Forms extends Queries
         if (!$this->checkReq()) {
 
             $this->insertLog('Product Categories', 'Add', 'Adding product category '.$name. 'failed, not all required fields are set. By '.user());
-
             return;
         }
 
@@ -405,19 +410,18 @@ class Forms extends Queries
         if ($this->countCategoriesByName($name) != 0) {
 
             $this->insertLog('Product Categories', 'Add', 'Adding product category '.$name.' failed, duplicate name. By '.user());
-            
             return;
         }
 
         // Insert category
-        $this->addCategories($name, $description);
-
-        if ($this->countCategoriesByName($name) == 1) {
+        if ($this->addCategories($name, $description)) == 1) {
             
+            // Succes
             $this->insertLog('Product Categories', 'Add', 'Added product category '.$name.' with ID '.$this->getCategoryByName($name)['id'].'. By '.user());
         
         } else {
 
+            // Failed
             $this->insertLog('Product Categories', 'Add', 'Adding product category '.$name.' failed. By '.user());
 
         }
@@ -436,7 +440,6 @@ class Forms extends Queries
         if (!$this->checkReq()) {
 
             $this->insertLog('Product Categories', 'Edit', 'Editting product category failed, not all required fields are set. By '.user());
-
             return;
         }
 
@@ -451,7 +454,6 @@ class Forms extends Queries
         if ($this->countCategoryByNameNotId($name, $category['id']) != 0) {
 
             $this->insertLog('Product Categories', 'Edit', 'Editting product category '.$category['name'].' to '.$name.' (id '.$category['id'].') failed, new name is not unique. By '.user());
-
             return;
         }
 

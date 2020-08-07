@@ -16,16 +16,20 @@ class Queries extends Db
 
     /**
      * Count users
+     * 
+     * @return int
      */
-    public function countUsers()
+    public function countUsers() : int
     {
         return $this->one('SELECT COUNT(*) FROM `users`');
     }
 
     /**
      * All users
+     * 
+     * @return array
      */
-    public function allUsers()
+    public function allUsers() : array
     {
         return $this->all('SELECT * FROM `users` ORDER BY `username` ASC');
     }
@@ -34,9 +38,10 @@ class Queries extends Db
      * Count users by username
      * 
      * @param string $username
+     * 
      * @return int
      */
-    public function countUserByUsername($username)
+    public function countUserByUsername($username) : int
     {
         return $this->one('SELECT COUNT(*) FROM `users` WHERE `username` = ?', array($username));
     }
@@ -46,19 +51,22 @@ class Queries extends Db
      * 
      * @param string $username
      * @param string $password
+     * 
+     * @return int
      */
-    public function insertUser($username, $password)
+    public function insertUser($username, $password) : int
     {
-        $this->none('INSERT INTO `users` (`username`, `password`) VALUES (?, ?)', array($username, $password));
+        return $this->none('INSERT INTO `users` (`username`, `password`) VALUES (?, ?)', array($username, $password));
     }
 
     /**
      * Get user by username
      * 
      * @param string $username
+     * 
      * @return array
      */
-    public function getUserByUsername($username)
+    public function getUserByUsername($username) : array
     {
         return $this->row('SELECT * FROM `users` WHERE `username` = ?', array($username));
     }
@@ -67,9 +75,10 @@ class Queries extends Db
      * Get user by id
      * 
      * @param int $id
+     * 
      * @return array
      */
-    public function getUserById($id)
+    public function getUserById($id) : array
     {
         return $this->row('SELECT * FROM `users` WHERE `id` = ?', array($id));
     }
@@ -79,10 +88,12 @@ class Queries extends Db
      * 
      * @param string $password
      * @param int $id
+     * 
+     * @return int
      */
-    public function updatePassword($password, $id)
+    public function updatePassword($password, $id) : int
     {
-        $this->none('UPDATE `users` SET `password` = ? WHERE `id` = ?', array($password, $id));
+        return $this->none('UPDATE `users` SET `password` = ? WHERE `id` = ?', array($password, $id));
     }
 
     /**
@@ -90,18 +101,24 @@ class Queries extends Db
      * 
      * @param string $username
      * @param int $id
+     * 
+     * @return int
      */
-    public function updateUsername($username, $id)
+    public function updateUsername($username, $id) : int
     {
-        $this->none('UPDATE `users` SET `username` = ? WHERE `id` = ?', array($username, $id));
+        return $this->none('UPDATE `users` SET `username` = ? WHERE `id` = ?', array($username, $id));
     }
 
     /**
      * Delete a user
+     * 
+     * @param int $id
+     * 
+     * @return int
      */
-    public function deleteUser($id)
+    public function deleteUser($id) : int
     {
-        $this->none('DELETE FROM `users` WHERE `id` = ?', array($id));
+        return $this->none('DELETE FROM `users` WHERE `id` = ?', array($id));
     }
 
     /**
@@ -116,10 +133,12 @@ class Queries extends Db
      * @param string $tableSource
      * @param string $action
      * @param string $description
+     * 
+     * @return int
      */
-    public function insertLog($tableSource, $action, $description)
+    public function insertLog($tableSource, $action, $description) : int
     {
-        $this->none('INSERT INTO `log` (`table_source`, `action`, `description`) VALUES (?, ?, ?)', array($tableSource, $action, $description));
+        return $this->none('INSERT INTO `log` (`table_source`, `action`, `description`) VALUES (?, ?, ?)', array($tableSource, $action, $description));
     }
 
     /**
@@ -130,8 +149,10 @@ class Queries extends Db
 
      /**
       * Count brands
+      *
+      * @return int
       */
-    public function countBrands()
+    public function countBrands() : int
     {
         return $this->one('SELECT COUNT(*) FROM `brands`');
     }
@@ -143,19 +164,22 @@ class Queries extends Db
      * @param string $image
      * @param string $description
      * @param string $website
+     * 
+     * @return int
      */
-    public function addBrands($name, $image, $description, $website)
+    public function addBrands($name, $image, $description, $website) : int
     {
-        $this->none('INSERT INTO `brands` (`name`, `image`, `description`, `website`) VALUES (?, ?, ?, ?)', array($name, $image, $description, $website));
+        return $this->none('INSERT INTO `brands` (`name`, `image`, `description`, `website`) VALUES (?, ?, ?, ?)', array($name, $image, $description, $website));
     }
 
     /**
      * Count brands by name
      * 
      * @param string $name
+     * 
      * @return int
      */
-    public function countBrandByName($name)
+    public function countBrandByName($name) : int
     {
         return $this->one('SELECT COUNT(*) FROM `brands` WHERE `name` = ?', array($name));
     }
@@ -164,9 +188,10 @@ class Queries extends Db
      * Get brand by name
      * 
      * @param string $name
+     * 
      * @return array
      */
-    public function getBrandByName($name)
+    public function getBrandByName($name) : array
     {
         return $this->row('SELECT * FROM `brands` WHERE `name` = ?', array($name));
     }
@@ -176,7 +201,7 @@ class Queries extends Db
      * 
      * @return array 
      */
-    public function allBrands()
+    public function allBrands() : array
     {
         return $this->all('SELECT * FROM `brands` ORDER BY `name` ASC');
     }
@@ -185,9 +210,10 @@ class Queries extends Db
      * Get brand by id
      * 
      * @param int $id
+     * 
      * @return array
      */
-    public function getBrandById($id)
+    public function getBrandById($id) : array
     {
         return $this->row('SELECT * FROM `brands` WHERE `id` = ?', array($id));
     }
@@ -200,20 +226,24 @@ class Queries extends Db
      * @param string $description
      * @param string $website
      * @param int $id
+     * 
+     * @return int
      */
-    public function editBrands($name, $image, $description, $website, $id)
+    public function editBrands($name, $image, $description, $website, $id) : int
     {
-        $this->none('UPDATE `brands` SET `name` = ?, `image` = ?, `description` = ?, `website` = ? WHERE `id` = ?', array($name, $image, $description, $website, $id));
+        return $this->none('UPDATE `brands` SET `name` = ?, `image` = ?, `description` = ?, `website` = ? WHERE `id` = ?', array($name, $image, $description, $website, $id));
     }
 
     /**
      * Delete brand
      * 
      * @param int $id
+     * 
+     * @return int
      */
-    public function deleteBrand($id)
+    public function deleteBrand($id) : int
     {
-        $this->none('DELETE FROM `brands` WHERE `id` = ?', array($id));
+        return $this->none('DELETE FROM `brands` WHERE `id` = ?', array($id));
     }
 
     /**
@@ -221,9 +251,10 @@ class Queries extends Db
      * 
      * @param string $name
      * @param int $id
+     * 
      * @return int
      */
-    public function countBrandByNameNotId($name, $id)
+    public function countBrandByNameNotId($name, $id) : int
     {
         return $this->one('SELECT COUNT(*) FROM `brands` WHERE `name` = ? AND `id` != ?', array($name, $id));
     }
@@ -239,7 +270,7 @@ class Queries extends Db
      * 
      * @return int
      */
-    public function countProducts()
+    public function countProducts() : int
     {
         return $this->one('SELECT COUNT(*) FROM `products`');
     }
@@ -255,7 +286,7 @@ class Queries extends Db
      * 
      * @return int
      */
-    public function countCategories()
+    public function countCategories() : int
     {
         return $this->one('SELECT COUNT(*) FROM `product_categories`');
     }
@@ -265,7 +296,7 @@ class Queries extends Db
      * 
      * @return array
      */
-    public function allCategories()
+    public function allCategories() : array
     {
         return $this->all('SELECT * FROM `product_categories` ORDER BY `name` ASC');
     }
@@ -274,6 +305,7 @@ class Queries extends Db
      * Count categories by name
      * 
      * @param string $name
+     * 
      * @return int
      */
     public function countCategoriesByName($name)
@@ -283,19 +315,22 @@ class Queries extends Db
 
     /**
      * Insert category
+     * 
+     * @return int
      */
-    public function addCategories($name, $description)
+    public function addCategories($name, $description) : int
     {
-        $this->none('INSERT INTO `product_categories` (`name`, `description`) VALUES (?, ?)', array($name, $description));
+        return $this->none('INSERT INTO `product_categories` (`name`, `description`) VALUES (?, ?)', array($name, $description));
     }
 
     /**
      * Get category by name
      * 
      * @param string $name
+     * 
      * @return array
      */
-    public function getCategoryByName($name)
+    public function getCategoryByName($name) : array
     {
         return $this->row('SELECT * FROM `product_categories` WHERE `name` = ?', array($name));
     }
@@ -304,6 +339,7 @@ class Queries extends Db
      * Get category by id
      * 
      * @param int $id
+     * 
      * @return array
      */
     public function getCategoryById($id) : array
@@ -316,6 +352,7 @@ class Queries extends Db
      * 
      * @param string $name
      * @param int $id
+     * 
      * @return int
      */
     public function countCategoryByNameNotId($name, $id) : int
@@ -325,6 +362,8 @@ class Queries extends Db
 
     /**
      * Edit categories
+     * 
+     * @return int
      */
     public function editCategories($name, $description, $id) : int
     {
