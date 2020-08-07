@@ -35,6 +35,7 @@ include('includes/php/include.php');
     <script src="includes/js/addbrand.js"></script>
     <script src="includes/js/editbrand.js"></script>
     <script src="includes/js/addcategory.js"></script>
+    <script src="includes/js/editcategory.js"></script>
 </head>
 
 <body>

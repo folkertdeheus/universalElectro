@@ -267,7 +267,7 @@ class Queries extends Db
      */
     public function allCategories()
     {
-        return $this->all('SELECT * FROM `product_categories`');
+        return $this->all('SELECT * FROM `product_categories` ORDER BY `name` ASC');
     }
 
     /**
@@ -298,5 +298,36 @@ class Queries extends Db
     public function getCategoryByName($name)
     {
         return $this->row('SELECT * FROM `product_categories` WHERE `name` = ?', array($name));
+    }
+
+    /**
+     * Get category by id
+     * 
+     * @param int $id
+     * @return array
+     */
+    public function getCategoryById($id) : array
+    {
+        return $this->row('SELECT * FROM `product_categories` WHERE `id` = ?', array($id));
+    }
+
+    /**
+     * Count categories by name and skip id
+     * 
+     * @param string $name
+     * @param int $id
+     * @return int
+     */
+    public function countCategoryByNameNotId($name, $id) : int
+    {
+        return $this->one('SELECT COUNT(*) FROM `product_categories` WHERE `name` = ? AND `id` != ?', array($name, $id));
+    }
+
+    /**
+     * Edit categories
+     */
+    public function editCategories($name, $description, $id) : int
+    {
+        return $this->none('UPDATE `product_categories` SET `name` = ?, `description` = ? WHERE `id` = ?', array($name, $description, $id));
     }
 }

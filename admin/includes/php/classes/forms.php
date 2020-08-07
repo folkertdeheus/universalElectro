@@ -18,7 +18,8 @@ class Forms extends Queries
         'editUser',
         'addBrand',
         'editBrand',
-        'addCategory'
+        'addCategory',
+        'editCategory'
     ];
     
 
@@ -44,7 +45,7 @@ class Forms extends Queries
      * 
      * @return boolean
      */
-    private function checkReq()
+    private function checkReq() : bool
     {
         if (count(array_intersect_key($this->required, $this->post)) == count($this->required)) {
             return true;
@@ -58,7 +59,7 @@ class Forms extends Queries
      * 
      * @param string $required, variable length of required POST fields
      */
-    private function setReq(...$required)
+    private function setReq(...$required) : void
     {
         // Set required array
         foreach($required as $value) {
@@ -67,6 +68,19 @@ class Forms extends Queries
 
         // Remove empty entries
         $this->post = array_filter($_POST);
+    }
+
+    /**
+     * This function checks if an id has not been editted
+     */
+    private function isId($id) : int
+    {
+        // First check if the id is numeric
+        if (is_numeric($id) && $id != null && $id != false) {
+
+            // htmlentities for possible XSS
+            return htmlentities($id);
+        }
     }
 
     /**
@@ -369,7 +383,7 @@ class Forms extends Queries
     /**
      * Add category
      */
-    private function addCategory()
+    private function addCategory() : void
     {
         // Set required $_POST fields
         $this->setReq('name');
@@ -405,6 +419,53 @@ class Forms extends Queries
         } else {
 
             $this->insertLog('Product Categories', 'Add', 'Adding product category '.$name.' failed. By '.user());
+
+        }
+    }
+
+    /**
+     * Edit category
+     */
+    private function editCategory() : void
+    {
+        // Set required $_POST fields
+        $this->setReq('name', 'id');
+
+        // Check if all required items are posted
+        // Fail if not
+        if (!$this->checkReq()) {
+
+            $this->insertLog('Product Categories', 'Edit', 'Editting product category failed, not all required fields are set. By '.user());
+
+            return;
+        }
+
+        // Set variables
+        $name = htmlentities($_POST['name']);
+        $description = htmlentities($_POST['description']);
+        $id = $this->isId($_POST['id']);
+
+        $category = $this->getCategoryById($id);
+
+        // Check if name is unique, skip own id
+        if ($this->countCategoryByNameNotId($name, $category['id']) != 0) {
+
+            $this->insertLog('Product Categories', 'Edit', 'Editting product category '.$category['name'].' to '.$name.' (id '.$category['id'].') failed, new name is not unique. By '.user());
+
+            return;
+        }
+
+        // Update category
+        // If 1 row was affected, the query was succesful
+        if ($this->editCategories($name, $description, $id) == 1) {
+
+            // Succes
+            $this->insertLog('Product Categories', 'Edit', 'Editted product category '.$category['name'].' to '.$name.' (id '.$category['id'].'). By '.user());
+        
+        } else {
+
+            // Failed
+            $this->insertLog('Product Categories', 'Edit', 'Editting product category '.$category['name'].' to '.$name.'(id '.$category['id'].') failed. 0 or multiple records affected. By '.user());
 
         }
     }
