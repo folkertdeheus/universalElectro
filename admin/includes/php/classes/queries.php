@@ -227,4 +227,76 @@ class Queries extends Db
     {
         return $this->one('SELECT COUNT(*) FROM `brands` WHERE `name` = ? AND `id` != ?', array($name, $id));
     }
+
+    /**
+     * ===================================================
+     * PRODUCTS
+     * ===================================================
+     */
+
+    /**
+     * Count products
+     * 
+     * @return int
+     */
+    public function countProducts()
+    {
+        return $this->one('SELECT COUNT(*) FROM `products`');
+    }
+
+    /**
+     * ===================================================
+     * PRODUCT_CATEGORIES
+     * ===================================================
+     */
+
+    /**
+     * Count categories
+     * 
+     * @return int
+     */
+    public function countCategories()
+    {
+        return $this->one('SELECT COUNT(*) FROM `product_categories`');
+    }
+
+    /**
+     * All categories
+     * 
+     * @return array
+     */
+    public function allCategories()
+    {
+        return $this->all('SELECT * FROM `product_categories`');
+    }
+
+    /**
+     * Count categories by name
+     * 
+     * @param string $name
+     * @return int
+     */
+    public function countCategoriesByName($name)
+    {
+        return $this->one('SELECT COUNT(*) FROM `product_categories` WHERE `name` = ?', array($name));
+    }
+
+    /**
+     * Insert category
+     */
+    public function addCategories($name, $description)
+    {
+        $this->none('INSERT INTO `product_categories` (`name`, `description`) VALUES (?, ?)', array($name, $description));
+    }
+
+    /**
+     * Get category by name
+     * 
+     * @param string $name
+     * @return array
+     */
+    public function getCategoryByName($name)
+    {
+        return $this->row('SELECT * FROM `product_categories` WHERE `name` = ?', array($name));
+    }
 }

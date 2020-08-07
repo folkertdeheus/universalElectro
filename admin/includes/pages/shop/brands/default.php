@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This page contains the content inclusion of the users part
+ * This page contains the content inclusion of the brands part
  * The content is controlled by $_GET['sub']
  */
 

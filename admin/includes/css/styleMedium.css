@@ -120,7 +120,7 @@ main {
     background: linear-gradient(to right, var(--back) 80%, var(--accent));
 
     /* Positioning */
-    width: 160px;
+    width: 140px;
     padding: 20px;
 
     /* Display */

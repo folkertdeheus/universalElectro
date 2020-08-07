@@ -12,6 +12,8 @@ if (login()) {
 
         <div class="toolbar">
             <a href="index.php?page=2&action=3&sub=1">Add brand</a>
+            <a href="index.php?page=2&action=1">Products</a>
+            <a href="index.php?page=2&action=4">Categories</a>
         </div> <!-- toolbar -->
 
         <div class="table">
@@ -36,7 +38,13 @@ if (login()) {
 ?>
                         <tr>
                             <td><?= $brandValue['name']; ?></td>
-                            <td><img src="<?= $brandValue['image']; ?>" alt="logo preview" /></td>
+                            <td>
+<?php
+                                if (isset($brandValue['image']) && $brandValue != null) {
+                                    echo '<img src="'.$brandValue['image'].'" alt="logo preview" />';
+                                }
+?>
+                            </td>
                             <td><?= $brandValue['description']; ?></td>
                             <td><?= $brandValue['website']; ?></td>
                             <td class="icon"><a href="index.php?page=2&action=3&sub=2&id=<?= $brandValue['id']; ?>"><img src="includes/images/edit.png" alt="edit" /></a></td>

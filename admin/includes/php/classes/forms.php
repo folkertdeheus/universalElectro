@@ -17,7 +17,8 @@ class Forms extends Queries
         'addUser',
         'editUser',
         'addBrand',
-        'editBrand'
+        'editBrand',
+        'addCategory'
     ];
     
 
@@ -57,7 +58,7 @@ class Forms extends Queries
      * 
      * @param string $required, variable length of required POST fields
      */
-    function setReq(...$required)
+    private function setReq(...$required)
     {
         // Set required array
         foreach($required as $value) {
@@ -179,7 +180,7 @@ class Forms extends Queries
      * 
      * @return boolean
      */
-    public function addBrand()
+    private function addBrand()
     {
         // Set required $_POST fields
         $this->setReq('name');
@@ -197,45 +198,56 @@ class Forms extends Queries
 
         // Upload file
 
-        // File naming
-        $path = '../includes/brands/';
-        $file = basename($_FILES['image']['name']);
-        $filename = pathinfo($file, PATHINFO_FILENAME);
-        $extension = pathinfo($file, PATHINFO_EXTENSION);
-        
-        // Accepted files
-        $acceptedFileTypes = ['jpg', 'jpeg', 'png', 'gif'];
-    
-        // Check if file exists
-        // If exists, rename with number added
-        $base = $filename;
-        
-        // Continue numbering until unique name is found
-        for ($i = 1; file_exists($path.$filename.'.'.$extension); $i++) {
-            $filename = $base.$i;
-        }
+        // Check if file is being uploaded
+        if (isset($_FILES['image']['name']) && $_FILES['image']['name'] != null) {
 
-        // Check if file is accepted file type
-        // If not, stop executing
-        if (!in_array($extension, $acceptedFileTypes)) {
-            return;
-        }
-
-        // Set destination path
-        $filepath = $path.$filename.'.'.$extension;
-
-        // Upload file
-        if (!move_uploaded_file($_FILES['image']['tmp_name'], $filepath)) {
+            // File naming
+            $path = '../includes/brands/';
+            $file = basename($_FILES['image']['name']);
+            $filename = pathinfo($file, PATHINFO_FILENAME);
+            $extension = pathinfo($file, PATHINFO_EXTENSION);
             
-            // File upload failed
-            $filesError = null;
-            foreach($_FILES as $value) {
-                $filesError = $filesError.$value.' ';
+            // Accepted files
+            $acceptedFileTypes = ['jpg', 'jpeg', 'png', 'gif'];
+        
+            // Check if file exists
+            // If exists, rename with number added
+            $base = $filename;
+            
+            // Continue numbering until unique name is found
+            for ($i = 1; file_exists($path.$filename.'.'.$extension); $i++) {
+                $filename = $base.$i;
             }
 
-            // Insert log
-            $this->insertLog('Brands', 'Add', 'Add brand failed, image upload error: '.$filesError.'. By '.user());
-            return;
+            // Check if file is accepted file type
+            // If not, stop executing
+            if (!in_array($extension, $acceptedFileTypes)) {
+
+                $this->insertLog('Brands', 'Add', 'Add brand failed, image was the wrong type. By '.user());
+                return;
+            }
+
+            // Set destination path
+            $filepath = $path.$filename.'.'.$extension;
+
+            // Upload file
+            if (!move_uploaded_file($_FILES['image']['tmp_name'], $filepath)) {
+                
+                // File upload failed
+                $filesError = null;
+                foreach($_FILES as $value) {
+                    $filesError = $filesError.$value.' ';
+                }
+
+                // Insert log
+                $this->insertLog('Brands', 'Add', 'Add brand ('.$name.') failed, image upload error: '.$filesError.'. By '.user());
+                return;
+            }
+
+        // No image uploaded, set filepath null
+        } else {
+
+            $filepath = null;
         }
 
         // Continue with database adding
@@ -243,7 +255,9 @@ class Forms extends Queries
         // Check if brand name is unique
         // If not, stop executing
         if ($this->countBrandByName($name) != 0) {
-            return false;
+
+            $this->insertLog('Brands', 'Add', 'Add brand failed, duplicate name ('.$name.'). By '.user());
+            return;
         }
 
         // Add brand
@@ -264,9 +278,6 @@ class Forms extends Queries
 
     /**
      * Edit brand
-     * 
-     * @todo Updating an image without changing the name results in not changing the image, because the check says there's already an entry with the same name
-     * Resolve by checking against ID
      */
     private function editBrand()
     {
@@ -276,7 +287,7 @@ class Forms extends Queries
         // Check if all required items are posted
         // Fail if not
         if (!$this->checkReq()) {
-            return false;
+            return;
         }
 
         // Set variables
@@ -352,6 +363,49 @@ class Forms extends Queries
 
             // Failed
             $this->insertLog('Brands', 'Edit', 'Editting brand '.$brand['name']. ' with ID '.$id.' failed. By '.user());
+        }
+    }
+
+    /**
+     * Add category
+     */
+    private function addCategory()
+    {
+        // Set required $_POST fields
+        $this->setReq('name');
+
+        // Check if all required items are posted
+        // Fail if not
+        if (!$this->checkReq()) {
+
+            $this->insertLog('Product Categories', 'Add', 'Adding product category '.$name. 'failed, not all required fields are set. By '.user());
+
+            return;
+        }
+
+        // Set variables
+        $name = htmlentities($_POST['name']);
+        $description = htmlentities($_POST['description']);
+
+        // Check if the category name is unique
+        if ($this->countCategoriesByName($name) != 0) {
+
+            $this->insertLog('Product Categories', 'Add', 'Adding product category '.$name.' failed, duplicate name. By '.user());
+            
+            return;
+        }
+
+        // Insert category
+        $this->addCategories($name, $description);
+
+        if ($this->countCategoriesByName($name) == 1) {
+            
+            $this->insertLog('Product Categories', 'Add', 'Added product category '.$name.' with ID '.$this->getCategoryByName($name)['id'].'. By '.user());
+        
+        } else {
+
+            $this->insertLog('Product Categories', 'Add', 'Adding product category '.$name.' failed. By '.user());
+
         }
     }
 }

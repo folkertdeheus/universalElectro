@@ -15,15 +15,23 @@ if (login()) {
 
             case '1':
                 // Products
+                require_once('includes/pages/shop/products/default.php');
                 break;
             
             case '2':
                 // Orders
+
                 break;
 
             case '3':
                 // Brands
                 require_once('includes/pages/shop/brands/default.php');
+
+                break;
+
+            case '4':
+                // Categories
+                require_once('includes/pages/shop/categories/default.php');
 
                 break;
             

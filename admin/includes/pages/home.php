@@ -22,8 +22,9 @@ if (login()) {
             <a href="index.php?page=2">Shop</a>
             <div class="menuright">
                 <a href="index.php?page=2&action=1">Products</a>
-                <a href="index.php?page=2&action=2">Orders</a>
+                <a href="index.php?page=2&action=4">Categories</a>
                 <a href="index.php?page=2&action=3">Brands</a>
+                <a href="index.php?page=2&action=2">Orders</a>
             </div> <!-- menuright -->
         </div> <!-- menublock -->
     </div> <!-- menutop -->

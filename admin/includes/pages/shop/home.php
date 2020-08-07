@@ -14,11 +14,15 @@ if (login()) {
         </div> <!-- menublock -->
 
         <div class="menublock">
-            <a href="index.php?page=2&action=2">Orders</a>
+            <a href="index.php?page=2&action=3">Brands</a>
         </div> <!-- menublock -->
 
         <div class="menublock">
-            <a href="index.php?page=2&action=3">Brands</a>
+            <a href="index.php?page=2&action=4">Categories</a>
+        </div> <!-- menublock -->
+
+        <div class="menublock">
+            <a href="index.php?page=2&action=2">Orders</a>
         </div> <!-- menublock -->
     </div> <!-- menubottom -->
 
