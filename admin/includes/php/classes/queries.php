@@ -369,4 +369,14 @@ class Queries extends Db
     {
         return $this->none('UPDATE `product_categories` SET `name` = ?, `description` = ? WHERE `id` = ?', array($name, $description, $id));
     }
+
+    /**
+     * Delete category
+     * 
+     * @return int
+     */
+    public function deleteCategory($id) : int
+    {
+        return $this->none('DELETE FROM `product_categories` WHERE `id` = ?', array($id));
+    }
 }

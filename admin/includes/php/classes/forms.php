@@ -193,7 +193,7 @@ class Forms extends Queries
         } else {
 
             // Failed
-            $this->insertLog('Users', 'Edit', 'Edit user username '.$user['username']).' failed. By '.user());
+            $this->insertLog('Users', 'Edit', 'Edit user username '.$user['username'].' failed. By '.user());
         }
     }
 
@@ -414,7 +414,7 @@ class Forms extends Queries
         }
 
         // Insert category
-        if ($this->addCategories($name, $description)) == 1) {
+        if ($this->addCategories($name, $description) == 1) {
             
             // Succes
             $this->insertLog('Product Categories', 'Add', 'Added product category '.$name.' with ID '.$this->getCategoryByName($name)['id'].'. By '.user());

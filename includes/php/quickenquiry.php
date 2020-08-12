@@ -18,7 +18,7 @@ if (isset($_POST['form']) && $_POST['form'] == 'quickenquiry') {
             $mailReplyTo = htmlentities($_POST['email']);
             $mailTo = 'sales@universalelectro.nl';
             $mailSubject = 'Quick enquiry from '.htmlentities($_POST['firstname']).' '.htmlentities($_POST['lastname']);
-            $mailMessage = htmlentities($_POST['message']);
+            $mailMessage = htmlentities($_POST['message'])."\r\n"."\r\n".'Contact information: '."\r\n".'Reply to '.$mailReplyTo."\r\n".'Phone: '.htmlentities($_POST['phone'])."\r\n".'Company: '.htmlentities($_POST['company']);
 
             $mailHeaders = ['From' => $mailFrom,
                             'Reply-To' => $mailReplyTo];
