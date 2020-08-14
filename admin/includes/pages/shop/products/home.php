@@ -47,6 +47,7 @@ if (login()) {
                                 <td><?= $productsValue['brand']; ?></td>
                                 <td><?= $productsValue['category']; ?></td>
                                 <td><?= $productsValue['articlenumber']; ?></td>
+                                <td><?= $productsValue['price']; ?></td>
                                 <td class="icon"><a href="index.php?page=2&action=1&sub=4&id=<?= $productsValue['id']; ?>"><img src="includes/images/addoptions.png" alt="options" /></a></td>
                                 <td class="icon"><a href="index.php?page=2&action=1&sub=2&id=<?= $productsValue['id']; ?>"><img src="includes/images/edit.png" alt="edit" /></a></td>
                                 <td class="icon"><a href="index.php?page=2&action=1&sub=3&id=<?= $productsValue['id']; ?>"><img src="includes/images/delete.png" alt="delete" /></a></td>

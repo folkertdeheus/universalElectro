@@ -276,6 +276,58 @@ class Queries extends Db
     }
 
     /**
+     * Count products by article number
+     * 
+     * @param string $articlenumber
+     * @return int
+     */
+    public function countProductsByArticlenumber($articlenumber) : int
+    {
+        return $this->one('SELECT COUNT(*) FROM `products` WHERE `articlenumber` = ?', array($articlenumber));
+    }
+
+    /**
+     * Insert product
+     * 
+     * @param int $brand
+     * @param int $category
+     * @param string $name
+     * @param string $articlenumber
+     * @param string $description_dutch
+     * @param string $description_english
+     * @param string $images
+     * @param string $tags
+     * @param string $properties
+     * @param string $specifications
+     * @param float $price
+     * @param boolean $highlight
+     * @return int
+     */
+    public function addProducts($brand, $category, $name, $articlenumber, $description_dutch, $description_english, $images, $tags, $properties, $specifications, $price, $highlight) : int
+    {
+        return $this->none('INSERT INTO `products` (`brand`, `category`, `name`, `articlenumber`, `description_dutch`, `description_english`, `images`, `tags`, `properties`, `specifications`, `price`, `highlight`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', array($brand, $category, $name, $articlenumber, $description_dutch, $description_english, $images, $tags, $properties, $specifications, $price, $highlight));
+    }
+
+    /**
+     * Get product by articlenumber
+     * 
+     * @param string $articlenumber
+     * @return array
+     */
+    public function getProductByArticleNumber($articlenumber) : array
+    {
+        return $this->row('SELECT * FROM `products` WHERE `articlenumber` = ?', array($articlenumber));
+    }
+
+    /**
+     * Get all products
+     */
+    public function allProducts() : array
+    {
+        return $this->all('SELECT * FROM `products` ORDER BY `name` ASC');
+    }
+
+    /**
      * ===================================================
      * PRODUCT_CATEGORIES
      * ===================================================

@@ -19,7 +19,8 @@ class Forms extends Queries
         'addBrand',
         'editBrand',
         'addCategory',
-        'editCategory'
+        'editCategory',
+        'addProduct'
     ];
     
 
@@ -469,6 +470,131 @@ class Forms extends Queries
             // Failed
             $this->insertLog('Product Categories', 'Edit', 'Editting product category '.$category['name'].' to '.$name.'(id '.$category['id'].') failed. 0 or multiple records affected. By '.user());
 
+        }
+    }
+
+    /**
+     * Add product
+     */
+    public function addProduct() : void
+    {
+        // Set required $_POST fields
+        $this->setReq('name', 'brands', 'categories', 'articlenumber', 'nl_description', 'en_description');
+
+        // Check if all required items are posted
+        // Fail if not
+        if (!$this->checkReq()) {
+
+            $this->insertLog('Products', 'Add', 'Adding product failed, not all required fields are set. By '.user());
+            return;
+        }
+
+        // Set variables
+        $name = htmlentities($_POST['name']);
+        $brand = htmlentities($_POST['brands']);
+        $category = htmlentities($_POST['categories']);
+        $articleNumber = htmlentities($_POST['articlenumber']);
+        $nlDescription = htmlentities($_POST['nl_description']);
+        $enDescription = htmlentities($_POST['en_description']);
+        $properties = htmlentities($_POST['properties']);
+        $specifications = htmlentities($_POST['specifications']);
+        $price = htmlentities($_POST['price']);
+        $tags = htmlentities($_POST['tags']);
+        $highlight = $_POST['highlight']; // Will be checked to be 1 or 0
+
+        // Check if article number is unique
+        if ($this->countProductsByArticlenumber($articleNumber) != 0) {
+
+            // Article number is not unique, fail
+            $this->insertLog('Products', 'Add', 'Adding '.$name.' failed, articlenumber '.$articleNumber.' is not unique. By '.user());
+            return;
+        }
+
+        // Check value of highlight
+        if ($highlight != 1) {
+            $highlight = 0;
+        }
+
+        // Upload image(s)
+        
+        // Flip multidimensional $_FILES array
+        $images = [];
+        foreach($_FILES['image'] as $filesKey => $filesArray) {
+
+            foreach($filesArray as $fileKey => $fileValue) {
+
+                $images[$fileKey][$filesKey] = $fileValue;
+            }
+        }
+
+        // Start filepath variable. If no image is uploaded, foreach will not be run and filepath will not be changed
+        $filepaths = [];
+
+        if (isset($_FILES['image']['name'][0]) && $_FILES['image']['name'][0] != null) {
+
+            // Loop throug files for upload
+            foreach ($images as $imageKey => $imageValue) {
+                
+                // File naming
+                $path = '../includes/products/';
+                $file = basename($imageValue['name']);
+                $filename = pathinfo($file, PATHINFO_FILENAME);
+                $extension = pathinfo($file, PATHINFO_EXTENSION);
+                
+                // Accepted files
+                $acceptedFileTypes = ['jpg', 'jpeg', 'png', 'gif'];
+            
+                // Check if file exists
+                // If exists, rename with number added
+                $base = $filename;
+                
+                // Continue numbering until unique name is found
+                for ($i = 1; file_exists($path.$filename.'.'.$extension); $i++) {
+                    $filename = $base.$i;
+                }
+
+                // Check if file is accepted file type
+                // If not, stop executing
+                if (!in_array($extension, $acceptedFileTypes)) {
+
+                    $this->insertLog('Products', 'Add', 'Add product failed, image was the wrong type. By '.user());
+                    return;
+                }
+
+                // Set destination path
+                $filepath = $path.$filename.'.'.$extension;
+                array_push($filepaths, $filepath);
+
+                // Upload file
+                if (!move_uploaded_file($_FILES['image']['tmp_name'][$imageKey], $filepath)) {
+                    
+                    // File upload failed
+                    $filesError = null;
+                    foreach($_FILES['image']['error'] as $value) {
+                        $filesError = $filesError.$value.' ';
+                    }
+
+                    // Insert log
+                    $this->insertLog('Products', 'Add', 'Add product ('.$name.') failed, image upload error: '.$filesError.'. By '.user());
+                    return;
+                }
+            }
+        }
+
+        // Make json object from files path array
+        $filepaths = json_encode($filepaths);
+        
+        // Insert product
+        // If 1 row was affected, the query was succesful
+        if ($this->addProducts($brand, $category, $name, $articleNumber, $nlDescription, $enDescription, $filepaths, $tags, $properties, $specifications, $price, $highlight)) {
+
+            // Succes
+            $this->insertLog('Products', 'Add', 'Added product '.$name.' with ID '.$this->getProductByArticleNumber($articleNumber)['id']. '. By '.user());
+        
+        } else {
+
+            // Failed
+            $this->insertLog('Products', 'Add', 'Add product '.$name.' failed. By '.user());
         }
     }
 }
