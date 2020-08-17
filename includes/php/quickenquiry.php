@@ -26,15 +26,15 @@ if (isset($_POST['form']) && $_POST['form'] == 'quickenquiry') {
             // Sent mail    
             if (mail($mailTo, $mailSubject, $mailMessage, $mailHeaders)) {
                 // Message sent succesfully
-                header('Location: index.php?action=1');
+                header('Location: index.php?page=5');
             } else {
 
                 // Failed to sent message
-                header('Location: index.php?action=2');
+                header('Location: index.php?page=6');
             }
         } else {
             // Failed to sent message
-            header('Location: index.php?action=2');
+            header('Location: index.php?page=6');
         }
     }
 }

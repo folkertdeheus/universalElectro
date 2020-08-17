@@ -55,7 +55,8 @@ function languageChange(lang = null) {
         document.getElementById('nl_qe_form').style.display = 'grid';
 
         // Menu items
-        for(i = 1; 1 <= 5; i++) {
+        for(i = 1; i <= 5; i++) {
+            console.log('i: ' + i);
             document.getElementById('en_menu' + i).style.display = 'none';
             document.getElementById('nl_menu' + i).style.display = 'block';
         }
@@ -80,7 +81,8 @@ function languageChange(lang = null) {
         document.getElementById('nl_qe_form').style.display = 'none';
 
         // Menu items
-        for(i = 1; 1 <= 5; i++) {
+        for(i = 1; i <= 5; i++) {
+            console.log('i: ' + i);
             document.getElementById('en_menu' + i).style.display = 'block';
             document.getElementById('nl_menu' + i).style.display = 'none';
         }
