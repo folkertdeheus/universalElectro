@@ -35,7 +35,7 @@ if (login()) {
 <?php
                 foreach($categories as $categoryKey => $categoryValue) {
 ?>
-                    <option value="<?= $categoryValue['id']; ?>" <?php if ($categoryValue['id'] == $product['category']) { echo ' selected '; } ?>><?= $categoryValue['name']; ?></option>
+                    <option value="<?= $categoryValue['id']; ?>" <?php if ($categoryValue['id'] == $product['category']) { echo ' selected '; } ?>><?= $categoryValue['nl_name']; ?></option>
 <?php
                 }
 ?>

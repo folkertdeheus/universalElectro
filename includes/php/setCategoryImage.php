@@ -6,6 +6,7 @@
  * If no (correct) image has been found, set default image
  * 
  * @param array $images
+ * @param string $name
  * @return string
  */
 

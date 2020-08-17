@@ -4,6 +4,7 @@
  * This page contains the categories overview 
  */
 
+// Get all categories
 $productCategories = $q->allCategories();
 
 ?>

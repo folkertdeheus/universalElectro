@@ -397,6 +397,14 @@ class Queries extends Db
     }
 
     /**
+     * Get products by category
+     */
+    public function getProductsByCategory($category) : array
+    {
+        return $this->all('SELECT * FROM `products` WHERE `category` = ?', array($category));
+    }
+
+    /**
      * ===================================================
      * PRODUCT_CATEGORIES
      * ===================================================
