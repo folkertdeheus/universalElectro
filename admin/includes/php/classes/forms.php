@@ -394,37 +394,39 @@ class Forms extends Queries
     private function addCategory() : void
     {
         // Set required $_POST fields
-        $this->setReq('name');
+        $this->setReq('nl_name', 'en_name');
 
         // Check if all required items are posted
         // Fail if not
         if (!$this->checkReq()) {
 
-            $this->insertLog('Product Categories', 'Add', 'Adding product category '.$name. 'failed, not all required fields are set. By '.user());
+            $this->insertLog('Product Categories', 'Add', 'Adding product category failed, not all required fields are set. By '.user());
             return;
         }
 
         // Set variables
-        $name = htmlentities($_POST['name']);
-        $description = htmlentities($_POST['description']);
+        $nlName = htmlentities($_POST['nl_name']);
+        $nlDescription = htmlentities($_POST['nl_description']);
+        $enName = htmlentities($_POST['en_name']);
+        $enDescription = htmlentities($_POST['en_description']);
 
         // Check if the category name is unique
-        if ($this->countCategoriesByName($name) != 0) {
+        if ($this->countCategoriesByName($nlName) != 0) {
 
-            $this->insertLog('Product Categories', 'Add', 'Adding product category '.$name.' failed, duplicate name. By '.user());
+            $this->insertLog('Product Categories', 'Add', 'Adding product category '.$nlName.' failed, duplicate name. By '.user());
             return;
         }
 
         // Insert category
-        if ($this->addCategories($name, $description) == 1) {
+        if ($this->addCategories($nlName, $nlDescription, $enName, $enDescription) == 1) {
             
             // Succes
-            $this->insertLog('Product Categories', 'Add', 'Added product category '.$name.' with ID '.$this->getCategoryByName($name)['id'].'. By '.user());
+            $this->insertLog('Product Categories', 'Add', 'Added product category '.$nlName.' with ID '.$this->getCategoryByName($nlName)['id'].'. By '.user());
         
         } else {
 
             // Failed
-            $this->insertLog('Product Categories', 'Add', 'Adding product category '.$name.' failed. By '.user());
+            $this->insertLog('Product Categories', 'Add', 'Adding product category '.$nlName.' failed. By '.user());
 
         }
     }

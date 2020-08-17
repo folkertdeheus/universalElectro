@@ -408,48 +408,49 @@ class Queries extends Db
      */
     public function allCategories() : array
     {
-        return $this->all('SELECT * FROM `product_categories` ORDER BY `name` ASC');
+        return $this->all('SELECT * FROM `product_categories` ORDER BY `nl_name` ASC');
     }
 
     /**
      * Count categories by name
      * 
-     * @param string $name
-     * 
+     * @param string $nlName
      * @return int
      */
-    public function countCategoriesByName($name)
+    public function countCategoriesByName($nlName)
     {
-        return $this->one('SELECT COUNT(*) FROM `product_categories` WHERE `name` = ?', array($name));
+        return $this->one('SELECT COUNT(*) FROM `product_categories` WHERE `nl_name` = ?', array($nlName));
     }
 
     /**
      * Insert category
      * 
+     * @param string $nlName
+     * @param string $nlDescription
+     * @param string $enName
+     * @param string $enDescription
      * @return int
      */
-    public function addCategories($name, $description) : int
+    public function addCategories($nlName, $nlDescription, $enName, $enDescription) : int
     {
-        return $this->none('INSERT INTO `product_categories` (`name`, `description`) VALUES (?, ?)', array($name, $description));
+        return $this->none('INSERT INTO `product_categories` (`nl_name`, `nl_description`, `en_name`, `en_description`) VALUES (?, ?, ?, ?)', array($nlName, $nlDescription, $enName, $enDescription));
     }
 
     /**
      * Get category by name
      * 
-     * @param string $name
-     * 
+     * @param string $nlName
      * @return array
      */
-    public function getCategoryByName($name) : array
+    public function getCategoryByName($nlName) : array
     {
-        return $this->row('SELECT * FROM `product_categories` WHERE `name` = ?', array($name));
+        return $this->row('SELECT * FROM `product_categories` WHERE `nl_name` = ?', array($nlName));
     }
 
     /**
      * Get category by id
      * 
      * @param int $id
-     * 
      * @return array
      */
     public function getCategoryById($id) : array
@@ -460,19 +461,17 @@ class Queries extends Db
     /**
      * Count categories by name and skip id
      * 
-     * @param string $name
+     * @param string $nlName
      * @param int $id
-     * 
      * @return int
      */
-    public function countCategoryByNameNotId($name, $id) : int
+    public function countCategoryByNameNotId($nlName, $id) : int
     {
-        return $this->one('SELECT COUNT(*) FROM `product_categories` WHERE `name` = ? AND `id` != ?', array($name, $id));
+        return $this->one('SELECT COUNT(*) FROM `product_categories` WHERE `nl_name` = ? AND `id` != ?', array($nlName, $id));
     }
 
     /**
      * Edit categories
-     * 
      * @return int
      */
     public function editCategories($name, $description, $id) : int

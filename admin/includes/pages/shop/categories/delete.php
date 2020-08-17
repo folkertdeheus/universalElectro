@@ -12,7 +12,7 @@ if (login()) {
 ?>
     <div class="content">
 
-        Are you sure you want to delete "<?= $category['name']; ?>"?
+        Are you sure you want to delete "<?= $category['nl_name']; ?>"?
 
         <div class="yesnobuttons">
             <a href="index.php?page=2&action=4&delete=<?= $category['id']; ?>">Yes</a>

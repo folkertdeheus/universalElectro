@@ -35,8 +35,8 @@ if (login()) {
                     foreach($categories as $categoryKey => $categoryValue) {
 ?>
                         <tr>
-                            <td><?= $categoryValue['name']; ?></td>
-                            <td><?= $categoryValue['description']; ?></td>
+                            <td><?= $categoryValue['nl_name']; ?></td>
+                            <td><?= $categoryValue['nl_description']; ?></td>
                             <td class="icon"><a href="index.php?page=2&action=4&sub=2&id=<?= $categoryValue['id']; ?>"><img src="includes/images/edit.png" alt="edit" /></a></td>
                             <td class="icon"><a href="index.php?page=2&action=4&sub=3&id=<?= $categoryValue['id']; ?>"><img src="includes/images/delete.png" alt="delete" /></a></td>
                         </tr>

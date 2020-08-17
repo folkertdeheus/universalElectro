@@ -18,7 +18,7 @@ if (login()) {
         $q->deleteCategory($category['id']);
         
         // Insert Log
-        $q->insertLog('Category', 'Delete', 'Deleted category '.$category['name'].' with ID '.$category['id'].'. By '.user());
+        $q->insertLog('Category', 'Delete', 'Deleted category '.$category['nl_name'].' with ID '.$category['id'].'. By '.user());
     }
 
     // Check if a setting is selected
