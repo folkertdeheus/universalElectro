@@ -13,8 +13,10 @@ if (login()) {
 
     <div class="content">
         <form method="post" action="index.php?page=2&action=4">
-            <input type="text" id="name" name="name" placeholder="Name" required onchange="editcategory('name')" value="<?= $category['name']; ?>" />
-            <textarea id="description" name="description" placeholder="Description"><?= $category['description']; ?></textarea>
+            <input type="text" id="nl_name" name="nl_name" placeholder="Dutch name" required onchange="editcategory('nl_name')" value="<?= $category['nl_name']; ?>" />
+            <textarea id="nl_description" name="nl_description" placeholder="Dutch description"><?= $category['nl_description']; ?></textarea>
+            <input type="text" id="en_name" name="en_name" placeholder="English name" required onchange="editcategory('en_name')" value="<?= $category['en_name']; ?>" />
+            <textarea id="en_description" name="en_description" placeholder="English description"><?= $category['en_description']; ?></textarea>
             <input type="submit" value="Submit" />
             <input type="hidden" name="form" value="editCategory" />
             <input type="hidden" name="id" value="<?= $category['id']; ?>" />

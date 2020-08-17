@@ -474,9 +474,9 @@ class Queries extends Db
      * Edit categories
      * @return int
      */
-    public function editCategories($name, $description, $id) : int
+    public function editCategories($nlName, $nlDescription, $enName, $enDescription, $id) : int
     {
-        return $this->none('UPDATE `product_categories` SET `name` = ?, `description` = ? WHERE `id` = ?', array($name, $description, $id));
+        return $this->none('UPDATE `product_categories` SET `nl_name` = ?, `nl_description` = ?, `en_name` = ?, `en_description` = ? WHERE `id` = ?', array($nlName, $nlDescription, $enName, $enDescription, $id));
     }
 
     /**

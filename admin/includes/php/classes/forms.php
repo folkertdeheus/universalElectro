@@ -437,7 +437,7 @@ class Forms extends Queries
     private function editCategory() : void
     {
         // Set required $_POST fields
-        $this->setReq('name', 'id');
+        $this->setReq('nl_name', 'en_name', 'id');
 
         // Check if all required items are posted
         // Fail if not
@@ -448,30 +448,32 @@ class Forms extends Queries
         }
 
         // Set variables
-        $name = htmlentities($_POST['name']);
-        $description = htmlentities($_POST['description']);
+        $nlName = htmlentities($_POST['nl_name']);
+        $nlDescription = htmlentities($_POST['nl_description']);
+        $enName = htmlentities($_POST['en_name']);
+        $enDescription = htmlentities($_POST['en_description']);
         $id = $this->isId($_POST['id']);
 
         $category = $this->getCategoryById($id);
 
         // Check if name is unique, skip own id
-        if ($this->countCategoryByNameNotId($name, $category['id']) != 0) {
+        if ($this->countCategoryByNameNotId($nlName, $category['id']) != 0) {
 
-            $this->insertLog('Product Categories', 'Edit', 'Editting product category '.$category['name'].' to '.$name.' (id '.$category['id'].') failed, new name is not unique. By '.user());
+            $this->insertLog('Product Categories', 'Edit', 'Editting product category '.$category['nl_name'].' to '.$nlName.' (id '.$category['id'].') failed, new name is not unique. By '.user());
             return;
         }
 
         // Update category
         // If 1 row was affected, the query was succesful
-        if ($this->editCategories($name, $description, $id) == 1) {
+        if ($this->editCategories($nlName, $nlDescription, $enName, $enDescription, $id) == 1) {
 
             // Succes
-            $this->insertLog('Product Categories', 'Edit', 'Editted product category '.$category['name'].' to '.$name.' (id '.$category['id'].'). By '.user());
+            $this->insertLog('Product Categories', 'Edit', 'Editted product category '.$category['nl_name'].' to '.$nlName.' (id '.$category['id'].'). By '.user());
         
         } else {
 
             // Failed
-            $this->insertLog('Product Categories', 'Edit', 'Editting product category '.$category['name'].' to '.$name.'(id '.$category['id'].') failed. 0 or multiple records affected. By '.user());
+            $this->insertLog('Product Categories', 'Edit', 'Editting product category '.$category['nl_name'].' to '.$nlName.'(id '.$category['id'].') failed. 0 or multiple records affected. By '.user());
 
         }
     }
