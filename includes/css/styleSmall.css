@@ -185,3 +185,38 @@ footer {
     font-size: 15px;
     padding: 20px;
 }
+
+.webshop {
+    /* Display flex */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.webshop .webshop_category {
+    /* Display flex */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+
+    /* Font */
+    font-size: 25px;
+    font-family: Oxygen;
+
+    /* Positioning */
+    width: 250px;
+    height: 300px;
+}
+
+.webshop .webshop_title {
+    text-align: center;
+}
+
+.webshop img {
+    /* Positioning */
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+}

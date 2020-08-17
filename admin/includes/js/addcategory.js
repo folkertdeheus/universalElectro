@@ -22,4 +22,7 @@ function addcategory(field)
             } else {
                 messageTarget.innerHTML = '';
             }
+
+            break;
+    }
 }

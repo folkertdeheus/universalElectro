@@ -232,3 +232,12 @@ article {
     background-color: var(--grey);
     border-radius: 3px;
 }
+
+.webshop a:link, .webshop a:visited {
+    text-decoration: none;
+    color: var(--grey);
+}
+
+.webshop a:hover {
+    color: var(--blue);
+}

@@ -33,7 +33,7 @@ if (login()) {
 <?php
                 foreach($categories as $categoryKey => $categoryValue) {
 ?>
-                    <option value="<?= $categoryValue['id']; ?>"><?= $categoryValue['name']; ?></option>
+                    <option value="<?= $categoryValue['id']; ?>"><?= $categoryValue['nl_name']; ?></option>
 <?php
                 }
 ?>

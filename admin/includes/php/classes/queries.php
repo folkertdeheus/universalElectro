@@ -351,6 +351,17 @@ class Queries extends Db
     {
         return $this->one('SELECT COUNT(*) FROM `products` WHERE `articlenumber` = ? AND `id` != ?', array($articlenumber, $id));
     }
+    
+    /**
+     * Get one product with image in product category
+     * 
+     * @param int $category
+     * @return array/boolean
+     */
+    public function getProductByCategoryWithImage($category)
+    {
+        return $this->row('SELECT * FROM `products` WHERE `category` = ? AND `images` IS NOT NULL ORDER BY `id` DESC LIMIT 1', array($category));
+    }
 
     /**
      * Edit product
@@ -472,6 +483,10 @@ class Queries extends Db
 
     /**
      * Edit categories
+     * @param string $nlName
+     * @param string $nlDescription
+     * @param string $enName
+     * @param string $enDescription
      * @return int
      */
     public function editCategories($nlName, $nlDescription, $enName, $enDescription, $id) : int
