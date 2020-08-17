@@ -321,10 +321,68 @@ class Queries extends Db
 
     /**
      * Get all products
+     * 
+     * @return array
      */
     public function allProducts() : array
     {
         return $this->all('SELECT * FROM `products` ORDER BY `name` ASC');
+    }
+
+    /**
+     * Get product by id
+     * 
+     * @param int $id
+     * @return array
+     */
+    public function getProductById($id) : array
+    {
+        return $this->row('SELECT * FROM `products` WHERE `id` = ?', array($id));
+    }
+
+    /**
+     * Count products by articlenumber, but skip id
+     * 
+     * @param string $articlenumber
+     * @param int $id
+     * @return int
+     */
+    public function countProductsByArticlenumberNotId($articlenumber, $id) : int
+    {
+        return $this->one('SELECT COUNT(*) FROM `products` WHERE `articlenumber` = ? AND `id` != ?', array($articlenumber, $id));
+    }
+
+    /**
+     * Edit product
+     * 
+     * @param int $brand
+     * @param int $category
+     * @param string $name
+     * @param string $articlenumber
+     * @param string $description_dutch
+     * @param string $description_english
+     * @param string $images
+     * @param string $tags
+     * @param string $properties
+     * @param string $specifications
+     * @param float $price
+     * @param boolean $highlight
+     * @return int
+     */
+    public function editProducts($brand, $category, $name, $articlenumber, $description_dutch, $description_english, $image, $tags, $properties, $specifications, $price, $highlight, $id) : int
+    {
+        return $this->none('UPDATE `products` SET `brand` = ?, `category` = ?, `name` = ?, `articlenumber` = ?, `description_dutch` = ?, `description_english` = ?, `images` = ?, `tags` = ?, `properties` = ?, `specifications` = ?, `price` = ?, `highlight` = ? WHERE `id` = ?', array($brand, $category, $name, $articlenumber, $description_dutch, $description_english, $image, $tags, $properties, $specifications, $price, $highlight, $id));
+    }
+
+    /**
+     * Delete product
+     * 
+     * @param int @id
+     * @return int
+     */
+    public function deleteProduct($id) : int
+    {
+        return $this->none('DELETE FROM `products` WHERE `id` = ?', array($id));
     }
 
     /**
