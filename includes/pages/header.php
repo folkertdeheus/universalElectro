@@ -16,23 +16,23 @@
     </div> <!-- headermain -->
 
     <div class="headersub">
-        <span id="en_header"><?= EN_HEADER; ?></span>
-        <span id="nl_header"><?= NL_HEADER; ?></span>
+        <span id="en_header"><?= $language['en_header_text']; ?></span>
+        <span id="nl_header"><?= $language['nl_header_text']; ?></span>
     </div> <!-- headersub -->
 
     <nav class="menu">
 
-        <a href="index.php" id="en_menu1"><?= EN_HOME; ?></a>
-        <a href="index.php?page=1" id="en_menu2"><?= EN_WEBSHOP; ?></a>
-        <a href="index.php?page=2" id="en_menu3"><?= EN_LOGIN; ?></a>
-        <a href="index.php?page=3" id="en_menu4"><?= EN_CONTACT; ?></a>
-        <a href="index.php?page=4" id="en_menu5"><?= EN_SEARCH; ?></a>
+        <a href="index.php" id="en_menu1"><?= $language['en_menu_home']; ?></a>
+        <a href="index.php?page=1" id="en_menu2"><?= $language['en_menu_webshop']; ?></a>
+        <a href="index.php?page=2" id="en_menu3"><?= $language['en_menu_login']; ?></a>
+        <a href="index.php?page=3" id="en_menu4"><?= $language['en_menu_contact']; ?></a>
+        <a href="index.php?page=4" id="en_menu5"><?= $language['en_menu_search']; ?></a>
 
-        <a href="index.php" id="nl_menu1"><?= NL_HOME; ?></a>
-        <a href="index.php?page=1" id="nl_menu2"><?= NL_WEBSHOP; ?></a>
-        <a href="index.php?page=2" id="nl_menu3"><?= NL_LOGIN; ?></a>
-        <a href="index.php?page=3" id="nl_menu4"><?= NL_CONTACT; ?></a>
-        <a href="index.php?page=4" id="nl_menu5"><?= NL_SEARCH; ?></a>
+        <a href="index.php" id="nl_menu1"><?= $language['nl_menu_home']; ?></a>
+        <a href="index.php?page=1" id="nl_menu2"><?= $language['nl_menu_webshop']; ?></a>
+        <a href="index.php?page=2" id="nl_menu3"><?= $language['nl_menu_login']; ?></a>
+        <a href="index.php?page=3" id="nl_menu4"><?= $language['nl_menu_contact']; ?></a>
+        <a href="index.php?page=4" id="nl_menu5"><?= $language['nl_menu_search']; ?></a>
 
         <div class="language" id="language" onclick="languageChange()">
             Nederlands

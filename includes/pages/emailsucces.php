@@ -1,7 +1,7 @@
 <main id="mainEnglish">
-    Message sent succesfully! We will reply as soon as possible.
+    <?= $language['en_quickenquiry_success']; ?>
 </main>
 
 <main id="mainDutch">
-    Bericht verzonden! We nemen zo snel mogelijk contact op.
+    <?= $language['nl_quickenquiry_success']; ?>
 </main>

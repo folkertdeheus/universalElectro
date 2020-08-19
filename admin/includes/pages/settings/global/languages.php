@@ -67,6 +67,14 @@ if (login()) {
                 <td><textarea name="nl_quickenquiry_disclaimer" id="nl_quickenquiry_disclaimer" placeholder="Disclaimer Dutch" required onchange="languageSettings('nl_quickenquiry_disclaimer')"><?= $language['nl_quickenquiry_disclaimer']; ?></textarea></td>
                 <td><textarea name="en_quickenquiry_disclaimer" id="en_quickenquiry_disclaimer" placeholder="Disclaimer English" required onchange="languageSettings('en_quickenquiry_disclaimer')"><?= $language['en_quickenquiry_disclaimer']; ?></textarea></td>
             </tr>
+            <tr>
+                <td><input type="text" name="nl_quickenquiry_success" id="nl_quickenquiry_success" placeholder="Success message Dutch" required onchange="languageSettings('nl_quickenquiry_success')" value="<?= $language['nl_quickenquiry_success']; ?>" /></td>
+                <td><input type="text" name="en_quickenquiry_success" id="en_quickenquiry_success" placeholder="Success message English" required onchange="languageSettings('en_quickenquiry_success')" value="<?= $language['en_quickenquiry_success']; ?>" /></td>
+            </tr>
+            <tr>
+                <td><input type="text" name="nl_quickenquiry_failed" id="nl_quickenquiry_failed" placeholder="Failed message Dutch" required onchange="languageSettings('nl_quickenquiry_failed')" value="<?= $language['nl_quickenquiry_failed']; ?>" /></td>
+                <td><input type="text" name="en_quickenquiry_failed" id="en_quickenquiry_failed" placeholder="Failed message English" required onchange="languageSettings('en_quickenquiry_failed')" value="<?= $language['en_quickenquiry_failed']; ?>" /></td>
+            </tr>
 
             <tr>
                 <th colspan=2>Main Menu</th>

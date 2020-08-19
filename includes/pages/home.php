@@ -1,3 +1,11 @@
+<?php
+
+/**
+ * This file contains the home page
+ */
+
+?>
+
 <main id="mainEnglish">
     <article>
         <div class="title">

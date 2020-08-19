@@ -1,19 +1,27 @@
-<footer>
+<footer id="en_footer">
     <div class="footerleft">
-            Universal Electro BV<br>
-            David Ricardostraat 13-9<br>
-            7559 SH Hengelo<br>
-            The Netherlands<br>
+        <?= nl2br($language['en_footer_adress']); ?>
     </div> <!-- footerleft -->
 
     <div class="footermiddle">
-        Tel: 0031 (0)85 104 69 56<br>
-        Mob: 0031 (0)6 38 16 84 20<br>
-        sales@universalelectro.nl<br>
+        <?= nl2br($language['en_footer_contact']); ?>
     </div> <!-- footermiddle -->
 
     <div class="footerright">
-        BTW NL860318412B01<br>
-        Kvk Enschede nr. 75543451<br>
+        <?= nl2br($language['en_footer_tax']); ?>
+    </div> <!-- footerright -->
+</footer>
+
+<footer id="nl_footer">
+    <div class="footerleft">
+        <?= nl2br($language['nl_footer_adress']); ?>
+    </div> <!-- footerleft -->
+
+    <div class="footermiddle">
+        <?= nl2br($language['nl_footer_contact']); ?>
+    </div> <!-- footermiddle -->
+
+    <div class="footerright">
+        <?= nl2br($language['nl_footer_tax']); ?>
     </div> <!-- footerright -->
 </footer>

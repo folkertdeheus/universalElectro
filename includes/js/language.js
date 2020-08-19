@@ -54,6 +54,11 @@ function languageChange(lang = null) {
         document.getElementById('nl_qe_message').style.display = 'block';
         document.getElementById('nl_qe_form').style.display = 'grid';
 
+        // Footer
+        document.getElementById('en_footer').style.display = 'none';
+        document.getElementById('nl_footer').style.display = 'flex';
+        
+
         // Menu items
         for(i = 1; i <= 5; i++) {
             console.log('i: ' + i);
@@ -79,6 +84,10 @@ function languageChange(lang = null) {
         document.getElementById('nl_qe_question').style.display = 'none';
         document.getElementById('nl_qe_message').style.display = 'none';
         document.getElementById('nl_qe_form').style.display = 'none';
+
+        // Footer
+        document.getElementById('en_footer').style.display = 'flex';
+        document.getElementById('nl_footer').style.display = 'none';
 
         // Menu items
         for(i = 1; i <= 5; i++) {
