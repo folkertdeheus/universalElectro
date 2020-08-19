@@ -398,10 +398,25 @@ class Queries extends Db
 
     /**
      * Get products by category
+     * 
+     * @param int $category
+     * @return array
      */
     public function getProductsByCategory($category) : array
     {
         return $this->all('SELECT * FROM `products` WHERE `category` = ?', array($category));
+    }
+
+    /**
+     * Count products by category and id
+     * 
+     * @param int $category
+     * @param int $id
+     * @return int
+     */
+    public function countProductsByCategoryAndId($category, $id) : int
+    {
+        return $this->one('SELECT COUNT(*) FROM `products` WHERE `category` = ? AND `id` = ?', array($category, $id));
     }
 
     /**
@@ -510,5 +525,117 @@ class Queries extends Db
     public function deleteCategory($id) : int
     {
         return $this->none('DELETE FROM `product_categories` WHERE `id` = ?', array($id));
+    }
+
+    /**
+     * ===================================================
+     * LANGUAGES
+     * ===================================================
+     */
+
+    /**
+     * Get languages data
+     * Make sure no extra data is pulled, should not be possible to enter new data
+     * 
+     * @return array
+     */
+    public function allLanguages() : array
+    {
+        return $this->row('SELECT * FROM `languages` LIMIT 1');
+    }
+
+    /**
+     * Edit languages
+     * 
+     * @param string $nlHeaderText
+     * @param string $enHeaderText
+     * @param string $nlQuickenquiryButton
+     * @param string $enQuickenquiryButton
+     * @param string $nlQuickenquiryText
+     * @param string $enQuickenquiryText
+     * @param string $nlQuickenquiryFirstname
+     * @param string $enQuickenquiryFirstname
+     * @param string $nlQuickenquiryLastname
+     * @param string $enQuickenquiryLastname
+     * @param string $nlQuickenquiryCompany
+     * @param string $enQuickenquiryCompany
+     * @param string $nlQuickenquiryEmail
+     * @param string $enQuickenquiryEmail
+     * @param string $nlQuickenquiryPhone
+     * @param string $enQuickenquiryPhone
+     * @param string $nlQuickenquiryMessage
+     * @param string $enQuickenquiryMessage
+     * @param string $nlQuickenquirySend
+     * @param string $enQuickenquirySend
+     * @param string $nlQuickenquiryDisclaimer
+     * @param string $enQuickenquiryDisclaimer
+     * @param string $nlMenuHome
+     * @param string $enMenuHome
+     * @param string $nlMenuWebshop
+     * @param string $enMenuWebshop
+     * @param string $nlMenuLogin
+     * @param string $enMenuLogin
+     * @param string $nlMenuContact
+     * @param string $enMenuContact
+     * @param string $nlMenuSearch
+     * @param string $enMenuSearch
+     * @param string $nlFooterAdress
+     * @param string $enFooterAdress
+     * @param string $nlFooterContact
+     * @param string $enFooterContact
+     * @param string $nlFooterTax
+     * @param string $enFooterTax
+     * @return int
+     */
+    public function editLanguages($nlHeaderText, $enHeaderText, $nlQuickenquiryButton, $enQuickenquiryButton, $nlQuickenquiryText, $enQuickenquiryText, $nlQuickenquiryFirstname, $enQuickenquiryFirstname, $nlQuickenquiryLastname, $enQuickenquiryLastname, $nlQuickenquiryCompany, $enQuickenquiryCompany, $nlQuickenquiryEmail, $enQuickenquiryEmail, $nlQuickenquiryPhone, $enQuickenquiryPhone, $nlQuickenquiryMessage, $enQuickenquiryMessage, $nlQuickenquirySend, $enQuickenquirySend, $nlQuickenquiryDisclaimer, $enQuickenquiryDisclaimer, $nlMenuHome, $enMenuHome, $nlMenuWebshop, $enMenuWebshop, $nlMenuLogin, $enMenuLogin, $nlMenuContact, $enMenuContact, $nlMenuSearch, $enMenuSearch, $nlFooterAdress, $enFooterAdress, $nlFooterContact, $enFooterContact, $nlFooterTax, $enFooterTax) : int
+    {
+        return $this->none('UPDATE `languages` SET `nl_header_text` = ?, `en_header_text` = ?, `nl_quickenquiry_button` = ?, `en_quickenquiry_button` = ?, `nl_quickenquiry_text` = ?, `en_quickenquiry_text` = ?, `nl_quickenquiry_firstname` = ?, `en_quickenquiry_firstname` = ?, `nl_quickenquiry_lastname` = ?, `en_quickenquiry_lastname` = ?, `nl_quickenquiry_company` = ?, `en_quickenquiry_company` = ?, `nl_quickenquiry_email` = ?, `en_quickenquiry_email` = ?, `nl_quickenquiry_phone` = ?, `en_quickenquiry_phone` = ?, `nl_quickenquiry_message` = ?, `en_quickenquiry_message` = ?, `nl_quickenquiry_send` = ?, `en_quickenquiry_send` = ?, `en_quickenquiry_disclaimer` = ?, `nl_quickenquiry_disclaimer` = ?, `nl_menu_home` = ?, `en_menu_home` = ?, `nl_menu_webshop` = ?, `en_menu_webshop` = ?, `nl_menu_login` = ?, `en_menu_login` = ?, `nl_menu_contact` = ?, `en_menu_contact` = ?, `nl_menu_search` = ?, `en_menu_search` = ?, `nl_footer_adress` = ?, `en_footer_adress` = ?, `nl_footer_contact` = ?, `en_footer_contact` = ?, `nl_footer_tax` = ?, `en_footer_tax` = ?', array($nlHeaderText, $enHeaderText, $nlQuickenquiryButton, $enQuickenquiryButton, $nlQuickenquiryText, $enQuickenquiryText, $nlQuickenquiryFirstname, $enQuickenquiryFirstname, $nlQuickenquiryLastname, $enQuickenquiryLastname, $nlQuickenquiryCompany, $enQuickenquiryCompany, $nlQuickenquiryEmail, $enQuickenquiryEmail, $nlQuickenquiryPhone, $enQuickenquiryPhone, $nlQuickenquiryMessage, $enQuickenquiryMessage, $nlQuickenquirySend, $enQuickenquirySend, $nlQuickenquiryDisclaimer, $enQuickenquiryDisclaimer, $nlMenuHome, $enMenuHome, $nlMenuWebshop, $enMenuWebshop, $nlMenuLogin, $enMenuLogin, $nlMenuContact, $enMenuContact, $nlMenuSearch, $enMenuSearch, $nlFooterAdress, $enFooterAdress, $nlFooterContact, $enFooterContact, $nlFooterTax, $enFooterTax));
+    }
+
+    /**
+     * ===================================================
+     * LOGS
+     * ===================================================
+     */
+
+    /**
+     * Get all logs
+     * 
+     * @return array
+     */
+    public function allLogs() : array
+    {
+        return $this->all('SELECT * FROM `log` ORDER BY `id` DESC');
+    }
+    
+    /**
+     * ===================================================
+     * SETTINGS
+     * ===================================================
+     */
+
+    /**
+     * Get all settings
+     * Make sure no extra data is pulled, should not be possible to enter new data
+     * 
+     * @return array
+     */
+    public function allSettings() : array
+    {
+        return $this->row('SELECT * FROM `settings` LIMIT 1');
+    }
+
+    /**
+     * Update settings
+     * 
+     * @param boolean $webshopPriceGuest
+     * @param boolean $webshopPriceAccount
+     * @param boolean $webshopCheckout
+     * @param boolean $qeActive
+     * @return int
+     */
+    public function editSettings($webshopPriceGuest, $webshopPriceAccount, $webshopCheckout, $qeActive) : int
+    {
+        return $this->none('UPDATE `settings` SET `webshop_show_prices_on_guest` = ?, `webshop_show_prices_on_account` = ?, `webshop_checkout_button` = ?, `quick_enquiry_active` = ?', array($webshopPriceGuest, $webshopPriceAccount, $webshopCheckout, $qeActive));
     }
 }

@@ -147,6 +147,25 @@ main {
     grid-row: 1 / 2;
 }
 
+.content th {
+    /* Positioning */
+    height: 30px;
+
+    /* Font */
+    font-size: 30px;
+    text-align: left;
+}
+
+.content td {
+    /* Border, overwrite default td style */
+    border: none;
+}
+
+.content input, .content textarea {
+    /* Positioning, overwrite centering */
+    margin: 0px;
+}
+
 footer {
     /* Grid positioning */
     grid-column: 2 / 3;

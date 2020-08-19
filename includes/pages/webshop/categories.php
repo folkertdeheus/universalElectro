@@ -10,6 +10,12 @@ $productCategories = $q->allCategories();
 ?>
 
 <main id="mainEnglish">
+
+<?php
+    // Include navbar
+    require_once('includes/pages/webshop/en_navbar.php');
+?>
+
     <div class="webshop">
 <?php
         foreach($productCategories as $categoryKey => $categoryValue) {
@@ -39,6 +45,12 @@ $productCategories = $q->allCategories();
 </main>
 
 <main id="mainDutch">
+
+<?php
+    // Include navbar
+    require_once('includes/pages/webshop/nl_navbar.php');
+?>
+
     <div class="webshop">
 <?php
         foreach($productCategories as $categoryKey => $categoryValue) {

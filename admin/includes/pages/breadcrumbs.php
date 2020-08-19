@@ -42,7 +42,7 @@ if (login()) {
 
                                     case '1':
                                         // Add
-                                        echo '&nbsp;>&nbsp;<a href="index.php?page=2&action=1&sub=1">Add brand</a>';
+                                        echo '&nbsp;>&nbsp;<a href="index.php?page=2&action=1&sub=1">Add product</a>';
 
                                         break;
 
@@ -181,6 +181,24 @@ if (login()) {
                         case '2':
                             // Global
                             echo '&nbsp;>&nbsp;<a href="index.php?page=4&action=2">Global</a>';
+
+                            // Check if the sub navigation is set
+                            if (isset($_GET['sub']) && $_GET['sub'] != null) {
+                                switch($_GET['sub']) {
+                                        
+                                    case '1':
+                                        // Global settings
+                                        echo '&nbsp;>&nbsp;<a href="index.php?page=4&action=2&sub=1">Settings</a>';
+
+                                        break;
+                                    
+                                    case '2':
+                                        // Languages
+                                        echo '&nbsp;>&nbsp;<a href="index.php?page=4&action=2&sub=2">Languages</a>';
+
+                                        break;
+                                }
+                            }
 
                             break;
                         

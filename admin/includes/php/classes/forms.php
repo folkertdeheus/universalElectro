@@ -21,7 +21,9 @@ class Forms extends Queries
         'addCategory',
         'editCategory',
         'addProduct',
-        'editProduct'
+        'editProduct',
+        'languages',
+        'settings'
     ];
     
 
@@ -717,7 +719,7 @@ class Forms extends Queries
         
         // Insert product
         // If 1 row was affected, the query was succesful
-        if ($this->editProducts($brand, $category, $name, $articleNumber, $nlDescription, $enDescription, $filepaths, $tags, $properties, $specifications, $price, $highlight, $id)) {
+        if ($this->editProducts($brand, $category, $name, $articleNumber, $nlDescription, $enDescription, $filepaths, $tags, $properties, $specifications, $price, $highlight, $id) == 1) {
 
             // Succes
             $this->insertLog('Products', 'Edit', 'Editted product '.$name.' with ID '.$id. '. By '.user());
@@ -726,6 +728,116 @@ class Forms extends Queries
 
             // Failed
             $this->insertLog('Products', 'Edit', 'Editting product '.$name.' failed. By '.user());
+        }
+    }
+
+    /**
+     * Save language settings
+     */
+    private function languages() : void
+    {
+        // Set required $_POST fields
+        $this->setReq(
+            'nl_header_text',
+            'en_header_text',
+            'nl_quickenquiry_button',
+            'en_quickenquiry_button',
+            'nl_quickenquiry_text',
+            'en_quickenquiry_text',
+            'nl_quickenquiry_firstname',
+            'en_quickenquiry_firstname',
+            'nl_quickenquiry_lastname',
+            'en_quickenquiry_lastname',
+            'nl_quickenquiry_company',
+            'en_quickenquiry_company',
+            'nl_quickenquiry_email',
+            'en_quickenquiry_email',
+            'nl_quickenquiry_phone',
+            'en_quickenquiry_phone',
+            'nl_quickenquiry_message',
+            'en_quickenquiry_message',
+            'nl_quickenquiry_send',
+            'en_quickenquiry_send',
+            'nl_quickenquiry_disclaimer',
+            'en_quickenquiry_disclaimer',
+            'nl_menu_home',
+            'en_menu_home',
+            'nl_menu_webshop',
+            'en_menu_webshop',
+            'nl_menu_login',
+            'en_menu_login',
+            'nl_menu_contact',
+            'en_menu_contact',
+            'nl_menu_search',
+            'en_menu_search',
+            'nl_footer_adress',
+            'en_footer_adress',
+            'nl_footer_contact',
+            'en_footer_contact',
+            'nl_footer_tax',
+            'en_footer_tax'
+        );
+
+        // Check if all required items are posted
+        // Fail if not
+        if (!$this->checkReq()) {
+
+            $this->insertLog('Languages', 'Edit', 'Editting languages failed, not all required fields are set. By '.user());
+            return;
+        }
+
+        // Escape all html entities
+        foreach($_POST as $key => $value) {
+            if ($key != 'form') {
+                $$key = htmlentities($value);
+            }
+        }
+        
+        if ($this->editLanguages($nl_header_text, $en_header_text, $nl_quickenquiry_button, $en_quickenquiry_button, $nl_quickenquiry_text, $en_quickenquiry_text, $nl_quickenquiry_firstname, $en_quickenquiry_firstname, $nl_quickenquiry_lastname, $en_quickenquiry_lastname, $nl_quickenquiry_company, $en_quickenquiry_company, $nl_quickenquiry_email, $en_quickenquiry_email, $nl_quickenquiry_phone, $en_quickenquiry_phone, $nl_quickenquiry_message, $en_quickenquiry_message, $nl_quickenquiry_send, $en_quickenquiry_send, $nl_quickenquiry_disclaimer, $en_quickenquiry_disclaimer, $nl_menu_home, $en_menu_home, $nl_menu_webshop, $en_menu_webshop, $nl_menu_login, $en_menu_login, $nl_menu_contact, $en_menu_contact, $nl_menu_search, $en_menu_search, $nl_footer_adress, $en_footer_adress, $nl_footer_contact, $en_footer_contact, $nl_footer_tax, $en_footer_tax) == 1) {
+
+            // Succes
+            $this->insertLog('Languages', 'Edit', 'Editted languages. By '.user());
+
+        } else {
+
+            // Failed
+            $this->insertLog('Languages', 'Edit', 'Editting languages failed. By '.user());
+        }
+    }
+
+    /**
+     * Save settings
+     */
+    private function settings() : void
+    {
+        // No required $_POST data, because when a field is not true, it will not be sent
+        // All missing values will be set to 0
+        
+        // Set form fields
+        $fields = [
+            'webshop_show_prices_on_guest',
+            'webshop_show_prices_on_accounts',
+            'webshop_checkout_button',
+            'quick_enquiry_active'
+        ];
+        
+        // Loop through form fields
+        foreach($fields as $value) {
+
+            // Set new variable
+            $$value = isset($_POST[$value]) && $_POST[$value] == 1 ? 1 : 0;
+
+        }
+
+        if ($this->editSettings($webshop_show_prices_on_guest, $webshop_show_prices_on_accounts, $webshop_checkout_button, $quick_enquiry_active) == 1) {
+
+            // Succes
+            $this->insertLog('Settings', 'Edit', 'Updated settings. By '.user());
+            
+        } else {
+
+            // Failed
+            $this->insertLog('Settings', 'Edit', 'Update settings failed. By '.user());
         }
     }
 }

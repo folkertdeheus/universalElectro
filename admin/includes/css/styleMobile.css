@@ -127,6 +127,27 @@ main {
     margin: 15px;
 }
 
+.content th {
+    /* Positioning */
+    height: 30px;
+
+    /* Font */
+    font-size: 30px;
+    text-align: left;
+}
+
+.content td {
+    /* Border, overwrite default td style */
+    border: none;
+    max-width: 200px;
+}
+
+.content input, .content textarea {
+    /* Positioning, overwrite centering */
+    margin: 0px;
+    max-width: 200px;
+}
+
 footer {
     /* Grid positioning */
     margin-top: 20px;

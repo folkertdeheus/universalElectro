@@ -6,6 +6,9 @@ error_reporting(E_ALL);
 
 // Include php files
 include('includes/php/include.php');
+
+// Get Settings
+$settings = $q->allSettings();
 ?>
 
 <!doctype html>

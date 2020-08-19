@@ -21,10 +21,12 @@ if (login()) {
             
             case '2':
                 // Global
+                require_once('includes/pages/settings/global/default.php');
                 break;
             
             case '3':
                 // Logs
+                require_once('includes/pages/settings/logs/default.php');
                 break;
             
             default:

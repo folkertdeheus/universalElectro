@@ -233,6 +233,48 @@ article {
     border-radius: 3px;
 }
 
+.webshop_navbar {
+    /* Display flex */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    /* Background */
+    background-color: var(--grey);
+    border-radius: 2px;
+
+    /* Positioning */
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.webshop_navbar a:link, .webshop_navbar a:visited {
+    /* Font */
+    color: var(--white);
+    text-decoration: none;
+
+    /* Display */
+    display: block;
+
+    /* Positioning */
+    padding: 5px;
+
+    /* Animation */
+    transition: 0.5s;
+}
+
+.webshop_navbar a:hover {
+    /* Font */
+    color: var(--grey);
+
+    /* Background */
+    background-color: var(--blue);
+    border-radius: 2px;
+
+    /* Animation */
+    transition: 0.5s;
+}
+
 .webshop a:link, .webshop a:visited {
     text-decoration: none;
     color: var(--grey);

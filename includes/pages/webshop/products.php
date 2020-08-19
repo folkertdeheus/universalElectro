@@ -10,6 +10,12 @@ $products = $q->getProductsByCategory($_GET['cat']);
 ?>
 
 <main id="mainEnglish">
+
+<?php
+    // Include navbar
+    require_once('includes/pages/webshop/en_navbar.php');
+?>
+
     <div class="webshop">
 <?php
         foreach($products as $productKey => $productValue) {
@@ -36,6 +42,12 @@ $products = $q->getProductsByCategory($_GET['cat']);
 </main>
 
 <main id="mainDutch">
+
+<?php
+    // Include navbar
+    require_once('includes/pages/webshop/nl_navbar.php');
+?>
+
     <div class="webshop">
 <?php
         foreach($products as $productKey => $productValue) {

@@ -11,6 +11,7 @@ require_once('includes/php/creator.php');
 require_once('includes/php/login.php');
 require_once('includes/php/classes/db.php');
 require_once('includes/php/user.php');
+require_once('includes/php/checkbox.php');
 require_once('includes/php/classes/queries.php');
 require_once('includes/php/classes/forms.php');
 require_once('includes/php/classes/login.php');
