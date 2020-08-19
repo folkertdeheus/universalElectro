@@ -8,7 +8,7 @@ if ($settings['quick_enquiry_active']) {
 
 ?>
 
-    <div class="quickenquiry">
+    <div class="quickenquiry" onmouseout="qe_mouseout()">
         
         <div class="quickenquirybutton">
             <img src="includes/images/email_white.png" alt="email"/>

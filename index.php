@@ -34,6 +34,7 @@ $language = $q->allLanguages();
     <link rel="icon" type="image/png" href="includes/images/logo.png">
 
     <script src="includes/js/language.js"></script>
+    <script src="includes/js/qe_mouseout.js"></script>
 </head>
 
 <body>
