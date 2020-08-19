@@ -159,6 +159,10 @@ a:hover {
     width: 100%;
 }
 
+.content form {
+    margin: 0 auto;
+}
+
 td {
     /* Positioning */
     padding: 5px;
@@ -213,12 +217,12 @@ form img {
     max-width: 100%;
 }
 
-.content input[type=checkbox] {
+.settings input[type=checkbox] {
     /* Display */
     display: none;
 }
 
-.content label {
+.settings label {
     /* Display */
     display: inline-block;
 
@@ -232,12 +236,12 @@ form img {
     width: 20px;
 }
 
-.content label:hover {
+.settings label:hover {
     /* Cursor */
     cursor: pointer;
 }
 
-.content input[type=checkbox]:checked + label {
+.settings input[type=checkbox]:checked + label {
     background-image: url('../images/check_green.png');
     background-size: cover;
 }

@@ -9,6 +9,9 @@ include('includes/php/include.php');
 
 // Get Settings
 $settings = $q->allSettings();
+
+// Get languages
+$language = $q->allLanguages();
 ?>
 
 <!doctype html>

@@ -8,7 +8,7 @@
 $product = $q->getProductById($_GET['product']);
 
 // Set accepted images types
-$acceptedFileTypes = ['jpg', 'jpeg', 'png', 'gif'];
+$acceptedFileTypes = $acceptedImageTypes;
 
 // Make array from json object in database
 $images = json_decode($product['images']);
@@ -59,7 +59,21 @@ if (isset($product['images']) && $product['images'] != null && in_array(pathinfo
                 </tr>
             </table>
 
-            <span class="price">Price: &euro; <?= $product['price']; ?></span>
+<?php
+            if ($settings['webshop_show_prices_on_guest']) {
+?>
+                <span class="price">Price: &euro; <?= $product['price']; ?></span>
+<?php
+            }
+
+            if ($settings['webshop_checkout_button']) {
+?>
+                <div class="checkout_button">
+                    Add to cart
+                </div> <!-- checkout_button -->
+<?php
+            }
+?>
         </div> <!-- product_details -->
 
         <div class="product_properties">

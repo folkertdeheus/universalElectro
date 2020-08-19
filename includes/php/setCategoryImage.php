@@ -20,7 +20,7 @@ function setCategoryImage($images, $name) : string
         $image = json_decode($images);
 
         // Set accepted image types
-        $acceptedFileTypes = ['jpg', 'jpeg', 'png', 'gif'];
+        $acceptedFileTypes = $GLOBALS['acceptedImageTypes'];
 
         // Check if file in database has the correct file type
         if (in_array(pathinfo($image[0], PATHINFO_EXTENSION), $acceptedFileTypes)) {

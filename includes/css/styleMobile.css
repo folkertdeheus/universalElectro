@@ -190,7 +190,7 @@ footer {
 
     /* Positioning */
     width: 250px;
-    height: 300px;
+    height: 320px;
 }
 
 .webshop .webshop_title {
@@ -202,4 +202,41 @@ footer {
     width: 200px;
     height: 200px;
     object-fit: cover;
+}
+
+
+.product {
+    /* Display grid */
+    display: flex;
+    flex-direction: column
+}
+
+.product_image img {
+    max-width: 300px;
+    object-fit: cover;
+}
+
+.product_details .title {
+    font-size: 30px;
+}
+
+.product_details td {
+    /* Positioning */
+    min-width: 100px;
+}
+
+.product_details span {
+    display: block;
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+.product_properties {
+    /* Positioning */
+    margin-top: 20px;
+}
+
+.product_specifications {
+    /* Positioning */
+    margin-top: 20px;
 }
