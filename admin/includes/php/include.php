@@ -4,6 +4,7 @@
  * This page includes all php files
  */
 
+require_once('includes/php/acceptedFiles.php');
 require_once('includes/php/conn.php');
 require_once('includes/php/salt.php');
 require_once('includes/php/defaults.php');

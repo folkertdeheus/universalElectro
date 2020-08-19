@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This page contains the content inclusion of the main part
+ * This page contains the content inclusion of the shop part
  * The content is controlled by $_GET['page'] and it's child $_GET['action']
  */
 

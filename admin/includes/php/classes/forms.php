@@ -234,7 +234,7 @@ class Forms extends Queries
             $extension = pathinfo($file, PATHINFO_EXTENSION);
             
             // Accepted files
-            $acceptedFileTypes = ['jpg', 'jpeg', 'png', 'gif'];
+            $acceptedFileTypes = $GLOBALS['acceptedImageTypes'];
         
             // Check if file exists
             // If exists, rename with number added
@@ -330,7 +330,7 @@ class Forms extends Queries
         $extension = pathinfo($file, PATHINFO_EXTENSION);
         
         // Accepted files
-        $acceptedFileTypes = ['jpg', 'jpeg', 'png', 'gif'];
+        $acceptedFileTypes = $GLOBALS['acceptedImageTypes'];
     
         // Check if file exists
         // If exists, rename with number added
@@ -549,7 +549,7 @@ class Forms extends Queries
                 $extension = pathinfo($file, PATHINFO_EXTENSION);
                 
                 // Accepted files
-                $acceptedFileTypes = ['jpg', 'jpeg', 'png', 'gif'];
+                $acceptedFileTypes = $GLOBALS['acceptedImageTypes'];
             
                 // Check if file exists
                 // If exists, rename with number added
@@ -675,7 +675,7 @@ class Forms extends Queries
                 $extension = pathinfo($file, PATHINFO_EXTENSION);
                 
                 // Accepted files
-                $acceptedFileTypes = ['jpg', 'jpeg', 'png', 'gif'];
+                $acceptedFileTypes = $GLOBALS['acceptedImageTypes'];
             
                 // Check if file exists
                 // If exists, rename with number added
@@ -775,7 +775,11 @@ class Forms extends Queries
             'nl_footer_contact',
             'en_footer_contact',
             'nl_footer_tax',
-            'en_footer_tax'
+            'en_footer_tax',
+            'nl_quickenquiry_success',
+            'en_quickenquiry_success',
+            'nl_quickenquiry_failed',
+            'en_quickenquiry_failed'
         );
 
         // Check if all required items are posted
@@ -793,7 +797,7 @@ class Forms extends Queries
             }
         }
         
-        if ($this->editLanguages($nl_header_text, $en_header_text, $nl_quickenquiry_button, $en_quickenquiry_button, $nl_quickenquiry_text, $en_quickenquiry_text, $nl_quickenquiry_firstname, $en_quickenquiry_firstname, $nl_quickenquiry_lastname, $en_quickenquiry_lastname, $nl_quickenquiry_company, $en_quickenquiry_company, $nl_quickenquiry_email, $en_quickenquiry_email, $nl_quickenquiry_phone, $en_quickenquiry_phone, $nl_quickenquiry_message, $en_quickenquiry_message, $nl_quickenquiry_send, $en_quickenquiry_send, $nl_quickenquiry_disclaimer, $en_quickenquiry_disclaimer, $nl_menu_home, $en_menu_home, $nl_menu_webshop, $en_menu_webshop, $nl_menu_login, $en_menu_login, $nl_menu_contact, $en_menu_contact, $nl_menu_search, $en_menu_search, $nl_footer_adress, $en_footer_adress, $nl_footer_contact, $en_footer_contact, $nl_footer_tax, $en_footer_tax) == 1) {
+        if ($this->editLanguages($nl_header_text, $en_header_text, $nl_quickenquiry_button, $en_quickenquiry_button, $nl_quickenquiry_text, $en_quickenquiry_text, $nl_quickenquiry_firstname, $en_quickenquiry_firstname, $nl_quickenquiry_lastname, $en_quickenquiry_lastname, $nl_quickenquiry_company, $en_quickenquiry_company, $nl_quickenquiry_email, $en_quickenquiry_email, $nl_quickenquiry_phone, $en_quickenquiry_phone, $nl_quickenquiry_message, $en_quickenquiry_message, $nl_quickenquiry_send, $en_quickenquiry_send, $nl_quickenquiry_disclaimer, $en_quickenquiry_disclaimer, $nl_menu_home, $en_menu_home, $nl_menu_webshop, $en_menu_webshop, $nl_menu_login, $en_menu_login, $nl_menu_contact, $en_menu_contact, $nl_menu_search, $en_menu_search, $nl_footer_adress, $en_footer_adress, $nl_footer_contact, $en_footer_contact, $nl_footer_tax, $en_footer_tax, $nl_quickenquiry_success, $en_quickenquiry_success, $nl_quickenquiry_failed, $en_quickenquiry_failed) == 1) {
 
             // Succes
             $this->insertLog('Languages', 'Edit', 'Editted languages. By '.user());

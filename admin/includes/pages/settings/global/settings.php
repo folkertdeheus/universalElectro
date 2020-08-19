@@ -10,7 +10,7 @@ if (login()) {
     // Get settings
     $settings = $q->allSettings();
 ?>
-    <div class="content">
+    <div class="content settings">
         <form method="post" action="index.php?page=4&action=2">
             <table>
                 <tr>

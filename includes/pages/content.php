@@ -1,3 +1,11 @@
+<?php
+
+/**
+ * This file contains the main content switch
+ */
+
+?>
+
 <div class="container">
 
 <?php

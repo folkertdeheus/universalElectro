@@ -15,6 +15,7 @@ if (login()) {
         switch ($_GET['page']) {
             case '1':
                 // CRM
+                require_once('includes/pages/crm/default.php');
             break;
             case '2':
                 // Shop
