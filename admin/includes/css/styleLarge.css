@@ -49,12 +49,6 @@ main {
     grid-template-rows: 300px 200px auto;
 }
 
-.content {
-    /* Grid positioning */
-    grid-column: 1 / 3;
-    grid-row: 1 / 4;
-}
-
 .menutop {
     /* Grid positioning */
     grid-column: 1 / 3;
@@ -164,6 +158,18 @@ main {
 .content input, .content textarea {
     /* Positioning, overwrite centering */
     margin: 0px;
+}
+
+.content {
+    /* Grid positioning */
+    grid-column: 1 / 3;
+    grid-row: 1 / 4;
+}
+
+.content .multi {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 
 footer {

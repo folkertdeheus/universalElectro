@@ -11,6 +11,7 @@ class Forms extends Queries
     private $required = []; // array of required POST fields
     private $post = null; // POST data sanitized
     private $salt = null; // Password hash salt, set in constructor
+    private $cSalt = null; // Customer password hash salt, set in constructor
 
     // List accepted forms
     private $forms = [
@@ -23,10 +24,11 @@ class Forms extends Queries
         'addProduct',
         'editProduct',
         'languages',
-        'settings'
+        'settings',
+        'addCustomer',
+        'editCustomer'
     ];
     
-
     /**
      * The constructor checks for any sent forms
      * The form name must be in the class variable $forms
@@ -35,6 +37,7 @@ class Forms extends Queries
     function __construct()
     {
         $this->salt = $GLOBALS['salt'];
+        $this->cSalt = $GLOBALS['customerSalt'];
 
         if (isset($_POST['form']) && in_array($_POST['form'],$this->forms)) {
             $form = $_POST['form']; // Direct handling isn't allowed, so one variable needed
@@ -822,18 +825,26 @@ class Forms extends Queries
             'webshop_show_prices_on_guest',
             'webshop_show_prices_on_accounts',
             'webshop_checkout_button',
-            'quick_enquiry_active'
+            'quick_enquiry_active',
+            'home_initial_language'
         ];
         
         // Loop through form fields
         foreach($fields as $value) {
+            
+            if ($value == 'home_initial_language') {
+                // Set new string variable
+                $$value = $_POST[$value] == 'dutch' ? 'dutch' : 'english';
 
-            // Set new variable
-            $$value = isset($_POST[$value]) && $_POST[$value] == 1 ? 1 : 0;
+            } else {
+            
+                // Set new boolean variable
+                $$value = isset($_POST[$value]) && $_POST[$value] == 1 ? 1 : 0;
+            }
 
         }
 
-        if ($this->editSettings($webshop_show_prices_on_guest, $webshop_show_prices_on_accounts, $webshop_checkout_button, $quick_enquiry_active) == 1) {
+        if ($this->editSettings($webshop_show_prices_on_guest, $webshop_show_prices_on_accounts, $webshop_checkout_button, $quick_enquiry_active, $home_initial_language) == 1) {
 
             // Succes
             $this->insertLog('Settings', 'Edit', 'Updated settings. By '.user());
@@ -842,6 +853,91 @@ class Forms extends Queries
 
             // Failed
             $this->insertLog('Settings', 'Edit', 'Update settings failed. By '.user());
+        }
+    }
+
+    /**
+     * Add customer
+     */
+    private function addCustomer() : void
+    {
+        // Set required $_POST fields
+        $this->setReq('firstname', 'lastname', 'password');
+
+        // Check if all required items are posted
+        // Fail if not
+        if (!$this->checkReq()) {
+
+            $this->insertLog('Customers', 'Add', 'Adding customer failed, not all required fields are set. By '.user());
+            return;
+        }
+
+        // Loop through POST values and set variables
+        foreach($_POST as $key => $value) {
+            if ($key != 'password' && $key != 'form') {
+                $$key = htmlentities($value);
+            }
+        }
+
+        // Hash password
+        $password = hash('whirlpool', $this->cSalt.$_POST['password']);
+
+        // Insert customer
+        if ($this->addCustomers($firstname, $insertion, $lastname, $email, $phone, $company, $billing_street, $billing_housenumber, $billing_postalcode, $billing_city, $billing_provence, $billing_country, $shipping_street, $shipping_housenumber, $shipping_postalcode, $shipping_city, $shipping_provence, $shipping_country, $remarks, $password) == 1) {
+
+            // Succes
+            $this->insertLog('Customers', 'Add', 'Added customer '.$firstname.' '.$insertion.' '.$lastname.' with ID '.$this->getCustomerByName($firstname, $lastname)['id'].'. By '.user());
+        
+        } else {
+            // Failed
+            $this->insertLog('Customers', 'Add', 'Adding customer '.$firstname.' '.$insertion.' '.$lastname.' failed. By '.user());
+        }
+    }
+
+    /**
+     * Edit customer
+     */
+    private function editCustomer() : void
+    {
+        $customer = $this->getCustomer($_POST['id']);
+
+        // Set required $_POST fields
+        $this->setReq('firstname', 'lastname');
+
+        // Check if all required items are posted
+        // Fail if not
+        if (!$this->checkReq()) {
+
+            $this->insertLog('Customers', 'Edit', 'Editting customer '.$customer['lastname'].' '.$customer['firstname'].' '.$customer['insertion'].' with id '.$customer['id'].' failed, not all required fields are set. By '.user());
+            return;
+        }
+
+        // Loop through POST values and set variables
+        foreach($_POST as $key => $value) {
+            if ($key != 'password' && $key != 'form') {
+                $$key = htmlentities($value);
+            }
+        }
+
+        // Set password default to hashed password in database
+        
+        $password = $customer['password'];
+
+        // Check if password is reset
+        if (isset($_POST['password']) && $_POST['password'] != null) {
+            // Hash password
+            $password = hash('whirlpool', $this->cSalt.$_POST['password']);
+        }
+
+        if ($this->editCustomers($firstname, $insertion, $lastname, $email, $phone, $company, $billing_street, $billing_housenumber, $billing_postalcode, $billing_city, $billing_provence, $billing_country, $shipping_street, $shipping_housenumber, $shipping_postalcode, $shipping_city, $shipping_provence, $shipping_country, $remarks, $password, $id) == 1) {
+        
+            // Succes
+            $this->insertLog('Customers', 'Edit', 'Editted customer '.$customer['lastname'].' '.$customer['firstname'].' '.$customer['insertion'].' with id '.$customer['id'].'. By '.user());
+
+        } else {
+
+            // Failed
+            $this->insertLog('Customers', 'Edit', 'Editting customer '.$customer['lastname'].' '.$customer['firstname'].' '.$customer['insertion'].' with id '.$customer['id'].' failed. By '.user());
         }
     }
 }

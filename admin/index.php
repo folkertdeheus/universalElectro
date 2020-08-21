@@ -38,6 +38,7 @@ include('includes/php/include.php');
     <script src="includes/js/editcategory.js"></script>
     <script src="includes/js/addproduct.js"></script>
     <script src="includes/js/editproduct.js"></script>
+    <script src="includes/js/copy_adress.js"></script>
 </head>
 
 <body>

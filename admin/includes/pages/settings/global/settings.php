@@ -14,6 +14,19 @@ if (login()) {
         <form method="post" action="index.php?page=4&action=2">
             <table>
                 <tr>
+                    <th colspan=2>Home</th>
+                </tr>
+                <tr>
+                    <td>Initial language</td>
+                    <td>
+                        <select name="home_initial_language">
+                            <option value="english" <?php if ($settings['home_initial_language'] == 'english') { echo ' selected '; } ?>>English</option>
+                            <option value="dutch" <?php if ($settings['home_initial_language'] == 'dutch') { echo ' selected '; } ?>>Dutch</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
                     <th colspan=2>Webshop</th>
                 </tr>
                 <tr>

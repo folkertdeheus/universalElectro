@@ -8,7 +8,6 @@
 // Check if user is logged in when accessing this file
 if (login()) {
 
-    
     // Check if a brand was deleted
     if (isset($_GET['delete']) && $_GET['delete'] != null) {
         

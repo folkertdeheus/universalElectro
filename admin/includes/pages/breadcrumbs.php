@@ -20,6 +20,62 @@ if (login()) {
                 // CRM
                 echo '&nbsp;>&nbsp;<a href="index.php?page=1">CRM</a>';
 
+                // // Check if the action navigation is set
+                if (isset($_GET['action']) && $_GET['action'] != null) {
+
+                    switch($_GET['action']) {
+
+                        case '1':
+                            // Customers
+                            echo '&nbsp;>&nbsp;<a href="index.php?page=1&action=1">Customers</a>';
+
+                            // Check if the sub navigation is set
+                            if (isset($_GET['sub']) && $_GET['sub'] != null) {
+
+                                switch($_GET['sub']) {
+
+                                    case '1':
+                                        // Add
+                                        echo '&nbsp;>&nbsp;<a href="index.php?page=1&action=1&sub=1">Add customer</a>';
+
+                                        break;
+
+                                    case '2':
+                                        // Details
+                                        echo '&nbsp;>&nbsp;<a href="index.php?page=1&action=1&sub=2&id='.$_GET['id'].'">Customer details</a>';
+
+                                        break;
+
+                                    case '3':
+                                        // Edit
+                                        echo '&nbsp;>&nbsp;<a href="index.php?page=1&action=1&sub=3&id='.$_GET['id'].'">Edit customer</a>';
+
+                                        break;
+
+                                    case '4':
+                                        // Delete
+                                        echo '&nbsp;>&nbsp;<a href="index.php?page=1&action=1&sub=4&id='.$_GET['id'].'">Delete customer</a>';
+
+                                        break;
+                                }
+                            }
+
+                            break;
+
+                        case '2':
+                            // Tickets
+                            echo '&nbsp;>&nbsp;<a href="index.php?page=1&action=1">Tickets</a>';
+
+                            break;
+
+                        case '3':
+                            // Messages
+                            echo '&nbsp;>&nbsp;<a href="index.php?page=1&action=1">Messages</a>';
+
+                            break;
+                    }
+                }
+
                 break;
             
             case '2':

@@ -636,10 +636,188 @@ class Queries extends Db
      * @param boolean $webshopPriceAccount
      * @param boolean $webshopCheckout
      * @param boolean $qeActive
+     * @param string $homeInitialLanguage
      * @return int
      */
-    public function editSettings($webshopPriceGuest, $webshopPriceAccount, $webshopCheckout, $qeActive) : int
+    public function editSettings($webshopPriceGuest, $webshopPriceAccount, $webshopCheckout, $qeActive, $homeInitialLanguage) : int
     {
-        return $this->none('UPDATE `settings` SET `webshop_show_prices_on_guest` = ?, `webshop_show_prices_on_account` = ?, `webshop_checkout_button` = ?, `quick_enquiry_active` = ?', array($webshopPriceGuest, $webshopPriceAccount, $webshopCheckout, $qeActive));
+        return $this->none('UPDATE `settings` SET `webshop_show_prices_on_guest` = ?, `webshop_show_prices_on_account` = ?, `webshop_checkout_button` = ?, `quick_enquiry_active` = ?, `home_initial_language` = ?', array($webshopPriceGuest, $webshopPriceAccount, $webshopCheckout, $qeActive, $homeInitialLanguage));
+    }
+
+    /**
+     * ===================================================
+     * CUSTOMERS
+     * ===================================================
+     */
+
+    /**
+     * Count customers
+     * 
+     * @return int
+     */
+    public function countCustomers() : int
+    {
+        return $this->one('SELECT COUNT(*) FROM `customers`');
+    }
+
+    /**
+     * Get all customers
+     * 
+     * @return array
+     */
+    public function allCustomers() : array
+    {
+        return $this->all('SELECT * FROM `customers` ORDER BY `lastname` ASC');
+    }
+
+    /**
+     * Add customers
+     * 
+     * @param string $firstname
+     * @param string $insertion
+     * @param string $lastname
+     * @param string $email
+     * @param string $phone
+     * @param string $company
+     * @param string $billingStreet
+     * @param string $billingHousenumber
+     * @param string $billingPostalcode
+     * @param string $billingCity
+     * @param string $billingProvence
+     * @param string $billingCountry
+     * @param string $shippingStreet
+     * @param string $shippingHousenumber
+     * @param string $shippingPostalcode
+     * @param string $shippingCity
+     * @param string $shippingProvence
+     * @param string $shippingCountry
+     * @param string $remarks
+     * @param string $password
+     * @return int
+     */
+    public function addCustomers($firstname, $insertion, $lastname, $email, $phone, $company, $billingStreet, $billingHousenumber, $billingPostalcode, $billingCity, $billingProvence, $billingCountry, $shippingStreet, $shippingHousenumber, $shippingPostalcode, $shippingCity, $shippingProvence, $shippingCountry, $remarks, $password) : int
+    {
+        return $this->none('INSERT INTO `customers` (`firstname`, `insertion`, `lastname`, `email`, `phone`, `company_name`, `billing_street`, `billing_housenumber`, `billing_postalcode`, `billing_city`, `billing_provence`, `billing_country`, `shipping_street`, `shipping_housenumber`, `shipping_postalcode`, `shipping_city`, `shipping_provence`, `shipping_country`, `remarks`, `password`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', array($firstname, $insertion, $lastname, $email, $phone, $company, $billingStreet, $billingHousenumber, $billingPostalcode, $billingCity, $billingProvence, $billingCountry, $shippingStreet, $shippingHousenumber, $shippingPostalcode, $shippingCity, $shippingProvence, $shippingCountry, $remarks, $password));
+    }
+
+    /**
+     * Edit customers
+     * 
+     * @param string $firstname
+     * @param string $insertion
+     * @param string $lastname
+     * @param string $email
+     * @param string $phone
+     * @param string $company
+     * @param string $billingStreet
+     * @param string $billingHousenumber
+     * @param string $billingPostalcode
+     * @param string $billingCity
+     * @param string $billingProvence
+     * @param string $billingCountry
+     * @param string $shippingStreet
+     * @param string $shippingHousenumber
+     * @param string $shippingPostalcode
+     * @param string $shippingCity
+     * @param string $shippingProvence
+     * @param string $shippingCountry
+     * @param string $remarks
+     * @param string $password
+     * @param int $id
+     * @return int
+     */
+    public function editCustomers($firstname, $insertion, $lastname, $email, $phone, $company, $billingStreet, $billingHousenumber, $billingPostalcode, $billingCity, $billingProvence, $billingCountry, $shippingStreet, $shippingHousenumber, $shippingPostalcode, $shippingCity, $shippingProvence, $shippingCountry, $remarks, $password, $id) : int
+    {
+        return $this->none('UPDATE `customers` SET `firstname` = ?, `insertion` = ?, `lastname` = ?, `email` = ?, `phone` = ?, `company_name` = ?, `billing_street` = ?, `billing_housenumber` = ?, `billing_postalcode` = ?, `billing_city` = ?, `billing_provence` = ?, `billing_country` = ?, `shipping_street` = ?, `shipping_housenumber` = ?, `shipping_postalcode` = ?, `shipping_city` = ?, `shipping_provence` = ?, `shipping_country` = ?, `remarks` = ?, `password` = ? WHERE `id` = ?', array($firstname, $insertion, $lastname, $email, $phone, $company, $billingStreet, $billingHousenumber, $billingPostalcode, $billingCity, $billingProvence, $billingCountry, $shippingStreet, $shippingHousenumber, $shippingPostalcode, $shippingCity, $shippingProvence, $shippingCountry, $remarks, $password, $id));
+    }
+
+    /**
+     * Get customer by firstname and lastname
+     * 
+     * @param string $firstname
+     * @param string $lastname
+     * @return array
+     */
+    public function getCustomerByName($firstname, $lastname) : array
+    {
+        return $this->row('SELECT * FROM `customers` WHERE `firstname` = ? AND `lastname` = ? ORDER BY `id` DESC', array($firstname, $lastname));
+    }
+
+    /**
+     * Get customer by id
+     * 
+     * @param int $id
+     * @return array
+     */
+    public function getCustomer($id) : array
+    {
+        return $this->row('SELECT * FROM `customers` WHERE `id` = ?',array($id));
+    }
+
+    /**
+     * Delete customer
+     * 
+     * @param int $id
+     * @return int
+     */
+    public function deleteCustomer($id) : int
+    {
+        return $this->none('DELETE FROM `customers` WHERE `id` = ?', array($id));
+    }
+
+    /**
+     * ===================================================
+     * ORDERS
+     * ===================================================
+     */
+
+    /**
+     * Get orders by customer id
+     * 
+     * @param int $customer
+     * @return array
+     */
+    public function getOrdersByCustomer($customer) : array
+    {
+        return $this->all('SELECT * FROM `orders` WHERE `customer` = ?', array($customer));
+    }
+
+    /**
+     * Count orders by customer id
+     * 
+     * @param int $customer
+     * @return int
+     */
+    public function countOrdersByCustomer($customer) : int
+    {
+        return $this->one('SELECT COUNT(*) FROM `orders` WHERE `customer` = ?', array($customer));
+    }
+
+    /**
+     * ===================================================
+     * TICKETS
+     * ===================================================
+     */
+
+    /**
+     * Get tickets by customer id
+     * 
+     * @param int $customer
+     * @return array
+     */
+    public function getTicketsByCustomer($customer) : array
+    {
+        return $this->all('SELECT * FROM `tickets` WHERE `customer` = ?', array($customer));
+    }
+
+    /**
+     * Count tickets by customer id
+     * 
+     * @param int $customer
+     * @return int
+     */
+    public function countTicketsByCustomer($customer) : int
+    {
+        return $this->one('SELECT COUNT(*) FROM `tickets` WHERE `customer` = ?', array($customer));
     }
 }

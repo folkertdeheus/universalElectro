@@ -245,3 +245,36 @@ form img {
     background-image: url('../images/check_green.png');
     background-size: cover;
 }
+
+.form_cat {
+    /* Display */
+    display: block;
+
+    /* Positioning */
+    margin-top: 20px;
+
+    /* Font */
+    color: var(--main);
+    font-size: 30px;
+}
+
+#copy_adress {
+    /* Display */
+    display: block;
+
+    /* Background */
+    background-color: var(--accent);
+    border-radius: 2px;
+
+    /* Positioning */
+    padding: 10px;
+    margin-top: 10px;
+
+    /* Font */
+    color: var(--main);
+}
+
+#copy_adress:hover {
+    /* Cursor */
+    cursor: pointer;
+}

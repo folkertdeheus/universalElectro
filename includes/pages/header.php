@@ -35,7 +35,13 @@
         <a href="index.php?page=4" id="nl_menu5"><?= $language['nl_menu_search']; ?></a>
 
         <div class="language" id="language" onclick="languageChange()">
-            Nederlands
+<?php
+            if ($settings['home_initial_language'] == 'dutch') {
+                echo 'Nederlands';
+            } else {
+                echo 'English';
+            }
+?>
         </div> <!-- language -->
 
     </nav>

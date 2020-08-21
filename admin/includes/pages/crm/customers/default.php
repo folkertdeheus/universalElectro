@@ -8,19 +8,18 @@
 // Check if user is logged in when accessing this file
 if (login()) {
 
-    /*
     // Check if a brand was deleted
     if (isset($_GET['delete']) && $_GET['delete'] != null) {
         
         // Get brand information
-        $brand = $q->getBrandById($_GET['delete']);
+        $customer = $q->getCustomer($_GET['delete']);
         
         // Delete brand
-        $q->deleteBrand($brand['id']);
+        $q->deleteCustomer($customer['id']);
         
         // Insert Log
-        $q->insertLog('Brands', 'Delete', 'Deleted brand '.$brand['name'].' with ID '.$brand['id'].'. By '.user());
-    }*/
+        $q->insertLog('Customers', 'Delete', 'Deleted customer '.$customer['lastname'].', '.$customer['firstname'].' '.$customer['insertion'].' with ID '.$customer['id'].'. By '.user());
+    }
 
     // Check if a setting is selected
     if (isset($_GET['sub']) && $_GET['sub'] != null) {
@@ -33,11 +32,16 @@ if (login()) {
                 break;
             
             case '2':
+                // Details
+                require_once('includes/pages/crm/customers/details.php');
+                break;
+
+            case '3':
                 // Edit
                 require_once('includes/pages/crm/customers/edit.php');
                 break;
             
-            case '3':
+            case '4':
                 // Delete
                 require_once('includes/pages/crm/customers/delete.php');
                 break;
