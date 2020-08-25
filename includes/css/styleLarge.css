@@ -189,7 +189,7 @@ footer {
     font-size: 15px;
 }
 
-.webshop {
+.webshop{
     /* Display flex */
     display: flex;
     flex-direction: row;

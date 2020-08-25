@@ -115,6 +115,63 @@ if (login()) {
                 <td><textarea name="nl_footer_tax" id="nl_footer_tax" placeholder="Tax information Dutch" required onchange="languageSettings('nl_footer_tax')"><?= $language['nl_footer_tax']; ?></textarea></td>
                 <td><textarea name="en_footer_tax" id="en_footer_tax" placeholder="Tax information English" required onchange="languageSettings('en_footer_tax')"><?= $language['en_footer_tax']; ?></textarea></td>
             </tr>
+
+            <tr>
+                <th colspan=2>Login</th>
+            </tr>
+            <tr>
+                <td><input type="text" name="nl_login_login" id="nl_login_login" placeholder="Login Dutch" required onchange="languageSettings('nl_login_login')" value="<?= $language['nl_login_login']; ?>" /></td>
+                <td><input type="text" name="en_login_login" id="en_login_login" placeholder="Login English" required onchange="languageSettings('en_login_login')" value="<?= $language['en_login_login']; ?>" /></td>
+            </tr>
+            <tr>
+                <td><input type="text" name="nl_login_create" id="nl_login_create" placeholder="Create account Dutch" required onchange="languageSettings('nl_login_create')" value="<?= $language['nl_login_createaccount']; ?>" /></td>
+                <td><input type="text" name="en_login_create" id="en_login_create" placeholder="Create account English" required onchange="languageSettings('en_login_create')" value="<?= $language['en_login_createaccount']; ?>" /></td>
+            </tr>
+            <tr>
+                <td><input type="text" name="nl_login_email" id="nl_login_email" placeholder="Email Dutch" required onchange="languageSettings('nl_login_email')" value="<?= $language['nl_login_email']; ?>" /></td>
+                <td><input type="text" name="en_login_email" id="en_login_email" placeholder="Email English" required onchange="languageSettings('en_login_email')" value="<?= $language['en_login_email']; ?>" /></td>
+            </tr>
+            <tr>
+                <td><input type="text" name="nl_login_password" id="nl_login_password" placeholder="Password Dutch" required onchange="languageSettings('nl_login_password')" value="<?= $language['nl_login_password']; ?>" /></td>
+                <td><input type="text" name="en_login_password" id="en_login_password" placeholder="Password English" required onchange="languageSettings('en_login_password')" value="<?= $language['en_login_password']; ?>" /></td>
+            </tr>
+
+
+            <tr>
+                <th colspan=2>Create account</th>
+            </tr>
+            <tr>
+                <td><input type="text" name="nl_create_firstname" id="nl_create_firstname" placeholder="Firstname Dutch" required onchange="languageSettings('nl_create_firstname')" value="<?= $language['nl_create_firstname']; ?>" /></td>
+                <td><input type="text" name="en_create_firstname" id="en_create_firstname" placeholder="Firstname English" required onchange="languageSettings('en_create_firstname')" value="<?= $language['en_create_firstname']; ?>" /></td>
+            </tr>
+            <tr>
+                <td><input type="text" name="nl_create_insertion" id="nl_create_insertion" placeholder="Insertion Dutch" required onchange="languageSettings('nl_create_insertion')" value="<?= $language['nl_create_insertion']; ?>" /></td>
+                <td><input type="text" name="en_create_insertion" id="en_create_insertion" placeholder="Insertion English" required onchange="languageSettings('en_create_insertion')" value="<?= $language['en_create_insertion']; ?>" /></td>
+            </tr>
+            <tr>
+                <td><input type="text" name="nl_create_lastname" id="nl_create_firstname" placeholder="Lastname Dutch" required onchange="languageSettings('nl_create_lastname')" value="<?= $language['nl_create_lastname']; ?>" /></td>
+                <td><input type="text" name="en_create_lastname" id="en_create_firstname" placeholder="Lastname English" required onchange="languageSettings('en_create_lastname')" value="<?= $language['en_create_lastname']; ?>" /></td>
+            </tr>
+            <tr>
+                <td><input type="text" name="nl_create_email" id="nl_create_email" placeholder="Email Dutch" required onchange="languageSettings('nl_create_email')" value="<?= $language['nl_create_email']; ?>" /></td>
+                <td><input type="text" name="en_create_email" id="en_create_email" placeholder="Email English" required onchange="languageSettings('en_create_email')" value="<?= $language['en_create_email']; ?>" /></td>
+            </tr>
+            <tr>
+                <td><input type="text" name="nl_create_phone" id="nl_create_phone" placeholder="Phone Dutch" required onchange="languageSettings('nl_create_phone')" value="<?= $language['nl_create_phone']; ?>" /></td>
+                <td><input type="text" name="en_create_phone" id="en_create_phone" placeholder="Phone English" required onchange="languageSettings('en_create_phone')" value="<?= $language['en_create_phone']; ?>" /></td>
+            </tr>
+            <tr>
+                <td><input type="text" name="nl_create_password" id="nl_create_password" placeholder="Password Dutch" required onchange="languageSettings('nl_create_password')" value="<?= $language['nl_create_password']; ?>" /></td>
+                <td><input type="text" name="en_create_password" id="en_create_password" placeholder="Password English" required onchange="languageSettings('en_create_password')" value="<?= $language['en_create_password']; ?>" /></td>
+            </tr>
+            <tr>
+                <td><input type="text" name="nl_create_rpassword" id="nl_create_rpassword" placeholder="Repeat password Dutch" required onchange="languageSettings('nl_create_rpassword')" value="<?= $language['nl_create_rpassword']; ?>" /></td>
+                <td><input type="text" name="en_create_rpassword" id="en_create_rpassword" placeholder="Repeat password English" required onchange="languageSettings('en_create_rpassword')" value="<?= $language['en_create_rpassword']; ?>" /></td>
+            </tr>
+            <tr>
+                <td><input type="text" name="nl_create_create" id="nl_create_create" placeholder="Create account Dutch" required onchange="languageSettings('nl_create_create')" value="<?= $language['nl_create_create']; ?>" /></td>
+                <td><input type="text" name="en_create_create" id="en_create_create" placeholder="Create account English" required onchange="languageSettings('en_create_create')" value="<?= $language['en_create_create']; ?>" /></td>
+            </tr>
         </table>
 
         <input type="hidden" name="form" value="languages" />

@@ -782,7 +782,27 @@ class Forms extends Queries
             'nl_quickenquiry_success',
             'en_quickenquiry_success',
             'nl_quickenquiry_failed',
-            'en_quickenquiry_failed'
+            'en_quickenquiry_failed',
+            'nl_login_login',
+            'en_login_login',
+            'nl_login_create',
+            'en_login_create',
+            'nl_create_firstname',
+            'en_create_firstname',
+            'nl_create_insertion',
+            'en_create_insertion',
+            'nl_create_lastname',
+            'en_create_lastname',
+            'nl_create_email',
+            'en_create_email',
+            'nl_create_phone',
+            'en_create_phone',
+            'nl_create_password',
+            'en_create_password',
+            'nl_create_rpassword',
+            'en_create_rpassword',
+            'nl_create_create',
+            'en_create_create'
         );
 
         // Check if all required items are posted
@@ -800,7 +820,7 @@ class Forms extends Queries
             }
         }
         
-        if ($this->editLanguages($nl_header_text, $en_header_text, $nl_quickenquiry_button, $en_quickenquiry_button, $nl_quickenquiry_text, $en_quickenquiry_text, $nl_quickenquiry_firstname, $en_quickenquiry_firstname, $nl_quickenquiry_lastname, $en_quickenquiry_lastname, $nl_quickenquiry_company, $en_quickenquiry_company, $nl_quickenquiry_email, $en_quickenquiry_email, $nl_quickenquiry_phone, $en_quickenquiry_phone, $nl_quickenquiry_message, $en_quickenquiry_message, $nl_quickenquiry_send, $en_quickenquiry_send, $nl_quickenquiry_disclaimer, $en_quickenquiry_disclaimer, $nl_menu_home, $en_menu_home, $nl_menu_webshop, $en_menu_webshop, $nl_menu_login, $en_menu_login, $nl_menu_contact, $en_menu_contact, $nl_menu_search, $en_menu_search, $nl_footer_adress, $en_footer_adress, $nl_footer_contact, $en_footer_contact, $nl_footer_tax, $en_footer_tax, $nl_quickenquiry_success, $en_quickenquiry_success, $nl_quickenquiry_failed, $en_quickenquiry_failed) == 1) {
+        if ($this->editLanguages($nl_header_text, $en_header_text, $nl_quickenquiry_button, $en_quickenquiry_button, $nl_quickenquiry_text, $en_quickenquiry_text, $nl_quickenquiry_firstname, $en_quickenquiry_firstname, $nl_quickenquiry_lastname, $en_quickenquiry_lastname, $nl_quickenquiry_company, $en_quickenquiry_company, $nl_quickenquiry_email, $en_quickenquiry_email, $nl_quickenquiry_phone, $en_quickenquiry_phone, $nl_quickenquiry_message, $en_quickenquiry_message, $nl_quickenquiry_send, $en_quickenquiry_send, $nl_quickenquiry_disclaimer, $en_quickenquiry_disclaimer, $nl_menu_home, $en_menu_home, $nl_menu_webshop, $en_menu_webshop, $nl_menu_login, $en_menu_login, $nl_menu_contact, $en_menu_contact, $nl_menu_search, $en_menu_search, $nl_footer_adress, $en_footer_adress, $nl_footer_contact, $en_footer_contact, $nl_footer_tax, $en_footer_tax, $nl_quickenquiry_success, $en_quickenquiry_success, $nl_quickenquiry_failed, $en_quickenquiry_failed, $nl_login_login, $en_login_login, $nl_login_create, $en_login_create, $nl_login_email, $en_login_email, $nl_login_password, $en_login_password, $nl_create_firstname, $en_create_firstname, $nl_create_insertion, $en_create_insertion, $nl_create_lastname, $en_create_lastname, $nl_create_email, $en_create_email, $nl_create_phone, $en_create_phone, $nl_create_password, $en_create_password, $nl_create_rpassword, $en_create_rpassword, $nl_create_create, $en_create_create) == 1) {
 
             // Succes
             $this->insertLog('Languages', 'Edit', 'Editted languages. By '.user());

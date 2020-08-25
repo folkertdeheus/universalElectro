@@ -276,10 +276,40 @@ article {
 }
 
 .webshop a:link, .webshop a:visited {
+    /* Font */
     text-decoration: none;
     color: var(--grey);
 }
 
 .webshop a:hover {
+    /* Font */
     color: var(--blue);
+}
+
+.login {
+    /* Display flex */
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+
+    /* Font */
+    text-align: center;
+}
+
+.login form {
+    /* Display flex */
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}
+
+.login form input {
+    /* Display */
+    align-self: center;
+
+    /* Positioning */
+    width: 400px;
+
+    /* Background */
+    border-bottom: 1px solid var(--blue);
 }
