@@ -15,28 +15,28 @@
         <div class="mainLeft">
             <div class="accountdetails">
                 <div class="title">
-                    Basic information
+                    <?= $language['en_account_basic']; ?>
                 </div> <!-- title -->
 
                 <table>
                     <tr>
-                        <td class="tdname">Name</td>
+                        <td class="tdname"><?= $language['en_account_name']; ?></td>
                         <td><?= $customer['lastname'].', '.$customer['firstname'].' '.$customer['insertion']; ?></td>
                     </tr>
                     <tr>
-                        <td class="tdname">Email</td>
+                        <td class="tdname"><?= $language['en_account_email']; ?></td>
                         <td><?= $customer['email']; ?></td>
                     </tr>
                     <tr>
-                        <td class="tdname">Phone</td>
+                        <td class="tdname"><?= $language['en_account_phone']; ?></td>
                         <td><?= $customer['phone']; ?></td>
                     </tr>
                     <tr>
-                        <td class="tdname">Company</td>
+                        <td class="tdname"><?= $language['en_account_company']; ?></td>
                         <td><?= $customer['company_name']; ?></td>
                     </tr>
                     <tr>
-                        <td class="tdname">Tax number</td>
+                        <td class="tdname"><?= $language['en_account_tax']; ?></td>
                         <td><?= $customer['taxnumber']; ?></td>
                     </tr>
                 </table>
@@ -44,28 +44,28 @@
 
             <div class="accountdetails">
                 <div class="title">
-                    Shipping adress
+                    <?= $language['en_account_shipping']; ?>
                 </div> <!-- title -->
 
                 <table>
                     <tr>
-                        <td class="tdname">Adress</td>
+                        <td class="tdname"><?= $language['en_account_adress']; ?></td>
                         <td><?= $customer['shipping_street'].' '.$customer['shipping_housenumber']; ?></td>
                     </tr>
                     <tr>
-                        <td class="tdname">Postal code</td>
+                        <td class="tdname"><?= $language['en_account_postalcode']; ?></td>
                         <td><?= $customer['shipping_postalcode']; ?></td>
                     </tr>
                     <tr>
-                        <td class="tdname">City</td>
+                        <td class="tdname"><?= $language['en_account_city']; ?></td>
                         <td><?= $customer['shipping_city']; ?></td>
                     </tr>
                     <tr>
-                        <td class="tdname">Provence</td>
+                        <td class="tdname"><?= $language['en_account_provence']; ?></td>
                         <td><?= $customer['shipping_provence']; ?></td>
                     </tr>
                     <tr>
-                        <td class="tdname">Country</td>
+                        <td class="tdname"><?= $language['en_account_country']; ?></td>
                         <td><?= $customer['shipping_country']; ?></td>
                     </tr>
                 </table>
@@ -73,48 +73,48 @@
 
             <div class="accountdetails">
                 <div class="title">
-                    Billing adress
+                    <?= $language['en_account_billing']; ?>
                 </div> <!-- title -->
 
                 <table>
                     <tr>
-                        <td class="tdname">Adress</td>
+                        <td class="tdname"><?= $language['en_account_street']; ?></td>
                         <td><?= $customer['billing_street'].' '.$customer['billing_housenumber']; ?></td>
                     </tr>
                     <tr>
-                        <td class="tdname">Postal code</td>
+                        <td class="tdname"><?= $language['en_account_postalcode']; ?></td>
                         <td><?= $customer['billing_postalcode']; ?></td>
                     </tr>
                     <tr>
-                        <td class="tdname">City</td>
+                        <td class="tdname"><?= $language['en_account_city']; ?></td>
                         <td><?= $customer['billing_city']; ?></td>
                     </tr>
                     <tr>
-                        <td class="tdname">Provence</td>
+                        <td class="tdname"><?= $language['en_account_provence']; ?></td>
                         <td><?= $customer['billing_provence']; ?></td>
                     </tr>
                     <tr>
-                        <td class="tdname">Country</td>
+                        <td class="tdname"><?= $language['en_account_country']; ?></td>
                         <td><?= $customer['billing_country']; ?></td>
                     </tr>
                 </table>
 
-                <a href="index.php?page=2&action=2">Edit</a>
-                <a href="index.php?page=2&action=3">Change password</a>
+                <a href="index.php?page=2&action=2"><?= $language['en_account_edit']; ?></a>
+                <a href="index.php?page=2&action=3"><?= $language['en_account_changepw']; ?></a>
             </div> <!-- accountdetails -->
         </div> <!-- mainLeft -->
 
         <div class="mainRight">
             <div class="accountdetails">
                 <div class="title">
-                    Order history
+                    <?= $language['en_account_orderhistory']; ?>
                 </div> <!-- title -->
 
 <?php
                     if ($q->countOrdersByCustomer($_SESSION['webuser']) > 0) {
-                        echo 'No orders';
+                        
                     } else {
-                        echo 'No orders';
+                        echo $language['en_account_noorders'];
                     }
 ?>
             </div> <!-- accountdetails -->
@@ -125,11 +125,12 @@
                 </div> <!-- title -->
 <?php
                     if ($q->countTicketsByCustomer($_SESSION['webuser']) > 0) {
+                    
                     } else {
-                        echo 'No tickets';
+                        echo $language['en_account_notickets'];
                     }
 ?>
-                    <a href="index.php?page=3&action=1">New ticket</a>
+                    <a href="index.php?page=3&action=1"><?= $language['en_account_newticket']; ?></a>
             </div> <!-- accountdetails -->
             
         </div> <!-- mainRight -->
@@ -137,7 +138,130 @@
 </main>
 
 <main id="mainDutch">
-    blablba
+<div class="mainContent">
+        <div class="mainLeft">
+            <div class="accountdetails">
+                <div class="title">
+                    <?= $language['nl_account_basic']; ?>
+                </div> <!-- title -->
+
+                <table>
+                    <tr>
+                        <td class="tdname"><?= $language['nl_account_name']; ?></td>
+                        <td><?= $customer['lastname'].', '.$customer['firstname'].' '.$customer['insertion']; ?></td>
+                    </tr>
+                    <tr>
+                        <td class="tdname"><?= $language['nl_account_email']; ?></td>
+                        <td><?= $customer['email']; ?></td>
+                    </tr>
+                    <tr>
+                        <td class="tdname"><?= $language['nl_account_phone']; ?></td>
+                        <td><?= $customer['phone']; ?></td>
+                    </tr>
+                    <tr>
+                        <td class="tdname"><?= $language['nl_account_company']; ?></td>
+                        <td><?= $customer['company_name']; ?></td>
+                    </tr>
+                    <tr>
+                        <td class="tdname"><?= $language['nl_account_tax']; ?></td>
+                        <td><?= $customer['taxnumber']; ?></td>
+                    </tr>
+                </table>
+            </div> <!-- accountdetails -->
+
+            <div class="accountdetails">
+                <div class="title">
+                    <?= $language['nl_account_shipping']; ?>
+                </div> <!-- title -->
+
+                <table>
+                    <tr>
+                        <td class="tdname"><?= $language['nl_account_adress']; ?></td>
+                        <td><?= $customer['shipping_street'].' '.$customer['shipping_housenumber']; ?></td>
+                    </tr>
+                    <tr>
+                        <td class="tdname"><?= $language['nl_account_postalcode']; ?></td>
+                        <td><?= $customer['shipping_postalcode']; ?></td>
+                    </tr>
+                    <tr>
+                        <td class="tdname"><?= $language['nl_account_city']; ?></td>
+                        <td><?= $customer['shipping_city']; ?></td>
+                    </tr>
+                    <tr>
+                        <td class="tdname"><?= $language['nl_account_provence']; ?></td>
+                        <td><?= $customer['shipping_provence']; ?></td>
+                    </tr>
+                    <tr>
+                        <td class="tdname"><?= $language['nl_account_country']; ?></td>
+                        <td><?= $customer['shipping_country']; ?></td>
+                    </tr>
+                </table>
+            </div> <!-- acountdetails -->
+
+            <div class="accountdetails">
+                <div class="title">
+                    <?= $language['nl_account_billing']; ?>
+                </div> <!-- title -->
+
+                <table>
+                    <tr>
+                        <td class="tdname"><?= $language['nl_account_street']; ?></td>
+                        <td><?= $customer['billing_street'].' '.$customer['billing_housenumber']; ?></td>
+                    </tr>
+                    <tr>
+                        <td class="tdname"><?= $language['nl_account_postalcode']; ?></td>
+                        <td><?= $customer['billing_postalcode']; ?></td>
+                    </tr>
+                    <tr>
+                        <td class="tdname"><?= $language['nl_account_city']; ?></td>
+                        <td><?= $customer['billing_city']; ?></td>
+                    </tr>
+                    <tr>
+                        <td class="tdname"><?= $language['nl_account_provence']; ?></td>
+                        <td><?= $customer['billing_provence']; ?></td>
+                    </tr>
+                    <tr>
+                        <td class="tdname"><?= $language['nl_account_country']; ?></td>
+                        <td><?= $customer['billing_country']; ?></td>
+                    </tr>
+                </table>
+
+                <a href="index.php?page=2&action=2"><?= $language['nl_account_edit']; ?></a>
+                <a href="index.php?page=2&action=3"><?= $language['nl_account_changepw']; ?></a>
+            </div> <!-- accountdetails -->
+        </div> <!-- mainLeft -->
+
+        <div class="mainRight">
+            <div class="accountdetails">
+                <div class="title">
+                    <?= $language['nl_account_orderhistory']; ?>
+                </div> <!-- title -->
+
+<?php
+                    if ($q->countOrdersByCustomer($_SESSION['webuser']) > 0) {
+                        
+                    } else {
+                        echo $language['nl_account_noorders'];
+                    }
+?>
+            </div> <!-- accountdetails -->
+
+            <div class="accountdetails">
+                <div class="title">
+                    Tickets
+                </div> <!-- title -->
+<?php
+                    if ($q->countTicketsByCustomer($_SESSION['webuser']) > 0) {
+                    
+                    } else {
+                        echo $language['nl_account_notickets'];
+                    }
+?>
+                    <a href="index.php?page=3&action=1"><?= $language['nl_account_newticket']; ?></a>
+            </div> <!-- accountdetails -->
+            
+        </div> <!-- mainRight -->
+    </div> <!-- mainContent -->
 </main>
 
 <?php
