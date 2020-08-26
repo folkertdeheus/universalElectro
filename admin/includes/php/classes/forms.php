@@ -70,7 +70,18 @@ class Forms extends Queries
     {
         // Set required array
         foreach($required as $value) {
-            $this->required[$value] = null;
+
+            // Check if value is array (language form)
+            if (is_array($value)) {
+                
+                // Extra loop
+                foreach($value as $nKey => $nValue) {
+                    $this->required[$nValue] = null;
+                }
+
+            } else {
+                $this->required[$value] = null;
+            }
         }
 
         // Remove empty entries
@@ -740,70 +751,7 @@ class Forms extends Queries
     private function languages() : void
     {
         // Set required $_POST fields
-        $this->setReq(
-            'nl_header_text',
-            'en_header_text',
-            'nl_quickenquiry_button',
-            'en_quickenquiry_button',
-            'nl_quickenquiry_text',
-            'en_quickenquiry_text',
-            'nl_quickenquiry_firstname',
-            'en_quickenquiry_firstname',
-            'nl_quickenquiry_lastname',
-            'en_quickenquiry_lastname',
-            'nl_quickenquiry_company',
-            'en_quickenquiry_company',
-            'nl_quickenquiry_email',
-            'en_quickenquiry_email',
-            'nl_quickenquiry_phone',
-            'en_quickenquiry_phone',
-            'nl_quickenquiry_message',
-            'en_quickenquiry_message',
-            'nl_quickenquiry_send',
-            'en_quickenquiry_send',
-            'nl_quickenquiry_disclaimer',
-            'en_quickenquiry_disclaimer',
-            'nl_menu_home',
-            'en_menu_home',
-            'nl_menu_webshop',
-            'en_menu_webshop',
-            'nl_menu_login',
-            'en_menu_login',
-            'nl_menu_contact',
-            'en_menu_contact',
-            'nl_menu_search',
-            'en_menu_search',
-            'nl_footer_adress',
-            'en_footer_adress',
-            'nl_footer_contact',
-            'en_footer_contact',
-            'nl_footer_tax',
-            'en_footer_tax',
-            'nl_quickenquiry_success',
-            'en_quickenquiry_success',
-            'nl_quickenquiry_failed',
-            'en_quickenquiry_failed',
-            'nl_login_login',
-            'en_login_login',
-            'nl_login_create',
-            'en_login_create',
-            'nl_create_firstname',
-            'en_create_firstname',
-            'nl_create_insertion',
-            'en_create_insertion',
-            'nl_create_lastname',
-            'en_create_lastname',
-            'nl_create_email',
-            'en_create_email',
-            'nl_create_phone',
-            'en_create_phone',
-            'nl_create_password',
-            'en_create_password',
-            'nl_create_rpassword',
-            'en_create_rpassword',
-            'nl_create_create',
-            'en_create_create'
-        );
+        $this->setReq($GLOBALS['fieldsArray']);
 
         // Check if all required items are posted
         // Fail if not
@@ -813,14 +761,18 @@ class Forms extends Queries
             return;
         }
 
+        // Start variable to pass to PDO query
+        $queryVars = array();
+
         // Escape all html entities
         foreach($_POST as $key => $value) {
             if ($key != 'form') {
-                $$key = htmlentities($value);
+                array_push($queryVars, htmlentities($value));
             }
         }
         
-        if ($this->editLanguages($nl_header_text, $en_header_text, $nl_quickenquiry_button, $en_quickenquiry_button, $nl_quickenquiry_text, $en_quickenquiry_text, $nl_quickenquiry_firstname, $en_quickenquiry_firstname, $nl_quickenquiry_lastname, $en_quickenquiry_lastname, $nl_quickenquiry_company, $en_quickenquiry_company, $nl_quickenquiry_email, $en_quickenquiry_email, $nl_quickenquiry_phone, $en_quickenquiry_phone, $nl_quickenquiry_message, $en_quickenquiry_message, $nl_quickenquiry_send, $en_quickenquiry_send, $nl_quickenquiry_disclaimer, $en_quickenquiry_disclaimer, $nl_menu_home, $en_menu_home, $nl_menu_webshop, $en_menu_webshop, $nl_menu_login, $en_menu_login, $nl_menu_contact, $en_menu_contact, $nl_menu_search, $en_menu_search, $nl_footer_adress, $en_footer_adress, $nl_footer_contact, $en_footer_contact, $nl_footer_tax, $en_footer_tax, $nl_quickenquiry_success, $en_quickenquiry_success, $nl_quickenquiry_failed, $en_quickenquiry_failed, $nl_login_login, $en_login_login, $nl_login_create, $en_login_create, $nl_login_email, $en_login_email, $nl_login_password, $en_login_password, $nl_create_firstname, $en_create_firstname, $nl_create_insertion, $en_create_insertion, $nl_create_lastname, $en_create_lastname, $nl_create_email, $en_create_email, $nl_create_phone, $en_create_phone, $nl_create_password, $en_create_password, $nl_create_rpassword, $en_create_rpassword, $nl_create_create, $en_create_create) == 1) {
+        // Update languages
+        if ($this->editLanguages($queryVars) == 1) {
 
             // Succes
             $this->insertLog('Languages', 'Edit', 'Editted languages. By '.user());
@@ -899,11 +851,26 @@ class Forms extends Queries
             }
         }
 
+        // Check if email is valid
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+
+            $this->insertLog('Customers', 'Add', 'Adding customer failed, email is not valid. By '.user());
+            return;
+        }
+
+        // Check if email is unique
+        if ($this->countCustomersByEmail($email) != 0) {
+
+            $this->insertLog('Customers', 'Add', 'Adding customer failed, email is not unique. By '.user());
+            return;
+        }
+
+
         // Hash password
         $password = hash('whirlpool', $this->cSalt.$_POST['password']);
 
         // Insert customer
-        if ($this->addCustomers($firstname, $insertion, $lastname, $email, $phone, $company, $billing_street, $billing_housenumber, $billing_postalcode, $billing_city, $billing_provence, $billing_country, $shipping_street, $shipping_housenumber, $shipping_postalcode, $shipping_city, $shipping_provence, $shipping_country, $remarks, $password) == 1) {
+        if ($this->addCustomers($firstname, $insertion, $lastname, $email, $phone, $company, $billing_street, $billing_housenumber, $billing_postalcode, $billing_city, $billing_provence, $billing_country, $shipping_street, $shipping_housenumber, $shipping_postalcode, $shipping_city, $shipping_provence, $shipping_country, $remarks, $password, $taxnumber) == 1) {
 
             // Succes
             $this->insertLog('Customers', 'Add', 'Added customer '.$firstname.' '.$insertion.' '.$lastname.' with ID '.$this->getCustomerByName($firstname, $lastname)['id'].'. By '.user());
@@ -949,7 +916,7 @@ class Forms extends Queries
             $password = hash('whirlpool', $this->cSalt.$_POST['password']);
         }
 
-        if ($this->editCustomers($firstname, $insertion, $lastname, $email, $phone, $company, $billing_street, $billing_housenumber, $billing_postalcode, $billing_city, $billing_provence, $billing_country, $shipping_street, $shipping_housenumber, $shipping_postalcode, $shipping_city, $shipping_provence, $shipping_country, $remarks, $password, $id) == 1) {
+        if ($this->editCustomers($firstname, $insertion, $lastname, $email, $phone, $company, $billing_street, $billing_housenumber, $billing_postalcode, $billing_city, $billing_provence, $billing_country, $shipping_street, $shipping_housenumber, $shipping_postalcode, $shipping_city, $shipping_provence, $shipping_country, $remarks, $password, $taxnumber, $id) == 1) {
         
             // Succes
             $this->insertLog('Customers', 'Edit', 'Editted customer '.$customer['lastname'].' '.$customer['firstname'].' '.$customer['insertion'].' with id '.$customer['id'].'. By '.user());

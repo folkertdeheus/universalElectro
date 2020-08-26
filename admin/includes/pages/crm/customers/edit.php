@@ -23,6 +23,7 @@ if (login()) {
                 <input type="text" name="email" id="email" placeholder="Email" required onchange="addCustomers('email')" value="<?= $customer['email']; ?>" />
                 <input type="text" name="phone" id="phone" placeholder="Phone" value="<?= $customer['phone']; ?>" />
                 <input type="text" name="company" id="company" placeholder="Company name" value="<?= $customer['company_name']; ?>" />
+                <input type="text" name="taxnumber" id="taxnumber" placeholder="Tax number" value="<?=$customer['taxnumber']; ?>" />
                 <input type="text" name="password" id="password" placeholder="New password (blank to keep current)" />
                 <textarea name="remarks" id="remarks" placeholder="Remarks"><?= $customer['remarks']; ?></textarea>
 

@@ -1,8 +1,19 @@
 <?php
 
+//If the HTTPS is not found to be "on"
+if(!isset($_SERVER["HTTPS"]) || $_SERVER["HTTPS"] != "on")
+{
+    //Tell the browser to redirect to the HTTPS URL.
+    header("Location: https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"], true, 301);
+    //Prevent the rest of the script from executing.
+    exit;
+}
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+
+session_start();
 
 // Include php files
 include('includes/php/include.php');

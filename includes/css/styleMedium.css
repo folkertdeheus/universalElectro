@@ -281,3 +281,7 @@ footer {
     /* Positioning */
     margin-top: 20px;
 }
+
+.tdname {
+    width: 250px;
+}

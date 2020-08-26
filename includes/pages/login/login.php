@@ -1,6 +1,6 @@
 <main id="mainEnglish">
     <div class="login">
-        <form method="post">
+        <form method="post" action="index.php?page=2">
             <input type="text" name="email" placeholder="<?= $language['en_login_email']; ?>" />
             <input type="password" name="password" placeholder="<?= $language['en_login_password']; ?>" />
 
@@ -13,8 +13,8 @@
 </main>
 
 <main id="mainDutch">
-<div class="login">
-        <form method="post">
+    <div class="login">
+        <form method="post" action="index.php?page=2">
             <input type="text" name="email" placeholder="<?= $language['nl_login_email']; ?>" />
             <input type="password" name="password" placeholder="<?= $language['nl_login_password']; ?>" />
 

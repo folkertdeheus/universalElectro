@@ -4,17 +4,21 @@
  * This page includes all php files
  */
 
-require_once('includes/php/acceptedFiles.php');
-require_once('includes/php/conn.php');
-require_once('includes/php/salt.php');
-require_once('includes/php/defaults.php');
-require_once('includes/php/creator.php');
-require_once('includes/php/login.php');
-require_once('includes/php/classes/db.php');
-require_once('includes/php/user.php');
-require_once('includes/php/checkbox.php');
-require_once('includes/php/classes/queries.php');
-require_once('includes/php/classes/forms.php');
-require_once('includes/php/classes/login.php');
+define('PATH', 'includes/php/');
+define('CLAS', 'includes/php/classes/');
 
-require_once('includes/php/classes.php');
+require_once(PATH.'language.php');
+require_once(PATH.'acceptedFiles.php');
+require_once(PATH.'conn.php');
+require_once(PATH.'salt.php');
+require_once(PATH.'defaults.php');
+require_once(PATH.'creator.php');
+require_once(PATH.'login.php');
+require_once(PATH.'classes/db.php');
+require_once(PATH.'user.php');
+require_once(PATH.'checkbox.php');
+
+require_once(CLAS.'queries.php');
+require_once(CLAS.'forms.php');
+require_once(CLAS.'login.php');
+require_once(PATH.'classes.php');

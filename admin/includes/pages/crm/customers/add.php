@@ -21,6 +21,7 @@ if (login()) {
                 <input type="text" name="email" id="email" placeholder="Email" required onchange="addCustomers('email')" />
                 <input type="text" name="phone" id="phone" placeholder="Phone" />
                 <input type="text" name="company" id="company" placeholder="Company name" />
+                <input type="text" name="taxnumber" id="taxnumber" placeholder="Tax number" />
                 <input type="text" name="password" id="password" placeholder="Password" required />
                 <textarea name="remarks" id="remarks" placeholder="Remarks"></textarea>
 

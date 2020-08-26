@@ -5,6 +5,7 @@
     --light: rgba(64, 56, 58, 1);
     --blue: rgba(0, 164, 225, 1);
     --white: rgba(255, 255, 255, 1);
+    --greyed: rgb(187, 169, 173, 1);
 
     --background: url('../images/background.png');
 }
@@ -312,4 +313,62 @@ article {
 
     /* Background */
     border-bottom: 1px solid var(--blue);
+}
+
+.accountdetails a:link, .accountdetails a:visited {
+    /* Display */
+    display: block;
+
+    /* Background */
+    background-color: var(--blue);
+    border-radius: 3px;
+
+    /* Font */
+    color: var(--grey);
+    text-decoration: none;
+    text-align: center;
+
+    /* Positioning */
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+
+    /* Animation */
+    transition: 0.5s;
+}
+
+.accountdetails {
+    /* Display */
+    display: block;
+
+    /* Positioning */
+    margin-bottom: 20px;
+}
+
+.accountdetails table {
+    margin: 10px;
+}
+
+.accountdetails a:hover {
+    background: none;
+    outline: 1px solid var(--blue);
+    transition: 0.5s;
+}
+
+.accountdetails_grey .title {
+    background-color: var(--greyed);
+    color: var(--white);
+    border-bottom: 1px solid var(--white);
+}
+
+.accountdetails input[type="submit"] {
+    display: block;
+    background-color: var(--blue);
+    border-radius: 3px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.accountdetails input[type="submit"]:hover {
+    cursor: pointer;
 }

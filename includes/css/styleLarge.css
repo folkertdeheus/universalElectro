@@ -277,3 +277,41 @@ footer {
     /* Positioning */
     margin-top: 20px;
 }
+
+.mainContent {
+    /* Display flex */
+    display: flex;
+    flex-direction: row;
+}
+
+.mainContent .mainLeft, .mainContent .mainRight {
+    /* Display flex */
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+
+    /* Positioning */
+    width: 50%;
+}
+
+.mainContent .mainLeft {
+    /* Positioning */
+    margin-right: 10px;
+}
+
+.mainContent .mainRight {
+    /* Positioning */
+    margin-left: 10px;
+}
+
+.accountdetails a:link, .accountdetails a:visited {
+    margin-bottom: 0px;
+}
+
+.accountdetails input[type="submit"] {
+    margin-bottom: 0px;
+}
+
+.tdname {
+    width: 150px;
+}

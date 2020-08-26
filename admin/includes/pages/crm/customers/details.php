@@ -36,6 +36,10 @@ if (login()) {
                         <td><?= $customer['company_name']; ?></td>
                     </tr>
                     <tr>
+                        <td>Tax number</td>
+                        <td><?= $customer['taxnumber']; ?></td>
+                    </tr>
+                    <tr>
                         <td>Remarks</td>
                         <td><?= nl2br($customer['remarks']); ?></td>
                     </tr>

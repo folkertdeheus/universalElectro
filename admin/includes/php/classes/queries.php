@@ -547,77 +547,24 @@ class Queries extends Db
     /**
      * Edit languages
      * 
-     * @param string $nlHeaderText
-     * @param string $enHeaderText
-     * @param string $nlQuickenquiryButton
-     * @param string $enQuickenquiryButton
-     * @param string $nlQuickenquiryText
-     * @param string $enQuickenquiryText
-     * @param string $nlQuickenquiryFirstname
-     * @param string $enQuickenquiryFirstname
-     * @param string $nlQuickenquiryLastname
-     * @param string $enQuickenquiryLastname
-     * @param string $nlQuickenquiryCompany
-     * @param string $enQuickenquiryCompany
-     * @param string $nlQuickenquiryEmail
-     * @param string $enQuickenquiryEmail
-     * @param string $nlQuickenquiryPhone
-     * @param string $enQuickenquiryPhone
-     * @param string $nlQuickenquiryMessage
-     * @param string $enQuickenquiryMessage
-     * @param string $nlQuickenquirySend
-     * @param string $enQuickenquirySend
-     * @param string $nlQuickenquiryDisclaimer
-     * @param string $enQuickenquiryDisclaimer
-     * @param string $nlMenuHome
-     * @param string $enMenuHome
-     * @param string $nlMenuWebshop
-     * @param string $enMenuWebshop
-     * @param string $nlMenuLogin
-     * @param string $enMenuLogin
-     * @param string $nlMenuContact
-     * @param string $enMenuContact
-     * @param string $nlMenuSearch
-     * @param string $enMenuSearch
-     * @param string $nlFooterAdress
-     * @param string $enFooterAdress
-     * @param string $nlFooterContact
-     * @param string $enFooterContact
-     * @param string $nlFooterTax
-     * @param string $enFooterTax
-     * @param string $nlQuickenquirySuccess
-     * @param string $enQuickenquirySuccess
-     * @param string $nlQuickenquiryFailed
-     * @param string $enQuickenquiryFailed
-     * @param string $nlLoginLogin
-     * @param string $enLoginLogin
-     * @param string $nlLoginCreate
-     * @param string $enLoginCreate
-     * @param string $nlLoginEmail
-     * @param string $enLoginEmail
-     * @param string $nlLoginPassword
-     * @param string $enLoginPassword
-     * @param string $nlCreateFirstname
-     * @param string $enCreateFirstname
-     * @param string $nlCreateInsertion
-     * @param string $enCreateInsertion
-     * @param string $nlCreateLastname
-     * @param string $enCreateLastname
-     * @param string $nlCreateEmail
-     * @param string $enCreateEmail
-     * @param string $nlCreatePhone
-     * @param string $enCreatePhone
-     * @param string $nlCreatePassword
-     * @param string $enCreatePassword
-     * @param string $nlCreateRpassword
-     * @param string $enCreateRpassword
-     * @param string $nlCreateCreate
-     * @param string $enCreateCreate
+     * @param array $array
      * @return int
      */
-    public function editLanguages($nlHeaderText, $enHeaderText, $nlQuickenquiryButton, $enQuickenquiryButton, $nlQuickenquiryText, $enQuickenquiryText, $nlQuickenquiryFirstname, $enQuickenquiryFirstname, $nlQuickenquiryLastname, $enQuickenquiryLastname, $nlQuickenquiryCompany, $enQuickenquiryCompany, $nlQuickenquiryEmail, $enQuickenquiryEmail, $nlQuickenquiryPhone, $enQuickenquiryPhone, $nlQuickenquiryMessage, $enQuickenquiryMessage, $nlQuickenquirySend, $enQuickenquirySend, $nlQuickenquiryDisclaimer, $enQuickenquiryDisclaimer, $nlMenuHome, $enMenuHome, $nlMenuWebshop, $enMenuWebshop, $nlMenuLogin, $enMenuLogin, $nlMenuContact, $enMenuContact, $nlMenuSearch, $enMenuSearch, $nlFooterAdress, $enFooterAdress, $nlFooterContact, $enFooterContact, $nlFooterTax, $enFooterTax, $nlQuickenquirySuccess, $enQuickenquirySuccess, $nlQuickenquiryFailed, $enQuickenquiryFailed, $nlLoginLogin, $enLoginLogin, $nlLoginCreate, $enLoginCreate, $nlLoginEmail, $enLoginEmail, $nlLoginPassword, $enLoginPassword, $nlCreateFirstname, $enCreateFirstname, $nlCreateInsertion, $enCreateInsertion, $nlCreateLastname, $enCreateLastname, $nlCreateEmail, $enCreateEmail, $nlCreatePhone, $enCreatePhone, $nlCreatePassword, $enCreatePassword, $nlCreateRpassword, $enCreateRpassword, $nlCreateCreate, $enCreateCreate) : int
+    public function editLanguages($array) : int
     {
-        return $this->none('UPDATE `languages` SET `nl_header_text` = ?, `en_header_text` = ?, `nl_quickenquiry_button` = ?, `en_quickenquiry_button` = ?, `nl_quickenquiry_text` = ?, `en_quickenquiry_text` = ?, `nl_quickenquiry_firstname` = ?, `en_quickenquiry_firstname` = ?, `nl_quickenquiry_lastname` = ?, `en_quickenquiry_lastname` = ?, `nl_quickenquiry_company` = ?, `en_quickenquiry_company` = ?, `nl_quickenquiry_email` = ?, `en_quickenquiry_email` = ?, `nl_quickenquiry_phone` = ?, `en_quickenquiry_phone` = ?, `nl_quickenquiry_message` = ?, `en_quickenquiry_message` = ?, `nl_quickenquiry_send` = ?, `en_quickenquiry_send` = ?, `en_quickenquiry_disclaimer` = ?, `nl_quickenquiry_disclaimer` = ?, `nl_menu_home` = ?, `en_menu_home` = ?, `nl_menu_webshop` = ?, `en_menu_webshop` = ?, `nl_menu_login` = ?, `en_menu_login` = ?, `nl_menu_contact` = ?, `en_menu_contact` = ?, `nl_menu_search` = ?, `en_menu_search` = ?, `nl_footer_adress` = ?, `en_footer_adress` = ?, `nl_footer_contact` = ?, `en_footer_contact` = ?, `nl_footer_tax` = ?, `en_footer_tax` = ?, `nl_quickenquiry_success` = ?, `en_quickenquiry_success` = ?, `nl_quickenquiry_failed` = ?, `en_quickenquiry_failed` = ?, `nl_login_login` = ?, `en_login_login` = ?, `nl_login_createaccount` = ?, `en_login_createaccount` = ?, `nl_login_email` = ?, `en_login_email` = ?, `nl_login_password` = ?, `en_login_password` = ?, `nl_create_firstname` = ?, `en_create_firstname` = ?, `nl_create_insertion` = ?, `en_create_insertion` = ?, `nl_create_lastname` = ?, `en_create_lastname` = ?, `nl_create_email` = ?, `en_create_email` = ?, `nl_create_phone` = ?, `en_create_phone` = ?, `nl_create_password` = ?, `en_create_password` = ?, `nl_create_rpassword` = ?, `en_create_rpassword` = ?, `nl_create_create` = ?, `en_create_create` = ?', array($nlHeaderText, $enHeaderText, $nlQuickenquiryButton, $enQuickenquiryButton, $nlQuickenquiryText, $enQuickenquiryText, $nlQuickenquiryFirstname, $enQuickenquiryFirstname, $nlQuickenquiryLastname, $enQuickenquiryLastname, $nlQuickenquiryCompany, $enQuickenquiryCompany, $nlQuickenquiryEmail, $enQuickenquiryEmail, $nlQuickenquiryPhone, $enQuickenquiryPhone, $nlQuickenquiryMessage, $enQuickenquiryMessage, $nlQuickenquirySend, $enQuickenquirySend, $nlQuickenquiryDisclaimer, $enQuickenquiryDisclaimer, $nlMenuHome, $enMenuHome, $nlMenuWebshop, $enMenuWebshop, $nlMenuLogin, $enMenuLogin, $nlMenuContact, $enMenuContact, $nlMenuSearch, $enMenuSearch, $nlFooterAdress, $enFooterAdress, $nlFooterContact, $enFooterContact, $nlFooterTax, $enFooterTax, $nlQuickenquirySuccess, $enQuickenquirySuccess, $nlQuickenquiryFailed, $enQuickenquiryFailed, $nlLoginLogin, $enLoginLogin, $nlLoginCreate, $enLoginCreate, $nlLoginEmail, $enLoginEmail, $nlLoginPassword, $enLoginPassword, $nlCreateFirstname, $enCreateFirstname, $nlCreateInsertion, $enCreateInsertion, $nlCreateLastname, $enCreateLastname, $nlCreateEmail, $enCreateEmail, $nlCreatePhone, $enCreatePhone, $nlCreatePassword, $enCreatePassword, $nlCreateRpassword, $enCreateRpassword, $nlCreateCreate, $enCreateCreate));
+        // Start prepared statement
+        $statement = 'UPDATE `languages` SET';
+
+        // Build rows
+        foreach($GLOBALS['fieldsArray'] as $key => $value) {
+            $statement .= ' `'.$value.'` = ?,';
+        }
+
+        // Remove last comma
+        $statement = substr($statement, 0, -1);
+
+        // Run query
+        return $this->none($statement, $array);
     }
 
     /**
@@ -717,11 +664,12 @@ class Queries extends Db
      * @param string $shippingCountry
      * @param string $remarks
      * @param string $password
+     * @param string $taxnumber
      * @return int
      */
-    public function addCustomers($firstname, $insertion, $lastname, $email, $phone, $company, $billingStreet, $billingHousenumber, $billingPostalcode, $billingCity, $billingProvence, $billingCountry, $shippingStreet, $shippingHousenumber, $shippingPostalcode, $shippingCity, $shippingProvence, $shippingCountry, $remarks, $password) : int
+    public function addCustomers($firstname, $insertion, $lastname, $email, $phone, $company, $billingStreet, $billingHousenumber, $billingPostalcode, $billingCity, $billingProvence, $billingCountry, $shippingStreet, $shippingHousenumber, $shippingPostalcode, $shippingCity, $shippingProvence, $shippingCountry, $remarks, $password, $taxnumber) : int
     {
-        return $this->none('INSERT INTO `customers` (`firstname`, `insertion`, `lastname`, `email`, `phone`, `company_name`, `billing_street`, `billing_housenumber`, `billing_postalcode`, `billing_city`, `billing_provence`, `billing_country`, `shipping_street`, `shipping_housenumber`, `shipping_postalcode`, `shipping_city`, `shipping_provence`, `shipping_country`, `remarks`, `password`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', array($firstname, $insertion, $lastname, $email, $phone, $company, $billingStreet, $billingHousenumber, $billingPostalcode, $billingCity, $billingProvence, $billingCountry, $shippingStreet, $shippingHousenumber, $shippingPostalcode, $shippingCity, $shippingProvence, $shippingCountry, $remarks, $password));
+        return $this->none('INSERT INTO `customers` (`firstname`, `insertion`, `lastname`, `email`, `phone`, `company_name`, `billing_street`, `billing_housenumber`, `billing_postalcode`, `billing_city`, `billing_provence`, `billing_country`, `shipping_street`, `shipping_housenumber`, `shipping_postalcode`, `shipping_city`, `shipping_provence`, `shipping_country`, `remarks`, `password`, `taxnumber`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', array($firstname, $insertion, $lastname, $email, $phone, $company, $billingStreet, $billingHousenumber, $billingPostalcode, $billingCity, $billingProvence, $billingCountry, $shippingStreet, $shippingHousenumber, $shippingPostalcode, $shippingCity, $shippingProvence, $shippingCountry, $remarks, $password, $taxnumber));
     }
 
     /**
@@ -747,12 +695,13 @@ class Queries extends Db
      * @param string $shippingCountry
      * @param string $remarks
      * @param string $password
+     * @param string $taxnumber
      * @param int $id
      * @return int
      */
-    public function editCustomers($firstname, $insertion, $lastname, $email, $phone, $company, $billingStreet, $billingHousenumber, $billingPostalcode, $billingCity, $billingProvence, $billingCountry, $shippingStreet, $shippingHousenumber, $shippingPostalcode, $shippingCity, $shippingProvence, $shippingCountry, $remarks, $password, $id) : int
+    public function editCustomers($firstname, $insertion, $lastname, $email, $phone, $company, $billingStreet, $billingHousenumber, $billingPostalcode, $billingCity, $billingProvence, $billingCountry, $shippingStreet, $shippingHousenumber, $shippingPostalcode, $shippingCity, $shippingProvence, $shippingCountry, $remarks, $password, $taxnumber, $id) : int
     {
-        return $this->none('UPDATE `customers` SET `firstname` = ?, `insertion` = ?, `lastname` = ?, `email` = ?, `phone` = ?, `company_name` = ?, `billing_street` = ?, `billing_housenumber` = ?, `billing_postalcode` = ?, `billing_city` = ?, `billing_provence` = ?, `billing_country` = ?, `shipping_street` = ?, `shipping_housenumber` = ?, `shipping_postalcode` = ?, `shipping_city` = ?, `shipping_provence` = ?, `shipping_country` = ?, `remarks` = ?, `password` = ? WHERE `id` = ?', array($firstname, $insertion, $lastname, $email, $phone, $company, $billingStreet, $billingHousenumber, $billingPostalcode, $billingCity, $billingProvence, $billingCountry, $shippingStreet, $shippingHousenumber, $shippingPostalcode, $shippingCity, $shippingProvence, $shippingCountry, $remarks, $password, $id));
+        return $this->none('UPDATE `customers` SET `firstname` = ?, `insertion` = ?, `lastname` = ?, `email` = ?, `phone` = ?, `company_name` = ?, `billing_street` = ?, `billing_housenumber` = ?, `billing_postalcode` = ?, `billing_city` = ?, `billing_provence` = ?, `billing_country` = ?, `shipping_street` = ?, `shipping_housenumber` = ?, `shipping_postalcode` = ?, `shipping_city` = ?, `shipping_provence` = ?, `shipping_country` = ?, `remarks` = ?, `password` = ?, `taxnumber` = ? WHERE `id` = ?', array($firstname, $insertion, $lastname, $email, $phone, $company, $billingStreet, $billingHousenumber, $billingPostalcode, $billingCity, $billingProvence, $billingCountry, $shippingStreet, $shippingHousenumber, $shippingPostalcode, $shippingCity, $shippingProvence, $shippingCountry, $remarks, $password, $taxnumber, $id));
     }
 
     /**
@@ -787,6 +736,58 @@ class Queries extends Db
     public function deleteCustomer($id) : int
     {
         return $this->none('DELETE FROM `customers` WHERE `id` = ?', array($id));
+    }
+
+    /**
+     * Count customers by email
+     * 
+     * @param string $email
+     * @return int
+     */
+    public function countCustomersByEmail($email) : int
+    {
+        return $this->one('SELECT COUNT(*) FROM `customers` WHERE `email` = ?', array($email));
+    }
+
+    /** 
+     * Get customers by email
+     * 
+     * @param string $email
+     * @return array
+     */
+    public function getCustomersByEmail($email) : array
+    {
+        return $this->row('SELECT * FROM `customers` WHERE `email` = ?', array($email));
+    }
+
+    /**
+     * Edit customer through main website
+     * 
+     * @param string $firstname
+     * @param string $insertion
+     * @param string $lastname
+     * @param string $email
+     * @param string $phone
+     * @param string $company
+     * @param string $billingStreet
+     * @param string $billingHousenumber
+     * @param string $billingPostalcode
+     * @param string $billingCity
+     * @param string $billingProvence
+     * @param string $billingCountry
+     * @param string $shippingStreet
+     * @param string $shippingHousenumber
+     * @param string $shippingPostalcode
+     * @param string $shippingCity
+     * @param string $shippingProvence
+     * @param string $shippingCountry
+     * @param string $taxnumber
+     * @param int $id
+     * @return int
+     */
+    public function editCustomerWeb($firstname, $insertion, $lastname, $email, $phone, $company, $billingStreet, $billingHousenumber, $billingPostalcode, $billingCity, $billingProvence, $billingCountry, $shippingStreet, $shippingHousenumber, $shippingPostalcode, $shippingCity, $shippingProvence, $shippingCountry, $taxnumber, $id) : int
+    {
+        return $this->none('UPDATE `customers` SET `firstname` = ?, `insertion` = ?, `lastname` = ?, `email` = ?, `phone` = ?, `company_name` = ?, `billing_street` = ?, `billing_housenumber` = ?, `billing_postalcode` = ?, `billing_city` = ?, `billing_provence` = ?, `billing_country` = ?, `shipping_street` = ?, `shipping_housenumber` = ?, `shipping_postalcode` = ?, `shipping_city` = ?, `shipping_provence` = ?, `shipping_country` = ?, `taxnumber` = ? WHERE `id` = ?', array($firstname, $insertion, $lastname, $email, $phone, $company, $billingStreet, $billingHousenumber, $billingPostalcode, $billingCity, $billingProvence, $billingCountry, $shippingStreet, $shippingHousenumber, $shippingPostalcode, $shippingCity, $shippingProvence, $shippingCountry, $taxnumber, $id));
     }
 
     /**
