@@ -18,7 +18,7 @@ if (login()) {
                 <span class="form_cat">Basic information</span>
                 
                 <input type="text" name="firstname" id="firstname" placeholder="Firstname" required onchange="addCustumers('firstname')" value="<?= $customer['firstname']; ?>" />
-                <input type="text" name="insertion" id="insertion" placeholder="Insertion" value="<?= $customer['insertion']; ?>" />
+                <input type="text" name="insertion" id="insertion" placeholder="Middle name" value="<?= $customer['insertion']; ?>" />
                 <input type="text" name="lastname" id="lastname" placeholder="Lastname" required onchange="addCustomers('lastname')" value="<?= $customer['lastname']; ?>" />
                 <input type="text" name="email" id="email" placeholder="Email" required onchange="addCustomers('email')" value="<?= $customer['email']; ?>" />
                 <input type="text" name="phone" id="phone" placeholder="Phone" value="<?= $customer['phone']; ?>" />
