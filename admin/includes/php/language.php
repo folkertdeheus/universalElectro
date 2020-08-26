@@ -83,6 +83,13 @@ $languageFields = [
     ]
 ];
 
+$fieldsTextarea = [
+    'quickenquiry_disclaimer',
+    'footer_adress',
+    'footer_contact',
+    'footer_tax'
+];
+
 // Set array with the names without headings for form handling
 $fieldsArray = array();
 

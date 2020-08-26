@@ -23,10 +23,22 @@ if (login()) {
                 echo '</tr>';
                 
                 foreach($lValue as $fieldKey => $fieldValue) {
-                    echo '<tr>';
-                        echo '<td><input type="text" name="nl_'.$fieldKey.'" id="nl_'.$fieldKey.'" placeholder=\''.$fieldValue.' Dutch\' required onchange="languageSettings(\'nl_'.$fieldKey.'\')" value="'.$language['nl_'.$fieldKey].'" /></td>';
-                        echo '<td><input type="text" name="en_'.$fieldKey.'" id="en_'.$fieldKey.'" placeholder=\''.$fieldValue.' English\' required onchange="languageSettings(\'en_'.$fieldKey.'\')" value="'.$language['en_'.$fieldKey].'" /></td>';
-                    echo '</tr>';
+
+                    // Check if field must be a textarea instead of a textfield
+                    if (in_array($fieldKey, $fieldsTextarea)) {
+
+                        echo '<tr>';
+                            echo '<td><textarea name="nl_'.$fieldKey.'" id="nl_'.$fieldKey.'" placeholder=\''.$fieldValue.' Dutch\' required onchange="languageSettings(\'nl_'.$fieldKey.'\')">'.$language['nl_'.$fieldKey].'</textarea></td>';
+                            echo '<td><textarea name="en_'.$fieldKey.'" id="en_'.$fieldKey.'" placeholder=\''.$fieldValue.' English\' required onchange="languageSettings(\'en_'.$fieldKey.'\')">'.$language['en_'.$fieldKey].'</textarea></td>';
+                        echo '</tr>';
+
+                    } else {
+
+                        echo '<tr>';
+                            echo '<td><input type="text" name="nl_'.$fieldKey.'" id="nl_'.$fieldKey.'" placeholder=\''.$fieldValue.' Dutch\' required onchange="languageSettings(\'nl_'.$fieldKey.'\')" value="'.$language['nl_'.$fieldKey].'" /></td>';
+                            echo '<td><input type="text" name="en_'.$fieldKey.'" id="en_'.$fieldKey.'" placeholder=\''.$fieldValue.' English\' required onchange="languageSettings(\'en_'.$fieldKey.'\')" value="'.$language['en_'.$fieldKey].'" /></td>';
+                        echo '</tr>';
+                    }
                 }
             }
 ?>
