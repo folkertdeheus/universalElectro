@@ -38,7 +38,8 @@ if (login()) {
                 }
 ?>
             </select>
-            <input type="text" name="articlenumber" id="articlenumber" placeholder="Articlenumber" required onchange="addproduct('articlenumber')" />
+            <input type="text" name="articlenumber" id="articlenumber" placeholder="Manufacturer articlenumber" required onchange="addproduct('articlenumber')" />
+            <input type="text" name="own_articlenumber" id="own_articlenumber" placeholder="Own articlenumber" required onchange="addproduct('own_articlenumber')" />
             <textarea name="nl_description" id="nl_description" placeholder="Dutch description" required onchange="addproduct('nl_description')"></textarea>
             <textarea name="en_description" id="en_description" placeholder="English description" required onchange="addproduct('en_description')"></textarea>
             <textarea name="properties" id="properties" placeholder="Properties"></textarea>

@@ -33,7 +33,7 @@ if (login()) {
                             <td>Name</td>
                             <td>Brand</td>
                             <td>Category</td>
-                            <td>Articlenumber</td>
+                            <td>Own Articlenumber</td>
                             <td>Price</td>
                             <td class="icon">&nbsp;</td>
                             <td class="icon">&nbsp;</td>
@@ -46,7 +46,7 @@ if (login()) {
                                 <td><?= $productsValue['name']; ?></td>
                                 <td><?= $productsValue['brand']; ?></td>
                                 <td><?= $productsValue['category']; ?></td>
-                                <td><?= $productsValue['articlenumber']; ?></td>
+                                <td><?= $productsValue['own_articlenumber']; ?></td>
                                 <td><?= $productsValue['price']; ?></td>
                                 <td class="icon"><a href="index.php?page=2&action=1&sub=4&id=<?= $productsValue['id']; ?>"><img src="includes/images/addoptions.png" alt="options" /></a></td>
                                 <td class="icon"><a href="index.php?page=2&action=1&sub=2&id=<?= $productsValue['id']; ?>"><img src="includes/images/edit.png" alt="edit" /></a></td>

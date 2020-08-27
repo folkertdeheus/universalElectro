@@ -301,11 +301,12 @@ class Queries extends Db
      * @param string $specifications
      * @param float $price
      * @param boolean $highlight
+     * @param string $ownArticlenumber
      * @return int
      */
-    public function addProducts($brand, $category, $name, $articlenumber, $description_dutch, $description_english, $images, $tags, $properties, $specifications, $price, $highlight) : int
+    public function addProducts($brand, $category, $name, $articlenumber, $description_dutch, $description_english, $images, $tags, $properties, $specifications, $price, $highlight, $ownArticlenumber) : int
     {
-        return $this->none('INSERT INTO `products` (`brand`, `category`, `name`, `articlenumber`, `description_dutch`, `description_english`, `images`, `tags`, `properties`, `specifications`, `price`, `highlight`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', array($brand, $category, $name, $articlenumber, $description_dutch, $description_english, $images, $tags, $properties, $specifications, $price, $highlight));
+        return $this->none('INSERT INTO `products` (`brand`, `category`, `name`, `articlenumber`, `description_dutch`, `description_english`, `images`, `tags`, `properties`, `specifications`, `price`, `highlight`, `own_articlenumber`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', array($brand, $category, $name, $articlenumber, $description_dutch, $description_english, $images, $tags, $properties, $specifications, $price, $highlight, $ownArticlenumber));
     }
 
     /**
@@ -378,11 +379,13 @@ class Queries extends Db
      * @param string $specifications
      * @param float $price
      * @param boolean $highlight
+     * @param string $ownArticlenumber
+     * @param int $id
      * @return int
      */
-    public function editProducts($brand, $category, $name, $articlenumber, $description_dutch, $description_english, $image, $tags, $properties, $specifications, $price, $highlight, $id) : int
+    public function editProducts($brand, $category, $name, $articlenumber, $description_dutch, $description_english, $image, $tags, $properties, $specifications, $price, $highlight, $ownArticlenumber, $id) : int
     {
-        return $this->none('UPDATE `products` SET `brand` = ?, `category` = ?, `name` = ?, `articlenumber` = ?, `description_dutch` = ?, `description_english` = ?, `images` = ?, `tags` = ?, `properties` = ?, `specifications` = ?, `price` = ?, `highlight` = ? WHERE `id` = ?', array($brand, $category, $name, $articlenumber, $description_dutch, $description_english, $image, $tags, $properties, $specifications, $price, $highlight, $id));
+        return $this->none('UPDATE `products` SET `brand` = ?, `category` = ?, `name` = ?, `articlenumber` = ?, `description_dutch` = ?, `description_english` = ?, `images` = ?, `tags` = ?, `properties` = ?, `specifications` = ?, `price` = ?, `highlight` = ?, `own_articlenumber` = ? WHERE `id` = ?', array($brand, $category, $name, $articlenumber, $description_dutch, $description_english, $image, $tags, $properties, $specifications, $price, $highlight, $ownArticlenumber, $id));
     }
 
     /**

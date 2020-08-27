@@ -40,7 +40,8 @@ if (login()) {
                 }
 ?>
             </select>
-            <input type="text" name="articlenumber" id="articlenumber" placeholder="Articlenumber" value="<?= $product['articlenumber']; ?>" required onchange="editproduct('articlenumber')" />
+            <input type="text" name="articlenumber" id="articlenumber" placeholder="Manufacturer articlenumber" value="<?= $product['articlenumber']; ?>" required onchange="editproduct('articlenumber')" />
+            <input type="text" name="own_articlenumber" id="own_articlenumber" placeholder="Own articlenumber" value="<?= $product['own_articlenumber']; ?>" required onchange="editproduct('own_articlenumber')" />
             <textarea name="nl_description" id="nl_description" placeholder="Dutch description" required onchange="editproduct('nl_description')"><?= $product['description_dutch']; ?></textarea>
             <textarea name="en_description" id="en_description" placeholder="English description" required onchange="editproduct('en_description')"><?= $product['description_english']; ?></textarea>
             <textarea name="properties" id="properties" placeholder="Properties" ><?= $product['properties']; ?></textarea>

@@ -42,7 +42,18 @@ function addproduct(field)
 
             // Check if brands is not null
             if (value == null || value == '' || value == undefined || value == false) {
-                messageTarget.innerHTML = 'Articlenumber is a required field';
+                messageTarget.innerHTML = 'Manufacturer articlenumber is a required field';
+            } else {
+                messageTarget.innerHTML = '';
+            }
+
+            break;
+
+        case 'own_articlenumber':
+
+            // Check if brands is not null
+            if (value == null || value == '' || value == undefined || value == false) {
+                messageTarget.innerHTML = 'Own articlenumber is a required field';
             } else {
                 messageTarget.innerHTML = '';
             }

@@ -500,7 +500,7 @@ class Forms extends Queries
     public function addProduct() : void
     {
         // Set required $_POST fields
-        $this->setReq('name', 'brands', 'categories', 'articlenumber', 'nl_description', 'en_description');
+        $this->setReq('name', 'brands', 'categories', 'articlenumber', 'own_articlenumber', 'nl_description', 'en_description');
 
         // Check if all required items are posted
         // Fail if not
@@ -522,6 +522,7 @@ class Forms extends Queries
         $price = htmlentities($_POST['price']);
         $tags = htmlentities($_POST['tags']);
         $highlight = $_POST['highlight']; // Will be checked to be 1 or 0
+        $ownArticlenumber = htmlentities($_POST['own_articlenumber']);
 
         // Check if article number is unique
         if ($this->countProductsByArticlenumber($articleNumber) != 0) {
@@ -607,7 +608,7 @@ class Forms extends Queries
         
         // Insert product
         // If 1 row was affected, the query was succesful
-        if ($this->addProducts($brand, $category, $name, $articleNumber, $nlDescription, $enDescription, $filepaths, $tags, $properties, $specifications, $price, $highlight)) {
+        if ($this->addProducts($brand, $category, $name, $articleNumber, $nlDescription, $enDescription, $filepaths, $tags, $properties, $specifications, $price, $highlight, $ownArticlenumber)) {
 
             // Succes
             $this->insertLog('Products', 'Add', 'Added product '.$name.' with ID '.$this->getProductByArticleNumber($articleNumber)['id']. '. By '.user());
@@ -625,7 +626,7 @@ class Forms extends Queries
     public function editProduct() : void
     {
         // Set required $_POST fields
-        $this->setReq('name', 'brands', 'categories', 'articlenumber', 'nl_description', 'en_description', 'id');
+        $this->setReq('name', 'brands', 'categories', 'articlenumber', 'own_articlenumber', 'nl_description', 'en_description', 'id');
 
         // Check if all required items are posted
         // Fail if not
@@ -647,6 +648,7 @@ class Forms extends Queries
         $price = htmlentities($_POST['price']);
         $tags = htmlentities($_POST['tags']);
         $highlight = $_POST['highlight']; // Will be checked to be 1 or 0
+        $ownArticlenumber = htmlentities($_POST['own_articlenumber']);
         $id = htmlentities($_POST['id']);
 
         // Check if article number is unique
@@ -733,7 +735,7 @@ class Forms extends Queries
         
         // Insert product
         // If 1 row was affected, the query was succesful
-        if ($this->editProducts($brand, $category, $name, $articleNumber, $nlDescription, $enDescription, $filepaths, $tags, $properties, $specifications, $price, $highlight, $id) == 1) {
+        if ($this->editProducts($brand, $category, $name, $articleNumber, $nlDescription, $enDescription, $filepaths, $tags, $properties, $specifications, $price, $highlight, $ownArticlenumber, $id) == 1) {
 
             // Succes
             $this->insertLog('Products', 'Edit', 'Editted product '.$name.' with ID '.$id. '. By '.user());
