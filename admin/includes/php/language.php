@@ -94,7 +94,13 @@ $languageFields = [
         'contact_gotoform' => 'Go to form',
         'contact_tickets' => '"Tickets"',
         'contact_choosetickets' => 'Choose tickets when...',
-        'contact_gototickets' => 'Go to tickets'
+        'contact_gototickets' => 'Go to tickets',
+        'contact_name' => '"Name"',
+        'contact_email' => '"Email"',
+        'contact_phone' => '"Phone"',
+        'contact_subject' => '"Subject"',
+        'contact_message' => '"Message"',
+        'contact_send' => '"Send"'
     ]
 ];
 

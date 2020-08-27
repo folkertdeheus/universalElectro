@@ -372,3 +372,29 @@ article {
 .accountdetails input[type="submit"]:hover {
     cursor: pointer;
 }
+
+.contactform form {
+    /* Display flex */
+    display: flex;
+    flex-direction: column;
+
+    /* Positioning */
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.contactform input, .contactform textarea {
+    border-bottom: 1px solid var(--blue);
+}
+
+.contactform input[type="submit"] {
+    display: block;
+    background-color: var(--blue);
+    border-radius: 3px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.contactform input[type="submit"]:hover {
+    cursor: pointer;
+}

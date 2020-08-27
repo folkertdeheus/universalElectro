@@ -860,4 +860,25 @@ class Queries extends Db
     {
         return $this->one('SELECT COUNT(*) FROM `tickets` WHERE `customer` = ?', array($customer));
     }
+
+    /**
+     * ===================================================
+     * CONTACT
+     * ===================================================
+     */
+
+    /**
+     * Add contact form
+     * @param string $name
+     * @param string $email
+     * @param string $phone
+     * @param string $subject
+     * @param string $message
+     * @param string $customer
+     * @return int
+     */
+    public function addContact($name, $email, $phone, $subject, $message, $customer) : int
+    {
+        return $this->none('INSERT INTO `contact` (`name`, `email`, `phone`, `subject`, `message`, `customer`) VALUES (?, ?, ?, ?, ?, ?)', array($name, $email, $phone, $subject, $message, $customer));
+    }
 }

@@ -14,7 +14,8 @@ class Webforms extends Queries
     private $forms = [
         'createCustomer',
         'editCustomer',
-        'changepassword'
+        'changepassword',
+        'contact'
     ];
     
     /**
@@ -214,5 +215,62 @@ class Webforms extends Queries
         }
 
 
+    }
+
+    /**
+     * Send contact form
+     */
+    public function contact() : void
+    {
+        // Set required $_POST fields
+        $this->setReq('name', 'email', 'subject', 'message');
+
+        // Check if all required items are posted
+        // Fail if not
+        if (!$this->checkReq()) {
+
+            $this->insertLog('Contact', 'Add', 'Adding and sending message failed, not al required fields are set');
+            return;
+        }
+
+        // Loop through POST values and set variables
+        foreach($_POST as $key => $value) {
+            if ($key != 'form') {
+                $$key = htmlentities($value);
+            }
+        }
+echo 'Customer: '.$customer;
+        if ($this->addContact($name, $email, $phone, $subject, $message, $customer) == 1) {
+
+            // Succes
+            $this->insertLog('Contact', 'Add', 'Added message to database, message not sent yet');
+
+            // Set variables
+            $mailFrom = $email;
+            $mailReplyTo = $email;
+            $mailTo = 'sales@universalelectro.nl';
+            $mailSubject = $subject;
+            $mailMessage = $message."\r\n"."\r\n".'Contact information: '."\r\n".'Reply to '.$mailReplyTo."\r\n".'Phone: '.$phone;
+
+            $mailHeaders = ['From' => $mailFrom,
+                            'Reply-To' => $mailReplyTo];
+
+            // Sent mail    
+            if (mail($mailTo, $mailSubject, $mailMessage, $mailHeaders)) {
+                
+                // Message sent succesfully
+                $this->insertLog('Contact', 'Send', 'Message sent succesfully by '.$name);
+                
+            } else {
+
+                // Failed to sent message
+                $this->insertLog('Contact', 'Send', 'Failed to sent message by '.$name.' ('.$email.', '.$phone.': '.$message.')');
+            }
+        
+        } else {
+
+            // Failed
+            $this->insertLog('Contact', 'Add', 'Adding message from '.$name.' ('.$email.', '.$phone.': '.$message.') failed');
+        }
     }
 }

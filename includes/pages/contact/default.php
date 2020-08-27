@@ -19,6 +19,8 @@ if (isset($_GET['action']) && $_GET['action'] != null) {
     
             // Contact form
             require_once('includes/pages/contact/form.php');
+
+            break;
         
         default:
 
