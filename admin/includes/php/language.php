@@ -87,6 +87,14 @@ $languageFields = [
         'changepw_newpw' => '"New password"',
         'changepw_repeatpw' => '"Repeat password"',
         'changepw_save' => '"Save"'
+    ],
+    'Contact' => [
+        'contact_contact' => '"Contact"',
+        'contact_choosecontact' => 'Choose contact when...',
+        'contact_gotoform' => 'Go to form',
+        'contact_tickets' => '"Tickets"',
+        'contact_choosetickets' => 'Choose tickets when...',
+        'contact_gototickets' => 'Go to tickets'
     ]
 ];
 
@@ -94,7 +102,9 @@ $fieldsTextarea = [
     'quickenquiry_disclaimer',
     'footer_adress',
     'footer_contact',
-    'footer_tax'
+    'footer_tax',
+    'contact_choosecontact',
+    'contact_choosetickets'
 ];
 
 // Set array with the names without headings for form handling
