@@ -791,6 +791,18 @@ class Queries extends Db
     }
 
     /**
+     * Change password
+     * 
+     * @param string $password
+     * @param int $id
+     * @return int
+     */
+    public function editCustomerPassword($password, $id) : int
+    {
+        return $this->none('UPDATE `customers` SET `password` = ? WHERE `id` = ?', array($password, $id));
+    }
+
+    /**
      * ===================================================
      * ORDERS
      * ===================================================

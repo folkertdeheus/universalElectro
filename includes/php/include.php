@@ -26,6 +26,10 @@ require_once(ADM.'conn.php');
 require_once(ADM.'classes/db.php');
 $db = new \Blackbeard\Db($db_name, $db_host, $db_username, $db_password);
 
+// Login class
+require_once(PATH.'classes/login.php');
+$login = new \Blackbeard\WebLogin();
+
 // Queries
 require_once(ADM.'classes/queries.php');
 $q = new \Blackbeard\Queries($db_name, $db_host, $db_username, $db_password);

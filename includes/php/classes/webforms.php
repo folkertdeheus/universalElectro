@@ -13,7 +13,8 @@ class Webforms extends Queries
     // List accepted forms
     private $forms = [
         'createCustomer',
-        'editCustomer'
+        'editCustomer',
+        'changepassword'
     ];
     
     /**
@@ -161,5 +162,57 @@ class Webforms extends Queries
             // Failed
             $this->insertLog('Customers', 'Edit', 'Editting customer '.$lastname.', '.$firstname.' '.$insertion.' ('.$_SESSION['webuser'].') failed through web');
         }
+    }
+
+    /**
+     * Change password through website
+     */
+    public function changePassword() : void
+    {
+        // Set required $_POST fields
+        $this->setReq('oldpassword', 'newpassword', 'repeatpassword');
+
+        // Check if all required items are posted
+        // Fail if not
+        if (!$this->checkReq()) {
+
+            $this->insertLog('Customers', 'Edit', 'Changing password ('.$_SESSION['webuser'].') through website failed, not all required fields are set');
+            return;
+        }
+
+        if ($_POST['newpassword'] != $_POST['repeatpassword']) {
+
+            // New password and repeated password did not match
+            $this->insertLog('Customers', 'Edit', 'Changing password ('.$_SESSION['webuser'].') through website failed, new password did not match with the repeated password');
+            return;
+        }
+
+        // Get customer data
+        $customer = $this->getCustomer($_SESSION['webuser']);
+
+        // Salt passwords
+        $salt = $GLOBALS['customerSalt'];
+        $oldPassword = hash('whirlpool', $salt.$_POST['oldpassword']);
+        $newPassword = hash('whirlpool', $salt.$_POST['newpassword']);
+
+        if ($oldPassword != $customer['password']) {
+
+            // Old password not correct
+            $this->insertLog('Customers', 'Edit', 'Changing password ('.$_SESSION['webuser'].') through website failed, old password was not correct');
+            return;
+        }
+
+        if ($this->editCustomerPassword($newPassword, $_SESSION['webuser']) == 1) {
+
+            // Succes
+            $this->insertLog('Customers', 'Edit', 'Password of '.$customer['lastname'].', '.$customer['firstname'].' '.$customer['insertion'].' ('.$_SESSION['webuser'].') changed');
+        
+        } else {
+
+            // Failed
+            $this->insertLog('Customers', 'Edit', 'Changing password ('.$_SESSION['webuser'].') through website failed');
+        }
+
+
     }
 }

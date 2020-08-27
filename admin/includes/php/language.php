@@ -80,6 +80,13 @@ $languageFields = [
         'account_notickets' => '"No tickets"',
         'account_newticket' => '"New ticket"',
         'account_save' => '"Save"'
+    ],
+    'Change password' => [
+        'changepw_changepw' => '"Change password"',
+        'changepw_oldpw' => '"Old password"',
+        'changepw_newpw' => '"New password"',
+        'changepw_repeatpw' => '"Repeat password"',
+        'changepw_save' => '"Save"'
     ]
 ];
 

@@ -6,7 +6,7 @@
 
 namespace Blackbeard;
 
-class BlackbeardLogin
+class WebLogin
 {
     function __construct()
     {
@@ -32,6 +32,7 @@ class BlackbeardLogin
      */
     private function userLogin($email, $password)
     {
+
         $salt = $GLOBALS['customerSalt'];
         $password = hash('whirlpool', $salt.$password);
 
