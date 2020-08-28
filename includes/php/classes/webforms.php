@@ -239,7 +239,7 @@ class Webforms extends Queries
                 $$key = htmlentities($value);
             }
         }
-echo 'Customer: '.$customer;
+
         if ($this->addContact($name, $email, $phone, $subject, $message, $customer) == 1) {
 
             // Succes

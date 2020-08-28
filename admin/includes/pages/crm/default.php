@@ -25,7 +25,7 @@ if (login()) {
 
             case '3':
                 // Messages
-
+                require_once('includes/pages/crm/messages/default.php');
                 break;
             
             default:

@@ -64,13 +64,32 @@ if (login()) {
 
                         case '2':
                             // Tickets
-                            echo '&nbsp;>&nbsp;<a href="index.php?page=1&action=1">Tickets</a>';
+                            echo '&nbsp;>&nbsp;<a href="index.php?page=1&action=2">Tickets</a>';
 
                             break;
 
                         case '3':
                             // Messages
-                            echo '&nbsp;>&nbsp;<a href="index.php?page=1&action=1">Messages</a>';
+                            echo '&nbsp;>&nbsp;<a href="index.php?page=1&action=3">Messages</a>';
+
+                            // Check if the sub navigation is set
+                            if (isset($_GET['sub']) && $_GET['sub'] != null) {
+
+                                switch($_GET['sub']) {
+
+                                    case '1':
+                                        // Details
+                                        echo '&nbsp;>&nbsp;<a href="index.php?page=1&action=3&sub=1&id='.$_GET['id'].'">Details</a>';
+
+                                        break;
+
+                                    case '2':
+                                        // Details
+                                        echo '&nbsp;>&nbsp;<a href="index.php?page=1&action=3&sub=2&'.$_GET['id'].'">Delete</a>';
+
+                                        break;
+                                    }
+                                }
 
                             break;
                     }

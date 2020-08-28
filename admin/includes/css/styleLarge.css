@@ -178,3 +178,89 @@ footer {
     grid-row: 4 / 5;
     margin-top: 20px;
 }
+
+.contact {
+    /* Display grid */
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    grid-template-rows: 50px auto 50px;
+}
+
+.contactinfo {
+    /* Display grid */
+    grid-column: 1 / 2;
+    grid-row: 1 / 3;
+
+    /* Background */
+    border-right: 1px solid var(--accent);
+}
+
+.contactinfo td {
+    border: none;
+}
+
+.contactsubject {
+    /* Display grid */
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+
+    /* Background */
+    border-bottom: 1px solid var(--accent);
+
+    /* Positioning */
+    padding: 10px;
+}
+
+.contactmessage {
+    /* Display grid */
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+
+    /* Positioning */
+    padding: 10px;
+}
+
+.contactlink {
+    /* Display grid */
+    grid-column: 1 / 3;
+    grid-row: 3 / 4;
+
+    /* Font */
+    text-align: center;
+
+    /* Background */
+    border-top: 1px solid var(--accent);
+
+    /* Positioning */
+    padding-top: 10px;
+}
+
+.contactlink a:link, .contactlink a:visited {
+    /* Display */
+    display: block;
+
+    /* Background */
+    background-color: var(--accent);
+    border-radius: 3px;
+
+    /* Font */
+    color: var(--back);
+
+    /* Positioning */
+    padding: 10px;
+
+    /* Animation */
+    transition: 0.5s;
+}
+
+.contactlink a:hover {
+    /* Background */
+    background-color: var(--back);
+    outline: 1px solid var(--accent);
+
+    /* Font */
+    color: var(--accent);
+
+    /* Animation */
+    transition: 0.5s;
+}

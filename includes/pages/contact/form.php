@@ -19,8 +19,9 @@ if (login()) {
     
     if (isset($customer['phone']) && $customer['phone'] != null) {
         $phone = $customer['phone'];
-        $id = $customer['id'];
     }
+
+    $id = $customer['id'];
 }
 ?>
 

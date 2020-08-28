@@ -881,4 +881,46 @@ class Queries extends Db
     {
         return $this->none('INSERT INTO `contact` (`name`, `email`, `phone`, `subject`, `message`, `customer`) VALUES (?, ?, ?, ?, ?, ?)', array($name, $email, $phone, $subject, $message, $customer));
     }
+
+    /**
+     * Count contact messages
+     * 
+     * @return int
+     */
+    public function countContact() : int
+    {
+        return $this->one('SELECT COUNT(*) FROM `contact`');
+    }
+
+    /**
+     * All contact messages
+     * 
+     * @return array
+     */
+    public function allContact() : array
+    {
+        return $this->all('SELECT * FROM `contact` ORDER BY `id` DESC');
+    }
+
+    /**
+     * Get contact message
+     * 
+     * @param int $id
+     * @return array
+     */
+    public function getContact($id) : array
+    {
+        return $this->row('SELECT * FROM `contact` WHERE `id` = ?', array($id));
+    }
+
+    /**
+     * Delete contact message
+     * 
+     * @param int $id
+     * @return int
+     */
+    public function deleteContact($id) : int
+    {
+        return $this->none('DELETE FROM `contact` WHERE `id` = ?', array($id));
+    }
 }

@@ -7,7 +7,7 @@
 // Check if user is logged in when accessing this file
 if (login()) {
 
-    // Get brand
+    // Get customer
     $customer = $q->getCustomer($_GET['id']);
 ?>
     <div class="content">

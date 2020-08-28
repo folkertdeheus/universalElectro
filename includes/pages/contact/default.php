@@ -13,7 +13,7 @@ if (isset($_GET['action']) && $_GET['action'] != null) {
             // Tickets
             require_once('includes/pages/contact/tickets.php');
 
-        break;
+            break;
 
         case '2':
     
