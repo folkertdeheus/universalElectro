@@ -8,6 +8,9 @@
 define('PATH', 'includes/php/');
 define('ADM', 'admin/includes/php/');
 
+// Logout
+require_once(PATH.'logout.php');
+
 // Include languages files
 require_once(PATH.'languages/en.php');
 require_once(PATH.'languages/nl.php');

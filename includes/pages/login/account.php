@@ -101,6 +101,7 @@
 
                 <a href="index.php?page=2&action=2"><?= $language['en_account_edit']; ?></a>
                 <a href="index.php?page=2&action=3"><?= $language['en_account_changepw']; ?></a>
+                <a href="index.php?logout=true"><?= $language['en_account_logout']; ?></a>
             </div> <!-- accountdetails -->
         </div> <!-- mainLeft -->
 
@@ -228,6 +229,7 @@
 
                 <a href="index.php?page=2&action=2"><?= $language['nl_account_edit']; ?></a>
                 <a href="index.php?page=2&action=3"><?= $language['nl_account_changepw']; ?></a>
+                <a href="index.php?logout=true"><?= $language['nl_account_logout']; ?></a>
             </div> <!-- accountdetails -->
         </div> <!-- mainLeft -->
 

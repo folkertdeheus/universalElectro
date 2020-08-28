@@ -79,7 +79,8 @@ $languageFields = [
         'account_tickets' => '"Tickets"',
         'account_notickets' => '"No tickets"',
         'account_newticket' => '"New ticket"',
-        'account_save' => '"Save"'
+        'account_save' => '"Save"',
+        'account_logout' => '"Logout"'
     ],
     'Change password' => [
         'changepw_changepw' => '"Change password"',
