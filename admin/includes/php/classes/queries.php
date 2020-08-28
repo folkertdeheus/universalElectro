@@ -923,4 +923,113 @@ class Queries extends Db
     {
         return $this->none('DELETE FROM `contact` WHERE `id` = ?', array($id));
     }
+
+    /**
+     * ===================================================
+     * TICKETS CATEGORY
+     * ===================================================
+     */
+
+    /**
+     * Count ticket categories
+     * 
+     * @return int
+     */
+    public function countTicketCategories() : int
+    {
+        return $this->one('SELECT COUNT(*) FROM `tickets_category`');
+    }
+
+    /**
+     * Get all ticket categories
+     * 
+     * @return array
+     */
+    public function getTicketCategories() : array
+    {
+        return $this->all('SELECT * FROM `tickets_category` ORDER BY `name` ASC');
+    }
+
+    /**
+     * Add ticket category
+     * 
+     * @param string $name
+     * @param boolean $notification
+     * @param string $email
+     * @return int
+     */
+    public function addTicketCategories($name, $notification, $email) : int
+    {
+        return $this->none('INSERT INTO `tickets_category` (`name`, `notification`, `email`) VALUES (?, ?, ?)', array($name, $notification, $email));
+    }
+    
+    /**
+     * Count ticket category by name
+     * 
+     * @param string $name
+     * @return int
+     */
+    public function countTicketCategoryByName($name) : int
+    {
+        return $this->one('SELECT COUNT(*) FROM `tickets_category` WHERE `name` = ?', array($name));
+    }
+
+    /**
+     * Get ticket category by name
+     * 
+     * @param string $name
+     * @return array
+     */
+    public function getTicketCategoryByName($name) : array
+    {
+        return $this->row('SELECT * FROM `tickets_category` WHERE `name` = ?', array($name));
+    }
+
+    /**
+     * Get ticket category by id
+     * 
+     * @param int $id
+     * @return array
+     */
+    public function getTicketCategory($id) : array
+    {
+        return $this->row('SELECT * FROM `tickets_category` WHERE `id` = ?', array($id));
+    }
+
+    /**
+     * Count ticket categories by name, skip current
+     * 
+     * @param string $name
+     * @param int $id
+     * @return int
+     */
+    public function countTicketCategoryByNameNotThis($name, $id) : int
+    {
+        return $this->one('SELECT COUNT(*) FROM `tickets_category` WHERE `name` = ? AND `id` != ?', array($name, $id));
+    }
+
+    /**
+     * Edit ticket category
+     * 
+     * @param string $name
+     * @param boolean $notification
+     * @param string $email
+     * @param int $id
+     * @return int
+     */
+    public function editTicketCategories($name, $notification, $email, $id) : int
+    {
+        return $this->none('UPDATE `tickets_category` SET `name` = ?, `notification` = ?, `email` = ? WHERE `id` = ?', array($name, $notification, $email, $id));
+    }
+
+    /**
+     * Delete ticket category
+     * 
+     * @param int $id
+     * @return int
+     */
+    public function deleteTicketCategories($id) : int
+    {
+        return $this->none('DELETE FROM `tickets_category` WHERE `id` = ?', array($id));
+    }
 }

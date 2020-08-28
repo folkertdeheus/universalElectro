@@ -8,13 +8,13 @@
 // Check if user is logged in when accessing this file
 if (login()) {
 
-    // Check if a brand was deleted
+    // Check if a customer was deleted
     if (isset($_GET['delete']) && $_GET['delete'] != null) {
         
-        // Get brand information
+        // Get customer information
         $customer = $q->getCustomer($_GET['delete']);
         
-        // Delete brand
+        // Delete customer
         $q->deleteCustomer($customer['id']);
         
         // Insert Log

@@ -28,6 +28,11 @@ if (login()) {
                 // Logs
                 require_once('includes/pages/settings/logs/default.php');
                 break;
+
+            case '4':
+                // Tickets
+                require_once('includes/pages/settings/tickets/default.php');
+                break;
             
             default:
                 // Settings home

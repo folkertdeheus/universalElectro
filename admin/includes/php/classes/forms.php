@@ -26,7 +26,9 @@ class Forms extends Queries
         'languages',
         'settings',
         'addCustomer',
-        'editCustomer'
+        'editCustomer',
+        'addTicketCategory',
+        'editTicketCategory'
     ];
     
     /**
@@ -927,6 +929,109 @@ class Forms extends Queries
 
             // Failed
             $this->insertLog('Customers', 'Edit', 'Editting customer '.$customer['lastname'].' '.$customer['firstname'].' '.$customer['insertion'].' with id '.$customer['id'].' failed. By '.user());
+        }
+    }
+
+    /**
+     * Edit ticket category
+     */
+    private function addTicketCategory() : void
+    {
+        // Set required $_POST fields
+        $this->setReq('name');
+
+        // Check if all required items are posted
+        // Fail if not
+        if (!$this->checkReq()) {
+
+            $this->insertLog('Ticket category', 'Add', 'Adding ticket category '.$_POST['name'].' failed, not all required fields are set. By '.user());
+            return;
+        }
+
+        // Set notification
+        $notification = 1;
+        if (isset($_POST['notification']) && $_POST['notification'] != 1) {
+            $notification = 0;
+        }
+
+        // Set email
+        $email = null;
+        if (isset($_POST['email']) && $_POST['email'] != null) {
+            $email = htmlentities($_POST['email']);
+        }
+
+        // Set name
+        $name = htmlentities($_POST['name']);
+
+        // Check if the name is unique
+        if ($this->countTicketCategoryByName($name) != 0) {
+
+            // Not unique, fail
+            $this->insertLog('Ticket category', 'Add', 'Adding ticket category failed, name ('.$name.') is not unique. By '.user());
+            return;
+        }
+
+        if ($this->addTicketCategories($name, $notification, $email) == 1) {
+
+            // Succes
+            $this->insertLog('Ticket category', 'Add', 'Added ticket category "'.$name.'" with id '.$this->getTicketCategoryByName($name)['id'].' succesfully. By '.user());
+        
+        } else {
+
+            // Failed
+            $this->insertLog('Ticket category', 'Add', 'Added ticket category "'.$name.'" failed. By '.user());
+        }
+    }
+    
+    /**
+     * Edit ticket category
+     */
+    private function editTicketCategory() : void
+    {
+        // Set required $_POST fields
+        $this->setReq('name', 'id');
+
+        // Check if all required items are posted
+        // Fail if not
+        if (!$this->checkReq()) {
+
+            $this->insertLog('Ticket category', 'Edit', 'Editting ticket category '.$_POST['name'].' failed, not all required fields are set. By '.user());
+            return;
+        }
+
+        // Set notification
+        $notification = 1;
+        if (isset($_POST['notification']) && $_POST['notification'] != 1) {
+            $notification = 0;
+        }
+
+        // Set email
+        $email = null;
+        if (isset($_POST['email']) && $_POST['email'] != null) {
+            $email = htmlentities($_POST['email']);
+        }
+
+        // Set other variables
+        $name = htmlentities($_POST['name']);
+        $id = htmlentities($_POST['id']);
+
+        // Check if the name is unique
+        if ($this->countTicketCategoryByNameNotThis($name, $id) != 0) {
+
+            // Not unique, fail
+            $this->insertLog('Ticket category', 'Edit', 'Editting ticket category failed, name ('.$name.') is not unique. By '.user());
+            return;
+        }
+
+        if ($this->EditTicketCategories($name, $notification, $email, $id) == 1) {
+
+            // Succes
+            $this->insertLog('Ticket category', 'Edit', 'Editting ticket category "'.$name.'" with id '.$id.' succesfully. By '.user());
+        
+        } else {
+
+            // Failed
+            $this->insertLog('Ticket category', 'Edit', 'Editting ticket category "'.$name.'" (id: '.$id.') failed. By '.user());
         }
     }
 }

@@ -398,3 +398,21 @@ article {
 .contactform input[type="submit"]:hover {
     cursor: pointer;
 }
+
+.button a:link, .button a:visited {
+    display: block;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: var(--blue);
+    border-radius: 3px;
+    color: var(--grey);
+    text-align: center;
+    transition: 0.5s;
+}
+
+.button a:hover {
+    background: none;
+    outline: 1px solid var(--blue);
+    color: var(--blue);
+    transition: 0.5s;
+}

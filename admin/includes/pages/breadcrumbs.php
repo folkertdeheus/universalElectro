@@ -282,6 +282,54 @@ if (login()) {
                             echo '&nbsp;>&nbsp;<a href="index.php?page=4&action=3">Logs</a>';
 
                             break;
+
+                        case '4':
+                            // Tickets
+                            echo '&nbsp;>&nbsp;<a href="index.php?page=4&action=4">Tickets</a>';
+
+                            // Check if the cat navigation is set
+                            if (isset($_GET['cat']) && $_GET['cat'] != null) {
+                                switch($_GET['cat']) {
+                                        
+                                    case '1':
+                                        // Categories
+                                        echo '&nbsp;>&nbsp;<a href="index.php?page=4&action=4&cat=1">Categories</a>';
+
+                                         // Check if the sub navigation is set
+                                        if (isset($_GET['sub']) && $_GET['sub'] != null) {
+                                            switch($_GET['sub']) {
+                                                    
+                                                case '1':
+                                                    // Add Categories
+                                                    echo '&nbsp;>&nbsp;<a href="index.php?page=4&action=4&cat=1&sub=1">Add category</a>';
+
+                                                    break;
+
+                                                case '2':
+                                                    // Edit Categories
+                                                    echo '&nbsp;>&nbsp;<a href="index.php?page=4&action=4&cat=1&sub=2&id='.$_GET['id'].'">Edit category</a>';
+
+                                                    break;
+
+                                                case '3':
+                                                    // Delete Categories
+                                                    echo '&nbsp;>&nbsp;<a href="index.php?page=4&action=4&cat=1&sub=3&id='.$_GET['id'].'">Delete category</a>';
+
+                                                    break;
+                                            }
+                                        }
+
+                                        break;
+                                    
+                                    case '2':
+                                        // Statusses
+                                        echo '&nbsp;>&nbsp;<a href="index.php?page=4&action=4&sub=2">Statusses</a>';
+
+                                        break;
+                                }
+                            }
+
+                            break;
                     }
                 }
                 break;

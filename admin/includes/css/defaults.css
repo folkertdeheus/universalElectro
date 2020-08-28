@@ -278,3 +278,16 @@ form img {
     /* Cursor */
     cursor: pointer;
 }
+
+.check_set {
+    font-size: 20px;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    position: relative;
+}
+
+.check_set label {
+    position: absolute;
+    margin-top: -10px;
+}

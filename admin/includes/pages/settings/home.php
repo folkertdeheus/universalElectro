@@ -14,6 +14,10 @@ if (login()) {
         </div> <!-- menublock -->
 
         <div class="menublock">
+            <a href="index.php?page=4&action=4">Tickets</a>
+        </div> <!-- menublock -->
+
+        <div class="menublock">
             <a href="index.php?page=4&action=2">Global</a>
         </div> <!-- menublock -->
 

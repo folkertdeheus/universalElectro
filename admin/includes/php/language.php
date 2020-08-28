@@ -102,6 +102,10 @@ $languageFields = [
         'contact_subject' => '"Subject"',
         'contact_message' => '"Message"',
         'contact_send' => '"Send"'
+    ],
+    'Tickets' => [
+        'tickets_login' => 'First login message',
+        'tickets_gotologin' => 'Go to login page'
     ]
 ];
 
