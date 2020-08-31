@@ -48,6 +48,7 @@ $language = $q->allLanguages();
     <script src="includes/js/language.js"></script>
     <script src="includes/js/qe_mouseout.js"></script>
     <script src="includes/js/createCustomer.js"></script>
+    <script src="includes/js/addTicket.js"></script>
 </head>
 
 <body>

@@ -15,7 +15,8 @@ class Webforms extends Queries
         'createCustomer',
         'editCustomer',
         'changepassword',
-        'contact'
+        'contact',
+        'addTicket'
     ];
     
     /**
@@ -271,6 +272,66 @@ class Webforms extends Queries
 
             // Failed
             $this->insertLog('Contact', 'Add', 'Adding message from '.$name.' ('.$email.', '.$phone.': '.$message.') failed');
+        }
+    }
+
+    /**
+     * Add ticket
+     */
+    public function addTicket() : void
+    {
+        // Set required $_POST fields
+        $this->setReq('subject', 'message', 'category', 'priority');
+
+        // Check if all required items are posted
+        // Fail if not
+        if (!$this->checkReq()) {
+
+            $this->insertLog('Tickets', 'Add', 'Adding ticket through web failed, not al required fields are set');
+            return;
+        }
+
+        // Loop through POST values and set variables
+        foreach($_POST as $key => $value) {
+            if ($key != 'form') {
+                $$key = htmlentities($value);
+            }
+        }
+
+        // Get initial ticket status
+        $settings = $this->getTicketSettings();
+
+        // Add ticket
+        if ($this->addTickets($_SESSION['webuser'], $settings['initial_status'], $subject, $category, $priority, $notification) == 1) {
+
+            // Get ticket
+            $ticket = lastTicketByCustomerAndSubject($_SESSION['webuser'], $subject);
+
+            // Succes
+            $this->insertLog('Tickets', 'Add', 'Added ticket ('.$ticket['id'].') through web, message not sent yet');
+
+
+            /**
+             * @todo file handling
+             */
+
+
+
+            if ($this->addTicketMessage() == 1) {
+
+                // Succes
+                $this->insertLog('Added ticket message to ticket '.$ticket['id'].'. New ticket successful');
+
+            } else {
+
+                // Failed
+                $this->insertLog('Adding ticket message to ticket '.$ticket['id'].' failed');
+            }
+
+        } else {
+
+            // Failed
+            $this->insertLog('Tickets', 'Add', 'Adding ticket through web failed, not sending message');
         }
     }
 }

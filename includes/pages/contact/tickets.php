@@ -12,27 +12,5 @@
     
     } else {
         // Display login message if user is not logged in
-?>
-<main id="mainEnglish">
-
-    <?= $language['en_tickets_login']; ?>
-
-    <div class="button">
-        <a href="index.php?page=2"><?= $language['en_tickets_gotologin']; ?>'</a>
-    </div> <!-- button -->
-
-</main>
-
-<main id="mainDutch">
-
-    <?= $language['nl_tickets_login']; ?>
-
-    <div class="button">
-        <a href="index.php?page=2"><?= $language['nl_tickets_gotologin']; ?></a>
-    </div> <!-- button -->
-
-</main>
-
-<?php
-
+        require_once('includes/pages/contact/login.php');
     }

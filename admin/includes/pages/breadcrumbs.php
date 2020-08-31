@@ -351,7 +351,11 @@ if (login()) {
 
                                         break;
 
-                                        break;
+                                        case '3':
+                                            // Settings
+                                            echo '&nbsp;>&nbsp;<a href="index.php?page=4&action=4&cat=3">Settings</a>';
+
+                                            break;
                                 }
                             }
 

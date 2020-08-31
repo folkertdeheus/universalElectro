@@ -862,6 +862,34 @@ class Queries extends Db
     }
 
     /**
+     * Add ticket through web
+     * 
+     * @param int $customer
+     * @param int $status
+     * @param string $subject
+     * @param int $category
+     * @param int $priority
+     * @param boolean $customerNotification
+     * @return int
+     */
+    public function addTickets() : int
+    {
+        return $this->none('INSERT INTO `tickets` (`customer`, `status`, `subject`, `category`, `priority`, `customer_notification`) VALUES (?, ?, ?, ?, ?, ?, ?)', array($customer, $status, $subject $category, $priority, $customerNotification));
+    }
+
+    /**
+     * Get last ticket by customer and subject
+     * 
+     * @param int $customer
+     * @param string $subject
+     * @return array
+     */
+    public function lastTicketByCustomerAndSubject($customer, $subject) : array
+    {
+        return $this->row('SELECT * FROM `tickets` WHERE `customer` = ? AND `subject` = ? ORDER BY `id` DESC LIMIT 1', array($customer, $subject));
+    }
+
+    /**
      * ===================================================
      * CONTACT
      * ===================================================
@@ -1138,5 +1166,49 @@ class Queries extends Db
     public function deleteTicketStatus($id) : int
     {
         return $this->none('DELETE FROM `tickets_status` WHERE `id` = ?', array($id));
+    }
+
+    /**
+     * ===================================================
+     * TICKETS SETTINGS
+     * ===================================================
+     */
+
+    /**
+     * Get ticket settings
+     */
+    public function getTicketSettings() : array
+    {
+        return $this->row('SELECT * FROM `tickets_settings`');
+    }
+
+    /**
+     * Edit ticket settings
+     * @param int $initialStatus
+     * @return int
+     */
+    public function editTicketsSettings($initialStatus) : int
+    {
+        return $this->none('UPDATE `tickets_settings` SET `initial_status` = ?', array($initialStatus));
+    }
+
+    /**
+     * ===================================================
+     * TICKETS MESSAGES
+     * ===================================================
+     */
+
+    /**
+     * Add tickets message
+     * 
+     * @param int $ticket
+     * @param int $customer
+     * @param string $message
+     * @param string $file
+     * @return int
+     */
+    public function addTicketMessage($ticket, $customer, $message, $file) : int
+    {
+        return $this->none('INSERT INTO `tickets_messages` (`ticket`, `customer`, `message`, `file`) VALUES (?, ?, ?, ?)', array($ticket, $customer, $message, $file));
     }
 }

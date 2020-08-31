@@ -30,7 +30,8 @@ class Forms extends Queries
         'addTicketCategory',
         'editTicketCategory',
         'addTicketStatus',
-        'editTicketStatus'
+        'editTicketStatus',
+        'editTicketSettings'
     ];
     
     /**
@@ -1122,6 +1123,41 @@ class Forms extends Queries
 
             // Failed
             $this->insertLog('Ticket status', 'Edit', 'Editting ticket status '.$name.' failed. By '.user());
+        }
+    }
+
+    /**
+     * Edit ticket settings
+     */
+    public function editTicketSettings() : void
+    {
+        // Set required $_POST fields
+        $this->setReq('initialStatus');
+
+        // Check if all required items are posted
+        // Fail if not
+        if (!$this->checkReq()) {
+
+            $this->insertLog('Tickets settings', 'Edit', 'Editting ticket settings failed, not all required fields are set. By '.user());
+            return;
+        }
+
+        // Loop through POST values and set variables
+        foreach($_POST as $key => $value) {
+            if ($key != 'form') {
+                $$key = htmlentities($value);
+            }
+        }
+
+        if ($this->editTicketsSettings($initialStatus) == 1) {
+
+            // Succes
+            $this->insertLog('Tickets settings', 'Edit', 'Editted ticket settings. By '.user());
+        
+        } else {
+
+            // Failed
+            $this->insertLog('Tickets settings', 'Edit', 'Editting ticket settings failed. By '.user());
         }
     }
 }

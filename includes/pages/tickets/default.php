@@ -1,21 +1,35 @@
-TICKETS
-- id
-- customer
-- status
-- subject
-- started
-- closed
-- category
-- priority
-- customer_notification
+<?php
 
-TICKETS CATEGORY
-- id
-- name
-- notification
-- email
+/**
+ * This file contains the user ticket overview
+ */
 
-TICKETS STATUS
-- id
-- name
-- color
+// Check if the user is logged in
+if (login()) {
+
+    if (isset($_GET['sub']) && $_GET['sub'] != null) {
+
+        switch($_GET['sub']) {
+
+            case '1':
+
+                // Add ticket
+                require_once('includes/pages/tickets/add.php');
+                
+                break;
+            
+            default:
+
+                // Tickets overview
+                require_once('includes/pages/tickets/home.php');
+        }
+    } else {
+
+        // Tickets overview
+        require_once('includes/pages/tickets/home.php');
+    }
+} else {
+
+    // Login page
+    require_once('includes/pages/contact/login.php');
+}
