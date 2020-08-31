@@ -1032,4 +1032,111 @@ class Queries extends Db
     {
         return $this->none('DELETE FROM `tickets_category` WHERE `id` = ?', array($id));
     }
+
+    /**
+     * ===================================================
+     * TICKETS STATUS
+     * ===================================================
+     */
+
+    /**
+     * Count ticket statusses
+     * 
+     * @return int
+     */
+    public function countTicketStatusses() : int
+    {
+        return $this->one('SELECT COUNT(*) FROM `tickets_status`');
+    }
+
+    /**
+     * Get all ticket statusses
+     * 
+     * @return array
+     */
+    public function getTicketStatusses() : array
+    {
+        return $this->all('SELECT * FROM `tickets_status`');
+    }
+
+    /**
+     * Count ticket status by name
+     * 
+     * @param string $name
+     * @return int
+     */
+    public function countTicketStatusByName($name) : int
+    {
+        return $this->one('SELECT COUNT(*) FROM `tickets_status` WHERE `name` = ?', array($name));
+    }
+
+    /**
+     * Get ticket status by name
+     * 
+     * @param string $name
+     * @return array
+     */
+    public function getTicketStatusByName($name) : array
+    {
+        return $this->row('SELECT * FROM `tickets_status` WHERE `name` = ?', array($name));
+    }
+
+    /**
+     * Add ticket status
+     * 
+     * @param string $name
+     * @param string $color
+     * @return int
+     */
+    public function addTicketStatusses($name, $color) : int
+    {
+        return $this->none('INSERT INTO `tickets_status` (`name`, `color`) VALUES (?, ?)', array($name, $color));
+    }
+
+    /**
+     * Get ticket status
+     * 
+     * @param int $id
+     * @return array
+     */
+    public function getTicketStatus($id) : array
+    {
+        return $this->row('SELECT * FROM `tickets_status` WHERE `id` = ?', array($id));
+    }
+
+    /**
+     * Count tickets status by name, skip id
+     * 
+     * @param string $name
+     * @param int $id
+     * @return int
+     */
+    public function countTicketStatusByNameNotThis($name, $id) : int
+    {
+        return $this->one('SELECT COUNT(*) FROM `tickets_status` WHERE `name` = ? AND `id` != ?', array($name, $id));
+    }
+
+    /**
+     * Edit ticket status
+     * 
+     * @param string $name
+     * @param string $color
+     * @param int $id
+     * @return int
+     */
+    public function editTicketStatusses($name, $color, $id) : int
+    {
+        return $this->none('UPDATE `tickets_status` SET `name` = ?, `color` = ? WHERE `id` = ?', array($name, $color, $id));
+    }
+
+    /**
+     * Delete ticket status
+     * 
+     * @param int $id
+     * @return int
+     */
+    public function deleteTicketStatus($id) : int
+    {
+        return $this->none('DELETE FROM `tickets_status` WHERE `id` = ?', array($id));
+    }
 }

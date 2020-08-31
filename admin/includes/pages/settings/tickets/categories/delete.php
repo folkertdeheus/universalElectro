@@ -7,7 +7,7 @@
 // Check if user is logged in when accessing this file
 if (login()) {
 
-    // Get customer
+    // Get ticket category
     $ticketCat = $q->getTicketCategory($_GET['id']);
 ?>
     <div class="content">

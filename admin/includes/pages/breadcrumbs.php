@@ -295,7 +295,7 @@ if (login()) {
                                         // Categories
                                         echo '&nbsp;>&nbsp;<a href="index.php?page=4&action=4&cat=1">Categories</a>';
 
-                                         // Check if the sub navigation is set
+                                        // Check if the sub navigation is set
                                         if (isset($_GET['sub']) && $_GET['sub'] != null) {
                                             switch($_GET['sub']) {
                                                     
@@ -323,7 +323,33 @@ if (login()) {
                                     
                                     case '2':
                                         // Statusses
-                                        echo '&nbsp;>&nbsp;<a href="index.php?page=4&action=4&sub=2">Statusses</a>';
+                                        echo '&nbsp;>&nbsp;<a href="index.php?page=4&action=4&cat=2">Statusses</a>';
+
+                                        // Check if the sub navigation is set
+                                        if (isset($_GET['sub']) && $_GET['sub'] != null) {
+                                            switch($_GET['sub']) {
+                                                    
+                                                case '1':
+                                                    // Add Statusses
+                                                    echo '&nbsp;>&nbsp;<a href="index.php?page=4&action=4&cat=2&sub=1">Add status</a>';
+
+                                                    break;
+
+                                                case '2':
+                                                    // Edit Statusses
+                                                    echo '&nbsp;>&nbsp;<a href="index.php?page=4&action=4&cat=2&sub=2&id='.$_GET['id'].'">Edit status</a>';
+
+                                                    break;
+
+                                                case '3':
+                                                    // Delete Statusses
+                                                    echo '&nbsp;>&nbsp;<a href="index.php?page=4&action=4&cat=2&sub=3&id='.$_GET['id'].'">Delete status</a>';
+
+                                                    break;
+                                            }
+                                        }
+
+                                        break;
 
                                         break;
                                 }

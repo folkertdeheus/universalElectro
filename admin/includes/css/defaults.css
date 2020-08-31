@@ -291,3 +291,7 @@ form img {
     position: absolute;
     margin-top: -10px;
 }
+
+input[type="color"] {
+    height: 50px;
+}

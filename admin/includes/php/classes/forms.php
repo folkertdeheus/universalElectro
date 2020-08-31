@@ -28,7 +28,9 @@ class Forms extends Queries
         'addCustomer',
         'editCustomer',
         'addTicketCategory',
-        'editTicketCategory'
+        'editTicketCategory',
+        'addTicketStatus',
+        'editTicketStatus'
     ];
     
     /**
@@ -1001,7 +1003,7 @@ class Forms extends Queries
 
         // Set notification
         $notification = 1;
-        if (isset($_POST['notification']) && $_POST['notification'] != 1) {
+        if (!isset($_POST['notification']) || $_POST['notification'] != 1) {
             $notification = 0;
         }
 
@@ -1032,6 +1034,94 @@ class Forms extends Queries
 
             // Failed
             $this->insertLog('Ticket category', 'Edit', 'Editting ticket category "'.$name.'" (id: '.$id.') failed. By '.user());
+        }
+    }
+
+    /**
+     * Add ticket status
+     */
+    public function addTicketStatus() : void
+    {
+        // Set required $_POST fields
+        $this->setReq('name', 'color');
+
+        // Check if all required items are posted
+        // Fail if not
+        if (!$this->checkReq()) {
+
+            $this->insertLog('Ticket status', 'Add', 'Adding ticket status '.$_POST['name'].' failed, not all required fields are set. By '.user());
+            return;
+        }
+        
+        // Loop through POST values and set variables
+        foreach($_POST as $key => $value) {
+            if ($key != 'form') {
+                $$key = htmlentities($value);
+            }
+        }
+
+        // Check if the name is unique
+        if ($this->countTicketStatusByName($name) != 0) {
+
+            // Not unique, fail
+            $this->insertLog('Ticket status', 'Add', 'Adding ticket status '.$name.' failed, name is not unique. By '.user());
+            return;
+        }
+
+        // Insert ticket status
+        if ($this->addTicketStatusses($name, $color) == 1) {
+
+            // Succes
+            $this->insertLog('Ticket status', 'Add', 'Added ticket status '.$name.' with id '.$this->getTicketStatusByName($name)['id'].'. By '.user());
+        
+        } else {
+
+            // Failed
+            $this->insertLog('Ticket status', 'Add', 'Adding ticket status '.$name.' failed. By '.user());
+        }
+    }
+
+    /**
+     * Edit ticket status
+     */
+    public function editTicketStatus() : void
+    {
+        // Set required $_POST fields
+        $this->setReq('name', 'color', 'id');
+
+        // Check if all required items are posted
+        // Fail if not
+        if (!$this->checkReq()) {
+
+            $this->insertLog('Ticket status', 'Edit', 'Editting ticket status '.$_POST['name'].' (id: '.$_POST['id'].') failed, not all required fields are set. By '.user());
+            return;
+        }
+        
+        // Loop through POST values and set variables
+        foreach($_POST as $key => $value) {
+            if ($key != 'form') {
+                $$key = htmlentities($value);
+            }
+        }
+
+        // Check if the name is unique
+        if ($this->countTicketStatusByNameNotThis($name, $id) != 0) {
+
+            // Not unique, fail
+            $this->insertLog('Ticket status', 'Edit', 'Editting ticket status '.$name.' (id: '.$id.') failed, name is not unique. By '.user());
+            return;
+        }
+
+        // Edit ticket status
+        if ($this->editTicketStatusses($name, $color, $id) == 1) {
+
+            // Succes
+            $this->insertLog('Ticket status', 'Edit', 'Editted ticket status '.$name.' (id: '.$id.'). By '.user());
+        
+        } else {
+
+            // Failed
+            $this->insertLog('Ticket status', 'Edit', 'Editting ticket status '.$name.' failed. By '.user());
         }
     }
 }
