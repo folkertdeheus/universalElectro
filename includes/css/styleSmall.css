@@ -260,3 +260,102 @@ footer {
 .tdname {
     width: 200px;
 }
+
+.tickets {
+    /* Display grid */
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+}
+
+.tickets .title {
+    /* Display */
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+}
+
+.tickets .toolbar {
+    /* Display */
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+    display: flex;
+    flex-direction: column;
+
+    /* Background */
+    background-color: var(--grey);
+    border-radius: 2px;
+
+    /* Positioning */
+    padding: 10px;
+
+    /* Font */
+    color: var(--white);
+}
+
+.tickets .toolbar a:link, .tickets .toolbar a:visited {
+    /* Font */
+    color: var(--blue);
+    text-decoration: none;
+
+    /* Animation */
+    transition: 0.5s;
+}
+
+.tickets .toolbar a:hover {
+    /* Font */
+    color: var(--white);
+
+    /* Animation */
+    transition: 0.5s;
+}
+
+.tickets .ticket_content {
+    /* Display */
+    grid-column: 1 / 2;
+    grid-row: 3 / 4;
+    display: flex;
+    flex-direction: column;
+
+    /* Positioning */
+    padding: 10px;
+}
+
+.ticket_content input {
+    border-bottom: 1px solid var(--blue);
+}
+
+.ticket_content textarea {
+    height: 200px;
+    border-bottom: 1px solid var(--blue);
+}
+
+.toolbar input[type="file"], .toolbar input[type="checkbox"] {
+    /* Display */
+    display: none;
+}
+
+.toolbar label, .toolbar select {
+    /* Font */
+    color: var(--blue);
+
+    /* Positioning */
+    padding: 10px;
+    margin-bottom: 10px;
+
+    /* Background */
+    border: 1px solid var(--blue);
+    background-color: var(--grey);
+}
+
+.toolbar label:hover {
+    /* Cursor */
+    cursor: pointer;
+}
+
+#notiflabel {
+    /* Background */
+    border: 1px solid rgba(0, 255, 0, 1);
+
+    /* Font */
+    color: rgba(0, 255, 0, 1);
+}

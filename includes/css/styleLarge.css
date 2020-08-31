@@ -319,7 +319,7 @@ footer {
     width: 150px;
 }
 
-.tickets{
+.tickets {
     /* Display grid */
     display: grid;
     grid-template-columns: 200px 1fr;

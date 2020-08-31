@@ -874,7 +874,7 @@ class Queries extends Db
      */
     public function addTickets() : int
     {
-        return $this->none('INSERT INTO `tickets` (`customer`, `status`, `subject`, `category`, `priority`, `customer_notification`) VALUES (?, ?, ?, ?, ?, ?, ?)', array($customer, $status, $subject $category, $priority, $customerNotification));
+        return $this->none('INSERT INTO `tickets` (`customer`, `status`, `subject`, `category`, `priority`, `customer_notification`) VALUES (?, ?, ?, ?, ?, ?, ?)', array($customer, $status, $subject, $category, $priority, $customerNotification));
     }
 
     /**
