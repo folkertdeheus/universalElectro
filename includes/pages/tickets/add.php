@@ -20,6 +20,7 @@ $categories = $q->getTicketCategories();
         
 
             <div class="toolbar">
+                <a href="index.php?page=3&action=1"><?= $language['en_tickets_goback']; ?></a>
                 <?= $language['en_tickets_category']; ?>:
                 <select name="category" id="category" required >
 <?php
@@ -71,6 +72,7 @@ $categories = $q->getTicketCategories();
 
 
         <div class="toolbar">
+        <a href="index.php?page=3&action=1"><?= $language['nl_tickets_goback']; ?></a>
             <?= $language['nl_tickets_category']; ?>:
             <select name="category" id="category" required >
 <?php

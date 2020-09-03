@@ -363,6 +363,10 @@ footer {
     /* Font */
     color: var(--white);
 
+    /* Background */
+    background-color: var(--blue);
+    border-radius: 2px;
+
     /* Animation */
     transition: 0.5s;
 }
