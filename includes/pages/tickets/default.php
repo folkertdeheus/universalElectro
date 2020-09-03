@@ -17,6 +17,13 @@ if (login()) {
                 require_once('includes/pages/tickets/add.php');
                 
                 break;
+
+            case '2':
+
+                // View ticket
+                require_once('includes/pages/tickets/view.php');
+
+                break;
             
             default:
 

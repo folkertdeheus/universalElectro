@@ -416,3 +416,56 @@ article {
     color: var(--blue);
     transition: 0.5s;
 }
+
+.ticketmessage {
+    /* Background */
+    border: 1px solid var(--grey);
+}
+
+.ticketmessage_text {
+    /* Positioning */
+    padding: 10px;
+}
+
+.ticketmessage_details {
+    /* Display flex */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    /* Background */
+    background: linear-gradient(0deg, var(--grey), var(--light));
+    
+    /* Positioning */
+    padding: 10px;
+    margin-top: 10px;
+
+    /* Font */
+    color: var(--white);
+}
+
+.ticketmessage_details span {
+    /* Display flex */
+    display: flex;
+    flex-direction: row;
+}
+
+.ticketmessage_details a:link, .ticketmessage_details a:visited {
+    /* Display */
+    display: block;
+
+    /* Font */
+    color: rgba(0, 255, 0, 1);
+    text-decoration: none;
+
+    /* Positioning */
+    margin-left: 10px;
+}
+
+.ticketmessage_details a:hover {
+    /* Font */
+    color: var(--white);
+
+    /* Animation */
+    transition: 0.5s;
+}

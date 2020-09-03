@@ -847,7 +847,7 @@ class Queries extends Db
      */
     public function getTicketsByCustomer($customer) : array
     {
-        return $this->all('SELECT * FROM `tickets` WHERE `customer` = ?', array($customer));
+        return $this->all('SELECT * FROM `tickets` WHERE `customer` = ? ORDER BY `id` DESC', array($customer));
     }
 
     /**
@@ -872,9 +872,9 @@ class Queries extends Db
      * @param boolean $customerNotification
      * @return int
      */
-    public function addTickets() : int
+    public function addTickets($customer, $status, $subject, $category, $priority, $customerNotification) : int
     {
-        return $this->none('INSERT INTO `tickets` (`customer`, `status`, `subject`, `category`, `priority`, `customer_notification`) VALUES (?, ?, ?, ?, ?, ?, ?)', array($customer, $status, $subject, $category, $priority, $customerNotification));
+        return $this->none('INSERT INTO `tickets` (`customer`, `status`, `subject`, `category`, `priority`, `customer_notification`) VALUES (?, ?, ?, ?, ?, ?)', array($customer, $status, $subject, $category, $priority, $customerNotification));
     }
 
     /**
@@ -887,6 +887,38 @@ class Queries extends Db
     public function lastTicketByCustomerAndSubject($customer, $subject) : array
     {
         return $this->row('SELECT * FROM `tickets` WHERE `customer` = ? AND `subject` = ? ORDER BY `id` DESC LIMIT 1', array($customer, $subject));
+    }
+
+    /**
+     * Get ticket by id and customer
+     * 
+     * @param int $id
+     * @param int $customer
+     * @return array
+     */
+    public function getTicket($id, $customer) : array
+    {
+        return $this->row('SELECT * FROM `tickets` WHERE `id` = ? AND `customer` = ?', array($id, $customer));
+    }
+
+    /**
+     * Get all tickets ordered by the latest message in the ticket
+     * 
+     * @return array
+     */
+    public function getTickets() : array
+    {
+        return $this->all('SELECT * FROM `tickets` as t INNER JOIN `tickets_messages` as m ON m.ticket = t.id ORDER BY m.id DESC');
+    }
+
+    /**
+     * Count tickets
+     * 
+     * @return array
+     */
+    public function countTickets() : int
+    {
+        return $this->one('SELECT COUNT(*) FROM `tickets`');
     }
 
     /**
@@ -1210,5 +1242,16 @@ class Queries extends Db
     public function addTicketMessage($ticket, $customer, $message, $file) : int
     {
         return $this->none('INSERT INTO `tickets_messages` (`ticket`, `customer`, `message`, `file`) VALUES (?, ?, ?, ?)', array($ticket, $customer, $message, $file));
+    }
+
+    /**
+     * Get tickets messages by ticket
+     * 
+     * @param int $ticket
+     * @return array
+     */
+    public function getTicketMessagesByTicket($ticket) : array
+    {
+        return $this->all('SELECT * FROM `tickets_messages` WHERE `ticket` = ? ORDER BY `id` DESC', array($ticket));
     }
 }

@@ -20,7 +20,7 @@ if (login()) {
             
             case '2':
                 // Tickets
-
+                require_once('includes/pages/crm/tickets/default.php');
                 break;
 
             case '3':

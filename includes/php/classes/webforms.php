@@ -298,6 +298,11 @@ class Webforms extends Queries
             }
         }
 
+        $notification = 0;
+        if (isset($_POST['notification']) && $_POST['notification'] == 1) {
+            $notification = 1;
+        }
+
         // Get initial ticket status
         $settings = $this->getTicketSettings();
 
@@ -305,27 +310,77 @@ class Webforms extends Queries
         if ($this->addTickets($_SESSION['webuser'], $settings['initial_status'], $subject, $category, $priority, $notification) == 1) {
 
             // Get ticket
-            $ticket = lastTicketByCustomerAndSubject($_SESSION['webuser'], $subject);
+            $ticket = $this->lastTicketByCustomerAndSubject($_SESSION['webuser'], $subject);
 
             // Succes
             $this->insertLog('Tickets', 'Add', 'Added ticket ('.$ticket['id'].') through web, message not sent yet');
 
+            // Upload file
 
-            /**
-             * @todo file handling
-             */
+            // Check if file is being uploaded
+            if (isset($_FILES['file']['name']) && $_FILES['file']['name'] != null) {
 
+                // File naming
+                $path = 'includes/ticketfiles/';
+                $file = basename($_FILES['file']['name']);
+                $filename = pathinfo($file, PATHINFO_FILENAME);
+                $extension = pathinfo($file, PATHINFO_EXTENSION);
+                
+                // Accepted files
+                $acceptedFileTypes = $GLOBALS['acceptedFileTypes'];
+            
+                // Check if file exists
+                // If exists, rename with number added
+                $base = $filename;
+                
+                // Continue numbering until unique name is found
+                for ($i = 1; file_exists($path.$filename.'.'.$extension); $i++) {
+                    $filename = $base.$i;
+                }
 
+                // Check if file is accepted file type
+                if (in_array($extension, $acceptedFileTypes)) {
 
-            if ($this->addTicketMessage() == 1) {
+                    // Set destination path
+                    $filepath = $path.$filename.'.'.$extension;
+
+                    // Upload file
+                    if (!move_uploaded_file($_FILES['file']['tmp_name'], $filepath)) {
+                        
+                        // File upload failed
+                        $filesError = null;
+                        foreach($_FILES as $value) {
+                            foreach ($value as $value2) {
+                                $filesError = $filesError.$value2.' ';
+                            }
+                        }
+
+                        // Insert log
+                        $this->insertLog('Tickets message', 'Add', 'Adding file to ticket failed, file upload error: '.$filesError);
+                    }
+
+                    // File has the wrong type, insert error in log
+                } else {
+
+                    $this->insertLog('Tickets message', 'Add', 'Adding file to ticket failed, file was the wrong type');
+                }
+
+            // No image uploaded, set filepath null
+            } else {
+
+                $filepath = null;
+            }
+
+            // Insert message
+            if ($this->addTicketMessage($ticket['id'], $_SESSION['webuser'], $message, $filepath) == 1) {
 
                 // Succes
-                $this->insertLog('Added ticket message to ticket '.$ticket['id'].'. New ticket successful');
+                $this->insertLog('Tickets message', 'Add', 'Added ticket message to ticket '.$ticket['id'].'. New ticket successful');
 
             } else {
 
                 // Failed
-                $this->insertLog('Adding ticket message to ticket '.$ticket['id'].' failed');
+                $this->insertLog('Tickets message', 'Add', 'Adding ticket message to ticket '.$ticket['id'].' failed');
             }
 
         } else {

@@ -105,7 +105,27 @@ $languageFields = [
     ],
     'Tickets' => [
         'tickets_login' => 'First login message',
-        'tickets_gotologin' => 'Go to login page'
+        'tickets_gotologin' => 'Go to login page',
+        'tickets_newticket' => '"New ticket"',
+        'tickets_category' => '"Category"',
+        'tickets_priority' => '"Priority"',
+        'tickets_attachment' => '"Attachment"',
+        'tickets_upload' => '"Upload file"',
+        'tickets_subject' => '"Subject"',
+        'tickets_message' => '"Message"',
+        'tickets_submit' => '"Submit"',
+        'tickets_notifications' => '"Email notifications"',
+        'tickets_priolow' => 'Low priority',
+        'tickets_priomed' => 'Normal priority',
+        'tickets_priohigh' => 'High priority',
+        'tickets_priocrit' => 'Critical priority',
+        'tickets_tickets' => '"Tickets"',
+        'tickets_started' => '"Started"',
+        'tickets_notickets' => 'No tickets message',
+        'tickets_goback' => '"Back to tickets"',
+        'tickets_close' => '"Close ticket"',
+        'tickets_posted' => '"Message posted"',
+        'tickets_file' => '"File"'
     ]
 ];
 

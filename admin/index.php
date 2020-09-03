@@ -29,7 +29,7 @@ include('includes/php/include.php');
     <meta name="author" content="Folkert de Heus">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 
-    <title>Blackbeard: Universal Electro</title>
+    <title>Boxxed: Universal Electro</title>
     
     <link rel="stylesheet" href="includes/css/defaults.css">
     <link rel="stylesheet" media="screen and (min-width: 1200px)" href="includes/css/styleLarge.css">

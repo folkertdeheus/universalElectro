@@ -359,3 +359,79 @@ footer {
     /* Font */
     color: rgba(0, 255, 0, 1);
 }
+
+.ticketsummary {
+    /* Display Flex */
+    display: flex;
+    flex-direction: column;
+
+    /* Background */
+    border: 1px solid var(--grey);
+    border-radius: 3px;
+
+    /* Positioning */
+    margin-bottom: 10px;
+}
+
+.ticketsummary a:link, .ticketsummary a:visited {
+    /* Font */
+    color: var(--grey);
+    text-decoration: none;
+
+    /* Animation */
+    transition: 0.5s;
+}
+
+.ticketsummary a:hover {
+    /* Background */
+    background-color: var(--grey);
+
+    /* Font */
+    color: var(--white);
+
+    /* Animation */
+    transition: 0.5s;
+}
+
+.ticketsummary_subject {
+    /* Positioning */
+    padding: 10px;
+
+    /* Font */
+    font-family: 'Oxygen';
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.ticketsummary_details {
+    /* Display Flex */
+    display: flex;
+    flex-direction: row;
+}
+
+.ticketstatus {
+    /* Positioning */
+    width: 100px;
+    padding: 10px;
+
+    /* Font */
+    Text-align: center;
+    align-self: center;
+    font-family: 'Oxygen';
+    font-weight: bold;
+}
+
+.ticketdetail {
+    /* Display Flex */
+    display: flex;
+    flex-direction: column;
+
+    /* Positioning */
+    width: 150px;
+}
+
+.ticketdetail span {
+    /* Font */
+    font-family: 'Oxygen';
+    font-weight: bold;
+}

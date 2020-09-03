@@ -235,3 +235,47 @@ footer {
     /* Animation */
     transition: 0.5s;
 }
+.ticket {
+    /* Display flex */
+    display: flex;
+    flex-direction: column;
+
+    /* Background */
+    border: 1px solid var(--accent);
+    border-radius: 2px;
+
+    /* Positioning */
+    margin-bottom: 20px;
+
+    /* Animation */
+    transition: 0.5s;
+}
+
+.ticket a:link, .ticket a:visited {
+    color: var(--accent);
+}
+
+.ticket:hover {
+    border: 1px solid var(--main);
+    box-shadow: 2px 2px 5px 0px var(--main),
+                -2px -2px 5px 0px var(--main);
+    transition: 0.5s;
+}
+
+.subject {
+    /* Positioning */
+    padding: 10px;
+
+    /* Background */
+    border-bottom: 1px solid var(--accent);
+
+    /* Font */
+    font-family: Oxygen;
+    font-weight: bold;
+    color: var(--main);
+}
+
+.details {
+    /* Display */
+    display: none;
+}

@@ -12,7 +12,7 @@ if (login()) {
 
     // Get tickets if there are any
     if ($countTickets > 0) {
-        $tickets = getTicketsByCustomer($customer);
+        $tickets = $q->getTicketsByCustomer($_SESSION['webuser']);
     }
 
 ?>
@@ -20,19 +20,75 @@ if (login()) {
 
         <div class="tickets">
             <div class="title">
-                Tickets
+                <?= $language['en_tickets_tickets']; ?>
             </div>
 
             <div class="toolbar">
-                <a href="index.php?page=3&action=1&sub=1">Open new ticket</a>
+                <a href="index.php?page=3&action=1&sub=1"><?= $language['en_tickets_newticket']; ?></a>
             </div> <!-- toolbar -->
 
             <div class="ticket_content">
 <?php
             if ($countTickets > 0) {
-                print_r($tickets);
+
+                // Loop through tickets
+                foreach ($tickets as $ticketKey => $ticketValue) {
+
+                    $status = $q->getTicketStatus($ticketValue['status']);
+                    $category = $q->getTicketCategory($ticketValue['category']);
+
+                    switch($ticketValue['priority']) {
+                        case '1':
+                            $priority = $language['en_tickets_priolow'];
+                            break;
+                        case '2':
+                            $priority = $language['en_tickets_priomed'];
+                            break;
+                        case '3':
+                            $priority = $language['en_tickets_priohigh'];
+                            break;
+                        case '4':
+                            $priority = $language['en_tickets_priocrit'];
+                            break;
+                        default:
+                            $priority = $language['en_tickets_priomed'];
+                    }
+?>
+                    <div class="ticketsummary">
+                        <a href="index.php?page=3&action=1&sub=2&id=<?= $ticketValue['id']; ?>">
+                            <div class="ticketsummary_subject">
+                                <?= $ticketValue['subject']; ?>
+                            </div> <!-- ticketsummary_subject -->
+
+                            <div class="ticketsummary_details">
+                                <div class="ticketstatus" style="background: linear-gradient(45deg, <?= $status['color']; ?>, rgba(255, 255, 255, 0) 80%">
+                                    <?= $status['name']; ?>
+                                </div> <!-- ticketstatus -->
+
+                                <div class="ticketdetail">
+                                    <span><?= $language['en_tickets_started']; ?></span>
+                                    <?= $ticketValue['started']; ?>
+                                </div> <!-- ticketdetail -->
+
+                                <div class="ticketdetail">
+                                    <span><?= $language['en_tickets_category']; ?></span>
+                                    <?= $category['name']; ?>
+                                </div> <!-- ticketdetail -->
+
+                                <div class="ticketdetail">
+                                    <span><?= $language['en_tickets_priority']; ?></span>
+                                    <?= $priority; ?>
+                                </div> <!-- ticketdetail -->
+                            </div> <!-- ticketsummary_details -->
+                        </a>
+                    </div> <!-- ticketsummary -->
+<?php
+                }
+
             } else {
-                echo 'You have no submitted tickets';
+
+                echo $language['en_tickets_notickets'];
+
             }
 ?>
             </div> <!-- ticket content -->
@@ -40,6 +96,82 @@ if (login()) {
     </main>
 
     <main id="mainDutch">
+
+        <div class="tickets">
+            <div class="title">
+                <?= $language['nl_tickets_tickets']; ?>
+            </div>
+
+            <div class="toolbar">
+                <a href="index.php?page=3&action=1&sub=1"><?= $language['nl_tickets_newticket']; ?></a>
+            </div> <!-- toolbar -->
+
+            <div class="ticket_content">
+<?php
+            if ($countTickets > 0) {
+
+                // Loop through tickets
+                foreach ($tickets as $ticketKey => $ticketValue) {
+
+                    $status = $q->getTicketStatus($ticketValue['status']);
+                    $category = $q->getTicketCategory($ticketValue['category']);
+
+                    switch($ticketValue['priority']) {
+                        case '1':
+                            $priority = $language['nl_tickets_priolow'];
+                            break;
+                        case '2':
+                            $priority = $language['nl_tickets_priomed'];
+                            break;
+                        case '3':
+                            $priority = $language['nl_tickets_priohigh'];
+                            break;
+                        case '4':
+                            $priority = $language['nl_tickets_priocrit'];
+                            break;
+                        default:
+                            $priority = $language['nl_tickets_priomed'];
+                    }
+?>
+                    <div class="ticketsummary">
+                        <a href="index.php?page=3&action=1&sub=2&id=<?= $ticketValue['id']; ?>">
+                            <div class="ticketsummary_subject">
+                                <?= $ticketValue['subject']; ?>
+                            </div> <!-- ticketsummary_subject -->
+
+                            <div class="ticketsummary_details">
+                                <div class="ticketstatus" style="background: linear-gradient(45deg, <?= $status['color']; ?>, rgba(255, 255, 255, 0) 80%">
+                                    <?= $status['name']; ?>
+                                </div> <!-- ticketstatus -->
+
+                                <div class="ticketdetail">
+                                    <span><?= $language['nl_tickets_started']; ?></span>
+                                    <?= $ticketValue['started']; ?>
+                                </div> <!-- ticketdetail -->
+
+                                <div class="ticketdetail">
+                                    <span><?= $language['nl_tickets_category']; ?></span>
+                                    <?= $category['name']; ?>
+                                </div> <!-- ticketdetail -->
+
+                                <div class="ticketdetail">
+                                    <span><?= $language['nl_tickets_priority']; ?></span>
+                                    <?= $priority; ?>
+                                </div> <!-- ticketdetail -->
+                            </div> <!-- ticketsummary_details -->
+                        </a>
+                    </div> <!-- ticketsummary -->
+<?php
+                }
+
+            } else {
+
+                echo $language['nl_tickets_notickets'];
+
+            }
+?>
+            </div> <!-- ticket content -->
+        </div> <!-- tickets -->
     </main>
 
 <?php
