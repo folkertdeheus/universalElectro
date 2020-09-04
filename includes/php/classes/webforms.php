@@ -108,7 +108,7 @@ class Webforms extends Queries
         $password = hash('whirlpool', $this->cSalt.$_POST['password']);
 
         // Insert customer
-        if ($this->addCustomers($firstname, $insertion, $lastname, $email, $phone, null, null, null, null, null, null, null, null, null, null, null, null, null, null, $password) == 1) {
+        if ($this->addCustomers($firstname, $insertion, $lastname, $email, $phone, null, null, null, null, null, null, null, null, null, null, null, null, null, null, $password, null) == 1) {
 
             // Check if email adress is added, and only exists 1 time
             if ($this->countCustomersByEmail($email) == 1) {

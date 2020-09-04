@@ -47,10 +47,16 @@ if (login()) {
                 <a href="index.php?page=3&action=1"><?= $language['en_tickets_goback']; ?></a>
                 <a href="index.php?page=3&action=1&sub=1"><?= $language['en_tickets_newticket']; ?></a>
                 <a href=""><?= $language['en_tickets_close']; ?></a>
-
-                <?= $language['en_tickets_attachment']; ?>:
-                <input type="file" name="file" id="file" onchange="ticketReply('file')" />
-                <label for="file" id="filelabel"><?= $language['en_tickets_upload']; ?></label>
+<?php
+                // Only display button when ticket is not closed or solved
+                if ($ticket['status'] != 2 && $ticket['status'] != 5) {
+?>
+                    <?= $language['en_tickets_attachment']; ?>:
+                    <input type="file" name="file" id="file" onchange="ticketReply('file')" />
+                    <label for="file" id="filelabel"><?= $language['en_tickets_upload']; ?></label>
+<?php
+                }
+?>
             </div> <!-- toolbar -->
 
             <div class="ticket_content">
@@ -82,11 +88,16 @@ if (login()) {
                 </div> <!-- ticketsummary -->
 
                 <div class="ticketmessages">
-                
-                    <textarea name="message" placeholder="<?= $language['en_tickets_message']; ?>"></textarea>
-                    <input type="hidden" name="form" value="ticketReply" />
-                    <input type="submit" value="<?= $language['en_tickets_submit']; ?>" />
 <?php
+                    // Only display message field when ticket is not closed or solved
+                    if ($ticket['status'] != 2 && $ticket['status'] != 5) {
+?>
+                        <textarea name="message" placeholder="<?= $language['en_tickets_message']; ?>"></textarea>
+                        <input type="hidden" name="form" value="ticketReply" />
+                        <input type="submit" value="<?= $language['en_tickets_submit']; ?>" />
+<?php
+                    }
+
                     foreach($messages as $messageKey => $messageValue) {
 ?>
                         <div class="ticketmessage">
