@@ -1,7 +1,6 @@
 function addTicket(field)
 {
     var value = document.getElementById(field).value;
-    var messageTarget = document.getElementById('message');
 
     switch(field) {
 
@@ -33,7 +32,6 @@ function addTicket(field)
 
             } else {
 
-                console.log(32);
                 // Style button to red
                 document.getElementById('notiflabel').style.color = 'rgba(255, 0, 0, 1)';
                 document.getElementById('notiflabel').style.border = '1px solid rgba(255, 0, 0, 1)';

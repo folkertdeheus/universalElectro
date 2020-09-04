@@ -15,7 +15,7 @@ if (login()) {
 
             case '1':
                 // Ticket
-                require_once('includes/pages/crm/tickets/default.php');
+                require_once('includes/pages/crm/tickets/view.php');
                 break;
             
             default:

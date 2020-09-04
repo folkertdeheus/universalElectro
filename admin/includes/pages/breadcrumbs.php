@@ -66,6 +66,20 @@ if (login()) {
                             // Tickets
                             echo '&nbsp;>&nbsp;<a href="index.php?page=1&action=2">Tickets</a>';
 
+                            // Check if the sub navigation is set
+                            if (isset($_GET['sub']) && $_GET['sub'] != null) {
+
+                                switch($_GET['sub']) {
+
+                                    case '1':
+                                        // View
+                                        echo '&nbsp;>&nbsp;<a href="index.php?page=1&action=2&sub=1&id='.$_GET['id'].'">View ticket</a>';
+
+                                        break;
+
+                                }
+                            }
+
                             break;
 
                         case '3':

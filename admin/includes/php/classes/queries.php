@@ -908,7 +908,7 @@ class Queries extends Db
      */
     public function getTickets() : array
     {
-        return $this->all('SELECT * FROM `tickets` as t INNER JOIN `tickets_messages` as m ON m.ticket = t.id ORDER BY m.id DESC');
+        return $this->all('SELECT DISTINCT(`ticket`), t.id as id, `status`, `subject`, `started`, `closed`, `category`, `priority`, `customer_notification`, `posted` FROM `tickets_messages` as m JOIN `tickets` as t ON t.id = m.ticket ORDER BY m.id DESC');
     }
 
     /**
@@ -919,6 +919,32 @@ class Queries extends Db
     public function countTickets() : int
     {
         return $this->one('SELECT COUNT(*) FROM `tickets`');
+    }
+
+    /**
+     * Get ticket in CMS
+     * 
+     * @param int $id
+     * @return array
+     */
+    public function getCMSTicket($id) : array
+    {
+        return $this->row('SELECT * FROM `tickets` WHERE `id` = ?', array($id));
+    }
+
+    /**
+     * Edit ticket in CMS
+     * 
+     * @param int $status
+     * @param int $closed
+     * @param int $category
+     * @param int $priority
+     * @param int $id
+     * @return int
+     */
+    public function editTicket($status, $closed, $category, $priority, $id) : int
+    {
+        return $this->none('UPDATE `tickets` SET `status` = ?, `closed` = ?, `category` = ?, `priority` = ? WHERE `id` = ?', array($status, $closed, $category, $priority, $id));
     }
 
     /**
@@ -1231,7 +1257,7 @@ class Queries extends Db
      */
 
     /**
-     * Add tickets message
+     * Add tickets message through web
      * 
      * @param int $ticket
      * @param int $customer
@@ -1253,5 +1279,19 @@ class Queries extends Db
     public function getTicketMessagesByTicket($ticket) : array
     {
         return $this->all('SELECT * FROM `tickets_messages` WHERE `ticket` = ? ORDER BY `id` DESC', array($ticket));
+    }
+
+    /**
+     * Add ticket message through CMS
+     * 
+     * @param int $ticket
+     * @param int $user
+     * @param string $message
+     * @param string $file
+     * @return int
+     */
+    public function addTicketMessageThroughCMS($ticket, $user, $message, $file) : int
+    {
+        return $this->none('INSERT INTO `tickets_messages` (`ticket`, `user`, `message`, `file`) VALUES (?, ?, ?, ?)', array($ticket, $user, $message, $file));
     }
 }

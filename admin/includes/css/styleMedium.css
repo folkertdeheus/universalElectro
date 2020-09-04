@@ -341,3 +341,194 @@ footer {
     margin: auto 0px;
     padding: 20px;
 }
+
+.ticket_toolbar {
+    /* Display flex */
+    display: flex;
+    flex-direction: column;
+}
+
+.ticket_subject {
+    /* Font */
+    font-family: Oxygen;
+    font-size: 25px;
+    font-weight: bold;
+    color: var(--back);
+
+    /* Background */
+    background-color: var(--accent);
+    border-radius: 2px;
+
+    /* Positioning */
+    padding: 10px;
+    margin-bottom: 5px;
+}
+
+.ticket_details {
+    /* Display flex */
+    display: flex;
+    flex-direction: row;
+}
+
+.ticket_detail, .ticket_status {
+    /* Display flex */
+    display: flex;
+    flex-direction: column;
+
+    /* Positioning */
+    width: 200px;
+}
+
+.ticket_details {
+    /* Font */
+    color: var(--main);
+}
+
+.ticket_details span {
+    /* Font */
+    color: var(--accent);
+}
+
+.ticket_detail select, .ticket_status select {
+    /* Positioning */
+    width: 180px;
+    margin: 0px;
+
+    /* Font */
+    color: var(--main);
+    font-size: 15px;
+
+    /* Background */
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.ticket_status {
+    /* Positioning */
+    padding-left: 10px;
+}
+
+.ticket_reply {
+    /* Positioning */
+    margin-top: 20px;
+}
+
+.ticket_reply textarea {
+    /* Positioning */
+    width: calc(100% - 22px);
+    max-width: 800px;
+    height: 200px;
+
+    /* Background */
+    border: 1px solid var(--accent);
+}
+
+.ticket_reply input[type="file"] {
+    /* Display */
+    display: none;
+}
+
+.ticket_reply input[type="submit"] {
+    /* Positioning */
+    width: 100%;
+    max-width: 820px;
+
+    /* Transistion */
+    transition: 0.5s;
+}
+
+.ticket_reply input[type="submit"]:hover {
+    /* Background */
+    background-color: var(--accent);
+
+    /* Font */
+    color: var(--back);
+
+    /* Cursor */
+    cursor: pointer;
+
+    /* Animation */
+    transition: 0.5s;
+}
+
+.ticket_reply label {
+    /* Positioning */
+    width: calc(100% - 20px);
+
+    /* Background */
+    background-color: var(--accent);
+
+    /* Font */
+    color: var(--main);
+    text-align: center;
+
+    /* Animation */
+    transition: 0.5s;
+}
+
+.ticket_reply label:hover {
+    /* Background */
+    background: none;
+    outline: 1px solid var(--accent);
+
+    /* Font */
+    color: var(--accent);
+
+    /* Positioning */
+    width: calc(100% - 22px);
+
+    /* Animation */
+    transition: 0.5s;
+
+    /* Cursor */
+    cursor: pointer;
+}
+
+.ticket_messages {
+    /* Display flex */
+    display: flex;
+    flex-direction: column;
+
+    /* Positioning */
+    margin-top: 20px;
+}
+
+.ticket_message {
+    /* Background */
+    border: 1px solid var(--accent);
+    border-radius: 2px;
+
+    /* Positioning */
+    margin-bottom: 10px;
+    padding: 10px;
+
+    /* Font */
+    color: var(--main);
+}
+
+.ticket_footer {
+    /* Display flex */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    /* Font */
+    color: var(--accent);
+
+    /* Positioning */
+    margin-top: 10px;
+    padding: 10px;
+
+    /* Background */
+    border-top: 1px solid var(--accent);
+}
+
+.ticket_footer a:link, .ticket_footer a:visited {
+    /* Font */
+    color: var(--main);
+    text-decoration: underline;
+}
+
+/* Do not replace to default.css, this is needed for overwrite! */
+.critical {
+    border: 1px solid rgba(255, 0, 0, 1);
+}

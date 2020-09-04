@@ -103,6 +103,7 @@ header a:hover {
 }
 
 .toolbar a {
+    /* Positioning */
     margin-right: 20px;
 }
 
@@ -203,16 +204,21 @@ td img {
 }
 
 .yesnobuttons a {
+    /* Positioning */
     margin-right: 20px;
 }
 
 main input, main textarea, main label, main select {
+    /* Display */
     display: block;
+
+    /* Positioning */
     width: 400px;
     margin: 0 auto;
 }
 
 form img {
+    /* Positioning */
     height: 30px;
     max-width: 100%;
 }
@@ -242,6 +248,7 @@ form img {
 }
 
 .settings input[type=checkbox]:checked + label {
+    /* Background */
     background-image: url('../images/check_green.png');
     background-size: cover;
 }
@@ -280,18 +287,46 @@ form img {
 }
 
 .check_set {
+    /* Font */
     font-size: 20px;
+
+    /* Positioning */
     padding-left: 10px;
     padding-top: 10px;
     padding-bottom: 10px;
+    
+    /* Display */
     position: relative;
 }
 
 .check_set label {
+    /* Display */
     position: absolute;
+
+    /* Positioning */
     margin-top: -10px;
 }
 
 input[type="color"] {
+    /* Positioning */
     height: 50px;
+}
+
+.critical {
+    animation: critical 5s infinite;
+}
+
+@keyframes critical {
+    0% {
+        box-shadow: inset 0px 0px 0px 0px rgba(255, 0, 0, 1);
+    }
+
+    50% {
+        box-shadow: inset 50px 50px 50px 0px rgba(255, 0, 0, 1),
+                    inset -50px -50px 50px 0px rgba(255, 0, 0, 1);
+    }
+
+    100% {
+        box-shadow: inset 0px 0px 0px 0px rgba(255, 0, 0, 1);
+    }
 }

@@ -43,7 +43,7 @@ if (login()) {
                         $priority = 'Normal';
                 }
 ?>
-                <div class="ticket">
+                <div class="ticket<?php if ($ticketValue['priority'] == 4) { echo ' critical'; } ?>">
                     <a href="index.php?page=1&action=2&sub=1&id=<?= $ticketValue['id']; ?>">
                         <div class="subject">
                             <?= $ticketValue['subject']; ?>

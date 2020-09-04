@@ -31,7 +31,8 @@ class Forms extends Queries
         'editTicketCategory',
         'addTicketStatus',
         'editTicketStatus',
-        'editTicketSettings'
+        'editTicketSettings',
+        'ticketReply'
     ];
     
     /**
@@ -1158,6 +1159,107 @@ class Forms extends Queries
 
             // Failed
             $this->insertLog('Tickets settings', 'Edit', 'Editting ticket settings failed. By '.user());
+        }
+    }
+
+    /**
+     * Add ticket reply
+     */
+    public function ticketReply() : void
+    {
+        // Set required $_POST fields
+        $this->setReq('ticket', 'message');
+
+        // Check if all required items are posted
+        // Fail if not
+        if (!$this->checkReq()) {
+
+            $this->insertLog('Tickets messages', 'Add', 'Adding ticket message through cms failed, not all required fields are set. By '.user());
+            return;
+        }
+
+        // Loop through POST values and set variables
+        foreach($_POST as $key => $value) {
+            if ($key != 'form') {
+                $$key = htmlentities($value);
+            }
+        }
+
+        // Upload file
+
+        // Check if file is being uploaded
+        if (isset($_FILES['file']['name']) && $_FILES['file']['name'] != null) {
+
+            // File naming
+            $path = '../includes/ticketfiles/';
+            $file = basename($_FILES['file']['name']);
+            $filename = pathinfo($file, PATHINFO_FILENAME);
+            $extension = pathinfo($file, PATHINFO_EXTENSION);
+            
+            // Accepted files
+            $acceptedFileTypes = $GLOBALS['acceptedFileTypes'];
+        
+            // Check if file exists
+            // If exists, rename with number added
+            $base = $filename;
+            
+            // Continue numbering until unique name is found
+            for ($i = 1; file_exists($path.$filename.'.'.$extension); $i++) {
+                $filename = $base.$i;
+            }
+
+            // Check if file is accepted file type
+            if (in_array($extension, $acceptedFileTypes)) {
+
+                // Set destination path
+                $filepath = $path.$filename.'.'.$extension;
+
+                // Upload file
+                if (!move_uploaded_file($_FILES['file']['tmp_name'], $filepath)) {
+                    
+                    // File upload failed
+                    $filesError = null;
+                    foreach($_FILES as $value) {
+                        foreach ($value as $value2) {
+                            $filesError = $filesError.$value2.' ';
+                        }
+                    }
+
+                    // Insert log
+                    $this->insertLog('Tickets message', 'Add', 'Adding file to ticket through cms failed, file upload error: '.$filesError);
+                }
+
+                // File has the wrong type, insert error in log
+            } else {
+
+                $this->insertLog('Tickets message', 'Add', 'Adding file to ticket through cms failed, file was the wrong type');
+            }
+
+        // No image uploaded, set filepath null
+        } else {
+
+            $filepath = null;
+        }
+
+        if ($status == 3) {
+            $status = 1;
+        }
+        
+        // Set closed time
+        $closed = null;
+        if ($status == 2) {
+            $closed = date('Y-m-d H:i:s');
+        }
+
+        if ($this->addTicketMessageThroughCMS($ticket, $_SESSION['user'], $message, $filepath) == 1 && $this->editTicket($status, $closed, $category, $priority, $ticket) == 1) {
+
+            // Succes
+            $this->insertLog('Tickets message', 'Add', 'Added ticket message through cms to ticket '.$ticket.'. By '.user());
+
+        } else {
+
+            // Failed
+            $this->insertLog('Tickets message', 'Add', 'Adding ticket message through cms to ticket '.$ticket.' failed. By '.user());
         }
     }
 }

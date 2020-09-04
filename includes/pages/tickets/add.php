@@ -105,7 +105,7 @@ $categories = $q->getTicketCategories();
             <input type="text" name="subject" id="subject" placeholder="<?= $language['nl_tickets_subject']; ?>" required />
             <textarea name="message" id="message" placeholder="<?= $language['nl_tickets_message']; ?>" required ></textarea>
             <input type="hidden" name="form" value="addTicket" />
-            <input type="Submit" value="<?= $language['nl_tickets_submit']; ?>" />
+            <input type="submit" value="<?= $language['nl_tickets_submit']; ?>" />
         
         </div> <!-- ticket content -->
 
