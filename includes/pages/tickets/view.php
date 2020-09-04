@@ -121,7 +121,7 @@ if (login()) {
 
     <main id="mainDutch">
 
-<?php
+    <?php
         switch($ticket['priority']) {
             case '1':
                 $priority = $language['nl_tickets_priolow'];
@@ -139,8 +139,7 @@ if (login()) {
                 $priority = $language['nl_tickets_priomed'];
         }
 ?>
-
-        <div class="tickets">
+        <form class="tickets" method="post" action="index.php?page=3&action=1">
             <div class="title">
                 <?= $language['nl_tickets_tickets']; ?>
             </div>
@@ -149,6 +148,16 @@ if (login()) {
                 <a href="index.php?page=3&action=1"><?= $language['nl_tickets_goback']; ?></a>
                 <a href="index.php?page=3&action=1&sub=1"><?= $language['nl_tickets_newticket']; ?></a>
                 <a href=""><?= $language['nl_tickets_close']; ?></a>
+<?php
+                // Only display button when ticket is not closed or solved
+                if ($ticket['status'] != 2 && $ticket['status'] != 5) {
+?>
+                    <?= $language['nl_tickets_attachment']; ?>:
+                    <input type="file" name="file" id="file" onchange="ticketReply('file')" />
+                    <label for="file" id="filelabel"><?= $language['nl_tickets_upload']; ?></label>
+<?php
+                }
+?>
             </div> <!-- toolbar -->
 
             <div class="ticket_content">
@@ -181,6 +190,15 @@ if (login()) {
 
                 <div class="ticketmessages">
 <?php
+                    // Only display message field when ticket is not closed or solved
+                    if ($ticket['status'] != 2 && $ticket['status'] != 5) {
+?>
+                        <textarea name="message" placeholder="<?= $language['nl_tickets_message']; ?>"></textarea>
+                        <input type="hidden" name="form" value="ticketReply" />
+                        <input type="submit" value="<?= $language['nl_tickets_submit']; ?>" />
+<?php
+                    }
+
                     foreach($messages as $messageKey => $messageValue) {
 ?>
                         <div class="ticketmessage">
@@ -198,7 +216,7 @@ if (login()) {
 ?>
                 </div> <!-- ticketmessages -->
             </div> <!-- ticket_content -->
-        </div> <!-- tickets -->
+        </form>
     </main>
 <?php
 }
