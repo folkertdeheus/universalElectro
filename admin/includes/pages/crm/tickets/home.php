@@ -24,6 +24,7 @@ if (login()) {
                 // Get named values for status, category and priority
                 $status = $q->getTicketStatus($ticketValue['status']);
                 $category = $q->getTicketCategory($ticketValue['category']);
+                $customer = $q->getCustomer($ticketValue['customer']);
 
                 // Get last message from ticket
                 $lastMessage = $q->getLastMessageFromTicket($ticketValue['id']);
@@ -48,6 +49,9 @@ if (login()) {
                 <div class="ticket<?php if ($ticketValue['priority'] == 4) { echo ' critical'; } ?>">
                     <a href="index.php?page=1&action=2&sub=1&id=<?= $ticketValue['id']; ?>">
                         <div class="subject">
+                            <div class="customer">
+                                <?= $customer['lastname'].', '.$customer['firstname'].' '.$customer['insertion']; ?>
+                            </div> <!-- customer -->
                             <?= $ticketValue['subject']; ?>
                         </div> <!-- subject -->
 

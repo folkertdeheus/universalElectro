@@ -62,7 +62,7 @@ if (login()) {
 
                             <div class="ticketsummary_details">
                                 <div class="ticketstatus" style="background: linear-gradient(45deg, <?= $status['color']; ?>, rgba(255, 255, 255, 0) 80%">
-                                    <?= $status['name']; ?>
+                                    <?= $status['en_web_name']; ?>
                                 </div> <!-- ticketstatus -->
 
                                 <div class="ticketdetail">
@@ -141,7 +141,7 @@ if (login()) {
 
                             <div class="ticketsummary_details">
                                 <div class="ticketstatus" style="background: linear-gradient(45deg, <?= $status['color']; ?>, rgba(255, 255, 255, 0) 80%">
-                                    <?= $status['name']; ?>
+                                    <?= $status['nl_web_name']; ?>
                                 </div> <!-- ticketstatus -->
 
                                 <div class="ticketdetail">

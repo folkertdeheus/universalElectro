@@ -974,6 +974,30 @@ class Queries extends Db
     }
 
     /**
+     * Edit ticket status
+     * 
+     * @param int $status
+     * @param int $id
+     * @return int
+     */
+    public function setTicketStatus($status, $id) : int
+    {
+        return $this->none('UPDATE `tickets` SET `status` = ? WHERE `id` = ?', array($status, $id));
+    }
+
+    /**
+     * Close ticket
+     * 
+     * @param int $id
+     * @param int $customer
+     * @return int
+     */
+    public function closeTicket($id, $customer) : int
+    {
+        return $this->none('UPDATE `tickets` SET `status` = 2 WHERE `id` = ? AND `customer` = ?', array($id, $customer));
+    }
+
+    /**
      * ===================================================
      * CONTACT
      * ===================================================

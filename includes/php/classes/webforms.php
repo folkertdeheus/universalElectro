@@ -474,7 +474,19 @@ class Webforms extends Queries
         if ($this->addTicketMessage($id, $_SESSION['webuser'], $message, $filepath) == 1) {
 
             // Succes
-            $this->insertLog('Tickets message', 'Add', 'Added ticket message to ticket '.$id.'');
+            $this->insertLog('Tickets message', 'Add', 'Added ticket message to ticket '.$id.'. Status not updated yet');
+
+            // Update status
+            if ($this->setTicketStatus(7, $id) == 1) {
+
+                // Succes
+                $this->insertLog('Tickets', 'Edit', 'Changed status of ticket '.$id.' to 7');
+            
+            } else {
+
+                // Failed
+                $this->insertLog('Tickets', 'Edit', 'Status of ticket '.$id.' not changed, possible wrong display of status');
+            }
 
         } else {
 

@@ -330,3 +330,7 @@ input[type="color"] {
         box-shadow: inset 0px 0px 0px 0px rgba(255, 0, 0, 1);
     }
 }
+
+.customer {
+    display: inline-block;
+}

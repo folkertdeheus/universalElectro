@@ -263,6 +263,10 @@ footer {
 }
 
 .subject {
+    /* Display flex */
+    display: flex;
+    flex-direction: row;
+
     /* Positioning */
     padding: 10px;
 
@@ -273,6 +277,17 @@ footer {
     font-family: Oxygen;
     font-weight: bold;
     color: var(--main);
+}
+
+.customer {
+    /* Font */
+    font-size: 15px;
+    font-family: Roboto;
+    font-weight: normal;
+    color: var(--accent);
+
+    /* Positioning */
+    padding-right: 20px;
 }
 
 .details {

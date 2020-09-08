@@ -7,6 +7,17 @@
 // Check if the user is logged in
 if (login()) {
 
+    // Check if ticket is getting closed
+    if (isset($_GET['closed']) && $_GET['closed'] != null) {
+
+        // Close ticket
+        $q->closeTicket($_GET['closed'], $_SESSION['webuser']);
+
+        // Insert log
+        $q->insertLog('Tickets', 'Edit', 'Ticket id '.$_GET['closed'].' closed by user');
+
+    }
+
     if (isset($_GET['sub']) && $_GET['sub'] != null) {
 
         switch($_GET['sub']) {

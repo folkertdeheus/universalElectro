@@ -46,11 +46,12 @@ if (login()) {
             <div class="toolbar">
                 <a href="index.php?page=3&action=1"><?= $language['en_tickets_goback']; ?></a>
                 <a href="index.php?page=3&action=1&sub=1"><?= $language['en_tickets_newticket']; ?></a>
-                <a href=""><?= $language['en_tickets_close']; ?></a>
 <?php
-                // Only display button when ticket is not closed or solved
+                // Only display buttons when ticket is not closed or solved
                 if ($ticket['status'] != 2 && $ticket['status'] != 5) {
 ?>
+                    <a href="index.php?page=3&action=1&closed=<?= $_GET['id']; ?>"><?= $language['en_tickets_close']; ?></a>
+
                     <?= $language['en_tickets_attachment']; ?>:
                     <input type="file" name="file" id="file" onchange="ticketReply('file')" />
                     <label for="file" id="filelabel"><?= $language['en_tickets_upload']; ?></label>
@@ -148,11 +149,12 @@ if (login()) {
             <div class="toolbar">
                 <a href="index.php?page=3&action=1"><?= $language['nl_tickets_goback']; ?></a>
                 <a href="index.php?page=3&action=1&sub=1"><?= $language['nl_tickets_newticket']; ?></a>
-                <a href=""><?= $language['nl_tickets_close']; ?></a>
 <?php
-                // Only display button when ticket is not closed or solved
+                // Only display buttons when ticket is not closed or solved
                 if ($ticket['status'] != 2 && $ticket['status'] != 5) {
 ?>
+                    <a href="index.php?page=3&action=1&closed=<?= $_GET['id']; ?>"><?= $language['nl_tickets_close']; ?></a>
+
                     <?= $language['nl_tickets_attachment']; ?>:
                     <input type="file" name="file" id="file" onchange="ticketReply('file')" />
                     <label for="file" id="filelabel"><?= $language['nl_tickets_upload']; ?></label>
