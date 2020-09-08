@@ -21,12 +21,12 @@ if (login()) {
             
             case '2':
                 // Statusses
-                require_once('includes/pages/settings/tickets/statusses/default.php');
+               // require_once('includes/pages/settings/tickets/statusses/default.php');
                 break;
 
             case '3':
                 // Settings
-                require_once('includes/pages/settings/tickets/settings/default.php');
+               // require_once('includes/pages/settings/tickets/settings/default.php');
                 break;
             
             default:
