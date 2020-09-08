@@ -80,7 +80,7 @@ if (isset($product['images']) && $product['images'] != null && is_array($images)
             if ($settings['webshop_checkout_button']) {
 ?>
                 <div class="checkout_button">
-                    Add to cart
+                    <a href="index.php?page=1&action=1&id=<?= $product['id']; ?>">Add to cart</a>
                 </div> <!-- checkout_button -->
 <?php
             }
@@ -97,7 +97,7 @@ if (isset($product['images']) && $product['images'] != null && is_array($images)
     require_once('includes/pages/webshop/nl_navbar.php');
 ?>
 
-    <div class="product">
+<div class="product">
         <div class="product_image">
             <img src="<?= $image; ?>" alt="<?= $product['name']; ?>" />
         </div> <!-- product_image -->
@@ -126,7 +126,21 @@ if (isset($product['images']) && $product['images'] != null && is_array($images)
                 </tr>
             </table>
 
-            <span class="price">Price: &euro; <?= $product['price']; ?></span>
+<?php
+            if ($settings['webshop_show_prices_on_guest']) {
+?>
+                <span class="price">Price: &euro; <?= $product['price']; ?></span>
+<?php
+            }
+
+            if ($settings['webshop_checkout_button']) {
+?>
+                <div class="checkout_button">
+                    <a href="index.php?page=1&action=1&id=<?= $product['id']; ?>">Add to cart</a>
+                </div> <!-- checkout_button -->
+<?php
+            }
+?>
         </div> <!-- product_details -->
     </div> <!-- product -->
 </main>

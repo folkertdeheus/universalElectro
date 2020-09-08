@@ -242,7 +242,7 @@ footer {
 }
 
 .product_image img {
-    max-width: 480px;
+    max-width: 380px;
     object-fit: cover;
 }
 

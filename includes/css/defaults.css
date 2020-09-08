@@ -485,3 +485,35 @@ article {
     width: 100%;
     margin-bottom: 10px;
 }
+
+.checkout_button a:link, .checkout_button a:visited {
+    /* Display */
+    display: inline-block;
+
+    /* Positioning */
+    padding: 10px;
+    margin-top: 20px;
+
+    /* Background */
+    background-color: var(--blue);
+    border: 1px solid var(--blue);
+    border-radius: 3px;
+
+    /* Font */
+    color: var(--white);
+    text-decoration: none;
+
+    /* Animation */
+    transition: 0.5s;
+}
+
+.checkout_button a:hover {
+    /* Background */
+    background: none;
+
+    /* Font */
+    color: var(--blue);
+
+    /* Animation */
+    transition: 0.5s;
+}

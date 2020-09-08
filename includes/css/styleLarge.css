@@ -246,6 +246,9 @@ footer {
     /* Display grid */
     grid-column: 2 / 3;
     grid-row: 1 / 2;
+
+    /* Positioning */
+    padding-left: 20px;
 }
 
 .product_details .title {
