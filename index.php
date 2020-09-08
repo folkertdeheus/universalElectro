@@ -63,7 +63,6 @@ $language = $q->allLanguages();
 
     // Content
     require_once('includes/pages/content.php');
-
 ?>
 
 </body>

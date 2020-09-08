@@ -38,19 +38,23 @@ if (login()) {
                 }
 ?>
             </select>
-            <input type="text" name="articlenumber" id="articlenumber" placeholder="Manufacturer articlenumber" required onchange="addproduct('articlenumber')" />
-            <input type="text" name="own_articlenumber" id="own_articlenumber" placeholder="Own articlenumber" required onchange="addproduct('own_articlenumber')" />
+            <input type="text" name="articlenumber" id="articlenumber" placeholder="Manufacturer articlenumber" onchange="addproduct('articlenumber')" />
+            <input type="text" name="own_articlenumber" id="own_articlenumber" placeholder="Own articlenumber" onchange="addproduct('own_articlenumber')" />
             <textarea name="nl_description" id="nl_description" placeholder="Dutch description" required onchange="addproduct('nl_description')"></textarea>
             <textarea name="en_description" id="en_description" placeholder="English description" required onchange="addproduct('en_description')"></textarea>
-            <textarea name="properties" id="properties" placeholder="Properties"></textarea>
-            <textarea name="specifications" id="specifications" placeholder="Specifications"></textarea>
             <input type="number" name="price" id="price" placeholder="Price" min="0" step="0.01" />
-            <input type="text" name="tags" id="tags" placeholder="Searchtags" />
-            <label for="highlight">Highlight</label>
-            <select name="highlight" id="highlight">
-                <option value="0">No</option>
-                <option value="1">Yes</option>
+            <label for="categories">Condition</label>
+            <select name="condition">
+<?php
+                // Get conditions
+                $conditions = $q->allConditions();
+
+                foreach($conditions as $conKey => $conValue) {
+                    echo '<option value="'.$conValue['id'].'">'.$conValue['en_name'].'</option>';
+                }
+?>
             </select>
+            <input type="text" name="tags" id="tags" placeholder="Searchtags" />
             <label for="image">Images (you can select more than 1)</label>
             <input type="file" name="image[]" id="image" multiple />
             <input type="submit" value="Submit" />

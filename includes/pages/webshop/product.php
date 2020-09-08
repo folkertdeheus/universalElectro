@@ -14,10 +14,17 @@ $acceptedFileTypes = $acceptedImageTypes;
 $images = json_decode($product['images']);
 
 // Check if there is a proper image set, otherwise use default image
-if (isset($product['images']) && $product['images'] != null && in_array(pathinfo($images[0], PATHINFO_EXTENSION), $acceptedFileTypes)) {
+if (isset($product['images']) && $product['images'] != null && is_array($images) && count($images) > 0) {
+    if (in_array(pathinfo($images[0], PATHINFO_EXTENSION), $acceptedFileTypes)) {
 
-    // Remove navigation
-    $image = str_replace('../', '', $images[0]);
+        // Remove navigation
+        $image = str_replace('../', '', $images[0]);
+
+    } else {
+
+        // Default image
+        $image = 'includes/images/default.png';
+    }
 
 } else {
 
@@ -57,6 +64,10 @@ if (isset($product['images']) && $product['images'] != null && in_array(pathinfo
                     <td>Category:</td>
                     <td><?= $q->getCategoryById($product['category'])['en_name']; ?></td>
                 </tr>
+                <tr>
+                    <td>Condition:</td>
+                    <td><?= $q->getConditionById($product['conditions'])['en_name']; ?></td>
+                </tr>
             </table>
 
 <?php
@@ -75,20 +86,6 @@ if (isset($product['images']) && $product['images'] != null && in_array(pathinfo
             }
 ?>
         </div> <!-- product_details -->
-
-        <div class="product_properties">
-            <div class="title">
-                Properties
-            </div> <!-- product_properties -->
-            <?= nl2br($product['properties']); ?>
-        </div> <!-- product_properties -->
-    
-        <div class="product_specifications">
-            <div class="title">
-                Specifications
-            </div> <!-- product_specifications -->
-            <?= nl2br($product['specifications']); ?>
-        </div> <!-- product_specifications -->
     </div> <!-- product -->
 
 </main>
@@ -123,23 +120,13 @@ if (isset($product['images']) && $product['images'] != null && in_array(pathinfo
                     <td>Category:</td>
                     <td><?= $q->getCategoryById($product['category'])['nl_name']; ?></td>
                 </tr>
+                <tr>
+                    <td>Condition:</td>
+                    <td><?= $q->getConditionById($product['conditions'])['nl_name']; ?></td>
+                </tr>
             </table>
 
             <span class="price">Price: &euro; <?= $product['price']; ?></span>
         </div> <!-- product_details -->
-
-        <div class="product_properties">
-            <div class="title">
-                Eigenschappen
-            </div> <!-- product_properties -->
-            <?= nl2br($product['properties']); ?>
-        </div> <!-- product_properties -->
-    
-        <div class="product_specifications">
-            <div class="title">
-                Specificaties
-            </div> <!-- product_specifications -->
-            <?= nl2br($product['specifications']); ?>
-        </div> <!-- product_specifications -->
     </div> <!-- product -->
 </main>

@@ -207,6 +207,16 @@ class Queries extends Db
     }
 
     /**
+     * Get all brands with logo
+     * 
+     * @return array
+     */
+    public function allBrandsWithLogo() : array
+    {
+        return $this->all('SELECT * FROM `brands` WHERE `image` IS NOT NULL ORDER BY `name` ASC');
+    }
+
+    /**
      * Get brand by id
      * 
      * @param int $id
@@ -297,16 +307,14 @@ class Queries extends Db
      * @param string $description_english
      * @param string $images
      * @param string $tags
-     * @param string $properties
-     * @param string $specifications
      * @param float $price
-     * @param boolean $highlight
      * @param string $ownArticlenumber
+     * @param int $condition
      * @return int
      */
-    public function addProducts($brand, $category, $name, $articlenumber, $description_dutch, $description_english, $images, $tags, $properties, $specifications, $price, $highlight, $ownArticlenumber) : int
+    public function addProducts($brand, $category, $name, $articlenumber, $description_dutch, $description_english, $images, $tags, $price, $ownArticlenumber, $condition) : int
     {
-        return $this->none('INSERT INTO `products` (`brand`, `category`, `name`, `articlenumber`, `description_dutch`, `description_english`, `images`, `tags`, `properties`, `specifications`, `price`, `highlight`, `own_articlenumber`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', array($brand, $category, $name, $articlenumber, $description_dutch, $description_english, $images, $tags, $properties, $specifications, $price, $highlight, $ownArticlenumber));
+        return $this->none('INSERT INTO `products` (`brand`, `category`, `name`, `articlenumber`, `description_dutch`, `description_english`, `images`, `tags`, `price`, `own_articlenumber`, `conditions`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', array($brand, $category, $name, $articlenumber, $description_dutch, $description_english, $images, $tags, $price, $ownArticlenumber, $condition));
     }
 
     /**
@@ -375,17 +383,15 @@ class Queries extends Db
      * @param string $description_english
      * @param string $images
      * @param string $tags
-     * @param string $properties
-     * @param string $specifications
      * @param float $price
-     * @param boolean $highlight
      * @param string $ownArticlenumber
+     * @param int $condition
      * @param int $id
      * @return int
      */
-    public function editProducts($brand, $category, $name, $articlenumber, $description_dutch, $description_english, $image, $tags, $properties, $specifications, $price, $highlight, $ownArticlenumber, $id) : int
+    public function editProducts($brand, $category, $name, $articlenumber, $description_dutch, $description_english, $image, $tags, $price, $ownArticlenumber, $condition, $id) : int
     {
-        return $this->none('UPDATE `products` SET `brand` = ?, `category` = ?, `name` = ?, `articlenumber` = ?, `description_dutch` = ?, `description_english` = ?, `images` = ?, `tags` = ?, `properties` = ?, `specifications` = ?, `price` = ?, `highlight` = ?, `own_articlenumber` = ? WHERE `id` = ?', array($brand, $category, $name, $articlenumber, $description_dutch, $description_english, $image, $tags, $properties, $specifications, $price, $highlight, $ownArticlenumber, $id));
+        return $this->none('UPDATE `products` SET `brand` = ?, `category` = ?, `name` = ?, `articlenumber` = ?, `description_dutch` = ?, `description_english` = ?, `images` = ?, `tags` = ?, `price` = ?, `own_articlenumber` = ?, `conditions` = ? WHERE `id` = ?', array($brand, $category, $name, $articlenumber, $description_dutch, $description_english, $image, $tags, $price, $ownArticlenumber, $condition, $id));
     }
 
     /**
@@ -1354,5 +1360,30 @@ class Queries extends Db
     public function getLastMessageFromTicket($ticket) : array
     {
         return $this->row('SELECT * FROM `tickets_messages` WHERE `ticket` = ? ORDER BY `id` DESC LIMIT 1', array($ticket));
+    }
+
+    /**
+     * ===================================================
+     * PRODUCTS CONDITIONS
+     * ===================================================
+     */
+
+    /**
+     * Get all conditions
+     */
+    public function allConditions() : array
+    {
+        return $this->all('SELECT * FROM `products_condition`');
+    }
+
+    /**
+     * Get condition by id
+     * 
+     * @param int $id
+     * @return array
+     */
+    public function getConditionById($id) : array
+    {
+        return $this->row('SELECT * FROM `products_condition` WHERE `id` = ?', array($id));
     }
 }

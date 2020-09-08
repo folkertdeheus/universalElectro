@@ -40,19 +40,32 @@ if (login()) {
                 }
 ?>
             </select>
-            <input type="text" name="articlenumber" id="articlenumber" placeholder="Manufacturer articlenumber" value="<?= $product['articlenumber']; ?>" required onchange="editproduct('articlenumber')" />
-            <input type="text" name="own_articlenumber" id="own_articlenumber" placeholder="Own articlenumber" value="<?= $product['own_articlenumber']; ?>" required onchange="editproduct('own_articlenumber')" />
+            <input type="text" name="articlenumber" id="articlenumber" placeholder="Manufacturer articlenumber" value="<?= $product['articlenumber']; ?>" onchange="editproduct('articlenumber')" />
+            <input type="text" name="own_articlenumber" id="own_articlenumber" placeholder="Own articlenumber" value="<?= $product['own_articlenumber']; ?>" onchange="editproduct('own_articlenumber')" />
             <textarea name="nl_description" id="nl_description" placeholder="Dutch description" required onchange="editproduct('nl_description')"><?= $product['description_dutch']; ?></textarea>
             <textarea name="en_description" id="en_description" placeholder="English description" required onchange="editproduct('en_description')"><?= $product['description_english']; ?></textarea>
-            <textarea name="properties" id="properties" placeholder="Properties" ><?= $product['properties']; ?></textarea>
-            <textarea name="specifications" id="specifications" placeholder="Specifications" ><?= $product['specifications']; ?></textarea>
             <input type="number" name="price" id="price" placeholder="Price" min="0" step="0.01" value="<?= $product['price']; ?>" />
-            <input type="text" name="tags" id="tags" placeholder="Searchtags" value="<?= $product['tags']; ?>" />
-            <label for="highlight">Highlight</label>
-            <select name="highlight" id="highlight">
-                <option value="0" <?php if ($product['highlight'] == 0) { echo ' selected '; } ?>>No</option>
-                <option value="1" <?php if ($product['highlight'] == 1) { echo ' selected '; } ?>>Yes</option>
+            <select name="condition">
+<?php
+                // Get conditions
+                $conditions = $q->allConditions();
+
+                // Loop through conditions
+                foreach($conditions as $conKey => $conValue) {
+
+                    // Check which item needs to be selected
+                    $selected = null;
+
+                    if ($conValue['id'] == $product['conditions']) { 
+                        $selected = ' selected ';
+                    }
+
+                    // Option
+                    echo '<option value="'.$conValue['id'].'" '.$selected.' >'.$conValue['en_name'].'</option>';
+                }
+?>
             </select>
+            <input type="text" name="tags" id="tags" placeholder="Searchtags" value="<?= $product['tags']; ?>" />
             <label for="image">Images (you can select more than 1)</label>
             <input type="file" name="image[]" id="image" multiple />
             <input type="submit" value="Submit" />

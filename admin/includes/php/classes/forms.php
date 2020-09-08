@@ -506,7 +506,7 @@ class Forms extends Queries
     public function addProduct() : void
     {
         // Set required $_POST fields
-        $this->setReq('name', 'brands', 'categories', 'articlenumber', 'own_articlenumber', 'nl_description', 'en_description');
+        $this->setReq('name', 'brands', 'categories', 'nl_description', 'en_description');
 
         // Check if all required items are posted
         // Fail if not
@@ -523,12 +523,10 @@ class Forms extends Queries
         $articleNumber = htmlentities($_POST['articlenumber']);
         $nlDescription = htmlentities($_POST['nl_description']);
         $enDescription = htmlentities($_POST['en_description']);
-        $properties = htmlentities($_POST['properties']);
-        $specifications = htmlentities($_POST['specifications']);
         $price = htmlentities($_POST['price']);
         $tags = htmlentities($_POST['tags']);
-        $highlight = $_POST['highlight']; // Will be checked to be 1 or 0
         $ownArticlenumber = htmlentities($_POST['own_articlenumber']);
+        $condition = htmlentities($_POST['condition']);
 
         // Check if article number is unique
         if ($this->countProductsByArticlenumber($articleNumber) != 0) {
@@ -536,11 +534,6 @@ class Forms extends Queries
             // Article number is not unique, fail
             $this->insertLog('Products', 'Add', 'Adding '.$name.' failed, articlenumber '.$articleNumber.' is not unique. By '.user());
             return;
-        }
-
-        // Check value of highlight
-        if ($highlight != 1) {
-            $highlight = 0;
         }
 
         // Upload image(s)
@@ -614,7 +607,7 @@ class Forms extends Queries
         
         // Insert product
         // If 1 row was affected, the query was succesful
-        if ($this->addProducts($brand, $category, $name, $articleNumber, $nlDescription, $enDescription, $filepaths, $tags, $properties, $specifications, $price, $highlight, $ownArticlenumber)) {
+        if ($this->addProducts($brand, $category, $name, $articleNumber, $nlDescription, $enDescription, $filepaths, $tags, $price, $ownArticlenumber, $condition)) {
 
             // Succes
             $this->insertLog('Products', 'Add', 'Added product '.$name.' with ID '.$this->getProductByArticleNumber($articleNumber)['id']. '. By '.user());
@@ -632,7 +625,7 @@ class Forms extends Queries
     public function editProduct() : void
     {
         // Set required $_POST fields
-        $this->setReq('name', 'brands', 'categories', 'articlenumber', 'own_articlenumber', 'nl_description', 'en_description', 'id');
+        $this->setReq('name', 'brands', 'categories', 'nl_description', 'en_description', 'id');
 
         // Check if all required items are posted
         // Fail if not
@@ -649,13 +642,11 @@ class Forms extends Queries
         $articleNumber = htmlentities($_POST['articlenumber']);
         $nlDescription = htmlentities($_POST['nl_description']);
         $enDescription = htmlentities($_POST['en_description']);
-        $properties = htmlentities($_POST['properties']);
-        $specifications = htmlentities($_POST['specifications']);
         $price = htmlentities($_POST['price']);
         $tags = htmlentities($_POST['tags']);
-        $highlight = $_POST['highlight']; // Will be checked to be 1 or 0
         $ownArticlenumber = htmlentities($_POST['own_articlenumber']);
         $id = htmlentities($_POST['id']);
+        $condition = htmlentities($_POST['condition']);
 
         // Check if article number is unique
         if ($this->countProductsByArticlenumberNotId($articleNumber, $id) != 0) {
@@ -663,11 +654,6 @@ class Forms extends Queries
             // Article number is not unique, fail
             $this->insertLog('Products', 'Edit', 'Editting '.$name.' failed, articlenumber '.$articleNumber.' is not unique. By '.user());
             return;
-        }
-
-        // Check value of highlight
-        if ($highlight != 1) {
-            $highlight = 0;
         }
 
         // Upload image(s)
@@ -736,12 +722,24 @@ class Forms extends Queries
             }
         }
 
-        // Make json object from files path array
-        $filepaths = json_encode($filepaths);
+        // Check if file(s) uploaded, if not, replace with existing value
+        if (is_array($filepaths) && count($filepaths) > 0) {
+
+            // Make json object from files path array
+            $filepaths = json_encode($filepaths);
+        
+        } else {
+
+            // Get product info
+            $product = $this->getProductById($id);
+
+            $filepaths = $product['images'];
+        }
+
         
         // Insert product
         // If 1 row was affected, the query was succesful
-        if ($this->editProducts($brand, $category, $name, $articleNumber, $nlDescription, $enDescription, $filepaths, $tags, $properties, $specifications, $price, $highlight, $ownArticlenumber, $id) == 1) {
+        if ($this->editProducts($brand, $category, $name, $articleNumber, $nlDescription, $enDescription, $filepaths, $tags, $price, $ownArticlenumber, $condition, $id) == 1) {
 
             // Succes
             $this->insertLog('Products', 'Edit', 'Editted product '.$name.' with ID '.$id. '. By '.user());

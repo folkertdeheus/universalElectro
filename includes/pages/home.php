@@ -23,6 +23,16 @@
         Prices and parts availability are available on request. 
         We stock thousands of obsolete parts from Schneider Electric (Telemecanique / Merlin Gerin), ABB, Omron, Eaton (Moeller) and other manufacturers
     </article>
+
+    <article>
+        <div class="title">
+            Our brands
+        </div>
+<?php
+        // Brand ribbon
+        include('includes/pages/brands.php');
+?>
+    </article>
 </main>
 
 <main id="mainDutch">
@@ -35,11 +45,21 @@
 
     <article>
         <div class="title">
-            About us
+            Over ons
         </div> <!-- title -->
         We specialiseren ons in het leveren van nieuwe and verouderde onderdelen die niet meer verkocht of ondersteund worden door de leveranciers.
         We leveren nieuwe en gereviseerde onderdelen, volledig geteste en functionerende Schneider Electric onderdelen en onderdelen van andere bekende fabrikanten.
         Prijzen en beschikbaarheid delen we op verzoek.
         We hebben duizenden verouderde onderdelen van Schneider Electric (Telemacanique / Merlin Gerin), ABB, Omron, Eaton (Moeller) en andere fabrikanten op voorraad. van onze klanten welkom om onze service te blijven verbeteren.
+    </article>
+
+    <article>
+        <div class="title">
+            Onze merken
+        </div>
+<?php
+        // Brand ribbon
+        include('includes/pages/brands.php');
+?>
     </article>
 </main>

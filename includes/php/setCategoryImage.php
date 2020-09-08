@@ -19,18 +19,26 @@ function setCategoryImage($images, $name) : string
         // Make array of the json database object
         $image = json_decode($images);
 
-        // Set accepted image types
-        $acceptedFileTypes = $GLOBALS['acceptedImageTypes'];
+        if (is_array($image) && count($image) > 0) {
 
-        // Check if file in database has the correct file type
-        if (in_array(pathinfo($image[0], PATHINFO_EXTENSION), $acceptedFileTypes)) {
+            // Set accepted image types
+            $acceptedFileTypes = $GLOBALS['acceptedImageTypes'];
 
-            // Strip path dots from file path
-            $imagePath = str_replace('../','' ,$image[0]);
+            // Check if file in database has the correct file type
+            if (in_array(pathinfo($image[0], PATHINFO_EXTENSION), $acceptedFileTypes)) {
 
-            // Return image object
-            return '<img src="'.$imagePath.'" alt="<?= $name; ?>" />';
+                // Strip path dots from file path
+                $imagePath = str_replace('../','' ,$image[0]);
 
+                // Return image object
+                return '<img src="'.$imagePath.'" alt="<?= $name; ?>" />';
+
+            } else {
+
+                // Return image object with default image (image not the right type)
+                return '<img src="includes/images/default.png" alt="'.$name.'" />';
+
+            }
         } else {
 
             // Return image object with default image (image not the right type)

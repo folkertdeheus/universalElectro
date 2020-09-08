@@ -130,6 +130,7 @@ header {
 main {
     /* Position */
     min-height: 300px;
+    max-width: calc(100vw - 40px);
 }
 
 footer {
@@ -394,4 +395,35 @@ footer {
 .ticketsummary_details {
     /* Display Flex */
     display: none;
+}
+
+.brandribbon {
+    /* Background */
+    background-color: var(--white);
+    border-radius: 3px;
+
+    /* Display flex */
+    display: flex;
+    flex-direction: row;
+
+    /* Positioning */
+    max-width: 100vw;
+}
+
+.brandribbon a {
+    /* Display flex */
+    flex-basis: 200px;
+    flex-grow: 1;
+    flex-shrink: 1;
+
+    /* Display */
+    display: block;
+
+    /* Positioning */
+    max-height: 100px;
+}
+
+.brandribbon a img {
+    /* Positioning */
+    max-width: 100%;
 }

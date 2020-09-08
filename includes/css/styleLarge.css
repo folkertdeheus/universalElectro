@@ -497,3 +497,34 @@ footer {
     font-family: 'Oxygen';
     font-weight: bold;
 }
+
+.brandribbon {
+    /* Background */
+    background-color: var(--white);
+    border-radius: 3px;
+
+    /* Display flex */
+    display: flex;
+    flex-direction: row;
+
+    /* Positioning */
+    max-width: 1160px;
+}
+
+.brandribbon a {
+    /* Display flex */
+    flex-basis: 200px;
+    flex-grow: 1;
+    flex-shrink: 1;
+
+    /* Display */
+    display: block;
+
+    /* Positioning */
+    max-height: 100px;
+}
+
+.brandribbon a img {
+    /* Positioning */
+    max-width: 100%;
+}

@@ -22,10 +22,10 @@ if (login()) {
 
             <div class="table">
 <?php
-                // Count brands in table
+                // Count products in table
                 if($q->countProducts() > 0) {
 
-                    // Get all brands
+                    // Get all products
                     $products = $q->allProducts();
 ?>
                     <table>
@@ -41,14 +41,19 @@ if (login()) {
                         </tr>
 <?php
                         foreach($products as $productsKey => $productsValue) {
+
+                            // Get brand
+                            $brand = $q->getBrandById($productsValue['brand']);
+
+                            // Get category
+                            $category = $q->getCategoryById($productsValue['category']);
 ?>
                             <tr>
                                 <td><?= $productsValue['name']; ?></td>
-                                <td><?= $productsValue['brand']; ?></td>
-                                <td><?= $productsValue['category']; ?></td>
+                                <td><?= $brand['name']; ?></td>
+                                <td><?= $category['en_name']; ?></td>
                                 <td><?= $productsValue['own_articlenumber']; ?></td>
                                 <td><?= $productsValue['price']; ?></td>
-                                <td class="icon"><a href="index.php?page=2&action=1&sub=4&id=<?= $productsValue['id']; ?>"><img src="includes/images/addoptions.png" alt="options" /></a></td>
                                 <td class="icon"><a href="index.php?page=2&action=1&sub=2&id=<?= $productsValue['id']; ?>"><img src="includes/images/edit.png" alt="edit" /></a></td>
                                 <td class="icon"><a href="index.php?page=2&action=1&sub=3&id=<?= $productsValue['id']; ?>"><img src="includes/images/delete.png" alt="delete" /></a></td>
                             </tr>
