@@ -94,6 +94,7 @@ if (login()) {
 ?>
                         <textarea name="message" placeholder="<?= $language['en_tickets_message']; ?>"></textarea>
                         <input type="hidden" name="form" value="ticketReply" />
+                        <input type="hidden" name="id" value="<?= $_GET['id']; ?>" />
                         <input type="submit" value="<?= $language['en_tickets_submit']; ?>" />
 <?php
                     }
@@ -195,6 +196,7 @@ if (login()) {
 ?>
                         <textarea name="message" placeholder="<?= $language['nl_tickets_message']; ?>"></textarea>
                         <input type="hidden" name="form" value="ticketReply" />
+                        <input type="hidden" name="id" value="<?= $_GET['id']; ?>" />
                         <input type="submit" value="<?= $language['nl_tickets_submit']; ?>" />
 <?php
                     }

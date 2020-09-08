@@ -1,8 +1,7 @@
 <?php
 
 /**
- * This page contains the content inclusion of the crm part
- * The content is controlled by $_GET['action'] and it's child $_GET['sub']
+ * This page contains the overview of the tickets
  */
 
 // Check if user is logged in when accessing this file
@@ -25,6 +24,9 @@ if (login()) {
                 // Get named values for status, category and priority
                 $status = $q->getTicketStatus($ticketValue['status']);
                 $category = $q->getTicketCategory($ticketValue['category']);
+
+                // Get last message from ticket
+                $lastMessage = $q->getLastMessageFromTicket($ticketValue['id']);
 
                 switch($ticketValue['priority']) {
                     case '1':
@@ -66,7 +68,7 @@ if (login()) {
 
                             <div class="detail">
                                 <span>Posted</span>
-                                <?= $ticketValue['posted']; ?>
+                                <?= $lastMessage['posted']; ?>
                             </div> <!-- detail -->
 
                             <div class="detail">

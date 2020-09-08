@@ -16,7 +16,8 @@ class Webforms extends Queries
         'editCustomer',
         'changepassword',
         'contact',
-        'addTicket'
+        'addTicket',
+        'ticketReply'
     ];
     
     /**
@@ -387,6 +388,98 @@ class Webforms extends Queries
 
             // Failed
             $this->insertLog('Tickets', 'Add', 'Adding ticket through web failed, not sending message');
+        }
+    }
+
+    /**
+     * Add ticket reply
+     */
+    public function ticketReply() : void
+    {
+        // Set required $_POST fields
+        $this->setReq('message');
+
+        // Check if all required items are posted
+        // Fail if not
+        if (!$this->checkReq()) {
+
+            $this->insertLog('Tickets message', 'Add', 'Adding ticket message through web failed, not al required fields are set');
+            return;
+        }
+
+        // Loop through POST values and set variables
+        foreach($_POST as $key => $value) {
+            if ($key != 'form') {
+                $$key = htmlentities($value);
+            }
+        }
+
+        // Upload file
+
+        // Check if file is being uploaded
+        if (isset($_FILES['file']['name']) && $_FILES['file']['name'] != null) {
+
+            // File naming
+            $path = 'includes/ticketfiles/';
+            $file = basename($_FILES['file']['name']);
+            $filename = pathinfo($file, PATHINFO_FILENAME);
+            $extension = pathinfo($file, PATHINFO_EXTENSION);
+            
+            // Accepted files
+            $acceptedFileTypes = $GLOBALS['acceptedFileTypes'];
+        
+            // Check if file exists
+            // If exists, rename with number added
+            $base = $filename;
+            
+            // Continue numbering until unique name is found
+            for ($i = 1; file_exists($path.$filename.'.'.$extension); $i++) {
+                $filename = $base.$i;
+            }
+
+            // Check if file is accepted file type
+            if (in_array($extension, $acceptedFileTypes)) {
+
+                // Set destination path
+                $filepath = $path.$filename.'.'.$extension;
+
+                // Upload file
+                if (!move_uploaded_file($_FILES['file']['tmp_name'], $filepath)) {
+                    
+                    // File upload failed
+                    $filesError = null;
+                    foreach($_FILES as $value) {
+                        foreach ($value as $value2) {
+                            $filesError = $filesError.$value2.' ';
+                        }
+                    }
+
+                    // Insert log
+                    $this->insertLog('Tickets message', 'Add', 'Adding file to ticket failed, file upload error: '.$filesError);
+                }
+
+                // File has the wrong type, insert error in log
+            } else {
+
+                $this->insertLog('Tickets message', 'Add', 'Adding file to ticket failed, file was the wrong type');
+            }
+
+        // No image uploaded, set filepath null
+        } else {
+
+            $filepath = null;
+        }
+
+        // Insert message
+        if ($this->addTicketMessage($id, $_SESSION['webuser'], $message, $filepath) == 1) {
+
+            // Succes
+            $this->insertLog('Tickets message', 'Add', 'Added ticket message to ticket '.$id.'');
+
+        } else {
+
+            // Failed
+            $this->insertLog('Tickets message', 'Add', 'Adding ticket message to ticket '.$id.' failed');
         }
     }
 }

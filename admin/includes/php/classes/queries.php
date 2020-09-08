@@ -908,7 +908,33 @@ class Queries extends Db
      */
     public function getTickets() : array
     {
-        return $this->all('SELECT DISTINCT(`ticket`), t.id as id, `status`, `subject`, `started`, `closed`, `category`, `priority`, `customer_notification`, `posted` FROM `tickets_messages` as m JOIN `tickets` as t ON t.id = m.ticket ORDER BY m.id DESC');
+        // Get all messages, ordered descending, skip user replies
+        $messages = $this->all('SELECT * FROM `tickets_messages` WHERE `user` IS NULL ORDER BY `id` DESC');
+
+        // Set ticket id array, need for unique check
+        $ticketId = array();
+
+        // Set tickets array
+        $tickets = array();
+
+        // Loop through messages
+        foreach($messages as $messageKey => $messageValue) {
+
+            // Check if ticket id in message is not yet in array
+            if (!in_array($messageValue['ticket'], $ticketId)) {
+
+                // Insert ticket id in array
+                array_push($ticketId, $messageValue['ticket']);
+
+                // Get ticket
+                $ticket = $this->row('SELECT * FROM `tickets` WHERE `id` = ?', array($messageValue['ticket']));
+
+                // Push ticket into array
+                array_push($tickets, $ticket);
+            }
+        }
+
+        return $tickets;
     }
 
     /**
@@ -1293,5 +1319,16 @@ class Queries extends Db
     public function addTicketMessageThroughCMS($ticket, $user, $message, $file) : int
     {
         return $this->none('INSERT INTO `tickets_messages` (`ticket`, `user`, `message`, `file`) VALUES (?, ?, ?, ?)', array($ticket, $user, $message, $file));
+    }
+
+    /**
+     * Get last message from ticket
+     * 
+     * @param int $ticket
+     * @return array
+     */
+    public function getLastMessageFromTicket($ticket) : array
+    {
+        return $this->row('SELECT * FROM `tickets_messages` WHERE `ticket` = ? ORDER BY `id` DESC LIMIT 1', array($ticket));
     }
 }
