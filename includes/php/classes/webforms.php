@@ -18,7 +18,8 @@ class Webforms extends Queries
         'contact',
         'addTicket',
         'ticketReply',
-        'addtocart'
+        'addtocart',
+        'updatecart'
     ];
     
     /**
@@ -600,6 +601,57 @@ class Webforms extends Queries
 
                 // Failed
                 $this->insertLog('Quotation', 'Add', 'Quotation failed to add');
+            }
+        }
+    }
+
+    /**
+     * Update product amounts of cart
+     */
+    public function updatecart() : void
+    {
+
+        // Get shopping cart id
+        $cart = $this->getLatestQuotationFromSession($_COOKIE['unele_shop']);
+
+        // Loop through al POSTed fields
+        foreach($_POST as $key => $value) {
+            
+            // Skip 'form' post field
+            if ($key != 'form') {
+                
+                $hKey = htmlentities($key);
+                $hValue = htmlentities($value);
+
+                // Check if value is to be deleted or updated
+                if ($hValue == 0) {
+
+                    // Delete product from quotation
+                    if ($this->deleteQuotationProduct($hKey, $cart['id']) == 1) {
+
+                        // Succes
+                        $this->insertLog('Quotation products', 'Delete', 'Deleted product '.$hKey.' from quotation '.$cart['id']. ' through webshop cart update');
+                    
+                    } else {
+
+                        // Failed
+                        $this->insertLog('Quotation products', 'Delete', 'Deleting product '.$hKey.' from quotation '.$cart['id']. ' failed through webshop cart update');
+                    }
+
+                } else {
+
+                    // Update product amount in quotation
+                    if ($this->editQuotationProductAmount($hValue, $hKey, $cart['id']) == 1) {
+
+                        // Succes
+                        $this->insertLog('Quotation products', 'Edit', 'Updated product '.$hKey.' amount from quotation '.$cart['id'].' through webshop cart update');
+
+                    } else {
+
+                        // Failed
+                        $this->insertLog('Quotation products', 'Edit', 'Updating product '.$hKey.' amount from quotation '.$cart['id']. ' failed through webshop cart update');
+                    }
+                }
             }
         }
     }

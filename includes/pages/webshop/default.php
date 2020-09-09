@@ -13,6 +13,12 @@ if (isset($_GET['action']) && $_GET['action'] != null) {
             require_once('includes/pages/webshop/cart.php');
 
             break;
+
+        case '2':
+            // Request quotation
+            require_once('includes/pages/webshop/request.php');
+
+            break;
         
         default:
             // No known action set, display category overview
