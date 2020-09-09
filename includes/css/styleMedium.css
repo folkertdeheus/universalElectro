@@ -593,3 +593,108 @@ td.cart_bottom {
     /* Positioning */
     width: 30px;
 }
+
+.contact {
+    /* Display flex */
+    display: flex;
+    flex-direction: row;
+
+    /* Positioning */
+    margin-top: 20px;
+}
+
+.contact_left, .contact_right {
+    /* Display flex */
+    flex-basis: 300px;
+    flex-grow: 1;
+}
+
+.contact_left {
+    /* Positioning */
+    margin-right: 10px;
+}
+
+.contact_right {
+    /* Positioning */
+    margin-left: 10px;
+}
+
+.contact_message {
+    /* Display */
+    display: flex;
+    flex-direction: column;
+
+    /* Positioning */
+    margin-top: 20px;
+}
+
+.contact_message a:link, .contact_message a:visited {
+    /* Font */
+    text-decoration: none;
+    color: var(--white);
+    text-align: center;
+
+    /* Positioning */
+    padding: 10px;
+    margin-bottom: 10px;
+
+    /* Background */
+    background-color: var(--blue);
+    border-radius: 2px;
+
+    /* Animation */
+    transition: 0.5s;
+}
+
+.contact_message a:hover {
+    /* Background */
+    background: none;
+    outline: 1px solid var(--blue);
+
+    /* Font */
+    color: var(--blue);
+
+    /* Animation */
+    transition: 0.5s;
+}
+
+.contact_message a.sendquotation {
+    /* Display */
+    display: block;
+
+    /* Positioning */
+    padding: 20px;
+
+    /* Font */
+    color: var(--grey);
+    text-align: center;
+
+    /* Background */
+    background-color: rgba(0, 255, 0, 1);
+}
+
+.contact_message a.sendquotation:hover {
+    /* Background */
+    background: none;
+    outline: 1px solid rgba(0, 255, 0, 1);
+
+    /* Font */
+    color: rgba(0, 255, 0, 1);
+}
+
+.contact_message a.cancelquotation {
+    /* Font */
+    color: var(--grey);
+
+    /* Background */
+    background-color: rgba(255, 0, 0, 1);
+}
+
+.contact_message a.cancelquotation:hover {
+    /* Background */
+    background: none;
+    outline: 1px solid rgba(255, 0, 0, 1);
+
+    /* Font */
+    color: rgba(255, 0, 0, 1);
+}

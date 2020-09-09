@@ -112,11 +112,11 @@
                 </div> <!-- title -->
 
 <?php
-                    if ($q->countOrdersByCustomer($_SESSION['webuser']) > 0) {
+            //        if ($q->countOrdersByCustomer($_SESSION['webuser']) > 0) {
                         
-                    } else {
+            //        } else {
                         echo $language['en_account_noorders'];
-                    }
+            //        }
 ?>
             </div> <!-- accountdetails -->
 
@@ -240,11 +240,11 @@
                 </div> <!-- title -->
 
 <?php
-                    if ($q->countOrdersByCustomer($_SESSION['webuser']) > 0) {
+                    //if ($q->countOrdersByCustomer($_SESSION['webuser']) > 0) {
                         
-                    } else {
+                    //} else {
                         echo $language['nl_account_noorders'];
-                    }
+                    //}
 ?>
             </div> <!-- accountdetails -->
 

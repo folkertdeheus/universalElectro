@@ -19,6 +19,11 @@ if (isset($_GET['action']) && $_GET['action'] != null) {
             require_once('includes/pages/webshop/request.php');
 
             break;
+
+        case '3':
+            // Cancel quotation
+            
+            break;
         
         default:
             // No known action set, display category overview

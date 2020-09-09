@@ -74,8 +74,6 @@ $products = $q->getQuotationProducts($cart['id']);
                         </td>
                     </tr>
                 </table>
-
-                
             </form>
         </div> <!-- order_products --> 
     </div> <!-- order -->
@@ -124,8 +122,6 @@ $products = $q->getQuotationProducts($cart['id']);
                         </td>
                     </tr>
                 </table>
-
-                
             </form>
         </div> <!-- order_products --> 
     </div> <!-- order -->
