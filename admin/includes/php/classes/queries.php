@@ -1430,6 +1430,17 @@ class Queries extends Db
     }
 
     /**
+     * Delete quotation
+     * 
+     * @param string $session Cookie ID
+     * @return int
+     */
+    public function deleteQuotation($session) : int
+    {
+        return $this->none('DELETE FROM `quotation` WHERE `session` = ?', array($session));
+    }
+
+    /**
      * ===================================================
      * QUOTATION PRODUCTS
      * ===================================================

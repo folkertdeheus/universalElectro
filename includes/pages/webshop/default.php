@@ -22,7 +22,14 @@ if (isset($_GET['action']) && $_GET['action'] != null) {
 
         case '3':
             // Cancel quotation
-            
+            require_once('includes/pages/webshop/cancel.php');
+
+            break;
+        
+        case '4':
+            // Send quotation
+            require_once('includes/pages/webshop/send.php');
+
             break;
         
         default:
