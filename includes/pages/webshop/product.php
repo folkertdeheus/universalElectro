@@ -80,7 +80,15 @@ if (isset($product['images']) && $product['images'] != null && is_array($images)
             if ($settings['webshop_checkout_button']) {
 ?>
                 <div class="checkout_button">
-                    <a href="index.php?page=1&action=1&id=<?= $product['id']; ?>">Add to cart</a>
+                    <form method="post" action="index.php?page=1&action=1">
+                        <input type="hidden" name="id" value="<?= $product['id']; ?>" />
+                        <span>
+                            <label for="amount">Amount</label>
+                            <input type="number" name="amount" id="amount" step="1" min="1" value="1" />
+                        </span>
+                        <input type="submit" value="Add to cart" />
+                        <input type="hidden" name="form" value="addtocart" />
+                    </form>
                 </div> <!-- checkout_button -->
 <?php
             }
@@ -136,7 +144,15 @@ if (isset($product['images']) && $product['images'] != null && is_array($images)
             if ($settings['webshop_checkout_button']) {
 ?>
                 <div class="checkout_button">
-                    <a href="index.php?page=1&action=1&id=<?= $product['id']; ?>">Add to cart</a>
+                    <form method="post" action="index.php?page=1&action=1">
+                        <input type="hidden" name="id" value="<?= $product['id']; ?>" />
+                        <span>
+                            <label for="amount">Amount</label>
+                            <input type="number" name="amount" id="amount" step="1" min="1" value="1" />
+                        </span>
+                        <input type="submit" value="Add to cart" />
+                        <input type="hidden" name="form" value="addtocart" />
+                    </form>
                 </div> <!-- checkout_button -->
 <?php
             }

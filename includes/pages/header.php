@@ -24,6 +24,14 @@
 
         <a href="index.php" id="en_menu1"><?= $language['en_menu_home']; ?></a>
         <a href="index.php?page=1" id="en_menu2"><?= $language['en_menu_webshop']; ?></a>
+<?php
+        // Check if there is an open shopping cart
+        if ($openCart) {
+?>
+            <a href="index.php?page=1&action=1">Shopping Cart</a>
+<?php
+        }
+?>
         <a href="index.php?page=2" id="en_menu3"><?= $language['en_menu_login']; ?></a>
         <a href="index.php?page=3" id="en_menu4"><?= $language['en_menu_contact']; ?></a>
         <a href="index.php?page=4" id="en_menu5"><?= $language['en_menu_search']; ?></a>

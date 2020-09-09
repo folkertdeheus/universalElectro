@@ -17,7 +17,8 @@ class Webforms extends Queries
         'changepassword',
         'contact',
         'addTicket',
-        'ticketReply'
+        'ticketReply',
+        'addtocart'
     ];
     
     /**
@@ -492,6 +493,114 @@ class Webforms extends Queries
 
             // Failed
             $this->insertLog('Tickets message', 'Add', 'Adding ticket message to ticket '.$id.' failed');
+        }
+    }
+
+    /**
+     * Add product to cart
+     */
+    public function addtocart() : void
+    {
+        // Set required $_POST fields
+        $this->setReq('id', 'amount');
+
+        // Check if all required items are posted
+        // Fail if not
+        if (!$this->checkReq()) {
+
+            $this->insertLog('Quotation', 'Add', 'Adding quotation through web failed, not al required fields are set');
+            return;
+        }
+
+        // Loop through POST values and set variables
+        foreach($_POST as $key => $value) {
+            if ($key != 'form') {
+                $$key = htmlentities($value);
+            }
+        }
+
+        // Set customer id
+        $customer = null;
+        if (isset($_SESSION['webuser']) && $_SESSION['webuser'] != null) {
+            $customer = $_SESSION['webuser'];
+        }
+
+        // Count open quotations from cookie session
+        if ($this->countOpenQuotationsFromSession($_COOKIE['unele_shop']) == 1) {
+
+            // Quotation is open, add products to existing quotation
+            
+            // Get quotation
+            $quote = $this->getLatestQuotationFromSession($_COOKIE['unele_shop']);
+
+            // Check if product is already in cart
+            if ($this->countQuotationProduct($id, $quote['id']) == 1) {
+
+                // Update product amount, add new amount to the new amount
+
+                // Get existing amount
+                $productQuote = $this->getQuotationProduct($id, $quote['id']);
+
+                // Calculate new amount
+                $oldAmount = $productQuote['amount'];
+                $newAmount = $oldAmount + $amount;
+
+                // Update amount
+                if ($this->editQuotationProductAmount($newAmount, $id, $quote['id']) == 1) {
+
+                    // Succes
+                    $this->insertLog('Quotation products', 'Edit', 'Updated product '.$id.' amount from quotation '.$quote['id']);
+                
+                } else {
+
+                    $this->insertLog('Quotation products', 'Edit', 'Updating product '.$id.' amount failed in quotation '.$quote['id']);
+                }
+            
+            } else {
+
+                // New product, insert
+
+                // Add product to quotation
+                if ($this->addQuotationProduct($quote['id'], $id, $amount) == 1) {
+
+                    // Succes
+                    $this->insertLog('Quotation products', 'Add', 'Added product '.$id.' to quotation '.$quote['id']);
+
+                } else {
+
+                    // Failed
+                    $this->insertLog('Quotation products', 'Add', 'Product '.$id.' not added to quotation '.$quote['id']);
+                }
+            }
+        
+        } else {
+
+            // No open quotations, start a new one
+            if ($this->addQuotation($customer, $_SERVER['REMOTE_ADDR'], $_COOKIE['unele_shop'], 1) == 1) {
+
+                // Get quotation
+                $quote = $this->getLatestQuotationFromSession($_COOKIE['unele_shop']);
+
+                // Succes
+                $this->insertLog('Quotation', 'Add', 'Quotation added ('.$quote['id'].')');
+
+                // Add product to quotation
+                if ($this->addQuotationProduct($quote['id'], $id, $amount) == 1) {
+
+                    // Succes
+                    $this->insertLog('Quotation products', 'Add', 'Added product '.$id.' to quotation '.$quote['id']);
+
+                } else {
+
+                    // Failed
+                    $this->insertLog('Quotation products', 'Add', 'Product '.$id.' not added to quotation '.$quote['id']);
+                }
+            
+            } else {
+
+                // Failed
+                $this->insertLog('Quotation', 'Add', 'Quotation failed to add');
+            }
         }
     }
 }

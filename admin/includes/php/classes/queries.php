@@ -1386,4 +1386,124 @@ class Queries extends Db
     {
         return $this->row('SELECT * FROM `products_condition` WHERE `id` = ?', array($id));
     }
+
+    /**
+     * ===================================================
+     * QUOTATION
+     * ===================================================
+     */
+
+    /**
+     * Count open quotations by user
+     * 
+     * @param string $session Cookie ID
+     * @return int
+     */
+    public function countOpenQuotationsFromSession($session) : int
+    {
+        return $this->one('SELECT COUNT(*) FROM `quotation` WHERE `status` = 1 AND `session` = ?', array($session));
+    }
+
+    /**
+     * Add quotation
+     * 
+     * @param int $customer
+     * @param string $ip
+     * @param string $session Cookie ID
+     * @param int $status
+     * @return int
+     */
+    public function addQuotation($customer, $ip, $session, $status) : int
+    {
+        return $this->none('INSERT INTO `quotation` (`customer`, `ip`, `session`, `status`) VALUES (?, ?, ?, ?)', array($customer, $ip, $session, $status));
+    }
+
+    /**
+     * Get latest quotation
+     * 
+     * @param string $session Cookie ID
+     * @return array
+     */
+    public function getLatestQuotationFromSession($session) : array
+    {
+        return $this->row('SELECT * FROM `quotation` WHERE `session` = ? ORDER BY `id` DESC LIMIT 1', array($session));
+    }
+
+    /**
+     * ===================================================
+     * QUOTATION PRODUCTS
+     * ===================================================
+     */
+
+    /**
+     * Add quotation product
+     * 
+     * @param int $quotation
+     * @param int $product
+     * @param int $amount
+     * @return int
+     */
+    public function addQuotationProduct($quotation, $product, $amount) : int
+    {
+        return $this->none('INSERT INTO `quotation_products` (`quotation`, `product`, `amount`) VALUES (?, ?, ?)', array($quotation, $product, $amount));
+    }
+
+    /**
+     * Get products from quotation and session
+     * 
+     * @param int $quotation
+     * @return array
+     */
+    public function getQuotationProducts($quotation) : array
+    {
+        return $this->all('SELECT * FROM `quotation_products` WHERE `quotation` = ?', array($quotation));
+    }
+
+    /**
+     * Remove product form quotation and session
+     * 
+     * @param int $product
+     * @param string $quotation
+     * @return int
+     */
+    public function deleteQuotationProduct($product, $quotation) : int
+    {
+        return $this->none('DELETE FROM `quotation_products` WHERE `product` = ? AND `quotation` = ?', array($product, $quotation));
+    }
+
+    /**
+     * Count product in quotation
+     * 
+     * @param int $product
+     * @param int $quotation
+     * @return int
+     */
+    public function countQuotationProduct($product, $quotation) : int
+    {
+        return $this->one('SELECT COUNT(*) FROM `quotation_products` WHERE `product` = ? AND `quotation` = ?', array($product, $quotation));
+    }
+
+    /**
+     * Get product in quotation
+     * 
+     * @param int $product
+     * @param int $quotation
+     * @return array
+     */
+    public function getQuotationProduct($product, $quotation) : array
+    {
+        return $this->row('SELECT * FROM `quotation_products` WHERE `product` = ? AND `quotation` = ?', array($product, $quotation));
+    }
+
+    /**
+     * Edit product amount
+     * @param int $amount
+     * @param int $product
+     * @param int $quotation
+     * @return int
+     */
+    public function editQuotationProductAmount($amount, $product, $quotation) : int
+    {
+        return $this->none('UPDATE `quotation_products` SET `amount` = ? WHERE `product` = ? AND `quotation` = ?', array($amount, $product, $quotation));
+    }
 }

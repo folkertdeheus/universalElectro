@@ -40,3 +40,6 @@ $q = new \Blackbeard\Queries($db_name, $db_host, $db_username, $db_password);
 // Webforms
 require_once(PATH.'classes/webforms.php');
 $forms = new \Blackbeard\Webforms();
+
+// Webshop session creation and cookie setting/getting
+require_once(PATH.'webshopsession.php');

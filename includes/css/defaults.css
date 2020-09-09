@@ -486,7 +486,25 @@ article {
     margin-bottom: 10px;
 }
 
-.checkout_button a:link, .checkout_button a:visited {
+.checkout_button span {
+    /* Display */
+    display: block;
+}
+
+.checkout_button label {
+    /* Font */
+    font-size: 15px;
+}
+
+.checkout_button input[type="number"] {
+    /* Positioning */
+    width: 50px;
+
+    /* Font */
+    font-size: 15px;
+}
+
+.checkout_button input[type="submit"] {
     /* Display */
     display: inline-block;
 
@@ -507,7 +525,7 @@ article {
     transition: 0.5s;
 }
 
-.checkout_button a:hover {
+.checkout_button input[type="submit"]:hover {
     /* Background */
     background: none;
 
@@ -516,4 +534,7 @@ article {
 
     /* Animation */
     transition: 0.5s;
+
+    /* Cursor */
+    cursor: pointer;
 }
