@@ -429,6 +429,17 @@ class Queries extends Db
     }
 
     /**
+     * Get products by brand
+     * 
+     * @param int $brand
+     * @return array
+     */
+    public function getProductByBrand($brand) : array
+    {
+        return $this->all('SELECT * FROM `products` WHERE `brand` =  ?', array($brand));
+    }
+
+    /**
      * ===================================================
      * PRODUCT_CATEGORIES
      * ===================================================
@@ -1516,5 +1527,40 @@ class Queries extends Db
     public function editQuotationProductAmount($amount, $product, $quotation) : int
     {
         return $this->none('UPDATE `quotation_products` SET `amount` = ? WHERE `product` = ? AND `quotation` = ?', array($amount, $product, $quotation));
+    }
+
+    /**
+     * ===================================================
+     * SEARCH
+     * ===================================================
+     */
+
+    /**
+     * Search through database
+     * 
+     * @param string $search
+     * @return array
+     */
+    public function search($search) : array
+    {
+        $search = '%'.$search.'%';
+
+        $return = array();
+
+        // Search through products
+        $product = $this->all("SELECT * FROM `products` WHERE `name` LIKE ? OR `articlenumber` LIKE ? OR `own_articlenumber` LIKE ? OR `description_dutch` LIKE ? OR `description_english` LIKE ?", array($search, $search, $search, $search, $search));
+        
+        // Search through brands
+        $brands = $this->all("SELECT * FROM `brands` WHERE `name` LIKE ? OR `description` LIKE ?", array($search, $search));
+
+        // Search through categories
+        $categories = $this->all("SELECT * FROM `product_categories` WHERE `nl_name` LIKE ? OR `en_name` LIKE ? OR `nl_description` LIKE ? OR `en_description` LIKE ?", array($search, $search, $search, $search));
+        
+        // Join arrays
+        array_push($return, $product);
+        array_push($return, $brands);
+        array_push($return, $categories);
+
+        return $return;
     }
 }

@@ -32,7 +32,8 @@ class Forms extends Queries
         'addTicketStatus',
         'editTicketStatus',
         'editTicketSettings',
-        'ticketReply'
+        'ticketReply',
+        'search'
     ];
     
     /**
