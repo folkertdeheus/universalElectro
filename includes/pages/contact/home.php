@@ -1,3 +1,11 @@
+<?php
+
+/**
+ * This file contains the contact home page which directs users to contact form or tickets page
+ */
+
+?>
+
 <main id="mainEnglish">
     <div class="mainContent">
         <div class="mainLeft">

@@ -1,3 +1,11 @@
+<?php
+
+/**
+ * This file contains the login form for ticket login
+ */
+
+?>
+
 <main id="mainEnglish">
 
     <?= $language['en_tickets_login']; ?>

@@ -22,7 +22,7 @@ $account = $q->getCustomer($_SESSION['webuser']);
     if (login()) {
 ?>
         <div class="title">
-            Check quotation request
+            <?= $language['en_quote_check']; ?>
         </div>
 
         <div class="order">
@@ -30,9 +30,9 @@ $account = $q->getCustomer($_SESSION['webuser']);
 
                 <table>
                     <tr>
-                        <th class="cart_amount">Amount</th>
-                        <th class="cart_product">Product</th>
-                        <th class="cart_product">Brand</th>
+                        <th class="cart_amount"><?= $language['en_quote_amount']; ?></th>
+                        <th class="cart_product"><?= $language['en_quote_product']; ?></th>
+                        <th class="cart_product"><?= $language['en_quote_brand']; ?></th>
                     </tr>
 <?php
                     // Loop through quotation products
@@ -59,91 +59,91 @@ $account = $q->getCustomer($_SESSION['webuser']);
         <div class="contact">
             <div class="contact_left">
                 <div class="title">
-                    Basic information
+                    <?= $language['en_account_basic']; ?>
                 </div> <!-- title -->
 
                 <table>
                     <tr>
-                        <td>Name</td>
+                        <td><?= $language['en_account_name']; ?></td>
                         <td><?= $account['lastname'].', '.$account['firstname'].'  '.$account['insertion']; ?>
                     </tr>
                     <tr>
-                        <td>Email</td>
+                        <td><?= $language['en_account_email']; ?></td>
                         <td><?= $account['email']; ?></td>
                     </tr>
                     <tr>
-                        <td>Phone</td>
+                        <td><?= $language['en_account_phone']; ?></td>
                         <td><?= $account['phone']; ?></td>
                     </tr>
                     <tr>
-                        <td>Company name</td>
+                        <td><?= $language['en_account_company']; ?></td>
                         <td><?= $account['company_name']; ?></td>
                     </tr>
                     <tr>
-                        <td>Tax number</td>
+                        <td><?= $language['en_account_tax']; ?></td>
                         <td><?= $account['taxnumber']; ?></td>
                     </tr>
                 </table>
 
                 <div class="contact_message">
-                    <a href="index.php?page=2">Account</a>
-                    <a href="index.php?page=1&action=1">Edit quotation</a>
-                    <a class="cancelquotation" href="index.php?page=1&action=3">Cancel quotation</a>
-                    <a class="sendquotation" href="index.php?page=1&action=4">Send quotation request</a>
+                    <a href="index.php?page=2"><?= $language['en_quote_account']; ?></a>
+                    <a href="index.php?page=1&action=1"><?= $language['en_quote_edit']; ?></a>
+                    <a class="cancelquotation" href="index.php?page=1&action=3"><?= $language['en_quote_cancel']; ?></a>
+                    <a class="sendquotation" href="index.php?page=1&action=4"><?= $language['en_quote_send']; ?></a>
                 </div> <!-- contact_message -->
             </div> <!-- contact_left -->
 
             <div class="contact_right">
                 <div class="title">
-                    Shipping information
+                    <?= $language['en_account_shipping']; ?>
                 </div> <!-- title -->
 
                 <table>
                     <tr>
-                        <td>Adress</td>
+                        <td><?= $language['en_account_adress']; ?></td>
                         <td><?= $account['shipping_street'].' '.$account['shipping_housenumber']; ?></td>
                     </tr>
                     <tr>
-                        <td>Postal code</td>
+                        <td><?= $language['en_account_postalcode']; ?></td>
                         <td><?= $account['shipping_postalcode']; ?>
                     </tr>
                     <tr>
-                        <td>City</td>
+                        <td><?= $language['en_account_city']; ?></td>
                         <td><?= $account['shipping_city']; ?>
                     </tr>
                     <tr>
-                        <td>Provence</td>
+                        <td><?= $language['en_account_provence']; ?></td>
                         <td><?= $account['shipping_provence']; ?>
                     </tr>
                     <tr>
-                        <td>Country</td>
+                        <td><?= $language['en_account_country']; ?></td>
                         <td><?= $account['shipping_country']; ?></td>
                     </tr>
                 </table>
 
                 <div class="title">
-                    Billing information
+                    <?= $language['en_account_billing']; ?>
                 </div> <!-- title -->
 
                 <table>
                     <tr>
-                        <td>Adress</td>
+                        <td><?= $language['en_account_adress']; ?></td>
                         <td><?= $account['billing_street'].' '.$account['billing_housenumber']; ?></td>
                     </tr>
                     <tr>
-                        <td>Postal code</td>
+                        <td><?= $language['en_account_postalcode']; ?></td>
                         <td><?= $account['billing_postalcode']; ?>
                     </tr>
                     <tr>
-                        <td>City</td>
+                        <td><?= $language['en_account_city']; ?></td>
                         <td><?= $account['billing_city']; ?>
                     </tr>
                     <tr>
-                        <td>Provence</td>
+                        <td><?= $language['en_account_provence']; ?></td>
                         <td><?= $account['billing_provence']; ?>
                     </tr>
                     <tr>
-                        <td>Country</td>
+                        <td><?= $language['en_account_country']; ?></td>
                         <td><?= $account['billing_country']; ?></td>
                     </tr>
                 </table>
@@ -153,7 +153,7 @@ $account = $q->getCustomer($_SESSION['webuser']);
     } else {
 ?>
 
-        Please log in or create an account before sending the quotation request
+        <?= $language['en_quote_login']; ?>
         <div class="login">
             <form method="post" action="index.php?page=2">
                 <input type="text" name="email" placeholder="<?= $language['en_login_email']; ?>" />
@@ -179,7 +179,7 @@ $account = $q->getCustomer($_SESSION['webuser']);
     if (login()) {
 ?>
         <div class="title">
-            Check quotation request
+            <?= $language['nl_quote_check']; ?>
         </div>
 
         <div class="order">
@@ -187,9 +187,9 @@ $account = $q->getCustomer($_SESSION['webuser']);
 
                 <table>
                     <tr>
-                        <th class="cart_amount">Amount</th>
-                        <th class="cart_product">Product</th>
-                        <th class="cart_product">Brand</th>
+                        <th class="cart_amount"><?= $language['nl_quote_amount']; ?></th>
+                        <th class="cart_product"><?= $language['nl_quote_product']; ?></th>
+                        <th class="cart_product"><?= $language['nl_quote_brand']; ?></th>
                     </tr>
 <?php
                     // Loop through quotation products
@@ -216,91 +216,91 @@ $account = $q->getCustomer($_SESSION['webuser']);
         <div class="contact">
             <div class="contact_left">
                 <div class="title">
-                    Basic information
+                    <?= $language['nl_account_basic']; ?>
                 </div> <!-- title -->
 
                 <table>
                     <tr>
-                        <td>Name</td>
+                        <td><?= $language['nl_account_name']; ?></td>
                         <td><?= $account['lastname'].', '.$account['firstname'].'  '.$account['insertion']; ?>
                     </tr>
                     <tr>
-                        <td>Email</td>
+                        <td><?= $language['nl_account_email']; ?></td>
                         <td><?= $account['email']; ?></td>
                     </tr>
                     <tr>
-                        <td>Phone</td>
+                        <td><?= $language['nl_account_phone']; ?></td>
                         <td><?= $account['phone']; ?></td>
                     </tr>
                     <tr>
-                        <td>Company name</td>
+                        <td><?= $language['nl_account_company']; ?></td>
                         <td><?= $account['company_name']; ?></td>
                     </tr>
                     <tr>
-                        <td>Tax number</td>
+                        <td><?= $language['nl_account_tax']; ?></td>
                         <td><?= $account['taxnumber']; ?></td>
                     </tr>
                 </table>
 
                 <div class="contact_message">
-                    <a href="index.php?page=2">Account</a>
-                    <a href="index.php?page=1&action=1">Edit quotation</a>
-                    <a class="cancelquotation" href="index.php?page=1&action=3">Cancel quotation</a>
-                    <a class="sendquotation" href="index.php?page=1&action=4">Send quotation request</a>
+                    <a href="index.php?page=2"><?= $language['nl_quote_account']; ?></a>
+                    <a href="index.php?page=1&action=1"><?= $language['nl_quote_edit']; ?></a>
+                    <a class="cancelquotation" href="index.php?page=1&action=3"><?= $language['nl_quote_cancel']; ?></a>
+                    <a class="sendquotation" href="index.php?page=1&action=4"><?= $language['nl_quote_send']; ?></a>
                 </div> <!-- contact_message -->
             </div> <!-- contact_left -->
 
             <div class="contact_right">
                 <div class="title">
-                    Shipping information
+                    <?= $language['nl_account_shipping']; ?>
                 </div> <!-- title -->
 
                 <table>
                     <tr>
-                        <td>Adress</td>
+                        <td><?= $language['nl_account_adress']; ?></td>
                         <td><?= $account['shipping_street'].' '.$account['shipping_housenumber']; ?></td>
                     </tr>
                     <tr>
-                        <td>Postal code</td>
+                        <td><?= $language['nl_account_postalcode']; ?></td>
                         <td><?= $account['shipping_postalcode']; ?>
                     </tr>
                     <tr>
-                        <td>City</td>
+                        <td><?= $language['nl_account_city']; ?></td>
                         <td><?= $account['shipping_city']; ?>
                     </tr>
                     <tr>
-                        <td>Provence</td>
+                        <td><?= $language['nl_account_provence']; ?></td>
                         <td><?= $account['shipping_provence']; ?>
                     </tr>
                     <tr>
-                        <td>Country</td>
+                        <td><?= $language['nl_account_country']; ?></td>
                         <td><?= $account['shipping_country']; ?></td>
                     </tr>
                 </table>
 
                 <div class="title">
-                    Billing information
+                    <?= $language['nl_account_billing']; ?>
                 </div> <!-- title -->
 
                 <table>
                     <tr>
-                        <td>Adress</td>
+                        <td><?= $language['nl_account_adress']; ?></td>
                         <td><?= $account['billing_street'].' '.$account['billing_housenumber']; ?></td>
                     </tr>
                     <tr>
-                        <td>Postal code</td>
+                        <td><?= $language['nl_account_postalcode']; ?></td>
                         <td><?= $account['billing_postalcode']; ?>
                     </tr>
                     <tr>
-                        <td>City</td>
+                        <td><?= $language['nl_account_city']; ?></td>
                         <td><?= $account['billing_city']; ?>
                     </tr>
                     <tr>
-                        <td>Provence</td>
+                        <td><?= $language['nl_account_provence']; ?></td>
                         <td><?= $account['billing_provence']; ?>
                     </tr>
                     <tr>
-                        <td>Country</td>
+                        <td><?= $language['nl_account_country']; ?></td>
                         <td><?= $account['billing_country']; ?></td>
                     </tr>
                 </table>
@@ -310,17 +310,17 @@ $account = $q->getCustomer($_SESSION['webuser']);
     } else {
 ?>
 
-        Please log in or create an account before sending the quotation request
+        <?= $language['nl_quote_login']; ?>
         <div class="login">
             <form method="post" action="index.php?page=2">
-                <input type="text" name="email" placeholder="<?= $language['en_login_email']; ?>" />
-                <input type="password" name="password" placeholder="<?= $language['en_login_password']; ?>" />
+                <input type="text" name="email" placeholder="<?= $language['nl_login_email']; ?>" />
+                <input type="password" name="password" placeholder="<?= $language['nl_login_password']; ?>" />
 
                 <input type="hidden" name="form" value="login" />
-                <input type="submit" value="<?= $language['en_login_login']; ?>" />
+                <input type="submit" value="<?= $language['nl_login_login']; ?>" />
             </form>
 
-            <a href="index.php?page=2&action=1"><?= $language['en_login_createaccount']; ?></a>
+            <a href="index.php?page=2&action=1"><?= $language['nl_login_createaccount']; ?></a>
         </div> <!-- login -->
         
 <?php

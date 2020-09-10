@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This page contains the english navigation bar in the webshop
+ * This file contains the english navigation bar in the webshop
  */
 
 $productCategories = $q->allCategories();

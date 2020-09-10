@@ -1,3 +1,11 @@
+<?php
+
+/**
+ * This file contains the login form from account
+ */
+
+?>
+
 <main id="mainEnglish">
     <div class="login">
         <form method="post" action="index.php?page=2">

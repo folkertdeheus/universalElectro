@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This page contains the products overview 
+ * This file contains the products overview 
  */
 
 // Get all products in category

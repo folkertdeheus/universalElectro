@@ -34,7 +34,7 @@ if ($q->countOpenQuotationsFromSession($_COOKIE['unele_shop']) == 1) {
 
     <main id="mainEnglish">
         <div class="title">
-            Shopping cart
+            <?= $language['en_quote_cart']; ?>
         </div>
 
         <div class="order">
@@ -42,9 +42,9 @@ if ($q->countOpenQuotationsFromSession($_COOKIE['unele_shop']) == 1) {
                 <form method="post" action="index.php?page=1&action=1">
                     <table>
                         <tr>
-                            <th class="cart_amount">Amount</th>
-                            <th class="cart_product">Product</th>
-                            <th class="cart_product">Brand</th>
+                            <th class="cart_amount"><?= $language['en_quote_amount']; ?></th>
+                            <th class="cart_product"><?= $language['en_quote_product']; ?></th>
+                            <th class="cart_product"><?= $language['en_quote_brand']; ?></th>
                             <th class="cart_small"></th>
                         </tr>
 <?php
@@ -70,8 +70,8 @@ if ($q->countOpenQuotationsFromSession($_COOKIE['unele_shop']) == 1) {
                             <td colspan=4 class="cart_bottom">
                                 <input type="hidden" name="form" value="updatecart" />
                                 <input type="submit" value="Update cart" />
-                                <a href="index.php?page=1">Continue shopping</a>
-                                <a href="index.php?page=1&action=2">Request quotation</a>
+                                <a href="index.php?page=1"><?= $language['en_quote_continue']; ?></a>
+                                <a href="index.php?page=1&action=2"><?= $language['en_quote_request']; ?></a>
                             </td>
                         </tr>
                     </table>
@@ -82,7 +82,7 @@ if ($q->countOpenQuotationsFromSession($_COOKIE['unele_shop']) == 1) {
 
     <main id="mainDutch">
         <div class="title">
-            Shopping cart
+            <?= $language['nl_quote_cart']; ?>
         </div>
 
         <div class="order">
@@ -90,9 +90,9 @@ if ($q->countOpenQuotationsFromSession($_COOKIE['unele_shop']) == 1) {
                 <form method="post" action="index.php?page=1&action=1">
                     <table>
                         <tr>
-                            <th class="cart_amount">Amount</th>
-                            <th class="cart_product">Product</th>
-                            <th class="cart_product">Brand</th>
+                            <th class="cart_amount"><?= $language['nl_quote_amount']; ?></th>
+                            <th class="cart_product"><?= $language['nl_quote_product']; ?></th>
+                            <th class="cart_product"><?= $language['nl_quote_brand']; ?></th>
                             <th class="cart_small"></th>
                         </tr>
 <?php
@@ -118,8 +118,8 @@ if ($q->countOpenQuotationsFromSession($_COOKIE['unele_shop']) == 1) {
                             <td colspan=4 class="cart_bottom">
                                 <input type="hidden" name="form" value="updatecart" />
                                 <input type="submit" value="Update cart" />
-                                <a href="index.php?page=1">Continue shopping</a>
-                                <a href="index.php?page=1&action=2">Request quotation</a>
+                                <a href="index.php?page=1"><?= $language['nl_quote_continue']; ?></a>
+                                <a href="index.php?page=1&action=2"><?= $language['nl_quote_request']; ?></a>
                             </td>
                         </tr>
                     </table>

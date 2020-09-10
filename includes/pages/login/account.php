@@ -1,13 +1,15 @@
 <?php
-    /**
-     * This page contains the user account info
-     */
 
-    // Check if user is logged in
-    if (login()) {
+/**
+ * This page contains the user account info
+ */
 
-        // Get user information
-        $customer = $q->getCustomer($_SESSION['webuser']);
+// Check if user is logged in
+if (login()) {
+
+    // Get user information
+    $customer = $q->getCustomer($_SESSION['webuser']);
+
 ?>
 
 <main id="mainEnglish">

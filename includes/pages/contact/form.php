@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This page contains the contact form
+ * This file contains the contact form
  */
 
 // Set fields default for a not logged in user

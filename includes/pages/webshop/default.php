@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This page contains the navigations of the webshop
+ * This file contains the navigations of the webshop
  */
 
 // Check if action is set

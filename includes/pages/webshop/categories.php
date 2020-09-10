@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This page contains the categories overview 
+ * This file contains the categories overview 
  */
 
 // Get all categories

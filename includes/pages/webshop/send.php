@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This page contains the send quotation confirmation
+ * This file contains the send quotation confirmation
  */
 
 // Get quotation from cookie
@@ -16,9 +16,9 @@ $account = $q->getCustomer($_SESSION['webuser']);
 ?>
 
 <main id="mainEnglish">
-    Quotation request sent
+    <?= $language['en_quote_sent']; ?>
 </main>
 
 <main id="mainDutch">
-    Quotation request sent
+    <?= $language['nl_quote_sent']; ?>
 </main>

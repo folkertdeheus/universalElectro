@@ -14,9 +14,9 @@ $q->insertLog('Quotation', 'Delete', 'Deleted quotation id '.$quote['id'].' with
 ?>
 
 <main id="mainEnglish">
-    Quotation request deleted
+    <?= $language['en_quote_deleted']; ?>
 </main>
 
 <main id="mainDutch">
-    Quotation request deleted
+    <?= $language['nl_quote_deleted']; ?>
 </main>

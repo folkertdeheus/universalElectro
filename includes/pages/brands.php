@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This page contains the brand ribbon on the home page
+ * This file contains the brand ribbon on the home page
  */
 
 // Get all brands

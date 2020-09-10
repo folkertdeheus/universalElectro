@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This page contains the product detailed view
+ * This file contains the product detailed view
  */
 
 // Get product information
@@ -53,19 +53,19 @@ if (isset($product['images']) && $product['images'] != null && is_array($images)
 
             <table>
                 <tr>
-                    <td>Article number:</td>
+                    <td><?= $language['en_product_articlenumber']; ?>:</td>
                     <td><?= $product['articlenumber']; ?></td>
                 </tr>
                 <tr>
-                    <td>Brand:</td>
+                    <td><?= $language['en_product_brand']; ?>:</td>
                     <td><?= $q->getBrandById($product['brand'])['name']; ?></td>
                 </tr>
                 <tr>
-                    <td>Category:</td>
+                    <td><?= $language['en_product_category']; ?>:</td>
                     <td><?= $q->getCategoryById($product['category'])['en_name']; ?></td>
                 </tr>
                 <tr>
-                    <td>Condition:</td>
+                    <td><?= $language['en_product_condition']; ?>:</td>
                     <td><?= $q->getConditionById($product['conditions'])['en_name']; ?></td>
                 </tr>
             </table>
@@ -73,7 +73,7 @@ if (isset($product['images']) && $product['images'] != null && is_array($images)
 <?php
             if ($settings['webshop_show_prices_on_guest']) {
 ?>
-                <span class="price">Price: &euro; <?= $product['price']; ?></span>
+                <span class="price"><?= $language['en_product_price']; ?>: &euro; <?= $product['price']; ?></span>
 <?php
             }
 
@@ -83,10 +83,10 @@ if (isset($product['images']) && $product['images'] != null && is_array($images)
                     <form method="post" action="index.php?page=1&action=1">
                         <input type="hidden" name="id" value="<?= $product['id']; ?>" />
                         <span>
-                            <label for="amount">Amount</label>
+                            <label for="amount"><?= $language['en_product_amount']; ?></label>
                             <input type="number" name="amount" id="amount" step="1" min="1" value="1" />
                         </span>
-                        <input type="submit" value="Add to cart" />
+                        <input type="submit" value="<?= $language['en_product_addtocart']; ?>" />
                         <input type="hidden" name="form" value="addtocart" />
                     </form>
                 </div> <!-- checkout_button -->
@@ -117,19 +117,19 @@ if (isset($product['images']) && $product['images'] != null && is_array($images)
 
             <table>
                 <tr>
-                    <td>Article number:</td>
+                    <td><?= $language['nl_product_articlenumber']; ?>:</td>
                     <td><?= $product['articlenumber']; ?></td>
                 </tr>
                 <tr>
-                    <td>Brand:</td>
+                    <td><?= $language['nl_product_brand']; ?>:</td>
                     <td><?= $q->getBrandById($product['brand'])['name']; ?></td>
                 </tr>
                 <tr>
-                    <td>Category:</td>
+                    <td><?= $language['nl_product_category']; ?>:</td>
                     <td><?= $q->getCategoryById($product['category'])['nl_name']; ?></td>
                 </tr>
                 <tr>
-                    <td>Condition:</td>
+                    <td><?= $language['nl_product_condition']; ?>:</td>
                     <td><?= $q->getConditionById($product['conditions'])['nl_name']; ?></td>
                 </tr>
             </table>
@@ -137,7 +137,7 @@ if (isset($product['images']) && $product['images'] != null && is_array($images)
 <?php
             if ($settings['webshop_show_prices_on_guest']) {
 ?>
-                <span class="price">Price: &euro; <?= $product['price']; ?></span>
+                <span class="price"><?= $language['nl_product_price']; ?>: &euro; <?= $product['price']; ?></span>
 <?php
             }
 
@@ -147,10 +147,10 @@ if (isset($product['images']) && $product['images'] != null && is_array($images)
                     <form method="post" action="index.php?page=1&action=1">
                         <input type="hidden" name="id" value="<?= $product['id']; ?>" />
                         <span>
-                            <label for="amount">Amount</label>
+                            <label for="amount"><?= $language['nl_product_amount']; ?></label>
                             <input type="number" name="amount" id="amount" step="1" min="1" value="1" />
                         </span>
-                        <input type="submit" value="Add to cart" />
+                        <input type="submit" value="<?= $language['nl_product_addtocart']; ?>" />
                         <input type="hidden" name="form" value="addtocart" />
                     </form>
                 </div> <!-- checkout_button -->

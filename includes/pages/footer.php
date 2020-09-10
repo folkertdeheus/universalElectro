@@ -1,3 +1,11 @@
+<?php
+
+/**
+ * This file contains the footer text of the page
+ */
+
+?>
+
 <footer id="en_footer">
     <div class="footerleft">
         <?= nl2br($language['en_footer_adress']); ?>

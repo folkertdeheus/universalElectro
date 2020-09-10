@@ -126,6 +126,43 @@ $languageFields = [
         'tickets_close' => '"Close ticket"',
         'tickets_posted' => '"Message posted"',
         'tickets_file' => '"File"'
+    ],
+    'Search' => [
+        'search_search' => '"Search"',
+        'search_searchfield' => 'Searchfield',
+        'search_go' => 'Go search',
+        'search_products' => '"Products"',
+        'search_brands' => '"Brands"',
+        'search_categories' => '"Categories"',
+        'search_name' => '"Product name"',
+        'search_brand' => '"Product brand"',
+        'search_category' => '"Product category"',
+        'search_articlenumber' => '"Product articlenumber"',
+    ],
+    'Quotation' => [
+        'quote_deleted' => 'Quotation deleted',
+        'quote_cart' => '"Quotation shopping cart"',
+        'quote_amount' => '"Amount"',
+        'quote_product' => '"Product"',
+        'quote_brand' => '"Brand"',
+        'quote_continue' => '"Continue shopping"',
+        'quote_request' => '"Request quotation"',
+        'quote_check' => '"Check quotation request"',
+        'quote_account' => '"Account"',
+        'quote_edit' => '"Edit quotation"',
+        'quote_cancel' => '"Cancel quotation"',
+        'quote_send' => '"Send quotation request"',
+        'quote_login' => '"Login message"',
+        'quote_sent' => '"Quotation request sent"'
+    ],
+    'Products' => [
+        'product_articlenumber' => '"Articlenumber"',
+        'product_brand' => '"Brand"',
+        'product_category' => '"Category"',
+        'product_condition' => '"Condition"',
+        'product_price' => '"Price"',
+        'product_amount' => '"Amount"',
+        'product_addtocart' => '"Add to cart"'
     ]
 ];
 

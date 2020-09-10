@@ -1,3 +1,11 @@
+<?php
+
+/**
+ * This file contains the header of the page
+ */
+
+?>
+
 <header>
     <div class="headertop">
     </div> <!-- headertop -->

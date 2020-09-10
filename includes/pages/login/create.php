@@ -1,3 +1,11 @@
+<?php
+
+/**
+ * This file contains the create account form
+ */
+
+?>
+
 <main id="mainEnglish">
     <div class="login">
         <form method="post" action="index.php?page=2&action=2">
