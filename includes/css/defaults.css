@@ -609,29 +609,44 @@ article {
 }
 
 .search_result table {
+    /* Positioning */
     width: 100%;
+    
+    /* Table */
     table-layout: fixed;
     border-spacing: 0px;
     border-collapse: separate;
 }
 
 .search_result th {
+    /* Font */
     text-align: left;
+
+    /* Background */
     border-bottom: 1px solid var(--blue);
 }
 
 .search_result .s4 {
+    /* Positioning */
     width: 25%;
 }
 
 .trmarkup:hover {
+    /* Background */
     background-color: var(--greyed);
+
+    /* Cursor */
     cursor: pointer;
 }
 
 .accountdetails table {
+    /* Table */
     border-collapse: collapse;
     border-spacing: 0px;
+    table-layout: fixed;
+
+    /* Positioning */
+    width: calc(100% - 20px);
 }
 
 .quotesummaryid {
@@ -642,7 +657,7 @@ article {
 
 .quotesummarytime {
     /* Positioning */
-    width: 200px;
+    width: auto;
     padding: 5px;
 }
 
@@ -652,4 +667,10 @@ tr.quotesummary:hover {
 
     /* Cursor */
     cursor: pointer
+}
+
+td.accountticket {
+    /* Positioning */
+    width: 25%;
+    padding: 5px;
 }

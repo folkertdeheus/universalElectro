@@ -126,7 +126,8 @@ $languageFields = [
         'tickets_goback' => '"Back to tickets"',
         'tickets_close' => '"Close ticket"',
         'tickets_posted' => '"Message posted"',
-        'tickets_file' => '"File"'
+        'tickets_file' => '"File"',
+        'tickets_status' => '"Status"'
     ],
     'Search' => [
         'search_search' => '"Search"',
@@ -154,7 +155,8 @@ $languageFields = [
         'quote_cancel' => '"Cancel quotation"',
         'quote_send' => '"Send quotation request"',
         'quote_login' => '"Login message"',
-        'quote_sent' => '"Quotation request sent"'
+        'quote_sent' => '"Quotation request sent"',
+        'quote_time' => 'Time requested'
     ],
     'Products' => [
         'product_articlenumber' => '"Articlenumber"',

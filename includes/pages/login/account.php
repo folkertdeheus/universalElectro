@@ -123,7 +123,7 @@ if (login()) {
                     <table>
                         <tr>
                             <td class="quotesummaryid">#</td>
-                            <td class="quotesummarytime">Time (year-month-day time)</td>
+                            <td class="quotesummarytime"><?= $language['en_quote_time']; ?></td>
                         </tr>
 <?php
                         // Loop through all quotation requests
@@ -152,7 +152,50 @@ if (login()) {
                 </div> <!-- title -->
 <?php
                     if ($q->countTicketsByCustomer($_SESSION['webuser']) > 0) {
-                    
+                        $tickets = $q->getTicketsByCustomer($_SESSION['webuser']);
+?>
+                        <table>
+                            <tr>
+                                <td class="accountticket"><?= $language['en_tickets_subject']; ?></td>
+                                <td class="accountticket"><?= $language['en_tickets_status']; ?></td>
+                                <td class="accountticket"><?= $language['en_tickets_category']; ?></td>
+                                <td class="accountticket"><?= $language['en_tickets_priority']; ?></td>
+                            </tr>
+<?php
+                        foreach($tickets as $ticketKey => $ticketValue) {
+
+                            // Set status, category and priority
+                            $status = $q->getTicketStatus($ticketValue['status']);
+                            $category = $q->getTicketCategory($ticketValue['category']);
+
+                            switch($ticketValue['priority']) {
+                                case '1':
+                                    $priority = $language['en_tickets_priolow'];
+                                    break;
+                                case '2':
+                                    $priority = $language['en_tickets_priomed'];
+                                    break;
+                                case '3':
+                                    $priority = $language['en_tickets_priohigh'];
+                                    break;
+                                case '4':
+                                    $priority = $language['en_tickets_priocrit'];
+                                    break;
+                                default:
+                                    $priority = $language['en_tickets_priomed'];
+                            }
+?>
+                            <tr class="quotesummary" onclick="window.location='index.php?page=3&action=1&sub=2&id=<?= $ticketValue['id']; ?>'">
+                                <td class="accountticket"><?= $ticketValue['subject']; ?></td>
+                                <td class="accountticket"><?= $status['en_web_name']; ?></td>
+                                <td class="accountticket"><?= $category['name']; ?></td>
+                                <td class="accountticket"><?= $priority; ?></td>
+                            </tr>
+<?php
+                        }
+?>
+                        </table>
+<?php
                     } else {
                         echo $language['en_account_notickets'];
                     }
@@ -266,11 +309,35 @@ if (login()) {
                 </div> <!-- title -->
 
 <?php
-                    //if ($q->countOrdersByCustomer($_SESSION['webuser']) > 0) {
-                        
-                    //} else {
-                        echo $language['nl_account_noorders'];
-                    //}
+                // Check if there are any quotation requests
+                if ($q->countQuotationsFromCustomer($_SESSION['webuser']) > 0) {
+                    
+                    // Get all quotation requests
+                    $quotes = $q->getQuotationsFromCustomer($_SESSION['webuser']);
+?>
+                    <table>
+                        <tr>
+                            <td class="quotesummaryid">#</td>
+                            <td class="quotesummarytime"><?= $language['nl_quote_time']; ?></td>
+                        </tr>
+<?php
+                        // Loop through all quotation requests
+                        foreach($quotes as $quoteKey => $quoteValue) {
+?>
+                            <tr class="quotesummary" onclick="window.location='index.php?page=2&action=4&id=<?= $quoteValue['id']; ?>'">
+                                <td class="quotesummaryid"><?= $quoteValue['id']; ?></td>
+                                <td class="quotesummarytime"><?= $quoteValue['timestamp']; ?></td>
+                            </tr>
+<?php
+                        }
+?>
+                    </table>
+<?php
+                } else {
+
+                    // No quotations found
+                    echo $language['en_account_noorders'];
+                }
 ?>
             </div> <!-- accountdetails -->
 
@@ -278,11 +345,55 @@ if (login()) {
                 <div class="title">
                     Tickets
                 </div> <!-- title -->
+
 <?php
                     if ($q->countTicketsByCustomer($_SESSION['webuser']) > 0) {
-                    
+                        $tickets = $q->getTicketsByCustomer($_SESSION['webuser']);
+?>
+                        <table>
+                            <tr>
+                                <td class="accountticket"><?= $language['nl_tickets_subject']; ?></td>
+                                <td class="accountticket"><?= $language['nl_tickets_status']; ?></td>
+                                <td class="accountticket"><?= $language['nl_tickets_category']; ?></td>
+                                <td class="accountticket"><?= $language['nl_tickets_priority']; ?></td>
+                            </tr>
+<?php
+                        foreach($tickets as $ticketKey => $ticketValue) {
+
+                            // Set status, category and priority
+                            $status = $q->getTicketStatus($ticketValue['status']);
+                            $category = $q->getTicketCategory($ticketValue['category']);
+
+                            switch($ticketValue['priority']) {
+                                case '1':
+                                    $priority = $language['en_tickets_priolow'];
+                                    break;
+                                case '2':
+                                    $priority = $language['en_tickets_priomed'];
+                                    break;
+                                case '3':
+                                    $priority = $language['en_tickets_priohigh'];
+                                    break;
+                                case '4':
+                                    $priority = $language['en_tickets_priocrit'];
+                                    break;
+                                default:
+                                    $priority = $language['en_tickets_priomed'];
+                            }
+?>
+                            <tr class="quotesummary" onclick="window.location='index.php?page=3&action=1&sub=2&id=<?= $ticketValue['id']; ?>'">
+                                <td class="accountticket"><?= $ticketValue['subject']; ?></td>
+                                <td class="accountticket"><?= $status['en_web_name']; ?></td>
+                                <td class="accountticket"><?= $category['name']; ?></td>
+                                <td class="accountticket"><?= $priority; ?></td>
+                            </tr>
+<?php
+                        }
+?>
+                        </table>
+<?php
                     } else {
-                        echo $language['nl_account_notickets'];
+                        echo $language['en_account_notickets'];
                     }
 ?>
                     <a href="index.php?page=3&action=1"><?= $language['nl_account_newticket']; ?></a>
