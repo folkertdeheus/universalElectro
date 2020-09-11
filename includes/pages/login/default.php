@@ -26,6 +26,13 @@ if (login()) {
                 require_once('includes/pages/login/changepw.php');
 
                 break;
+
+            case '4':
+
+                // View quotation
+                require_once('includes/pages/login/viewquotation.php');
+
+                break;
             
             default:
 

@@ -824,34 +824,6 @@ class Queries extends Db
 
     /**
      * ===================================================
-     * ORDERS
-     * ===================================================
-     */
-
-    /**
-     * Get orders by customer id
-     * 
-     * @param int $customer
-     * @return array
-     */
-    public function getOrdersByCustomer($customer) : array
-    {
-        return $this->all('SELECT * FROM `orders` WHERE `customer` = ?', array($customer));
-    }
-
-    /**
-     * Count orders by customer id
-     * 
-     * @param int $customer
-     * @return int
-     */
-    public function countOrdersByCustomer($customer) : int
-    {
-        return $this->one('SELECT COUNT(*) FROM `orders` WHERE `customer` = ?', array($customer));
-    }
-
-    /**
-     * ===================================================
      * TICKETS
      * ===================================================
      */
@@ -1449,6 +1421,40 @@ class Queries extends Db
     public function deleteQuotation($session) : int
     {
         return $this->none('DELETE FROM `quotation` WHERE `session` = ?', array($session));
+    }
+
+    /**
+     * Count quotations from customer
+     * 
+     * @param int $customer
+     * @return int
+     */
+    public function countQuotationsFromCustomer($customer) : int
+    {
+        return $this->one('SELECT COUNT(*) FROM `quotation` WHERE `customer` = ?', array($customer));
+    }
+
+    /**
+     * Get quotations from customer
+     * 
+     * @param int $customer
+     * @return array
+     */
+    public function getQuotationsFromCustomer($customer) : array
+    {
+        return $this->all('SELECT * FROM `quotation` WHERE `customer` = ?', array($customer));
+    }
+
+    /**
+     * Get quotation by id and user
+     * 
+     * @param int $id
+     * @param int $customer
+     * @return array
+     */
+    public function getQuotationByIdAndCustomer($id, $customer) : array
+    {
+        return $this->row('SELECT * FROM `quotation` WHERE `id` = ? AND `customer` = ?', array($id, $customer));
     }
 
     /**

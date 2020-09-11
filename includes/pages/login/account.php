@@ -114,11 +114,35 @@ if (login()) {
                 </div> <!-- title -->
 
 <?php
-            //        if ($q->countOrdersByCustomer($_SESSION['webuser']) > 0) {
-                        
-            //        } else {
-                        echo $language['en_account_noorders'];
-            //        }
+                // Check if there are any quotation requests
+                if ($q->countQuotationsFromCustomer($_SESSION['webuser']) > 0) {
+                    
+                    // Get all quotation requests
+                    $quotes = $q->getQuotationsFromCustomer($_SESSION['webuser']);
+?>
+                    <table>
+                        <tr>
+                            <td class="quotesummaryid">#</td>
+                            <td class="quotesummarytime">Time (year-month-day time)</td>
+                        </tr>
+<?php
+                        // Loop through all quotation requests
+                        foreach($quotes as $quoteKey => $quoteValue) {
+?>
+                            <tr class="quotesummary" onclick="window.location='index.php?page=2&action=4&id=<?= $quoteValue['id']; ?>'">
+                                <td class="quotesummaryid"><?= $quoteValue['id']; ?></td>
+                                <td class="quotesummarytime"><?= $quoteValue['timestamp']; ?></td>
+                            </tr>
+<?php
+                        }
+?>
+                    </table>
+<?php
+                } else {
+
+                    // No quotations found
+                    echo $language['en_account_noorders'];
+                }
 ?>
             </div> <!-- accountdetails -->
 

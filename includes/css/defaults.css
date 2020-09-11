@@ -628,3 +628,28 @@ article {
     background-color: var(--greyed);
     cursor: pointer;
 }
+
+.accountdetails table {
+    border-collapse: collapse;
+    border-spacing: 0px;
+}
+
+.quotesummaryid {
+    /* Positioning */
+    width: 50px;
+    padding: 5px;
+}
+
+.quotesummarytime {
+    /* Positioning */
+    width: 200px;
+    padding: 5px;
+}
+
+tr.quotesummary:hover {
+    /* Background */
+    background-color: var(--greyed);
+
+    /* Cursor */
+    cursor: pointer
+}

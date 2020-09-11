@@ -93,6 +93,7 @@ header {
 
     /* Overrule default header font */
     font-family: Roboto;
+    
 }
 
 .menu a:link, .menu a:visited {
@@ -101,6 +102,7 @@ header {
     color: var(--blue);
     padding: 10px;
     transition: 0.5s;
+    white-space: nowrap;
 }
 
 .menu a:hover, .language:hover {

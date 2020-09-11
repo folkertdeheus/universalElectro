@@ -36,7 +36,7 @@
         // Check if there is an open shopping cart
         if ($openCart) {
 ?>
-            <a href="index.php?page=1&action=1">Shopping Cart</a>
+            <a href="index.php?page=1&action=1" id="en_menu6"><?= $language['en_menu_cart']; ?></a>
 <?php
         }
 ?>
@@ -46,6 +46,14 @@
 
         <a href="index.php" id="nl_menu1"><?= $language['nl_menu_home']; ?></a>
         <a href="index.php?page=1" id="nl_menu2"><?= $language['nl_menu_webshop']; ?></a>
+        <?php
+        // Check if there is an open shopping cart
+        if ($openCart) {
+?>
+            <a href="index.php?page=1&action=1" id="nl_menu6"><?= $language['nl_menu_cart']; ?></a>
+<?php
+        }
+?>
         <a href="index.php?page=2" id="nl_menu3"><?= $language['nl_menu_login']; ?></a>
         <a href="index.php?page=3" id="nl_menu4"><?= $language['nl_menu_contact']; ?></a>
         <a href="index.php?page=4" id="nl_menu5"><?= $language['nl_menu_search']; ?></a>

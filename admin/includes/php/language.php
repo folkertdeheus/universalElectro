@@ -28,6 +28,7 @@ $languageFields = [
         'menu_webshop' => '"Webshop"',
         'menu_login' => '"Login"',
         'menu_contact' => '"Contact"',
+        'menu_cart' => '"Shopping cart"'
     ],
     'Company Data' => [
         'footer_adress' => 'Adress information',

@@ -60,7 +60,7 @@ function languageChange(lang = null) {
         
 
         // Menu items
-        for(i = 1; i <= 5; i++) {
+        for(i = 1; i <= 6; i++) {
             console.log('i: ' + i);
             document.getElementById('en_menu' + i).style.display = 'none';
             document.getElementById('nl_menu' + i).style.display = 'block';
@@ -90,7 +90,7 @@ function languageChange(lang = null) {
         document.getElementById('nl_footer').style.display = 'none';
 
         // Menu items
-        for(i = 1; i <= 5; i++) {
+        for(i = 1; i <= 6; i++) {
             document.getElementById('en_menu' + i).style.display = 'block';
             document.getElementById('nl_menu' + i).style.display = 'none';
         }
