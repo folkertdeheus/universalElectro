@@ -1243,6 +1243,42 @@ class Forms extends Queries
         if ($status == 3) {
             $status = 1;
         }
+
+        // Get ticket
+        $ticket = $q->getCMSTicket($id);
+
+        // Get account
+        $account = $q->getCustomer($ticket['customer']);
+
+        // Get ticket category
+        $category = $q->getTicketCategory($ticket['category']);
+
+        // Check if the email adress is valid
+        if (filter_var($account['email'], FILTER_VALIDATE_EMAIL)) {
+            
+            // Set variables
+            $mailFrom = $category['email'];
+            $mailReplyTo = $category['email'];
+            $mailTo = $account['email'];
+            $mailSubject = 'Ticketreply in "'.$ticket['subject'].'"';
+            $mailMessage = 'Ticketreply in "'.$ticket['subject'].'"'."\r\n"."\r\n";
+            $mailMessage = $message."\r\n"."\r\n";
+            $mailMessage = 'Go to message: https://universalelectro.nl/index.php?page=3&action=1';
+
+            $mailHeaders = ['From' => $mailFrom,
+                            'Reply-To' => $mailReplyTo];
+
+            if (!mail($mailTo, $mailSubject, $mailMessage, $mailHeaders)) {
+
+                // Error sending mail
+                $this->insertLog('Tickets', 'Edit', 'No email sent, error during sending email');
+            }
+        
+        } else {
+
+            // No email sent
+            $this->insertLog('Tickets', 'Edit', 'No email sent, user '.$account['lastname'].', '.$account['firstname'].' '.$account['insertion'].' ('.$_SESSION['webuser'].') has an invalid email adres');
+        }
         
         // Set closed time
         $closed = null;
