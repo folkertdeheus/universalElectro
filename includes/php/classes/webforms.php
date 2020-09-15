@@ -472,11 +472,133 @@ class Webforms extends Queries
             $filepath = null;
         }
 
+        // Get account
+        $account = $q->getCustomer($_SESSION['webuser']);
+
+        // Get ticket
+        $ticket = $q->getCMSTicket($id);
+
+        // Get ticket category
+        $category = $q->getTicketCategory($ticket['category']);
+
+        if ($category['notification'] == true) {
+
+            // Check if the email adress is valid
+            if (filter_var($account['email'], FILTER_VALIDATE_EMAIL)) {
+                
+                // Set variables
+                $mailFrom = 'tickets@universalelectro.nl';
+                $mailReplyTo = $account['email'];
+                $mailTo = $category['email'];
+                $mailSubject = 'Nieuw ticket van '.$account['lastname'].', '.$account['firstname'].' '.$account['insertion'];
+                $mailMessage = 'Nieuw ticket van '.$account['lastname'].', '.$account['firstname'].' '.$account['instertion'].':'."\r\n"."\r\n";
+                $mailMessage = $message."\r\n"."\r\n";
+                $mailMessage = 'Ga naar bericht: https://localhost/UniversalElectro/admin/index.php?page=1&action=2';
+
+                // Loop through quotation products
+                foreach($products as $productKey => $productValue) {
+
+                    // Get product info
+                    $product = $q->getProductById($productValue['product']);
+
+                    // Get brand info
+                    $brand = $q->getBrandById($product['brand']);
+
+                    $mailMessage .= '- '.$brand['name'].': ('.$product['amount'].'x) '.$product['name']."\r\n";
+                }
+
+                if (isset($account['remarks']) && $account['remarks'] != null) {
+                    $mailMessage .= 'Opmerking: '."\r\n"; 
+                    $mailMessage .= $account['remarks'];
+                }
+
+                $mailHeaders = ['From' => $mailFrom,
+                                'Reply-To' => $mailReplyTo];
+
+                if (!mail($mailTo, $mailSubject, $mailMessage, $mailHeaders)) {
+
+                    // Error sending mail
+                    $this->insertLog('Tickets', 'Add', 'No email sent, error during sending email');
+                }
+            
+            } else {
+
+                // No email sent
+                $this->insertLog('Tickets', 'Add', 'No email sent, user '.$account['lastname'].', '.$account['firstname'].' '.$account['insertion'].' ('.$_SESSION['webuser'].') has an invalid email adres');
+            }
+
+        } else {
+
+            // No email sent, turned off in settings
+            $this->insertLog('Tickets', 'Add', 'No email sent, turned off in settings');
+        }
+
         // Insert message
         if ($this->addTicketMessage($id, $_SESSION['webuser'], $message, $filepath) == 1) {
 
             // Succes
             $this->insertLog('Tickets message', 'Add', 'Added ticket message to ticket '.$id.'. Status not updated yet');
+
+            // Get account
+            $account = $q->getCustomer($_SESSION['webuser']);
+
+            // Get ticket
+            $ticket = $q->getCMSTicket($id);
+
+            // Get ticket category
+            $category = $q->getTicketCategory($ticket['category']);
+
+            if ($category['notification'] == true) {
+
+                // Check if the email adress is valid
+                if (filter_var($account['email'], FILTER_VALIDATE_EMAIL)) {
+                    
+                    // Set variables
+                    $mailFrom = 'tickets@universalelectro.nl';
+                    $mailReplyTo = $account['email'];
+                    $mailTo = $category['email'];
+                    $mailSubject = 'Nieuw bericht in het ticket van '.$account['lastname'].', '.$account['firstname'].' '.$account['insertion'];
+                    $mailMessage = 'Nieuw bericht in het ticket van '.$account['lastname'].', '.$account['firstname'].' '.$account['instertion'].':'."\r\n"."\r\n";
+                    $mailMessage = $message."\r\n"."\r\n";
+                    $mailMessage = 'Ga naar bericht: https://localhost/UniversalElectro/admin/index.php?page=1&action=2';
+
+                    // Loop through quotation products
+                    foreach($products as $productKey => $productValue) {
+
+                        // Get product info
+                        $product = $q->getProductById($productValue['product']);
+
+                        // Get brand info
+                        $brand = $q->getBrandById($product['brand']);
+
+                        $mailMessage .= '- '.$brand['name'].': ('.$product['amount'].'x) '.$product['name']."\r\n";
+                    }
+
+                    if (isset($account['remarks']) && $account['remarks'] != null) {
+                        $mailMessage .= 'Opmerking: '."\r\n"; 
+                        $mailMessage .= $account['remarks'];
+                    }
+
+                    $mailHeaders = ['From' => $mailFrom,
+                                    'Reply-To' => $mailReplyTo];
+
+                    if (!mail($mailTo, $mailSubject, $mailMessage, $mailHeaders)) {
+
+                        // Error sending mail
+                        $this->insertLog('Tickets', 'Edit', 'No email sent, error during sending email');
+                    }
+                
+                } else {
+
+                    // No email sent
+                    $this->insertLog('Tickets', 'Edit', 'No email sent, user '.$account['lastname'].', '.$account['firstname'].' '.$account['insertion'].' ('.$_SESSION['webuser'].') has an invalid email adres');
+                }
+
+            } else {
+
+                // No email sent, turned off in settings
+                $this->insertLog('Tickets', 'Edit', 'No email sent, turned off in settings');
+            }
 
             // Update status
             if ($this->setTicketStatus(7, $id) == 1) {
