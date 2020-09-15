@@ -695,11 +695,12 @@ class Queries extends Db
      * @param string $remarks
      * @param string $password
      * @param string $taxnumber
+     * @param string $iv
      * @return int
      */
-    public function addCustomers($firstname, $insertion, $lastname, $email, $phone, $company, $billingStreet, $billingHousenumber, $billingPostalcode, $billingCity, $billingProvence, $billingCountry, $shippingStreet, $shippingHousenumber, $shippingPostalcode, $shippingCity, $shippingProvence, $shippingCountry, $remarks, $password, $taxnumber) : int
+    public function addCustomers($firstname, $insertion, $lastname, $email, $phone, $company, $billingStreet, $billingHousenumber, $billingPostalcode, $billingCity, $billingProvence, $billingCountry, $shippingStreet, $shippingHousenumber, $shippingPostalcode, $shippingCity, $shippingProvence, $shippingCountry, $remarks, $password, $taxnumber, $iv) : int
     {
-        return $this->none('INSERT INTO `customers` (`firstname`, `insertion`, `lastname`, `email`, `phone`, `company_name`, `billing_street`, `billing_housenumber`, `billing_postalcode`, `billing_city`, `billing_provence`, `billing_country`, `shipping_street`, `shipping_housenumber`, `shipping_postalcode`, `shipping_city`, `shipping_provence`, `shipping_country`, `remarks`, `password`, `taxnumber`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', array($firstname, $insertion, $lastname, $email, $phone, $company, $billingStreet, $billingHousenumber, $billingPostalcode, $billingCity, $billingProvence, $billingCountry, $shippingStreet, $shippingHousenumber, $shippingPostalcode, $shippingCity, $shippingProvence, $shippingCountry, $remarks, $password, $taxnumber));
+        return $this->none('INSERT INTO `customers` (`firstname`, `insertion`, `lastname`, `email`, `phone`, `company_name`, `billing_street`, `billing_housenumber`, `billing_postalcode`, `billing_city`, `billing_provence`, `billing_country`, `shipping_street`, `shipping_housenumber`, `shipping_postalcode`, `shipping_city`, `shipping_provence`, `shipping_country`, `remarks`, `password`, `taxnumber`, `iv`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', array($firstname, $insertion, $lastname, $email, $phone, $company, $billingStreet, $billingHousenumber, $billingPostalcode, $billingCity, $billingProvence, $billingCountry, $shippingStreet, $shippingHousenumber, $shippingPostalcode, $shippingCity, $shippingProvence, $shippingCountry, $remarks, $password, $taxnumber, $iv));
     }
 
     /**

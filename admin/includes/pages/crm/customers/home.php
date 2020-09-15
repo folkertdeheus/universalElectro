@@ -35,11 +35,14 @@ if (login()) {
                     </tr>
 <?php
                     foreach($customers as $customerKey => $customerValue) {
+
+                        // Set iv for decryption
+                        $iv = $customerValue['iv'];
 ?>
                         <tr>
-                            <td><?= $customerValue['lastname'].', '.$customerValue['firstname'].' '.$customerValue['insertion']; ?></td>
-                            <td><?= $customerValue['email']; ?></td>
-                            <td><?= $customerValue['company_name']; ?></td>
+                            <td><?= decrypt($customerValue['lastname'], $iv).', '.decrypt($customerValue['firstname'], $iv).' '.decrypt($customerValue['insertion'], $iv); ?></td>
+                            <td><?= decrypt($customerValue['email'], $iv); ?></td>
+                            <td><?= decrypt($customerValue['company_name'], $iv); ?></td>
                             <td class="icon"><a href="index.php?page=1&action=1&sub=2&id=<?= $customerValue['id']; ?>"><img src="includes/images/details.png" alt="details" /></a></td>
                             <td class="icon"><a href="index.php?page=1&action=1&sub=3&id=<?= $customerValue['id']; ?>"><img src="includes/images/edit.png" alt="edit" /></a></td>
                             <td class="icon"><a href="index.php?page=1&action=1&sub=4&id=<?= $customerValue['id']; ?>"><img src="includes/images/delete.png" alt="delete" /></a></td>
