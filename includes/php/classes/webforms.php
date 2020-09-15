@@ -495,23 +495,6 @@ class Webforms extends Queries
                 $mailMessage = $message."\r\n"."\r\n";
                 $mailMessage = 'Ga naar bericht: https://universalelectro.nl/admin/index.php?page=1&action=2';
 
-                // Loop through quotation products
-                foreach($products as $productKey => $productValue) {
-
-                    // Get product info
-                    $product = $q->getProductById($productValue['product']);
-
-                    // Get brand info
-                    $brand = $q->getBrandById($product['brand']);
-
-                    $mailMessage .= '- '.$brand['name'].': ('.$product['amount'].'x) '.$product['name']."\r\n";
-                }
-
-                if (isset($account['remarks']) && $account['remarks'] != null) {
-                    $mailMessage .= 'Opmerking: '."\r\n"; 
-                    $mailMessage .= $account['remarks'];
-                }
-
                 $mailHeaders = ['From' => $mailFrom,
                                 'Reply-To' => $mailReplyTo];
 
@@ -561,23 +544,6 @@ class Webforms extends Queries
                     $mailMessage = 'Nieuw bericht in het ticket van '.$account['lastname'].', '.$account['firstname'].' '.$account['instertion'].':'."\r\n"."\r\n";
                     $mailMessage = $message."\r\n"."\r\n";
                     $mailMessage = 'Ga naar bericht: https://localhost/UniversalElectro/admin/index.php?page=1&action=2';
-
-                    // Loop through quotation products
-                    foreach($products as $productKey => $productValue) {
-
-                        // Get product info
-                        $product = $q->getProductById($productValue['product']);
-
-                        // Get brand info
-                        $brand = $q->getBrandById($product['brand']);
-
-                        $mailMessage .= '- '.$brand['name'].': ('.$product['amount'].'x) '.$product['name']."\r\n";
-                    }
-
-                    if (isset($account['remarks']) && $account['remarks'] != null) {
-                        $mailMessage .= 'Opmerking: '."\r\n"; 
-                        $mailMessage .= $account['remarks'];
-                    }
 
                     $mailHeaders = ['From' => $mailFrom,
                                     'Reply-To' => $mailReplyTo];
