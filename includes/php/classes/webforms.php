@@ -493,7 +493,7 @@ class Webforms extends Queries
                 $mailSubject = 'Nieuw ticket van '.$account['lastname'].', '.$account['firstname'].' '.$account['insertion'];
                 $mailMessage = 'Nieuw ticket van '.$account['lastname'].', '.$account['firstname'].' '.$account['instertion'].':'."\r\n"."\r\n";
                 $mailMessage = $message."\r\n"."\r\n";
-                $mailMessage = 'Ga naar bericht: https://localhost/UniversalElectro/admin/index.php?page=1&action=2';
+                $mailMessage = 'Ga naar bericht: https://universalelectro.nl/admin/index.php?page=1&action=2';
 
                 // Loop through quotation products
                 foreach($products as $productKey => $productValue) {
