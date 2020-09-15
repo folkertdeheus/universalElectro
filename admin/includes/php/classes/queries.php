@@ -561,7 +561,18 @@ class Queries extends Db
      */
     public function allLanguages() : array
     {
-        return $this->row('SELECT * FROM `languages` LIMIT 1');
+        // Get data
+        $languages = $this->all('SELECT * FROM `language`');
+
+        // Create empty array
+        $return = array();
+
+        // Set array
+        foreach($languages as $key => $value) {
+            $return[$value['field']] = $value['value'];
+        }
+
+        return $return;
     }
 
     /**
@@ -572,19 +583,18 @@ class Queries extends Db
      */
     public function editLanguages($array) : int
     {
-        // Start prepared statement
-        $statement = 'UPDATE `languages` SET';
+
+        $statement = null;
 
         // Build rows
         foreach($GLOBALS['fieldsArray'] as $key => $value) {
-            $statement .= ' `'.$value.'` = ?,';
+            if ($this->none('UPDATE `language` SET `value` = ? WHERE `field` = ?', array($array[$key], $value)) != 1) {
+                return false;
+            }
         }
 
-        // Remove last comma
-        $statement = substr($statement, 0, -1);
+        return true;
 
-        // Run query
-        return $this->none($statement, $array);
     }
 
     /**
@@ -1004,7 +1014,7 @@ class Queries extends Db
      */
     public function addContact($name, $email, $phone, $subject, $message, $customer) : int
     {
-        return $this->none('INSERT INTO `contact` (`name`, `email`, `phone`, `subject`, `message`, `customer`) VALUES (?, ?, ?, ?, ?, ?)', array($name, $email, $phone, $subject, $message, $customer));
+        return $this->none('INSERT INTO `contacts` (`name`, `email`, `phone`, `subject`, `message`, `customer`) VALUES (?, ?, ?, ?, ?, ?)', array($name, $email, $phone, $subject, $message, $customer));
     }
 
     /**
@@ -1014,7 +1024,7 @@ class Queries extends Db
      */
     public function countContact() : int
     {
-        return $this->one('SELECT COUNT(*) FROM `contact`');
+        return $this->one('SELECT COUNT(*) FROM `contacts`');
     }
 
     /**
@@ -1024,7 +1034,7 @@ class Queries extends Db
      */
     public function allContact() : array
     {
-        return $this->all('SELECT * FROM `contact` ORDER BY `id` DESC');
+        return $this->all('SELECT * FROM `contacts` ORDER BY `id` DESC');
     }
 
     /**
@@ -1035,7 +1045,7 @@ class Queries extends Db
      */
     public function getContact($id) : array
     {
-        return $this->row('SELECT * FROM `contact` WHERE `id` = ?', array($id));
+        return $this->row('SELECT * FROM `contacts` WHERE `id` = ?', array($id));
     }
 
     /**
@@ -1046,7 +1056,7 @@ class Queries extends Db
      */
     public function deleteContact($id) : int
     {
-        return $this->none('DELETE FROM `contact` WHERE `id` = ?', array($id));
+        return $this->none('DELETE FROM `contacts` WHERE `id` = ?', array($id));
     }
 
     /**

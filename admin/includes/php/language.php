@@ -156,7 +156,8 @@ $languageFields = [
         'quote_send' => '"Send quotation request"',
         'quote_login' => '"Login message"',
         'quote_sent' => '"Quotation request sent"',
-        'quote_time' => 'Time requested'
+        'quote_time' => 'Time requested',
+        'quote_notsent' => '"Quotation request not sent"'
     ],
     'Products' => [
         'product_articlenumber' => '"Articlenumber"',
