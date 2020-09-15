@@ -16,7 +16,7 @@ $account = $q->getCustomer($_SESSION['webuser']);
 // SENDING QUOTATION TO COMPANY
 
 // Check if the email adress is valid
-if (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+if (filter_var($account['email'], FILTER_VALIDATE_EMAIL)) {
     
     // Set variables
     $mailFrom = 'webshop@universalelectro.nl';
