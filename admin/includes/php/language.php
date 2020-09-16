@@ -9,6 +9,9 @@ $languageFields = [
     'Header' => [
         'header_text' => '"Header text"',
     ],
+    'Home' => [
+        'home_cookie' => 'Cookie notice'
+    ],
     'Quick Enquiry' => [
         'quickenquiry_button' => 'Button text',
         'quickenquiry_text' => 'Top text',
@@ -176,7 +179,8 @@ $fieldsTextarea = [
     'footer_contact',
     'footer_tax',
     'contact_choosecontact',
-    'contact_choosetickets'
+    'contact_choosetickets',
+    'home_cookie'
 ];
 
 // Set array with the names without headings for form handling

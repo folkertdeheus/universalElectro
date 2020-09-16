@@ -40,6 +40,11 @@ function languageChange(lang = null) {
         document.getElementById('en_header').style.display = 'none';
         document.getElementById('nl_header').style.display = 'block';
 
+        if (document.getElementById('cookienotice').style.display != 'none') {
+            document.getElementById('en_notice').style.display = 'none';
+            document.getElementById('nl_notice').style.display = 'block';
+        }
+
         // Main content
         mainEnglish.style.display = 'none';
         mainDutch.style.display = 'block';
@@ -71,6 +76,11 @@ function languageChange(lang = null) {
         document.getElementById('en_header').style.display = 'block';
         document.getElementById('nl_header').style.display = 'none';
 
+        if (document.getElementById('cookienotice').style.display != 'none') {
+            document.getElementById('en_notice').style.display = 'block';
+            document.getElementById('nl_notice').style.display = 'none';
+        }
+
         // Main content
         mainEnglish.style.display = 'block';
         mainDutch.style.display = 'none';
@@ -94,20 +104,5 @@ function languageChange(lang = null) {
             document.getElementById('en_menu' + i).style.display = 'block';
             document.getElementById('nl_menu' + i).style.display = 'none';
         }
-    }
-}
-
-/**
- * Trigger function on page load
- */
-window.onload = function() {
-    // Check if language is already stored in the browser's local storage
-    var storedLanguage = localStorage.getItem('language');
-
-    // Send stored language with the function if set
-    if (storedLanguage == 'English' || storedLanguage == 'Nederlands') {
-        languageChange(storedLanguage);
-    } else {
-        languageChange();
     }
 }

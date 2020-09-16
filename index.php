@@ -49,9 +49,16 @@ $language = $q->allLanguages();
     <script src="includes/js/qe_mouseout.js"></script>
     <script src="includes/js/createCustomer.js"></script>
     <script src="includes/js/addTicket.js"></script>
+    <script src="includes/js/cookienotice.js"></script>
+    <script src="includes/js/onload.js"></script>
 </head>
 
 <body>
+
+    <div class="cookienotice" id="cookienotice" onclick="cookienotice()">
+        <span id="en_notice"><?= $language['en_home_cookie']; ?></span>
+        <span id="nl_notice"><?= $language['nl_home_cookie']; ?></span>
+    </div>
 
 <?php
 
