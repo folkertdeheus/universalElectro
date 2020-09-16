@@ -8,6 +8,9 @@
 define('PATH', 'includes/php/');
 define('ADM', 'admin/includes/php/');
 
+// Get open SSL key
+require_once(ADM.'openssl.php');
+
 // Logout
 require_once(PATH.'logout.php');
 
@@ -27,10 +30,6 @@ require_once(ADM.'conn.php');
 require_once(ADM.'classes/db.php');
 $db = new \Blackbeard\Db($db_name, $db_host, $db_username, $db_password);
 
-// Login class
-require_once(PATH.'classes/login.php');
-$login = new \Blackbeard\WebLogin();
-
 // Queries
 require_once(ADM.'classes/queries.php');
 $q = new \Blackbeard\Queries($db_name, $db_host, $db_username, $db_password);
@@ -39,5 +38,12 @@ $q = new \Blackbeard\Queries($db_name, $db_host, $db_username, $db_password);
 require_once(PATH.'classes/webforms.php');
 $forms = new \Blackbeard\Webforms();
 
+// Login class
+require_once(PATH.'classes/login.php');
+$login = new \Blackbeard\WebLogin();
+
 // Webshop session creation and cookie setting/getting
 require_once(PATH.'webshopsession.php');
+
+// Decryption
+require_once(ADM.'decrypt.php');

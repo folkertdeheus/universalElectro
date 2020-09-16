@@ -10,10 +10,9 @@ if (login()) {
 ?>
     <div class="content">
 
-       <!-- <div class="toolbar">
-            <a href="index.php?page=1&action=1&sub=1">Add customer</a>
+        <div class="toolbar">
+            <a href="index.php?page=1&action=1">Customers</a>
             <a href="index.php?page=1&action=2">Tickets</a>
-            <a href="index.php?page=1&action=3">Messages</a>
         </div> <!-- toolbar -->
 
         <div class="table">

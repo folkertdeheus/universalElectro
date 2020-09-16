@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This page contains the content inclusion of the crm part
+ * This file contains the content inclusion of the crm part
  * The content is controlled by $_GET['action'] and it's child $_GET['sub']
  */
 

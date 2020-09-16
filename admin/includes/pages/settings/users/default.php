@@ -9,7 +9,7 @@
 if (login()) {
 
     // Check if a user was deleted
-    if (isset($_GET['delete']) && $_GET['delete'] != null) {
+    if (isset($_GET['delete']) && $_GET['delete'] != null && $_GET['delete'] != 0) {
         
         // Get user information
         $user = $q->getUserById($_GET['delete']);

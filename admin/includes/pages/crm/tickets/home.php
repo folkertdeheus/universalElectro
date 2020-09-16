@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This page contains the overview of the tickets
+ * This file contains the overview of the tickets
  */
 
 // Check if user is logged in when accessing this file
@@ -12,6 +12,11 @@ if (login()) {
 ?>
 
     <div class="content">
+
+        <div class="toolbar">
+            <a href="index.php?page=1&action=1">Customers</a>
+            <a href="index.php?page=1&action=3">Messages</a>
+        </div> <!-- toolbar -->
 
 <?php
 
@@ -25,6 +30,9 @@ if (login()) {
                 $status = $q->getTicketStatus($ticketValue['status']);
                 $category = $q->getTicketCategory($ticketValue['category']);
                 $customer = $q->getCustomer($ticketValue['customer']);
+
+                // Set iv for decryption
+                $iv = $customer['iv'];
 
                 // Get last message from ticket
                 $lastMessage = $q->getLastMessageFromTicket($ticketValue['id']);
@@ -50,7 +58,7 @@ if (login()) {
                     <a href="index.php?page=1&action=2&sub=1&id=<?= $ticketValue['id']; ?>">
                         <div class="subject">
                             <div class="customer">
-                                <?= $customer['lastname'].', '.$customer['firstname'].' '.$customer['insertion']; ?>
+                                <?= decrypt($customer['lastname'], $iv).', '.decrypt($customer['firstname'], $iv).' '.decrypt($customer['insertion'], $iv); ?>
                             </div> <!-- customer -->
                             <?= $ticketValue['subject']; ?>
                         </div> <!-- subject -->

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This page contains the main menu of the CMS
+ * This file contains the main menu of the CMS
  */
 
 // Check if user is logged in when accessing this file
@@ -24,7 +24,7 @@ if (login()) {
                 <a href="index.php?page=2&action=1">Products</a>
                 <a href="index.php?page=2&action=4">Categories</a>
                 <a href="index.php?page=2&action=3">Brands</a>
-                <a href="index.php?page=2&action=2">Orders</a>
+                <a href="index.php?page=2&action=2">Quotations</a>
             </div> <!-- menuright -->
         </div> <!-- menublock -->
     </div> <!-- menutop -->

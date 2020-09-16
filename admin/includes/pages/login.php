@@ -1,3 +1,11 @@
+<?php
+
+/**
+ * This file contains the login form
+ */
+
+?>
+
 <div class="content">
     <form method="post">
         <input type="text" name="username" placeholder="Username" required />

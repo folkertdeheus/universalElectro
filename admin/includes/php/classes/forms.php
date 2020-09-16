@@ -935,7 +935,7 @@ class Forms extends Queries
         // Loop through POST values and set variables
         foreach($_POST as $key => $value) {
             if ($key != 'password' && $key != 'form') {
-                $$key = htmlentities($value);
+                $$key = $this->encrypt(htmlentities($value));
             }
         }
 

@@ -34,14 +34,18 @@ if (login()) {
                     </tr>
 <?php
                 foreach($users as $userKey => $userValue) {
+
+                    // Skip creator account
+                    if ($userValue['id'] != 0) {
 ?>
-                    <tr>
-                        <td><?= $userValue['id']; ?></td>
-                        <td><?= $userValue['username']; ?></td>
-                        <td class="icon"><a href="index.php?page=4&action=1&sub=2&id=<?= $userValue['id']; ?>"><img src="includes/images/edit.png" alt="edit" /></a></td>
-                        <td class="icon"><a href="index.php?page=4&action=1&sub=3&id=<?= $userValue['id']; ?>"><img src="includes/images/delete.png" alt="delete" /></a></td>
-                    </tr>
+                        <tr>
+                            <td><?= $userValue['id']; ?></td>
+                            <td><?= $userValue['username']; ?></td>
+                            <td class="icon"><a href="index.php?page=4&action=1&sub=2&id=<?= $userValue['id']; ?>"><img src="includes/images/edit.png" alt="edit" /></a></td>
+                            <td class="icon"><a href="index.php?page=4&action=1&sub=3&id=<?= $userValue['id']; ?>"><img src="includes/images/delete.png" alt="delete" /></a></td>
+                        </tr>
 <?php
+                    }
                 }
 ?>
                 </table>

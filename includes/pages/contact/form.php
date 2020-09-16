@@ -13,9 +13,12 @@ if (login()) {
     // Get customer data
     $customer = $q->getCustomer($_SESSION['webuser']);
 
+    // Set iv for decryption
+    $iv = $customer['iv'];
+
     // Set fields
-    $nameField = '<input type="text" name="name" id="name"  value="'.$customer['firstname'].' '.$customer['insertion'].' '.$customer['lastname'].'" readonly required />';
-    $emailField = '<input type="text" name="email" id="email" value="'.$customer['email'].'" readonly required />';
+    $nameField = '<input type="text" name="name" id="name"  value="'.decrypt($customer['firstname'], $iv).' '.decrypt($customer['insertion'], $iv).' '.decrypt($customer['lastname'], $iv).'" readonly required />';
+    $emailField = '<input type="text" name="email" id="email" value="'.decrypt($customer['email'], $iv).'" readonly required />';
     
     if (isset($customer['phone']) && $customer['phone'] != null) {
         $phone = $customer['phone'];

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This page contains the user account info
+ * This file contains the user account info
  */
 
 // Check if user is logged in
@@ -9,6 +9,9 @@ if (login()) {
 
     // Get user information
     $customer = $q->getCustomer($_SESSION['webuser']);
+
+    // Set iv for decryption
+    $iv = $customer['iv'];
 
 ?>
 
@@ -23,23 +26,23 @@ if (login()) {
                 <table>
                     <tr>
                         <td class="tdname"><?= $language['en_account_name']; ?></td>
-                        <td><?= $customer['lastname'].', '.$customer['firstname'].' '.$customer['insertion']; ?></td>
+                        <td><?= decrypt($customer['lastname'], $iv).', '.decrypt($customer['firstname'], $iv).' '.decrypt($customer['insertion'], $iv); ?></td>
                     </tr>
                     <tr>
                         <td class="tdname"><?= $language['en_account_email']; ?></td>
-                        <td><?= $customer['email']; ?></td>
+                        <td><?= decrypt($customer['email'], $iv); ?></td>
                     </tr>
                     <tr>
                         <td class="tdname"><?= $language['en_account_phone']; ?></td>
-                        <td><?= $customer['phone']; ?></td>
+                        <td><?= decrypt($customer['phone'], $iv); ?></td>
                     </tr>
                     <tr>
                         <td class="tdname"><?= $language['en_account_company']; ?></td>
-                        <td><?= $customer['company_name']; ?></td>
+                        <td><?= decrypt($customer['company_name'], $iv); ?></td>
                     </tr>
                     <tr>
                         <td class="tdname"><?= $language['en_account_tax']; ?></td>
-                        <td><?= $customer['taxnumber']; ?></td>
+                        <td><?= decrypt($customer['taxnumber'], $iv); ?></td>
                     </tr>
                 </table>
             </div> <!-- accountdetails -->
@@ -52,23 +55,23 @@ if (login()) {
                 <table>
                     <tr>
                         <td class="tdname"><?= $language['en_account_adress']; ?></td>
-                        <td><?= $customer['shipping_street'].' '.$customer['shipping_housenumber']; ?></td>
+                        <td><?= decrypt($customer['shipping_street'], $iv).' '.decrypt($customer['shipping_housenumber'], $iv); ?></td>
                     </tr>
                     <tr>
                         <td class="tdname"><?= $language['en_account_postalcode']; ?></td>
-                        <td><?= $customer['shipping_postalcode']; ?></td>
+                        <td><?= decrypt($customer['shipping_postalcode'], $iv); ?></td>
                     </tr>
                     <tr>
                         <td class="tdname"><?= $language['en_account_city']; ?></td>
-                        <td><?= $customer['shipping_city']; ?></td>
+                        <td><?= decrypt($customer['shipping_city'], $iv); ?></td>
                     </tr>
                     <tr>
                         <td class="tdname"><?= $language['en_account_provence']; ?></td>
-                        <td><?= $customer['shipping_provence']; ?></td>
+                        <td><?= decrypt($customer['shipping_provence'], $iv); ?></td>
                     </tr>
                     <tr>
                         <td class="tdname"><?= $language['en_account_country']; ?></td>
-                        <td><?= $customer['shipping_country']; ?></td>
+                        <td><?= decrypt($customer['shipping_country'], $iv); ?></td>
                     </tr>
                 </table>
             </div> <!-- acountdetails -->
@@ -81,23 +84,23 @@ if (login()) {
                 <table>
                     <tr>
                         <td class="tdname"><?= $language['en_account_street']; ?></td>
-                        <td><?= $customer['billing_street'].' '.$customer['billing_housenumber']; ?></td>
+                        <td><?= decrypt($customer['billing_street'], $iv).' '.decrypt($customer['billing_housenumber'], $iv); ?></td>
                     </tr>
                     <tr>
                         <td class="tdname"><?= $language['en_account_postalcode']; ?></td>
-                        <td><?= $customer['billing_postalcode']; ?></td>
+                        <td><?= decrypt($customer['billing_postalcode'], $iv); ?></td>
                     </tr>
                     <tr>
                         <td class="tdname"><?= $language['en_account_city']; ?></td>
-                        <td><?= $customer['billing_city']; ?></td>
+                        <td><?= decrypt($customer['billing_city'], $iv); ?></td>
                     </tr>
                     <tr>
                         <td class="tdname"><?= $language['en_account_provence']; ?></td>
-                        <td><?= $customer['billing_provence']; ?></td>
+                        <td><?= decrypt($customer['billing_provence'], $iv); ?></td>
                     </tr>
                     <tr>
                         <td class="tdname"><?= $language['en_account_country']; ?></td>
-                        <td><?= $customer['billing_country']; ?></td>
+                        <td><?= decrypt($customer['billing_country'], $iv); ?></td>
                     </tr>
                 </table>
 
@@ -151,56 +154,56 @@ if (login()) {
                     Tickets
                 </div> <!-- title -->
 <?php
-                    if ($q->countTicketsByCustomer($_SESSION['webuser']) > 0) {
-                        $tickets = $q->getTicketsByCustomer($_SESSION['webuser']);
+                if ($q->countTicketsByCustomer($_SESSION['webuser']) > 0) {
+                    $tickets = $q->getTicketsByCustomer($_SESSION['webuser']);
 ?>
-                        <table>
-                            <tr>
-                                <td class="accountticket"><?= $language['en_tickets_subject']; ?></td>
-                                <td class="accountticket"><?= $language['en_tickets_status']; ?></td>
-                                <td class="accountticket"><?= $language['en_tickets_category']; ?></td>
-                                <td class="accountticket"><?= $language['en_tickets_priority']; ?></td>
-                            </tr>
+                    <table>
+                        <tr>
+                            <td class="accountticket"><?= $language['en_tickets_subject']; ?></td>
+                            <td class="accountticket"><?= $language['en_tickets_status']; ?></td>
+                            <td class="accountticket"><?= $language['en_tickets_category']; ?></td>
+                            <td class="accountticket"><?= $language['en_tickets_priority']; ?></td>
+                        </tr>
 <?php
-                        foreach($tickets as $ticketKey => $ticketValue) {
+                    foreach($tickets as $ticketKey => $ticketValue) {
 
-                            // Set status, category and priority
-                            $status = $q->getTicketStatus($ticketValue['status']);
-                            $category = $q->getTicketCategory($ticketValue['category']);
+                        // Set status, category and priority
+                        $status = $q->getTicketStatus($ticketValue['status']);
+                        $category = $q->getTicketCategory($ticketValue['category']);
 
-                            switch($ticketValue['priority']) {
-                                case '1':
-                                    $priority = $language['en_tickets_priolow'];
-                                    break;
-                                case '2':
-                                    $priority = $language['en_tickets_priomed'];
-                                    break;
-                                case '3':
-                                    $priority = $language['en_tickets_priohigh'];
-                                    break;
-                                case '4':
-                                    $priority = $language['en_tickets_priocrit'];
-                                    break;
-                                default:
-                                    $priority = $language['en_tickets_priomed'];
-                            }
-?>
-                            <tr class="quotesummary" onclick="window.location='index.php?page=3&action=1&sub=2&id=<?= $ticketValue['id']; ?>'">
-                                <td class="accountticket"><?= $ticketValue['subject']; ?></td>
-                                <td class="accountticket"><?= $status['en_web_name']; ?></td>
-                                <td class="accountticket"><?= $category['name']; ?></td>
-                                <td class="accountticket"><?= $priority; ?></td>
-                            </tr>
-<?php
+                        switch($ticketValue['priority']) {
+                            case '1':
+                                $priority = $language['en_tickets_priolow'];
+                                break;
+                            case '2':
+                                $priority = $language['en_tickets_priomed'];
+                                break;
+                            case '3':
+                                $priority = $language['en_tickets_priohigh'];
+                                break;
+                            case '4':
+                                $priority = $language['en_tickets_priocrit'];
+                                break;
+                            default:
+                                $priority = $language['en_tickets_priomed'];
                         }
 ?>
-                        </table>
+                        <tr class="quotesummary" onclick="window.location='index.php?page=3&action=1&sub=2&id=<?= $ticketValue['id']; ?>'">
+                            <td class="accountticket"><?= $ticketValue['subject']; ?></td>
+                            <td class="accountticket"><?= $status['en_web_name']; ?></td>
+                            <td class="accountticket"><?= $category['name']; ?></td>
+                            <td class="accountticket"><?= $priority; ?></td>
+                        </tr>
 <?php
-                    } else {
-                        echo $language['en_account_notickets'];
                     }
 ?>
-                    <a href="index.php?page=3&action=1"><?= $language['en_account_newticket']; ?></a>
+                    </table>
+<?php
+                } else {
+                    echo $language['en_account_notickets'];
+                }
+?>
+                <a href="index.php?page=3&action=1"><?= $language['en_account_newticket']; ?></a>
             </div> <!-- accountdetails -->
             
         </div> <!-- mainRight -->
@@ -208,7 +211,7 @@ if (login()) {
 </main>
 
 <main id="mainDutch">
-<div class="mainContent">
+    <div class="mainContent">
         <div class="mainLeft">
             <div class="accountdetails">
                 <div class="title">
@@ -218,23 +221,23 @@ if (login()) {
                 <table>
                     <tr>
                         <td class="tdname"><?= $language['nl_account_name']; ?></td>
-                        <td><?= $customer['lastname'].', '.$customer['firstname'].' '.$customer['insertion']; ?></td>
+                        <td><?= decrypt($customer['lastname'], $iv).', '.decrypt($customer['firstname'], $iv).' '.decrypt($customer['insertion'], $iv); ?></td>
                     </tr>
                     <tr>
                         <td class="tdname"><?= $language['nl_account_email']; ?></td>
-                        <td><?= $customer['email']; ?></td>
+                        <td><?= decrypt($customer['email'], $iv); ?></td>
                     </tr>
                     <tr>
                         <td class="tdname"><?= $language['nl_account_phone']; ?></td>
-                        <td><?= $customer['phone']; ?></td>
+                        <td><?= decrypt($customer['phone'], $iv); ?></td>
                     </tr>
                     <tr>
                         <td class="tdname"><?= $language['nl_account_company']; ?></td>
-                        <td><?= $customer['company_name']; ?></td>
+                        <td><?= decrypt($customer['company_name'], $iv); ?></td>
                     </tr>
                     <tr>
                         <td class="tdname"><?= $language['nl_account_tax']; ?></td>
-                        <td><?= $customer['taxnumber']; ?></td>
+                        <td><?= decrypt($customer['taxnumber'], $iv); ?></td>
                     </tr>
                 </table>
             </div> <!-- accountdetails -->
@@ -247,23 +250,23 @@ if (login()) {
                 <table>
                     <tr>
                         <td class="tdname"><?= $language['nl_account_adress']; ?></td>
-                        <td><?= $customer['shipping_street'].' '.$customer['shipping_housenumber']; ?></td>
+                        <td><?= decrypt($customer['shipping_street'], $iv).' '.decrypt($customer['shipping_housenumber'], $iv); ?></td>
                     </tr>
                     <tr>
                         <td class="tdname"><?= $language['nl_account_postalcode']; ?></td>
-                        <td><?= $customer['shipping_postalcode']; ?></td>
+                        <td><?= decrypt($customer['shipping_postalcode'], $iv); ?></td>
                     </tr>
                     <tr>
                         <td class="tdname"><?= $language['nl_account_city']; ?></td>
-                        <td><?= $customer['shipping_city']; ?></td>
+                        <td><?= decrypt($customer['shipping_city'], $iv); ?></td>
                     </tr>
                     <tr>
                         <td class="tdname"><?= $language['nl_account_provence']; ?></td>
-                        <td><?= $customer['shipping_provence']; ?></td>
+                        <td><?= decrypt($customer['shipping_provence'], $iv); ?></td>
                     </tr>
                     <tr>
                         <td class="tdname"><?= $language['nl_account_country']; ?></td>
-                        <td><?= $customer['shipping_country']; ?></td>
+                        <td><?= decrypt($customer['shipping_country'], $iv); ?></td>
                     </tr>
                 </table>
             </div> <!-- acountdetails -->
@@ -276,23 +279,23 @@ if (login()) {
                 <table>
                     <tr>
                         <td class="tdname"><?= $language['nl_account_street']; ?></td>
-                        <td><?= $customer['billing_street'].' '.$customer['billing_housenumber']; ?></td>
+                        <td><?= decrypt($customer['billing_street'], $iv).' '.decrypt($customer['billing_housenumber'], $iv); ?></td>
                     </tr>
                     <tr>
                         <td class="tdname"><?= $language['nl_account_postalcode']; ?></td>
-                        <td><?= $customer['billing_postalcode']; ?></td>
+                        <td><?= decrypt($customer['billing_postalcode'], $iv); ?></td>
                     </tr>
                     <tr>
                         <td class="tdname"><?= $language['nl_account_city']; ?></td>
-                        <td><?= $customer['billing_city']; ?></td>
+                        <td><?= decrypt($customer['billing_city'], $iv); ?></td>
                     </tr>
                     <tr>
                         <td class="tdname"><?= $language['nl_account_provence']; ?></td>
-                        <td><?= $customer['billing_provence']; ?></td>
+                        <td><?= decrypt($customer['billing_provence'], $iv); ?></td>
                     </tr>
                     <tr>
                         <td class="tdname"><?= $language['nl_account_country']; ?></td>
-                        <td><?= $customer['billing_country']; ?></td>
+                        <td><?= decrypt($customer['billing_country'], $iv); ?></td>
                     </tr>
                 </table>
 

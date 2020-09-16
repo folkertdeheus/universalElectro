@@ -8,8 +8,11 @@
 if (login()) {
     
     $customer = $q->getCustomer($_GET['id']);
-    $orders = $q->getOrdersByCustomer($_GET['id']);
+    $quotes = $q->getQuotationsFromCustomer($_GET['id']);
     $tickets = $q->getTicketsByCustomer($_GET['id']);
+
+    // Set iv for decryption
+    $iv = $customer['iv'];
 ?>
 
     <div class="content">
@@ -21,27 +24,27 @@ if (login()) {
                     </tr>
                     <tr>
                         <td>Name</td>
-                        <td><?= $customer['lastname'].', '.$customer['firstname'].' '.$customer['insertion']; ?></td>
+                        <td><?= decrypt($customer['lastname'], $iv).', '.decrypt($customer['firstname'], $iv).' '.decrypt($customer['insertion'], $iv); ?></td>
                     </tr>
                     <tr>
                         <td>Email</td>
-                        <td><?= $customer['email']; ?></td>
+                        <td><?= decrypt($customer['email'], $iv); ?></td>
                     </tr>
                     <tr>
                         <td>Phone</td>
-                        <td><?= $customer['phone']; ?></td>
+                        <td><?= decrypt($customer['phone'], $iv); ?></td>
                     </tr>
                     <tr>
                         <td>Company</td>
-                        <td><?= $customer['company_name']; ?></td>
+                        <td><?= decrypt($customer['company_name'], $iv); ?></td>
                     </tr>
                     <tr>
                         <td>Tax number</td>
-                        <td><?= $customer['taxnumber']; ?></td>
+                        <td><?= decrypt($customer['taxnumber'], $iv); ?></td>
                     </tr>
                     <tr>
                         <td>Remarks</td>
-                        <td><?= nl2br($customer['remarks']); ?></td>
+                        <td><?= nl2br(decrypt($customer['remarks'], $iv)); ?></td>
                     </tr>
                 </table>
 
@@ -51,27 +54,27 @@ if (login()) {
                     </tr>
                     <tr>
                         <td>Street</td>
-                        <td><?= $customer['shipping_street']; ?></td>
+                        <td><?= decrypt($customer['shipping_street'], $iv); ?></td>
                     </tr>
                     <tr>
                         <td>Housenumber</td>
-                        <td><?= $customer['shipping_housenumber']; ?></td>
+                        <td><?= decrypt($customer['shipping_housenumber'], $iv); ?></td>
                     </tr>
                     <tr>
                         <td>Postal code</td>
-                        <td><?= $customer['shipping_postalcode']; ?></td>
+                        <td><?= decrypt($customer['shipping_postalcode'], $iv); ?></td>
                     </tr>
                     <tr>
                         <td>City</td>
-                        <td><?= $customer['shipping_city']; ?></td>
+                        <td><?= decrypt($customer['shipping_city'], $iv); ?></td>
                     </tr>
                     <tr>
                         <td>Provence</td>
-                        <td><?= $customer['shipping_provence']; ?></td>
+                        <td><?= decrypt($customer['shipping_provence'], $iv); ?></td>
                     </tr>
                     <tr>
                         <td>Country</td>
-                        <td><?= $customer['shipping_country']; ?></td>
+                        <td><?= decrypt($customer['shipping_country'], $iv); ?></td>
                     </tr>
                 </table>
 
@@ -81,27 +84,27 @@ if (login()) {
                     </tr>
                     <tr>
                         <td>Street</td>
-                        <td><?= $customer['billing_street']; ?></td>
+                        <td><?= decrypt($customer['billing_street'], $iv); ?></td>
                     </tr>
                     <tr>
                         <td>Housenumber</td>
-                        <td><?= $customer['billing_housenumber']; ?></td>
+                        <td><?= decrypt($customer['billing_housenumber'], $iv); ?></td>
                     </tr>
                     <tr>
                         <td>Postal code</td>
-                        <td><?= $customer['billing_postalcode']; ?></td>
+                        <td><?= decrypt($customer['billing_postalcode'], $iv); ?></td>
                     </tr>
                     <tr>
                         <td>City</td>
-                        <td><?= $customer['billing_city']; ?></td>
+                        <td><?= decrypt($customer['billing_city'], $iv); ?></td>
                     </tr>
                     <tr>
                         <td>Provence</td>
-                        <td><?= $customer['billing_provence']; ?></td>
+                        <td><?= decrypt($customer['billing_provence'], $iv); ?></td>
                     </tr>
                     <tr>
                         <td>Country</td>
-                        <td><?= $customer['billing_country']; ?></td>
+                        <td><?= decrypt($customer['billing_country'], $iv); ?></td>
                     </tr>
                 </table>
             </div> <!-- content_left -->
@@ -109,20 +112,26 @@ if (login()) {
             <div class="content_right">
                 <table>
                     <tr>
-                        <th colspan=2 class="form_cat">Order history</th>
+                        <th colspan=2 class="form_cat">Quotation history</th>
                     </tr>
 <?php
-                    if ($q->countOrdersByCustomer($_GET['id']) > 0) {
+                    // Check if there are qoutation requests
+                    if ($q->countQuotationsFromCustomer($_GET['id']) > 0) {
+
+                        // Loop through quotation requests
+                        foreach($quotes as $quoteKey => $quoteValue) {
 ?>
-                        <tr>
-                            <td><?= $orders['id']; ?></td>
-                            <td><?= $orders['timestamp']; ?></td>
-                        </tr>
+                            <tr>
+                                <td><?= $quoteValue['id']; ?></td>
+                                <td><?= $quoteValue['timestamp']; ?></td>
+                            </tr>
 <?php
+                        }
+
                     } else {
 ?>
                         <tr>
-                            <td colspan=2>No orders</td>
+                            <td colspan=2>No quotation requests</td>
                         </tr>
 <?php
                     }
@@ -134,15 +143,21 @@ if (login()) {
                         <th colspan=4 class="form_cat">Tickets</td>
                     </tr>
 <?php
+                    // Check if there are tickets
                     if ($q->countTicketsByCustomer($_GET['id']) > 0) {
+
+                        // Loop through tickets
+                        foreach($tickets as $ticketKey => $ticketValue) {
 ?>
-                        <tr>
-                            <td><?= $tickets['subject']; ?></td>
-                            <td><?= $tickets['status']; ?></td>
-                            <td><?= $tickets['started']; ?></td>
-                            <td><?= $tickets['closed']; ?></td>
-                        </tr>
+                            <tr>
+                                <td><?= $ticketValue['subject']; ?></td>
+                                <td><?= $ticketValue['status']; ?></td>
+                                <td><?= $ticketValue['started']; ?></td>
+                                <td><?= $ticketValue['closed']; ?></td>
+                            </tr>
 <?php
+                        }
+
                     } else {
 ?>
                         <tr>

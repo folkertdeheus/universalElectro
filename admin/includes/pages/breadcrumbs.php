@@ -152,8 +152,8 @@ if (login()) {
                             break;
                         
                         case '2':
-                            // Orders
-                            echo '&nbsp;>&nbsp;<a href="index.php?page=2&action=2">Orders</a>';
+                            // Quotations
+                            echo '&nbsp;>&nbsp;<a href="index.php?page=2&action=2">Quotations</a>';
 
                             break;
 

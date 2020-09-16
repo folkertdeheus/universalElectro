@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * This file contains the formhandling class for the website forms
+ * It relies on the queries class inside the admin folder
+ */
+
 namespace Blackbeard;
 
 class Webforms extends Queries
@@ -9,6 +14,8 @@ class Webforms extends Queries
     private $post = null; // POST data sanitized
     private $salt = null; // Password hash salt, set in constructor
     private $cSalt = null; // Customer password hash salt, set in constructor
+    private $iv = null; // Set iv for customers
+    private $encMethod = "AES-256-CBC"; // Encryption method
 
     // List accepted forms
     private $forms = [
@@ -31,6 +38,7 @@ class Webforms extends Queries
     {
         $this->salt = $GLOBALS['salt'];
         $this->cSalt = $GLOBALS['customerSalt'];
+        $this->key = $GLOBALS['openSslKey'];
 
         if (isset($_POST['form']) && in_array($_POST['form'],$this->forms)) {
             $form = $_POST['form']; // Direct handling isn't allowed, so one variable needed
@@ -71,6 +79,26 @@ class Webforms extends Queries
     }
 
     /**
+     * This function creates in IV vector for the openssl encryption
+     */
+    private function iv() : void
+    {
+        $ivlen = openssl_cipher_iv_length($this->encMethod);
+        $this->iv = openssl_random_pseudo_bytes($ivlen);
+    }
+
+    /**
+     * This function encrypts data
+     * 
+     * @param string $input
+     * @return string
+     */
+    private function encrypt($input) : string
+    {
+        return openssl_encrypt($input, $this->encMethod, $this->key, 0, $this->iv);
+    }
+
+    /**
      * Add customer through website login page
      */
     public function createCustomer() : void
@@ -86,18 +114,21 @@ class Webforms extends Queries
             return;
         }
 
-        // Loop through POST values and set variables
-        foreach($_POST as $key => $value) {
-            if ($key != 'password' && $key != 'form') {
-                $$key = htmlentities($value);
-            }
-        }
-
         // Check if email is valid
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
 
             $this->insertLog('Customers', 'Add', 'Adding customer failed, email is not valid ('.$email.')');
             return;
+        }
+
+        // Set IV vector for encryption
+        $this->iv();
+
+        // Loop through POST values and set variables
+        foreach($_POST as $key => $value) {
+            if ($key != 'password' && $key != 'form') {
+                $$key = $this->encrypt(htmlentities($value));
+            }
         }
 
         // Check if email is unique
@@ -111,7 +142,7 @@ class Webforms extends Queries
         $password = hash('whirlpool', $this->cSalt.$_POST['password']);
 
         // Insert customer
-        if ($this->addCustomers($firstname, $insertion, $lastname, $email, $phone, null, null, null, null, null, null, null, null, null, null, null, null, null, null, $password, null) == 1) {
+        if ($this->addCustomers($firstname, $insertion, $lastname, $email, $phone, null, null, null, null, null, null, null, null, null, null, null, null, null, null, $password, null, $this->iv) == 1) {
 
             // Check if email adress is added, and only exists 1 time
             if ($this->countCustomersByEmail($email) == 1) {

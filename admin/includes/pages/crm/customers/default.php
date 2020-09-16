@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This page contains the content inclusion of the customers part
+ * This file contains the content inclusion of the customers part
  * The content is controlled by $_GET['sub']
  */
 
@@ -13,12 +13,15 @@ if (login()) {
         
         // Get customer information
         $customer = $q->getCustomer($_GET['delete']);
+
+        // Set iv for decryption
+        $iv = $customer['iv'];
         
         // Delete customer
         $q->deleteCustomer($customer['id']);
         
         // Insert Log
-        $q->insertLog('Customers', 'Delete', 'Deleted customer '.$customer['lastname'].', '.$customer['firstname'].' '.$customer['insertion'].' with ID '.$customer['id'].'. By '.user());
+        $q->insertLog('Customers', 'Delete', 'Deleted customer '.decrypt($customer['lastname'], $iv).', '.decrypt($customer['firstname'], $iv).' '.decrypt($customer['insertion'], $iv).' with ID '.$customer['id'].'. By '.user());
     }
 
     // Check if a setting is selected
