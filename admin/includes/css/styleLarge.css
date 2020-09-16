@@ -536,5 +536,6 @@ footer {
 
 /* Do not replace to default.css, this is needed for overwrite! */
 .critical {
+    /* Background */
     border: 1px solid rgba(255, 0, 0, 1);
 }

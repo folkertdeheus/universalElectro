@@ -1469,6 +1469,49 @@ class Queries extends Db
     }
 
     /**
+     * Get all quotations
+     * 
+     * @return array
+     */
+    public function allQuotations() : array
+    {
+        return $this->all('SELECT * FROM `quotation` ORDER BY `id` DESC');
+    }
+
+    /**
+     * Count all quotations
+     * 
+     * @return int
+     */
+    public function countQuotations() : int
+    {
+        return $this->one('SELECT COUNT(*) FROM `quotation`');
+    }
+
+    /**
+     * Get quotation by id
+     * 
+     * @param int $id
+     * @return array
+     */
+    public function getQuotation($id) : array
+    {
+        return $this->row('SELECT * FROM `quotation` WHERE `id` = ?', array($id));
+    }
+
+    /**
+     * Update quotation status
+     * 
+     * @param int $status
+     * @param int $id
+     * @return int
+     */
+    public function editQuotationStatus($status, $id) : int
+    {
+        return $this->none('UPDATE `quotation` SET `status` = ? WHERE `id` = ?', array($status, $id));
+    }
+
+    /**
      * ===================================================
      * QUOTATION PRODUCTS
      * ===================================================
@@ -1488,7 +1531,7 @@ class Queries extends Db
     }
 
     /**
-     * Get products from quotation and session
+     * Get products from quotation
      * 
      * @param int $quotation
      * @return array
@@ -1544,6 +1587,33 @@ class Queries extends Db
     public function editQuotationProductAmount($amount, $product, $quotation) : int
     {
         return $this->none('UPDATE `quotation_products` SET `amount` = ? WHERE `product` = ? AND `quotation` = ?', array($amount, $product, $quotation));
+    }
+
+    /**
+     * ===================================================
+     * QUOTATION STATUS
+     * ===================================================
+     */
+
+    /**
+     * Get quotation status
+     * 
+     * @param int $id
+     * @return array
+     */
+    public function getQuotationStatus($id) : array
+    {
+        return $this->row('SELECT * FROM `quotation_status` WHERE `id` = ?', array($id));
+    }
+
+    /**
+     * Get all quotation statusses
+     * 
+     * @return array
+     */
+    public function allQuotationStatus() : array
+    {
+        return $this->all('SELECT * FROM `quotation_status`');
     }
 
     /**

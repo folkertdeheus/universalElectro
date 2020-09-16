@@ -155,6 +155,12 @@ if (login()) {
                             // Quotations
                             echo '&nbsp;>&nbsp;<a href="index.php?page=2&action=2">Quotations</a>';
 
+                            if (isset($_GET['id']) && $_GET['id'] != null) {
+
+                                // Quotation details
+                                echo '&nbsp;>&nbsp;<a href="index.php?page=2&action=2&id='.$_GET['id'].'">Details</a>';
+                            }
+
                             break;
 
                         case '3':

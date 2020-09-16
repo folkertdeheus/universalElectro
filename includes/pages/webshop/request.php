@@ -13,6 +13,9 @@ $products = $q->getQuotationProducts($cart['id']);
 // Get account
 $account = $q->getCustomer($_SESSION['webuser']);
 
+// Set iv for decryption
+$iv = $account['iv'];
+
 ?>
 
 <main id="mainEnglish">
@@ -65,23 +68,23 @@ $account = $q->getCustomer($_SESSION['webuser']);
                 <table>
                     <tr>
                         <td><?= $language['en_account_name']; ?></td>
-                        <td><?= $account['lastname'].', '.$account['firstname'].'  '.$account['insertion']; ?>
+                        <td><?= decrypt($account['lastname'], $iv).', '.decrypt($account['firstname'], $iv).'  '.decrypt($account['insertion'], $iv); ?>
                     </tr>
                     <tr>
                         <td><?= $language['en_account_email']; ?></td>
-                        <td><?= $account['email']; ?></td>
+                        <td><?= decrypt($account['email'], $iv); ?></td>
                     </tr>
                     <tr>
                         <td><?= $language['en_account_phone']; ?></td>
-                        <td><?= $account['phone']; ?></td>
+                        <td><?= decrypt($account['phone'], $iv); ?></td>
                     </tr>
                     <tr>
                         <td><?= $language['en_account_company']; ?></td>
-                        <td><?= $account['company_name']; ?></td>
+                        <td><?= decrypt($account['company_name'], $iv); ?></td>
                     </tr>
                     <tr>
                         <td><?= $language['en_account_tax']; ?></td>
-                        <td><?= $account['taxnumber']; ?></td>
+                        <td><?= decrypt($account['taxnumber'], $iv); ?></td>
                     </tr>
                 </table>
 
@@ -101,23 +104,23 @@ $account = $q->getCustomer($_SESSION['webuser']);
                 <table>
                     <tr>
                         <td><?= $language['en_account_adress']; ?></td>
-                        <td><?= $account['shipping_street'].' '.$account['shipping_housenumber']; ?></td>
+                        <td><?= decrypt($account['shipping_street'], $iv).' '.decrypt($account['shipping_housenumber'], $iv); ?></td>
                     </tr>
                     <tr>
                         <td><?= $language['en_account_postalcode']; ?></td>
-                        <td><?= $account['shipping_postalcode']; ?>
+                        <td><?= decrypt($account['shipping_postalcode'], $iv); ?>
                     </tr>
                     <tr>
                         <td><?= $language['en_account_city']; ?></td>
-                        <td><?= $account['shipping_city']; ?>
+                        <td><?= decrypt($account['shipping_city'], $iv); ?>
                     </tr>
                     <tr>
                         <td><?= $language['en_account_provence']; ?></td>
-                        <td><?= $account['shipping_provence']; ?>
+                        <td><?= decrypt($account['shipping_provence'], $iv); ?>
                     </tr>
                     <tr>
                         <td><?= $language['en_account_country']; ?></td>
-                        <td><?= $account['shipping_country']; ?></td>
+                        <td><?= decrypt($account['shipping_country'], $iv); ?></td>
                     </tr>
                 </table>
 
@@ -128,23 +131,23 @@ $account = $q->getCustomer($_SESSION['webuser']);
                 <table>
                     <tr>
                         <td><?= $language['en_account_adress']; ?></td>
-                        <td><?= $account['billing_street'].' '.$account['billing_housenumber']; ?></td>
+                        <td><?= decrypt($account['billing_street'], $iv).' '.decrypt($account['billing_housenumber'], $iv); ?></td>
                     </tr>
                     <tr>
                         <td><?= $language['en_account_postalcode']; ?></td>
-                        <td><?= $account['billing_postalcode']; ?>
+                        <td><?= decrypt($account['billing_postalcode'], $iv); ?>
                     </tr>
                     <tr>
                         <td><?= $language['en_account_city']; ?></td>
-                        <td><?= $account['billing_city']; ?>
+                        <td><?= decrypt($account['billing_city'], $iv); ?>
                     </tr>
                     <tr>
                         <td><?= $language['en_account_provence']; ?></td>
-                        <td><?= $account['billing_provence']; ?>
+                        <td><?= decrypt($account['billing_provence'], $iv); ?>
                     </tr>
                     <tr>
                         <td><?= $language['en_account_country']; ?></td>
-                        <td><?= $account['billing_country']; ?></td>
+                        <td><?= decrypt($account['billing_country'], $iv); ?></td>
                     </tr>
                 </table>
             </div> <!-- contact_right -->
@@ -222,23 +225,23 @@ $account = $q->getCustomer($_SESSION['webuser']);
                 <table>
                     <tr>
                         <td><?= $language['nl_account_name']; ?></td>
-                        <td><?= $account['lastname'].', '.$account['firstname'].'  '.$account['insertion']; ?>
+                        <td><?= decrypt($account['lastname'], $iv).', '.decrypt($account['firstname'], $iv).'  '.decrypt($account['insertion'], $iv); ?>
                     </tr>
                     <tr>
                         <td><?= $language['nl_account_email']; ?></td>
-                        <td><?= $account['email']; ?></td>
+                        <td><?= decrypt($account['email'], $iv); ?></td>
                     </tr>
                     <tr>
                         <td><?= $language['nl_account_phone']; ?></td>
-                        <td><?= $account['phone']; ?></td>
+                        <td><?= decrypt($account['phone'], $iv); ?></td>
                     </tr>
                     <tr>
                         <td><?= $language['nl_account_company']; ?></td>
-                        <td><?= $account['company_name']; ?></td>
+                        <td><?= decrypt($account['company_name'], $iv); ?></td>
                     </tr>
                     <tr>
                         <td><?= $language['nl_account_tax']; ?></td>
-                        <td><?= $account['taxnumber']; ?></td>
+                        <td><?= decrypt($account['taxnumber'], $iv); ?></td>
                     </tr>
                 </table>
 
@@ -258,23 +261,23 @@ $account = $q->getCustomer($_SESSION['webuser']);
                 <table>
                     <tr>
                         <td><?= $language['nl_account_adress']; ?></td>
-                        <td><?= $account['shipping_street'].' '.$account['shipping_housenumber']; ?></td>
+                        <td><?= decrypt($account['shipping_street'], $iv).' '.decrypt($account['shipping_housenumber'], $iv); ?></td>
                     </tr>
                     <tr>
                         <td><?= $language['nl_account_postalcode']; ?></td>
-                        <td><?= $account['shipping_postalcode']; ?>
+                        <td><?= decrypt($account['shipping_postalcode'], $iv); ?>
                     </tr>
                     <tr>
                         <td><?= $language['nl_account_city']; ?></td>
-                        <td><?= $account['shipping_city']; ?>
+                        <td><?= decrypt($account['shipping_city'], $iv); ?>
                     </tr>
                     <tr>
                         <td><?= $language['nl_account_provence']; ?></td>
-                        <td><?= $account['shipping_provence']; ?>
+                        <td><?= decrypt($account['shipping_provence'], $iv); ?>
                     </tr>
                     <tr>
                         <td><?= $language['nl_account_country']; ?></td>
-                        <td><?= $account['shipping_country']; ?></td>
+                        <td><?= decrypt($account['shipping_country'], $iv); ?></td>
                     </tr>
                 </table>
 
@@ -285,23 +288,23 @@ $account = $q->getCustomer($_SESSION['webuser']);
                 <table>
                     <tr>
                         <td><?= $language['nl_account_adress']; ?></td>
-                        <td><?= $account['billing_street'].' '.$account['billing_housenumber']; ?></td>
+                        <td><?= decrypt($account['billing_street'], $iv).' '.decrypt($account['billing_housenumber'], $iv); ?></td>
                     </tr>
                     <tr>
                         <td><?= $language['nl_account_postalcode']; ?></td>
-                        <td><?= $account['billing_postalcode']; ?>
+                        <td><?= decrypt($account['billing_postalcode'], $iv); ?>
                     </tr>
                     <tr>
                         <td><?= $language['nl_account_city']; ?></td>
-                        <td><?= $account['billing_city']; ?>
+                        <td><?= decrypt($account['billing_city'], $iv); ?>
                     </tr>
                     <tr>
                         <td><?= $language['nl_account_provence']; ?></td>
-                        <td><?= $account['billing_provence']; ?>
+                        <td><?= decrypt($account['billing_provence'], $iv); ?>
                     </tr>
                     <tr>
                         <td><?= $language['nl_account_country']; ?></td>
-                        <td><?= $account['billing_country']; ?></td>
+                        <td><?= decrypt($account['billing_country'], $iv); ?></td>
                     </tr>
                 </table>
             </div> <!-- contact_right -->

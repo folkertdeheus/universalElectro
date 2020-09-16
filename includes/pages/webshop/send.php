@@ -123,7 +123,11 @@ if (filter_var($account['email'], FILTER_VALIDATE_EMAIL)) {
 
     // Sent mail    
     if (mail($mailTo, $mailSubject, $mailMessage, $mailHeaders) && mail($mailTo2, $mailSubject2, $mailMessage2, $mailHeaders2)) {
+        
         // Message sent succesfully
+
+        // Reset webshop cookie
+        $_COOKIE['unele_shop'] = null;
 ?>
         <main id="mainEnglish">
             <?= $language['en_quote_sent']; ?>

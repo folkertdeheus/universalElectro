@@ -313,6 +313,7 @@ input[type="color"] {
 }
 
 .critical {
+    /* Animation */
     animation: critical 5s infinite;
 }
 
@@ -332,5 +333,54 @@ input[type="color"] {
 }
 
 .customer {
+    /* Display */
     display: inline-block;
+}
+
+.quoterow {
+    /* Animation */
+    transition: 0.5s;
+}
+
+.quoterow:hover {
+    /* Background */
+    background-color: var(--accent);
+
+    /* Font */
+    color: var(--main);
+
+    /* Animation */
+    transition: 0.5s;
+
+    /* Cursor */
+    cursor: pointer;
+}
+
+.table table {
+    /* Background */
+    border-collapse: collapse;
+    border-spacing: 0px;
+}
+
+.quote_details {
+    /* Positioning */
+    width: 200px;
+}
+
+.quote_details table {
+    /* Background */
+    white-space: nowrap;
+}
+
+.quote_details input, .quote_details select, .quote_details label {
+    /* Font */
+    font-size: 15px;
+
+    /* Positioning */
+    width: 100px;
+    padding: 5px;
+}
+
+.quote_account {
+    width: 50%;
 }

@@ -16,10 +16,12 @@ if (login()) {
             case '1':
                 // Products
                 require_once('includes/pages/shop/products/default.php');
+                
                 break;
             
             case '2':
-                // Orders
+                // Quotations
+                require_once('includes/pages/shop/quotations/default.php');
 
                 break;
 

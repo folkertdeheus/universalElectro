@@ -35,7 +35,8 @@ class Forms extends Queries
         'editTicketStatus',
         'editTicketSettings',
         'ticketReply',
-        'search'
+        'search',
+        'quotestatus'
     ];
     
     /**
@@ -1321,6 +1322,37 @@ class Forms extends Queries
 
             // Failed
             $this->insertLog('Tickets message', 'Add', 'Adding ticket message through cms to ticket '.$ticket.' failed. By '.user());
+        }
+    }
+
+    /**
+     * Edit quotation status
+     */
+    public function quotestatus() : void
+    {
+        // Set required $_POST fields
+        $this->setReq('id', 'status');
+
+        // Check if all required items are posted
+        // Fail if not
+        if (!$this->checkReq()) {
+
+            $this->insertLog('Quotation', 'Edit', 'Updating quotation status failed, not all required fields are set. By '.user());
+            return;
+        }
+
+        $status = htmlentities($_POST['status']);
+        $id = htmlentities($_POST['id']);
+
+        if ($this->editQuotationStatus($status, $id) == 1) {
+
+            // Succes
+            $this->insertLog('Quotation', 'Edit', 'Updated quotation ('.$id.') status. By '.user());
+
+        } else {
+
+            // Failed
+            $this->insertLog('Quotation', 'Edit', 'Updating quotation ('.$id.') status failed. By '.user());
         }
     }
 }
