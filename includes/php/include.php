@@ -47,3 +47,6 @@ require_once(PATH.'webshopsession.php');
 
 // Decryption
 require_once(ADM.'decrypt.php');
+
+// Pageview
+require_once(PATH.'pageviews.php');

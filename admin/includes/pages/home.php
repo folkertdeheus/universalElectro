@@ -44,6 +44,35 @@ if (login()) {
         </div> <!-- menublock -->
     </div> <!-- menubottom -->
 
+    <div class="stats">
+
 <?php
 
+        /**
+         * IP STATISTICS
+         */
+
+        // Get pageviews
+        $pageviews = $q->pageviews();
+
+        // Count total pageviews
+        $total_pageviews = count($pageviews);
+
+        // Set pageview countries
+        $pageview_countries = array();
+
+        // Loop through all pageviews
+        foreach($pageviews as $pageviewKey => $pageviewValue) {
+
+            array_push($pageview_countries, ipInfo($pageviewValue['ip']));
+
+        }
+
+        echo 'Total pageviews: '.$total_pageviews;
+        echo 'Countries: '; print_r($pageview_countries);
+?>
+
+    </div> <!-- stats -->
+
+<?php
 }

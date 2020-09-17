@@ -1678,4 +1678,36 @@ class Queries extends Db
     {
         return $this->row('SELECT * FROM `pages`');
     }
+
+    /**
+     * ===================================================
+     * PAGEVIEWS
+     * ===================================================
+     */
+
+
+    /**
+     * Add pageview
+     * 
+     * @param string $ip
+     * @param string $agent
+     * @param string $referer
+     * @param string $protocol
+     * @param string $method
+     * @return int
+     */
+    public function addPageview($ip, $agent, $referer, $protocol, $method) : int
+    {
+        return $this->none('INSERT INTO `pageviews` (`ip`, `agent`, `referer`, `protocol`, `method`) VALUES (?, ?, ?, ?, ?)', array($ip, $agent, $referer, $protocol, $method));
+    }
+
+    /**
+     * Get pageviews
+     * 
+     * @return array
+     */
+    public function pageviews() : array
+    {
+        return $this->all('SELECT * FROM `pageviews`');
+    }
 }

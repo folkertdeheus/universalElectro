@@ -24,3 +24,4 @@ require_once(CLAS.'forms.php');
 require_once(CLAS.'login.php');
 require_once(PATH.'classes.php');
 require_once(PATH.'decrypt.php');
+require_once(PATH.'ipInfo.php');
