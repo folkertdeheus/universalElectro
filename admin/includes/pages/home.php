@@ -7,6 +7,37 @@
 // Check if user is logged in when accessing this file
 if (login()) {
 
+    // Get pageviews
+    $pageviews = $q->pageviews();
+
+    // Count total pageviews
+    $total_pageviews = count($pageviews);
+
+    // Set pageview countries
+    $pageview_countries = array();
+
+    // Loop through all pageviews
+    foreach($pageviews as $pageviewKey => $pageviewValue) {
+
+        array_push($pageview_countries, ipInfo($pageviewValue['ip'], 'Country'));
+
+    }
+    // Remove null entries
+    $pageview_countries = array_filter($pageview_countries);
+
+    // Set distinct entries
+    $distinct_countries = array_unique($pageview_countries);
+    $count_countries = array_count_values($pageview_countries);
+
+    // Set total country entries
+    $total_count = array_sum($count_countries);
+
+    // Count unaccounted views
+    $unaccounted_views = $total_pageviews - $total_count;
+
+    // Sort descending
+    arsort($count_countries);
+
 ?>
     <div class="menutop">
         <div class="menublock">
@@ -45,32 +76,33 @@ if (login()) {
     </div> <!-- menubottom -->
 
     <div class="stats">
+        <span>Website statistics</span>
 
+        <table>
+            <tr>
+                <td>Total pageviews</td>
+                <td><?= $total_pageviews; ?></td>
+            </tr>
+            <tr>
+                <td>Visited by</td>
+                <td>
 <?php
+                    // Loop through countries
+                    foreach($count_countries as $countryKey => $countryValue) {
 
-        /**
-         * IP STATISTICS
-         */
+                        // Calculate percentage
+                        $percentage = $countryValue / $total_count * 100;
 
-        // Get pageviews
-        $pageviews = $q->pageviews();
-
-        // Count total pageviews
-        $total_pageviews = count($pageviews);
-
-        // Set pageview countries
-        $pageview_countries = array();
-
-        // Loop through all pageviews
-        foreach($pageviews as $pageviewKey => $pageviewValue) {
-
-            array_push($pageview_countries, ipInfo($pageviewValue['ip']));
-
-        }
-
-        echo 'Total pageviews: '.$total_pageviews;
-        echo 'Countries: '; print_r($pageview_countries);
+                        echo $countryKey.' ('.$percentage.'%)<br>';
+                    }
 ?>
+                </td>
+            </tr>
+            <tr>
+                <td>Unaccounted views</td>
+                <td><?= $unaccounted_views; ?></td>
+            </tr>
+        </table>
 
     </div> <!-- stats -->
 

@@ -429,3 +429,25 @@ input[type="color"] {
     /* Positioning */
     height: 200px;
 }
+
+.stats {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.stats span {
+    font-size: 30px;
+    color: var(--main);
+}
+
+.stats table {
+    border-collapse: collapse;
+    border-spacing: 0px;
+
+    width: 100%;
+}
+
+.stats td {
+    border: none;
+    border-bottom: 1px solid var(--accent);
+}
