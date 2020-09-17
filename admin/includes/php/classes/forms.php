@@ -351,7 +351,7 @@ class Forms extends Queries
     {
         // Set required $_POST fields
         $this->setReq('name');
-
+echo '354';
         // Check if all required items are posted
         // Fail if not
         if (!$this->checkReq()) {
@@ -368,45 +368,52 @@ class Forms extends Queries
 
         // Upload file
 
-        // File naming
-        $path = '../includes/brands/';
-        $file = basename($_FILES['image']['name']);
-        $filename = pathinfo($file, PATHINFO_FILENAME);
-        $extension = pathinfo($file, PATHINFO_EXTENSION);
-        
-        // Accepted files
-        $acceptedFileTypes = $GLOBALS['acceptedImageTypes'];
-    
-        // Check if file exists
-        // If exists, rename with number added
-        $base = $filename;
-        
-        // Continue numbering until unique name is found
-        for ($i = 1; file_exists($path.$filename.'.'.$extension); $i++) {
-            $filename = $base.$i;
-        }
-
-        // Check if file is accepted file type
-        // If not, stop executing
-        if (!in_array($extension, $acceptedFileTypes)) {
-            return;
-        }
-
-        // Set destination path
-        $filepath = $path.$filename.'.'.$extension;
-
-        // Upload file
-        if (!move_uploaded_file($_FILES['image']['tmp_name'], $filepath)) {
+        if (isset($_FILES['name']) && $_FILES['name'] != null) {
+            // File naming
+            $path = '../includes/brands/';
+            $file = basename($_FILES['image']['name']);
+            $filename = pathinfo($file, PATHINFO_FILENAME);
+            $extension = pathinfo($file, PATHINFO_EXTENSION);
             
-            // File upload failed
-            $filesError = null;
-            foreach($_FILES as $value) {
-                $filesError = $filesError.$value.' ';
+            // Accepted files
+            $acceptedFileTypes = $GLOBALS['acceptedImageTypes'];
+        
+            // Check if file exists
+            // If exists, rename with number added
+            $base = $filename;
+            
+            // Continue numbering until unique name is found
+            for ($i = 1; file_exists($path.$filename.'.'.$extension); $i++) {
+                $filename = $base.$i;
             }
 
-            // Insert log
-            $this->insertLog('Brands', 'Edit', 'Edit brand failed, image upload error: '.$filesError.'. By '.user());
-            return;
+            // Check if file is accepted file type
+            // If not, stop executing
+            if (!in_array($extension, $acceptedFileTypes)) {
+                return;
+            }
+
+            // Set destination path
+            $filepath = $path.$filename.'.'.$extension;
+
+            // Upload file
+            if (!move_uploaded_file($_FILES['image']['tmp_name'], $filepath)) {
+                
+                // File upload failed
+                $filesError = null;
+                foreach($_FILES as $value) {
+                    $filesError = $filesError.$value.' ';
+                }
+
+                // Insert log
+                $this->insertLog('Brands', 'Edit', 'Edit brand failed, image upload error: '.$filesError.'. By '.user());
+                return;
+            }
+
+        } else {
+
+            // No file
+            $filepath = null;
         }
 
         // Continue with database adding

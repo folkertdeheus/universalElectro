@@ -71,7 +71,12 @@ if (isset($product['images']) && $product['images'] != null && is_array($images)
             </table>
 
 <?php
-            if ($settings['webshop_show_prices_on_guest']) {
+            // Check if price needs to be shown
+            // Show prices if on guest is on, or on account is on while user is logged in
+            if (
+                $settings['webshop_show_prices_on_guest'] ||
+                ($settings['webshop_show_prices_on_account'] && login())
+            ) {
 ?>
                 <span class="price"><?= $language['en_product_price']; ?>: &euro; <?= $product['price']; ?></span>
 <?php
@@ -135,7 +140,12 @@ if (isset($product['images']) && $product['images'] != null && is_array($images)
             </table>
 
 <?php
-            if ($settings['webshop_show_prices_on_guest']) {
+            // Check if price needs to be shown
+            // Show prices if on guest is on, or on account is on while user is logged in
+            if (
+                $settings['webshop_show_prices_on_guest'] ||
+                ($settings['webshop_show_prices_on_account'] && login())
+            ) {
 ?>
                 <span class="price"><?= $language['nl_product_price']; ?>: &euro; <?= $product['price']; ?></span>
 <?php
