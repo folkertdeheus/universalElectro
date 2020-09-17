@@ -53,9 +53,22 @@ if (isset($product['images']) && $product['images'] != null && is_array($images)
 
             <table>
                 <tr>
-                    <td><?= $language['en_product_articlenumber']; ?>:</td>
-                    <td><?= $product['articlenumber']; ?></td>
+                    <td><?= $language['en_product_description']; ?></td>
+                    <td><?= $product['description_english']; ?></td>
                 </tr>
+            <?php
+                // Hide articlenumber if not set
+                if (isset($product['articlenumber']) && $product['articlenumber'] != null) {
+?>
+                    <tr>
+                        <td>
+                            <?= $language['en_product_articlenumber']; ?>:
+                        </td>
+                        <td><?= $product['articlenumber']; ?></td>
+                    </tr>
+<?php
+                }
+?>
                 <tr>
                     <td><?= $language['en_product_brand']; ?>:</td>
                     <td><?= $q->getBrandById($product['brand'])['name']; ?></td>
@@ -122,9 +135,22 @@ if (isset($product['images']) && $product['images'] != null && is_array($images)
 
             <table>
                 <tr>
-                    <td><?= $language['nl_product_articlenumber']; ?>:</td>
-                    <td><?= $product['articlenumber']; ?></td>
+                    <td><?= $language['nl_product_description']; ?></td>
+                    <td><?= $product['description_dutch']; ?></td>
                 </tr>
+<?php
+                // Hide articlenumber if not set
+                if (isset($product['articlenumber']) && $product['articlenumber'] != null) {
+?>
+                    <tr>
+                        <td>
+                            <?= $language['nl_product_articlenumber']; ?>:
+                        </td>
+                        <td><?= $product['articlenumber']; ?></td>
+                    </tr>
+<?php
+                }
+?>
                 <tr>
                     <td><?= $language['nl_product_brand']; ?>:</td>
                     <td><?= $q->getBrandById($product['brand'])['name']; ?></td>
