@@ -1650,4 +1650,32 @@ class Queries extends Db
 
         return $return;
     }
+
+    /**
+     * ===================================================
+     * PAGES
+     * ===================================================
+     */
+
+    /**
+     * Update pages
+     * 
+     * @param string $nl_content
+     * @param string $en_content
+     * @return int
+     */
+    public function updatePages($nl_content, $en_content) : int
+    {
+        return $this->none('UPDATE `pages` SET `nl_content` = ?, `en_content` = ?', array($nl_content, $en_content));
+    }
+
+    /**
+     * Get pages
+     * 
+     * @return array
+     */
+    public function getPages() : array
+    {
+        return $this->row('SELECT * FROM `pages`');
+    }
 }

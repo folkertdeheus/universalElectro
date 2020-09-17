@@ -382,5 +382,50 @@ input[type="color"] {
 }
 
 .quote_account {
+    /* Positioning */
     width: 50%;
+}
+
+.legend {
+    /* Display */
+    display: flex;
+    flex-direction: column;
+
+    /* Background */
+    border-bottom: 1px solid var(--accent);
+
+    /* Positioning */
+    padding-bottom: 10px;
+}
+
+.legend span {
+    /* Background */
+    background: linear-gradient(90deg,rgba(0, 164, 225, 1), rgba(125, 165, 225, 1));
+    border-radius: 2px;
+
+    /* Font */
+    color: var(--back);
+
+    /* Positioning */
+    padding: 2px 10px 2px 10px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+
+    /* Display */
+    display: inline-block;
+}
+
+.pages form {
+    /* Positioning */
+    width: 100%;
+}
+
+.pages form textarea, .pages form input {
+    /* Positioning */
+    width: 100%;
+}
+
+.pages form textarea {
+    /* Positioning */
+    height: 200px;
 }

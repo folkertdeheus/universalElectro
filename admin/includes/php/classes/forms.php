@@ -36,7 +36,8 @@ class Forms extends Queries
         'editTicketSettings',
         'ticketReply',
         'search',
-        'quotestatus'
+        'quotestatus',
+        'pages'
     ];
     
     /**
@@ -351,7 +352,7 @@ class Forms extends Queries
     {
         // Set required $_POST fields
         $this->setReq('name');
-echo '354';
+
         // Check if all required items are posted
         // Fail if not
         if (!$this->checkReq()) {
@@ -1352,6 +1353,39 @@ echo '354';
 
             // Failed
             $this->insertLog('Quotation', 'Edit', 'Updating quotation ('.$id.') status failed. By '.user());
+        }
+    }
+
+    /**
+     * Edit pages
+     */
+    public function pages() : void
+    {
+        // Set required $_POST fields
+        $this->setReq('nl_content', 'en_content');
+
+        // Check if all required items are posted
+        // Fail if not
+        if (!$this->checkReq()) {
+
+            $this->insertLog('Pages', 'Edit', 'Updating pages failed, not all required fields are set. By '.user());
+            return;
+        }
+
+        // Secure data
+        $nl_content = htmlentities($_POST['nl_content']);
+        $en_content = htmlentities($_POST['en_content']);
+
+        // Update pages
+        if ($this->updatePages($nl_content, $en_content) == 1) {
+
+            // Succes
+            $this->insertLog('Pages', 'Edit', 'Updated pages. By '.user());
+        
+        } else {
+
+            // Failed
+            $this->insertLog('Pages', 'Edit', 'Updating pages failed. By '.user());
         }
     }
 }

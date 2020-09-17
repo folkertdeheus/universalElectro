@@ -23,6 +23,7 @@ if (login()) {
             break;
             case '3':
                 // Pages
+                require_once('includes/pages/pages/default.php');
             break;
             case '4':
                 // Settings
