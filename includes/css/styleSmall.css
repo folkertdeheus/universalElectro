@@ -469,6 +469,7 @@ footer {
 .brandribbon a img {
     /* Positioning */
     max-width: 100%;
+    max-height: 100px;
 }
 
 .order_products table {
