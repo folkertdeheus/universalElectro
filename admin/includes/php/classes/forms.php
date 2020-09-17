@@ -553,14 +553,6 @@ class Forms extends Queries
         $ownArticlenumber = htmlentities($_POST['own_articlenumber']);
         $condition = htmlentities($_POST['condition']);
 
-        // Check if article number is unique
-        if ($this->countProductsByArticlenumber($articleNumber) != 0) {
-
-            // Article number is not unique, fail
-            $this->insertLog('Products', 'Add', 'Adding '.$name.' failed, articlenumber '.$articleNumber.' is not unique. By '.user());
-            return;
-        }
-
         // Upload image(s)
         
         // Flip multidimensional $_FILES array
