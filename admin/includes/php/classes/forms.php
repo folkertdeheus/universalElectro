@@ -1272,23 +1272,23 @@ class Forms extends Queries
         }
 
         // Get ticket
-        $ticket = $q->getCMSTicket($id);
+        $tickets = $this->getCMSTicket($ticket);
 
         // Get account
-        $account = $q->getCustomer($ticket['customer']);
+        $account = $this->getCustomer($tickets['customer']);
 
         // Get ticket category
-        $category = $q->getTicketCategory($ticket['category']);
+        $categories = $this->getTicketCategory($tickets['category']);
 
         // Check if the email adress is valid
         if (filter_var($account['email'], FILTER_VALIDATE_EMAIL)) {
-            
+
             // Set variables
-            $mailFrom = $category['email'];
-            $mailReplyTo = $category['email'];
+            $mailFrom = $categories['email'];
+            $mailReplyTo = $categories['email'];
             $mailTo = $account['email'];
-            $mailSubject = 'Ticketreply in "'.$ticket['subject'].'"';
-            $mailMessage = 'Ticketreply in "'.$ticket['subject'].'"'."\r\n"."\r\n";
+            $mailSubject = 'Ticketreply in "'.$tickets['subject'].'"';
+            $mailMessage = 'Ticketreply in "'.$tickets['subject'].'"'."\r\n"."\r\n";
             $mailMessage = $message."\r\n"."\r\n";
             $mailMessage = 'Go to message: https://universalelectro.nl/index.php?page=3&action=1';
 
@@ -1300,13 +1300,13 @@ class Forms extends Queries
                 // Error sending mail
                 $this->insertLog('Tickets', 'Edit', 'No email sent, error during sending email');
             }
-        
+     
         } else {
 
             // No email sent
             $this->insertLog('Tickets', 'Edit', 'No email sent, user '.$account['lastname'].', '.$account['firstname'].' '.$account['insertion'].' ('.$_SESSION['webuser'].') has an invalid email adres');
         }
-        
+
         // Set closed time
         $closed = null;
         if ($status == 2) {

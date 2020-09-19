@@ -713,3 +713,26 @@ td.accountticket {
     /* Cursor */
     cursor: pointer;
 }
+
+.ticket_message_customer {
+    /* Display */
+    display: block;
+
+    /* Font */
+    font-weight: bold;
+
+    /* Positioning */
+    padding: 10px;
+}
+
+.ticket_message_user {
+    /* Display */
+    display: block;
+
+    /* Font */
+    font-weight: bold;
+    color: var(--blue);
+
+    /* Positioning */
+    padding: 10px;
+}

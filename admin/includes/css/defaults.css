@@ -489,3 +489,20 @@ input[type="color"] {
     /* Animation */
     transition: 0.5s;
 }
+
+.ticket_message_customer {
+    /* Display */
+    display: block;
+
+    /* Font */
+    font-weight: bold;
+}
+
+.ticket_message_user {
+    /* Display */
+    display: block;
+
+    /* Font */
+    font-weight: bold;
+    color: var(--accent);
+}

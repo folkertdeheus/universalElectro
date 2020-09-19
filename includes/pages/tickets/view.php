@@ -103,6 +103,23 @@ if (login()) {
                     foreach($messages as $messageKey => $messageValue) {
 ?>
                         <div class="ticketmessage">
+<?php
+                        // Check who posted message
+                        if (isset($messageValue['customer']) && $messageValue['customer'] != null) {
+
+                            // Display customer
+                            $customer = $q->getCustomer($messageValue['customer']);
+                            $iv = $customer['iv'];
+                            echo '<span class="ticket_message_customer">'.decrypt($customer['firstname'], $iv).' '.decrypt($customer['insertion'], $iv).' '.decrypt($customer['lastname'], $iv).' said: </span>';
+                        
+                        } else {
+
+                            // Display user
+                            $user = $q->getUserById($messageValue['user']);
+                            echo '<span class="ticket_message_user">'.$user['username'].' said: </span>';
+
+                        }
+?>
                             <div class="ticketmessage_text">
                                 <?= nl2br($messageValue['message']); ?>
                             </div> <!-- ticketmessage_text -->
