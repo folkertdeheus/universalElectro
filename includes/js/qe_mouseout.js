@@ -1,3 +1,0 @@
-function qe_mouseout() {
-    
-}
