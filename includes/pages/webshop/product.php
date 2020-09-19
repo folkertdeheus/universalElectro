@@ -43,7 +43,18 @@ if (isset($product['images']) && $product['images'] != null && is_array($images)
 
     <div class="product">
         <div class="product_image">
-            <img src="<?= $image; ?>" alt="<?= $product['name']; ?>" />
+            <img id="largeImage" src="<?= $image; ?>" alt="<?= $product['name']; ?>" />
+
+            <div class="thumbnails">
+<?php
+                $images = explode(',', $product['images']);
+                $replace = ['[', ']', '..', '\\', '"'];
+
+                foreach($images as $imageKey => $imageValue) {
+                    echo '<img id="thumb'.$imageKey.'" src="'.substr(str_replace($replace, '', $imageValue), 1).'" alt="thumbnail" onclick="changeImage(thumb'.$imageKey.')" />';
+                }
+?>
+            </div> <!-- thumbnails -->
         </div> <!-- product_image -->
 
         <div class="product_details">
@@ -88,7 +99,8 @@ if (isset($product['images']) && $product['images'] != null && is_array($images)
             // Show prices if on guest is on, or on account is on while user is logged in
             if (
                 $settings['webshop_show_prices_on_guest'] ||
-                ($settings['webshop_show_prices_on_account'] && login())
+                ($settings['webshop_show_prices_on_account'] && login()) &&
+                (isset($product['price']) && $product['price'] != null && $product['price'] != 0.00)
             ) {
 ?>
                 <span class="price"><?= $language['en_product_price']; ?>: &euro; <?= $product['price']; ?></span>
@@ -170,7 +182,8 @@ if (isset($product['images']) && $product['images'] != null && is_array($images)
             // Show prices if on guest is on, or on account is on while user is logged in
             if (
                 $settings['webshop_show_prices_on_guest'] ||
-                ($settings['webshop_show_prices_on_account'] && login())
+                ($settings['webshop_show_prices_on_account'] && login()) &&
+                (isset($product['price']) && $product['price'] != null && $product['price'] != 0.00)
             ) {
 ?>
                 <span class="price"><?= $language['nl_product_price']; ?>: &euro; <?= $product['price']; ?></span>

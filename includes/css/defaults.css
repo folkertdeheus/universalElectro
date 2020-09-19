@@ -676,17 +676,40 @@ td.accountticket {
 }
 
 .cookienotice {
+    /* Display */
     display: block;
     position: fixed;
     z-index: 3;
+
+    /* Positioning */
     top: 0px;
     width: 100vw;
-    background-color: rgba(0, 164, 225, 0.3);
-    text-align: center;
     padding: 5px;
+
+    /* Background */
+    background-color: rgba(0, 164, 225, 0.3);
+
+    /* Font */
+    text-align: center;
     color: var(--white);
 }
 
 .cookienotice:hover {
+    /* Cursor */
+    cursor: pointer;
+}
+
+.thumbnails img {
+    /* Background */
+    border: 1px solid var(--blue);
+
+    /* Positioning */
+    padding: 10px;
+    margin-right: 10px;
+    max-height: 100px;
+}
+
+.thumbnails img:hover {
+    /* Cursor */
     cursor: pointer;
 }

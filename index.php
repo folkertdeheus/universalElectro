@@ -50,6 +50,7 @@ $language = $q->allLanguages();
     <script src="includes/js/createCustomer.js"></script>
     <script src="includes/js/addTicket.js"></script>
     <script src="includes/js/cookienotice.js"></script>
+    <script src="includes/js/changeImage.js"></script>
     <script src="includes/js/onload.js"></script>
 </head>
 
