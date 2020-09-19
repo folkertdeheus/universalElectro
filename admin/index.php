@@ -40,16 +40,7 @@ include('includes/php/include.php');
 
     <link rel="icon" type="image/png" href="../includes/images/logo.png">
 
-    <script src="includes/js/adduser.js"></script>
-    <script src="includes/js/edituser.js"></script>
-    <script src="includes/js/addbrand.js"></script>
-    <script src="includes/js/editbrand.js"></script>
-    <script src="includes/js/addcategory.js"></script>
-    <script src="includes/js/editcategory.js"></script>
-    <script src="includes/js/addproduct.js"></script>
-    <script src="includes/js/editproduct.js"></script>
     <script src="includes/js/copy_adress.js"></script>
-    <script src="includes/js/languageSettings.js"></script>
     <script src="includes/js/ticketreply.js"></script>
     <script src="includes/js/tables.js"></script>
 </head>

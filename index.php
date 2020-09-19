@@ -46,8 +46,7 @@ $language = $q->allLanguages();
     <link rel="icon" type="image/png" href="includes/images/logo.png">
 
     <script src="includes/js/language.js"></script>
-    <script src="includes/js/qe_mouseout.js"></script>
-    <script src="includes/js/createCustomer.js"></script>
+    <script src="includes/js/quickenquiry.js"></script>
     <script src="includes/js/addTicket.js"></script>
     <script src="includes/js/cookienotice.js"></script>
     <script src="includes/js/changeImage.js"></script>

@@ -8,15 +8,19 @@ if ($settings['quick_enquiry_active']) {
 
 ?>
 
-    <div class="quickenquiry" onmouseout="qe_mouseout()">
+    <div class="quickenquiry">
         
-        <div class="quickenquirybutton">
+        <div class="quickenquirybutton" id="quickenquirybutton" onclick="quickenquiry('open')">
             <img src="includes/images/email_white.png" alt="email"/>
             <div id="en_qe_title"><?= $language['en_quickenquiry_button']; ?></div>
             <div id="nl_qe_title"><?= $language['nl_quickenquiry_button']; ?></div>
         </div> <!-- quickenquirybutton -->
+
+        <div class="quickenquiryclose" id="quickenquiryclose" onclick="quickenquiry('close')">
+            X
+        </div> <!-- quickenquiryclose -->
         
-        <div class="quickenquirycontent">
+        <div class="quickenquirycontent" id="quickenquirycontent">
             
             <div id="en_qe_question"><?= $language['en_quickenquiry_text']; ?></div>
             <div id="nl_qe_question"><?= $language['nl_quickenquiry_text'] ?></div>

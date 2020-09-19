@@ -84,16 +84,39 @@ input:focus, textarea:focus {
     width: 75px;
 }
 
-.quickenquirycontent {
+.quickenquirybutton:hover {
+    /* Cursor */
+    cursor: pointer;
+}
+
+.quickenquiryclose {
     /* Display */
     display: none;
+    
+    /* Font */
+    font-size: 30px;
+    color: var(--blue);
+    text-align: center;
+    line-height: 30px;
+
+    /* Positioning */
+    margin-right: 20px;
+    /*padding: auto auto;*/
+    height: 30px;
+    width: 30px;
+
+    /* Background */
+    background-color: var(--white);
+    border-radius: 20px;
 }
 
-.quickenquiry:hover .quickenquirycontent {
-    display: block;
+.quickenquiryclose:hover {
+    /* Cursor */
+    cursor: pointer;
 }
 
-.quickenquiry:hover .quickenquirybutton {
+.quickenquirycontent {
+    /* Display */
     display: none;
 }
 
