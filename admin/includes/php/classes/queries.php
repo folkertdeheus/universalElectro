@@ -440,6 +440,17 @@ class Queries extends Db
     }
 
     /**
+     * Count products in category
+     * 
+     * @param int $category
+     * @return int
+     */
+    public function countProductsByCategory($category) : int
+    {
+        return $this->one('SELECT COUNT(*) FROM `products` WHERE `category` = ?', array($category));
+    }
+
+    /**
      * ===================================================
      * PRODUCT_CATEGORIES
      * ===================================================

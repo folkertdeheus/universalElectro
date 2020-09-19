@@ -18,26 +18,31 @@ $productCategories = $q->allCategories();
 
     <div class="webshop">
 <?php
+        // Loop through categories
         foreach($productCategories as $categoryKey => $categoryValue) {
+
+            // Check if there are products in category
+            if ($q->countProductsByCategory($categoryValue['id']) > 0) {
 ?>
-            <a href="index.php?page=1&cat=<?= $categoryValue['id']; ?>">
-                <div class="webshop_category">
-                    <div class="webshop_image">
+                <a href="index.php?page=1&cat=<?= $categoryValue['id']; ?>">
+                    <div class="webshop_category">
+                        <div class="webshop_image">
 <?php
-                        // Get first product in category with image
-                        $products = $q->getProductByCategoryWithImage($categoryValue['id']);
+                            // Get first product in category with image
+                            $products = $q->getProductByCategoryWithImage($categoryValue['id']);
 
-                        // Set category image
-                        echo setCategoryImage($products['images'], $categoryValue['en_name']);
+                            // Set category image
+                            echo setCategoryImage($products['images'], $categoryValue['en_name']);
 ?>
-                    </div> <!-- webshop_image -->
+                        </div> <!-- webshop_image -->
 
-                    <div class="webshop_title">
-                        <?= $categoryValue['en_name']; ?>
-                    </div> <!-- webshop_title -->
-                </div> <!-- webshop_category -->
-            </a>
-<?php  
+                        <div class="webshop_title">
+                            <?= $categoryValue['en_name']; ?>
+                        </div> <!-- webshop_title -->
+                    </div> <!-- webshop_category -->
+                </a>
+<?php
+            }
         }
 ?>
 
