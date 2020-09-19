@@ -7,6 +7,9 @@
     --white: rgba(255, 255, 255, 1);
     --greyed: rgb(187, 169, 173, 1);
 
+    --gradient: linear-gradient(to right, var(--grey) 25%, var(--blue));
+    --shadow: 3px 3px 3px 0px var(--grey);
+
     --background: url('../images/background.png');
 }
 
@@ -210,7 +213,9 @@ header {
 
 .headerimage {
     /* Header background image */
-    background: var(--background) no-repeat center center; 
+    background: var(--background);
+    background-repeat: no-repeat;
+    background-position: bottom 25% left 50%;
     background-size: cover;
 }
 
@@ -254,6 +259,7 @@ article {
 
     /* Background */
     background-color: var(--grey);
+    background: var(--gradient);
     border-radius: 3px;
 }
 
@@ -345,6 +351,7 @@ article {
     /* Background */
     background-color: var(--blue);
     border-radius: 3px;
+    box-shadow: var(--shadow);
 
     /* Font */
     color: var(--grey);
