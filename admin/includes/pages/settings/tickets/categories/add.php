@@ -22,9 +22,6 @@ if (login()) {
             <input type="submit" value="Submit" />
         </form>
 
-        <div class="message" id="message">
-        </div> <!-- message -->
-
     </div> <!-- content -->
 
 <?php

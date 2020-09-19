@@ -13,7 +13,7 @@ if (login()) {
         <form method="post" class="multi" enctype="multipart/form-data" action="index.php?page=2&action=3">
 
             <div class="content_left">
-                <input type="text" id="name" name="name" placeholder="Name" required onchange="addbrand('name')" />
+                <input type="text" id="name" name="name" placeholder="Name" required />
                 <input type="text" id="website" name="website" placeholder="Website" />
                 <textarea id="website" name="description" placeholder="Description"></textarea>
             </div> <!-- content_left -->
@@ -25,9 +25,6 @@ if (login()) {
                 <input type="hidden" name="form" value="addBrand" />
             <div> <!-- content_right -->
         </form>
-
-        <div class="message" id="message">
-        </div> <!-- message -->
 
     </div> <!-- content -->
 

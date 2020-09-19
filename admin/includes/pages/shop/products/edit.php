@@ -21,11 +21,11 @@ if (login()) {
         <form method="post" class="multi" enctype="multipart/form-data" action="index.php?page=2&action=1">
 
             <div class="content_left">
-                <input type="text" name="name" id="name" placeholder="Name" value="<?= $product['name']; ?>" required onchange="editproduct('name')" />
-                <input type="text" name="articlenumber" id="articlenumber" placeholder="Manufacturer articlenumber" value="<?= $product['articlenumber']; ?>" onchange="editproduct('articlenumber')" />
-                <input type="text" name="own_articlenumber" id="own_articlenumber" placeholder="Own articlenumber" value="<?= $product['own_articlenumber']; ?>" onchange="editproduct('own_articlenumber')" />
-                <textarea name="nl_description" id="nl_description" placeholder="Dutch description" required onchange="editproduct('nl_description')"><?= $product['description_dutch']; ?></textarea>
-                <textarea name="en_description" id="en_description" placeholder="English description" required onchange="editproduct('en_description')"><?= $product['description_english']; ?></textarea>
+                <input type="text" name="name" id="name" placeholder="Name" value="<?= $product['name']; ?>" required />
+                <input type="text" name="articlenumber" id="articlenumber" placeholder="Manufacturer articlenumber" value="<?= $product['articlenumber']; ?>" />
+                <input type="text" name="own_articlenumber" id="own_articlenumber" placeholder="Own articlenumber" value="<?= $product['own_articlenumber']; ?>" />
+                <textarea name="nl_description" id="nl_description" placeholder="Dutch description" required ><?= $product['description_dutch']; ?></textarea>
+                <textarea name="en_description" id="en_description" placeholder="English description" required ><?= $product['description_english']; ?></textarea>
                 <input type="number" name="price" id="price" placeholder="Price" min="0" step="0.01" value="<?= $product['price']; ?>" />
                 <input type="text" name="tags" id="tags" placeholder="Searchtags" value="<?= $product['tags']; ?>" />
 
@@ -36,7 +36,7 @@ if (login()) {
 
             <div class="content_right">
             <label for="brands">Brand</label>
-                <select name="brands" id="brands" required onchange="editproduct('brands')">
+                <select name="brands" id="brands" required >
 <?php
                     foreach($brands as $brandKey => $brandValue) {
 ?>
@@ -47,7 +47,7 @@ if (login()) {
                 </select>
 
                 <label for="categories">Category</label>
-                <select name="categories" id="categories" required onchange="editproduct('categories')">
+                <select name="categories" id="categories" required >
 <?php
                     foreach($categories as $categoryKey => $categoryValue) {
 ?>
@@ -84,9 +84,6 @@ if (login()) {
             </div> <!-- content_right -->
 
         </form>
-
-        <div class="message" id="message">
-        </div> <!-- message -->
 
     </div> <!-- content -->
 

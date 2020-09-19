@@ -15,7 +15,7 @@ if (login()) {
         <form method="post" class="multi" enctype="multipart/form-data" action="index.php?page=2&action=3">
 
             <div class="content_left">
-                <input type="text" id="name" name="name" value="<?= $brands['name']; ?>" placeholder="Name" required onchange="editbrand('name')" />
+                <input type="text" id="name" name="name" value="<?= $brands['name']; ?>" placeholder="Name" required />
                 <input type="text" id="website" name="website" value="<?= $brands['website']; ?>" placeholder="Website" />
                 <textarea id="description" name="description" placeholder="Description"><?= $brands['description']; ?></textarea>
             </div> <!-- content_left -->
@@ -28,9 +28,6 @@ if (login()) {
                 <input type="hidden" name="id" value="<?= $brands['id']; ?>" />
             </div> <!-- content_right -->
         </form>
-
-        <div class="message" id="message">
-        </div> <!-- message -->
 
     </div> <!-- content -->
 

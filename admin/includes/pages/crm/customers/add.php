@@ -15,10 +15,10 @@ if (login()) {
             <div class="content_left">
                 <span class="form_cat">Basic information</span>
                 
-                <input type="text" name="firstname" id="firstname" placeholder="First name" required onchange="addCustumers('firstname')" />
+                <input type="text" name="firstname" id="firstname" placeholder="First name" required />
                 <input type="text" name="insertion" id="insertion" placeholder="Middle name" />
-                <input type="text" name="lastname" id="lastname" placeholder="Last name" required onchange="addCustomers('lastname')" />
-                <input type="text" name="email" id="email" placeholder="Email" required onchange="addCustomers('email')" />
+                <input type="text" name="lastname" id="lastname" placeholder="Last name" required />
+                <input type="text" name="email" id="email" placeholder="Email" required />
                 <input type="text" name="phone" id="phone" placeholder="Phone" />
                 <input type="text" name="company" id="company" placeholder="Company name" />
                 <input type="text" name="taxnumber" id="taxnumber" placeholder="Tax number" />
@@ -54,9 +54,6 @@ if (login()) {
             </div> <!-- content_right -->
 
         </form>
-
-        <div class="message" id="message">
-        </div> <!-- message -->
 
     </div> <!-- content -->
 

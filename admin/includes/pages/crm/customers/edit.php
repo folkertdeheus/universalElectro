@@ -20,10 +20,10 @@ if (login()) {
             <div class="content_left">
                 <span class="form_cat">Basic information</span>
                 
-                <input type="text" name="firstname" id="firstname" placeholder="Firstname" required onchange="addCustumers('firstname')" value="<?= decrypt($customer['firstname'], $iv); ?>" />
+                <input type="text" name="firstname" id="firstname" placeholder="Firstname" required value="<?= decrypt($customer['firstname'], $iv); ?>" />
                 <input type="text" name="insertion" id="insertion" placeholder="Middle name" value="<?= decrypt($customer['insertion'], $iv); ?>" />
-                <input type="text" name="lastname" id="lastname" placeholder="Lastname" required onchange="addCustomers('lastname')" value="<?= decrypt($customer['lastname'], $iv); ?>" />
-                <input type="text" name="email" id="email" placeholder="Email" required onchange="addCustomers('email')" value="<?= decrypt($customer['email'], $iv); ?>" />
+                <input type="text" name="lastname" id="lastname" placeholder="Lastname" required value="<?= decrypt($customer['lastname'], $iv); ?>" />
+                <input type="text" name="email" id="email" placeholder="Email" required value="<?= decrypt($customer['email'], $iv); ?>" />
                 <input type="text" name="phone" id="phone" placeholder="Phone" value="<?= decrypt($customer['phone'], $iv); ?>" />
                 <input type="text" name="company" id="company" placeholder="Company name" value="<?= decrypt($customer['company_name'], $iv); ?>" />
                 <input type="text" name="taxnumber" id="taxnumber" placeholder="Tax number" value="<?= decrypt($customer['taxnumber'], $iv); ?>" />
@@ -60,9 +60,6 @@ if (login()) {
             </div> <!-- content_right -->
 
         </form>
-
-        <div class="message" id="message">
-        </div> <!-- message -->
 
     </div> <!-- content -->
 
