@@ -24,7 +24,7 @@ if (login()) {
                 // Get all brands
                 $brands = $q->allBrands();
 ?>
-                <table>
+                <table id="paginate">
                     <tr>
                         <td>Name</td>
                         <td>Image</td>
@@ -36,7 +36,7 @@ if (login()) {
 <?php
                     foreach($brands as $brandKey => $brandValue) {
 ?>
-                        <tr>
+                        <tr id="row<?= $brandKey+1; ?>">
                             <td><?= $brandValue['name']; ?></td>
                             <td>
 <?php
@@ -54,6 +54,9 @@ if (login()) {
                     }
 ?>
                 </table>
+
+                <div class="pagebuttons" id="pagebuttons">
+                </div> <!-- pagebuttons -->
 <?php
             } else {
                 echo 'No brands';

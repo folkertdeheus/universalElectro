@@ -23,7 +23,7 @@ if (login()) {
                 // Get customers
                 $contact = $q->allContact();
 ?>
-                <table>
+                <table id="paginate">
                     <tr>
                         <th>Name</th>
                         <th>Email</th>
@@ -34,7 +34,7 @@ if (login()) {
 <?php
                     foreach($contact as $contactKey => $contactValue) {
 ?>
-                        <tr>
+                        <tr id="row<?= $contactKey+1; ?>">
                             <td><?= $contactValue['name'] ?></td>
                             <td><?= $contactValue['email']; ?></td>
                             <td><?= $contactValue['phone']; ?></td>
@@ -46,6 +46,9 @@ if (login()) {
                     }
 ?>
                 </table>
+
+                <div class="pagebuttons" id="pagebuttons">
+                </div> <!-- pagebuttons -->
 <?php
             } else {
                 echo 'No contact messages';

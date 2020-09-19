@@ -28,7 +28,7 @@ if (login()) {
                     // Get all products
                     $products = $q->allProducts();
 ?>
-                    <table>
+                    <table id="paginate">
                         <tr>
                             <td>Name</td>
                             <td>Brand</td>
@@ -48,7 +48,7 @@ if (login()) {
                             // Get category
                             $category = $q->getCategoryById($productsValue['category']);
 ?>
-                            <tr>
+                            <tr id="row<?= $productsKey+1; ?>">
                                 <td><?= $productsValue['name']; ?></td>
                                 <td><?= $brand['name']; ?></td>
                                 <td><?= $category['en_name']; ?></td>
@@ -61,6 +61,9 @@ if (login()) {
                         }
 ?>
                     </table>
+
+                    <div class="pagebuttons" id="pagebuttons">
+                    </div> <!-- pagebuttons -->
 <?php
                 } else {
                     echo 'No products';

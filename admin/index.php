@@ -51,6 +51,7 @@ include('includes/php/include.php');
     <script src="includes/js/copy_adress.js"></script>
     <script src="includes/js/languageSettings.js"></script>
     <script src="includes/js/ticketreply.js"></script>
+    <script src="includes/js/tables.js"></script>
 </head>
 
 <body>

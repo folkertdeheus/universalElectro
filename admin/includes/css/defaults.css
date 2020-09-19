@@ -431,23 +431,61 @@ input[type="color"] {
 }
 
 .stats {
+    /* Positioning */
     width: 100%;
     margin-top: 20px;
 }
 
 .stats span {
+    /* Font */
     font-size: 30px;
     color: var(--main);
 }
 
 .stats table {
+    /* Background */
     border-collapse: collapse;
     border-spacing: 0px;
 
+    /* Positioning */
     width: 100%;
 }
 
 .stats td {
+    /* Background */
     border: none;
     border-bottom: 1px solid var(--accent);
+}
+
+.pagebuttons {
+    /* Display flex */
+    display: flex;
+    flex-direction: row;
+}
+
+.pagebutton {
+    /* Positioning */
+    padding: 10px;
+    margin-right: 10px;
+
+    /* Background */
+    outline: 1px solid var(--accent);
+    border-radius: 2px;
+
+    /* Animation */
+    transition: 0.5s;
+}
+
+.pagebutton:hover {
+    /* Cursor */
+    cursor: pointer;
+
+    /* Background */
+    background-color: var(--accent);
+
+    /* Font */
+    color: var(--back);
+
+    /* Animation */
+    transition: 0.5s;
 }

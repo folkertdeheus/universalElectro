@@ -15,7 +15,7 @@ if (login()) {
         <div class="content">
             <div class="table">
 
-                <table>
+                <table id="paginate">
                     <tr>
                         <th>#</td>
                         <th>Date</th>
@@ -34,7 +34,7 @@ if (login()) {
                         // Get quotation status
                         $status = $q->getQuotationStatus($quoteValue['status']);
 ?>
-                        <tr class="quoterow" onclick="window.location='index.php?page=2&action=2&id=<?= $quoteValue['id']; ?>'">
+                        <tr id="row<?= $quoteKey+1; ?>class="quoterow" onclick="window.location='index.php?page=2&action=2&id=<?= $quoteValue['id']; ?>'">
                             <td><?= $quoteValue['id']; ?></td>
                             <td><?= $quoteValue['timestamp']; ?></td>
                             <td><?= decrypt($customer['lastname'], $iv).', '.decrypt($customer['firstname'], $iv).' '.decrypt($customer['insertion'], $iv).' ('.$quoteValue['customer'].')'; ?></td>
@@ -44,6 +44,10 @@ if (login()) {
                     }
 ?>
                 </table>
+
+                <div class="pagebuttons" id="pagebuttons">
+                </div> <!-- pagebuttons -->
+                
             </div> <!-- table -->
 <?php
     } else {

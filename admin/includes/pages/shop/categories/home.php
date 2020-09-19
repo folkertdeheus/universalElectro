@@ -24,7 +24,7 @@ if (login()) {
                 // Get all brands
                 $categories = $q->allCategories();
 ?>
-                <table>
+                <table id="paginate">
                     <tr>
                         <td>Name</td>
                         <td>Description</td>
@@ -34,7 +34,7 @@ if (login()) {
 <?php
                     foreach($categories as $categoryKey => $categoryValue) {
 ?>
-                        <tr>
+                        <tr id="row<?= $categoryKey+1; ?>">
                             <td><?= $categoryValue['nl_name']; ?></td>
                             <td><?= $categoryValue['nl_description']; ?></td>
                             <td class="icon"><a href="index.php?page=2&action=4&sub=2&id=<?= $categoryValue['id']; ?>"><img src="includes/images/edit.png" alt="edit" /></a></td>
@@ -44,6 +44,9 @@ if (login()) {
                     }
 ?>
                 </table>
+
+                <div class="pagebuttons" id="pagebuttons">
+                </div> <!-- pagebuttons -->
 <?php
             } else {
                 echo 'No categories';

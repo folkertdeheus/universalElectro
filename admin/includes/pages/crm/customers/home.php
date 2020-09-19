@@ -24,7 +24,7 @@ if (login()) {
                 // Get customers
                 $customers = $q->allCustomers();
 ?>
-                <table>
+                <table id="paginate">
                     <tr>
                         <th>Name</th>
                         <th>Email</th>
@@ -39,7 +39,7 @@ if (login()) {
                         // Set iv for decryption
                         $iv = $customerValue['iv'];
 ?>
-                        <tr>
+                        <tr id="row<?= $customerKey+1; ?>">
                             <td><?= decrypt($customerValue['lastname'], $iv).', '.decrypt($customerValue['firstname'], $iv).' '.decrypt($customerValue['insertion'], $iv); ?></td>
                             <td><?= decrypt($customerValue['email'], $iv); ?></td>
                             <td><?= decrypt($customerValue['company_name'], $iv); ?></td>
@@ -51,6 +51,9 @@ if (login()) {
                     }
 ?>
                 </table>
+
+                <div class="pagebuttons" id="pagebuttons">
+                </div> <!-- pagebuttons -->
 <?php
             } else {
                 echo 'No customers';
