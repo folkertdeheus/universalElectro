@@ -10,7 +10,12 @@ echo '<div class="webshop_navbar">';
 
 foreach($productCategories as $categoryKey => $categoryValue) {
 
-    echo '<a href="index.php?page=1&cat='.$categoryValue['id'].'">'.$categoryValue['nl_name'].'</a>';
+    // Check if there are products in category
+    if ($q->countProductsByCategory($categoryValue['id']) > 0) {
+
+        echo '<a href="index.php?page=1&cat='.$categoryValue['id'].'">'.$categoryValue['nl_name'].'</a>';
+
+    }
 
 }
 
