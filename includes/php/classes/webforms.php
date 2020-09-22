@@ -181,10 +181,14 @@ class Webforms extends Queries
             return;
         }
 
+        // Get customer to get IV
+        $customer = $this->getCustomer($_SESSION['webuser']);
+        $this->iv = $customer['iv'];
+        
         // Loop through POST values and set variables
         foreach($_POST as $key => $value) {
             if ($key != 'password' && $key != 'form') {
-                $$key = htmlentities($value);
+                $$key = $this->encrypt(htmlentities($value));
             }
         }
 
