@@ -369,7 +369,8 @@ class Forms extends Queries
 
         // Upload file
 
-        if (isset($_FILES['name']) && $_FILES['name'] != null) {
+        if (file_exists($_FILES['image']['tmp_name']) || is_uploaded_file($_FILES['image']['tmp_name'])) {
+
             // File naming
             $path = '../includes/brands/';
             $file = basename($_FILES['image']['name']);
