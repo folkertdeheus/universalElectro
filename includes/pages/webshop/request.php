@@ -4,18 +4,6 @@
  * This page contains the quotation review page
  */
 
-// Get quotation from cookie
-$cart = $q->getLatestQuotationFromSession($_COOKIE['unele_shop']);
-
-// Get products in cart
-$products = $q->getQuotationProducts($cart['id']);
-
-// Get account
-$account = $q->getCustomer($_SESSION['webuser']);
-
-// Set iv for decryption
-$iv = $account['iv'];
-
 ?>
 
 <main id="mainEnglish">
@@ -23,6 +11,18 @@ $iv = $account['iv'];
 <?php
     // Only continue when a user is logged in
     if (login()) {
+
+        // Get quotation from cookie
+        $cart = $q->getLatestQuotationFromSession($_COOKIE['unele_shop']);
+
+        // Get products in cart
+        $products = $q->getQuotationProducts($cart['id']);
+
+        // Get account
+        $account = $q->getCustomer($_SESSION['webuser']);
+
+        // Set iv for decryption
+        $iv = $account['iv'];
 ?>
         <div class="title">
             <?= $language['en_quote_check']; ?>
@@ -180,6 +180,18 @@ $iv = $account['iv'];
 <?php
     // Only continue when a user is logged in
     if (login()) {
+        
+        // Get quotation from cookie
+        $cart = $q->getLatestQuotationFromSession($_COOKIE['unele_shop']);
+
+        // Get products in cart
+        $products = $q->getQuotationProducts($cart['id']);
+
+        // Get account
+        $account = $q->getCustomer($_SESSION['webuser']);
+
+        // Set iv for decryption
+        $iv = $account['iv'];
 ?>
         <div class="title">
             <?= $language['nl_quote_check']; ?>

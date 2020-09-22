@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * This file contains the main page
+ * From here everything is included
+ */
+
 //If the HTTPS is not found to be "on"
 if(!isset($_SERVER["HTTPS"]) || $_SERVER["HTTPS"] != "on")
 {
@@ -10,10 +15,12 @@ if(!isset($_SERVER["HTTPS"]) || $_SERVER["HTTPS"] != "on")
     exit;
 }
 
+// Error reporting, only on while in development, turn off when done
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+// Start sessions
 session_start();
 
 // Include php files
