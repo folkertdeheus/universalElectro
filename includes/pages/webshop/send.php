@@ -77,9 +77,9 @@ if (filter_var(decrypt($account['email'], $iv), FILTER_VALIDATE_EMAIL)) {
 
     $mailMessageBot = '<table>';
     $mailMessageBot .= '<tr>';
-    $mailMessageBot .= '<th>Aantal</th>';
-    $mailMessageBot .= '<th>Product</th>';
-    $mailMessageBot .= '<th>Merk</th>';
+    $mailMessageBot .= '<th style="text-align: left;">Aantal</th>';
+    $mailMessageBot .= '<th style="text-align: left;">Product</th>';
+    $mailMessageBot .= '<th style="text-align: left;">Merk</th>';
     $mailMessageBot .= '</tr>';
 
     // Loop through quotation products
@@ -92,9 +92,9 @@ if (filter_var(decrypt($account['email'], $iv), FILTER_VALIDATE_EMAIL)) {
         $brand = $q->getBrandById($product['brand']);
 
         $mailMessageBot .= '<tr>';
-        $mailMessageBot .= '<td style="width: 40px; text-align: left;">'.$productValue['amount'].'x</td>';
-        $mailMessageBot .= '<td style="width: 300px; text-align: left;">'.$product['name'].'</td>';
-        $mailMessageBot .= '<td style="width: 150px; text-align: left;">'.$brand['name'].'</td>';
+        $mailMessageBot .= '<td style="width: 40px;">'.$productValue['amount'].'x</td>';
+        $mailMessageBot .= '<td style="width: 300px;">'.$product['name'].'</td>';
+        $mailMessageBot .= '<td style="width: 150px;">'.$brand['name'].'</td>';
         $mailMessageBot .= '</tr>';
         $mailMessageBot .= "\r\n";
     }
@@ -140,7 +140,7 @@ if (filter_var(decrypt($account['email'], $iv), FILTER_VALIDATE_EMAIL)) {
     $mailMessageMid2 .= '<th colspan=2>Shipping information</th>';
     $mailMessageMid2 .= '</tr>';
     $mailMessageMid2 .= '<tr>';
-    $mailMessageMid2 .= '<td>Name:<td><td>'.decrypt($account['firstname'], $iv).' '.decrypt($account['insertion'], $iv).' '.decrypt($account['lastname'], $iv).'</td>';
+    $mailMessageMid2 .= '<td>Name:</td><td>'.decrypt($account['firstname'], $iv).' '.decrypt($account['insertion'], $iv).' '.decrypt($account['lastname'], $iv).'</td>';
     $mailMessageMid2 .= '<td>Adress:</td><td>'.decrypt($account['billing_street'], $iv).' '.decrypt($account['billing_housenumber'], $iv).'</td>';
     $mailMessageMid2 .= '<td>Adress:</td><td>'.decrypt($account['shipping_street'], $iv).' '.decrypt($account['shipping_housenumber'], $iv).'</td>';
     $mailMessageMid2 .= '</tr>';
@@ -168,9 +168,9 @@ if (filter_var(decrypt($account['email'], $iv), FILTER_VALIDATE_EMAIL)) {
 
     $mailMessageBot2 = '<table>';
     $mailMessageBot2 .= '<tr>';
-    $mailMessageBot2 .= '<th>Aantal</th>';
-    $mailMessageBot2 .= '<th>Product</th>';
-    $mailMessageBot2 .= '<th>Merk</th>';
+    $mailMessageBot2 .= '<th style="text-align: left;">Aantal</th>';
+    $mailMessageBot2 .= '<th style="text-align: left;">Product</th>';
+    $mailMessageBot2 .= '<th style="text-align: left;">Merk</th>';
     $mailMessageBot2 .= '</tr>';
 
     // Loop through quotation products
@@ -183,9 +183,9 @@ if (filter_var(decrypt($account['email'], $iv), FILTER_VALIDATE_EMAIL)) {
         $brand = $q->getBrandById($product['brand']);
 
         $mailMessageBot2 .= '<tr>';
-        $mailMessageBot2 .= '<td>'.$productValue['amount'].'x</td>';
-        $mailMessageBot2 .= '<td>'.$product['name'].'</td>';
-        $mailMessageBot2 .= '<td>'.$brand['name'].'</td>';
+        $mailMessageBot2 .= '<td style="width: 40px;">'.$productValue['amount'].'x</td>';
+        $mailMessageBot2 .= '<td style="width: 300px;">'.$product['name'].'</td>';
+        $mailMessageBot2 .= '<td style="width: 150px;">'.$brand['name'].'</td>';
         $mailMessageBot2 .= '</tr>';
         $mailMessageBot2 .= "\r\n";
     }
