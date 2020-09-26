@@ -13,17 +13,74 @@ $products = $q->getQuotationProducts($cart['id']);
 // Get account
 $account = $q->getCustomer($_SESSION['webuser']);
 
+// Set IV
+$iv = $account['iv'];
+
 // SENDING QUOTATION TO COMPANY
 
 // Check if the email adress is valid
-if (filter_var($account['email'], FILTER_VALIDATE_EMAIL)) {
+if (filter_var(decrypt($account['email'], $iv), FILTER_VALIDATE_EMAIL)) {
     
     // Set variables
     $mailFrom = 'webshop@universalelectro.nl';
-    $mailReplyTo = $account['email'];
-    $mailTo = 'sales@universalelectro.nl';
-    $mailSubject = 'Offerteaanvraag van '.$account['lastname'].', '.$account['firstname'].' '.$account['insertion'];
-    $mailMessage = 'Nieuwe offerteaanvraag van '.$account['lastname'].', '.$account['firstname'].' '.$account['instertion']."\r\n"."\r\n";
+    $mailReplyTo = decrypt($account['email'], $iv);
+    $mailTo = 'dj_beathoven@hotmail.com'; //'sales@universalelectro.nl';
+    $mailSubject = 'Offerteaanvraag van '.decrypt($account['lastname'], $iv).', '.decrypt($account['firstname'], $iv).' '.decrypt($account['insertion'], $iv);
+    
+    $mailMessageTop = 'Nieuwe offerteaanvraag van '.decrypt($account['lastname'], $iv).', '.decrypt($account['firstname'], $iv).' '.decrypt($account['insertion'], $iv)."\r\n"."\r\n";
+
+    $mailMessageTop .= '<table>';
+    $mailMessageTop .= '<tr>';
+    $mailMessageTop .= '<td><img src="https://universalelectro.nl/includes/images/logo.png" style="max-width: 200px" /></td>';
+    $mailMessageTop .= '<td>';
+    $mailMessageTop .= 'Ordernummer: '.$cart['id'].'<br>';
+    $mailMessageTop .= 'Datum: '.date('d-m-Y').'<br>';
+    $mailMessageTop .= 'Tijd: '.date('H:i:s').'<br>';
+    $mailMessageTop .= '</td>';
+    $mailMessageTop .= '</tr>';
+    $mailMessageTop .= '</table>';
+    $mailMessageTop .= "\r\n";
+
+    $mailMessageMid = '<table>';
+    $mailMessageMid .= '<tr>';
+    $mailMessageMid .= '<th colspan=2>Accountgegevens</th>';
+    $mailMessageMid .= '<th colspan=2>Factuurgegevens</th>';
+    $mailMessageMid .= '<th colspan=2>Verzendgegevens</th>';
+    $mailMessageMid .= '</tr>';
+    $mailMessageMid .= '<tr>';
+    $mailMessageMid .= '<td style="width: 100px;">Naam:<td><td style="width: 200px;">'.decrypt($account['firstname'], $iv).' '.decrypt($account['insertion'], $iv).' '.decrypt($account['lastname'], $iv).'</td>';
+    $mailMessageMid .= '<td style="width: 100px;">Adres:</td><td style="width: 200px;">'.decrypt($account['billing_street'], $iv).' '.decrypt($account['billing_housenumber'], $iv).'</td>';
+    $mailMessageMid .= '<td style="width: 100px;">Adres:</td><td style="width: 200px;">'.decrypt($account['shipping_street'], $iv).' '.decrypt($account['shipping_housenumber'], $iv).'</td>';
+    $mailMessageMid .= '</tr>';
+    $mailMessageMid .= '<tr>';
+    $mailMessageMid .= '<td>Email:</td><td>'.decrypt($account['email'], $iv).'</td>';
+    $mailMessageMid .= '<td>Postcode:</td><td>'.decrypt($account['billing_postalcode'], $iv).'</td>';
+    $mailMessageMid .= '<td>Postcode:</td><td>'.decrypt($account['shipping_postalcode'], $iv).'</td>';
+    $mailMessageMid .= '</tr>';
+    $mailMessageMid .= '<tr>';
+    $mailMessageMid .= '<td>Telefoon:</td><td>'.decrypt($account['phone'], $iv).'</td>';
+    $mailMessageMid .= '<td>Plaats:</td><td>'.decrypt($account['billing_city'], $iv).'</td>';
+    $mailMessageMid .= '<td>Plaats:</td><td>'.decrypt($account['shipping_city'], $iv).'</td>';
+    $mailMessageMid .= '</tr>';
+    $mailMessageMid .= '<tr>';
+    $mailMessageMid .= '<td>Bedrijfsnaam:</td><td>'.decrypt($account['company_name'], $iv).'</td>';
+    $mailMessageMid .= '<td>Provincie:</td><td>'.decrypt($account['billing_provence'], $iv).'</td>';
+    $mailMessageMid .= '<td>Provincie:</td><td>'.decrypt($account['shipping_provence'], $iv).'</td>';
+    $mailMessageMid .= '</tr>';
+    $mailMessageMid .= '<tr>';
+    $mailMessageMid .= '<td>BTW Nummer:</td><td>'.decrypt($account['taxnumber'], $iv).'</td>';
+    $mailMessageMid .= '<td>Land:</td><td>'.decrypt($account['billing_country'], $iv).'</td>';
+    $mailMessageMid .= '<td>Land:</td><td>'.decrypt($account['shipping_country'], $iv).'</td>';
+    $mailMessageMid .= '</tr>';
+    $mailMessageMid .= '</table>';
+    $mailMessageMid .= "\r\n\r\n\r\n";
+
+    $mailMessageBot = '<table>';
+    $mailMessageBot .= '<tr>';
+    $mailMessageBot .= '<th>Aantal</th>';
+    $mailMessageBot .= '<th>Product</th>';
+    $mailMessageBot .= '<th>Merk</th>';
+    $mailMessageBot .= '</tr>';
 
     // Loop through quotation products
     foreach($products as $productKey => $productValue) {
@@ -34,49 +91,87 @@ if (filter_var($account['email'], FILTER_VALIDATE_EMAIL)) {
         // Get brand info
         $brand = $q->getBrandById($product['brand']);
 
-        $mailMessage .= '- '.$brand['name'].': ('.$product['amount'].'x) '.$product['name']."\r\n";
+        $mailMessageBot .= '<tr>';
+        $mailMessageBot .= '<td style="width: 40px;">'.$productValue['amount'].'x</td>';
+        $mailMessageBot .= '<td style="width: 300px;">'.$product['name'].'</td>';
+        $mailMessageBot .= '<td style="width: 150px;">'.$brand['name'].'</td>';
+        $mailMessageBot .= '</tr>';
+        $mailMessageBot .= "\r\n";
     }
 
-    $mailMessage .= "\r\n"."\r\n";
+    $mailMessageBot .= '</table>';
 
-    $mailMessage .= 'Accountgegevens: '."\r\n";
-    $mailMessage .= 'Naam: '.$account['firstname'].' '.$account['insertion'].' '.$account['lastname']."\r\n";
-    $mailMessage .= 'Email: '.$account['email']."\r\n";
-    $mailMessage .= 'Telefoon: '.$account['phone']."\r\n";
-    $mailMessage .= 'Bedrijfsnaam: '.$account['company_name']."\r\n";
-    $mailMessage .= 'BTW nummer: '.$account['taxnumber']."\r\n"."\r\n";
-
-    $mailMessage .= 'Factuurgegevens: '."\r\n";
-    $mailMessage .= 'Adres: '.$account['billing_street'].' '.$account['billing_housenumber']."\r\n";
-    $mailMessage .= 'Postcode: '.$account['billing_postalcode']."\r\n";
-    $mailMessage .= 'Plaats: '.$account['billing_city']."\r\n";
-    $mailMessage .= 'Provincie: '.$account['billing_provence']."\r\n";
-    $mailMessage .= 'Land: '.$account['billing_country']."\r\n"."\r\n";
-
-    $mailMessage .= 'Verzendgegevens: '."\r\n";
-    $mailMessage .= 'Adres: '.$account['shipping_street'].' '.$account['shipping_housenumber']."\r\n";
-    $mailMessage .= 'Postcode: '.$account['shipping_postalcode']."\r\n";
-    $mailMessage .= 'Plaats: '.$account['shipping_city']."\r\n";
-    $mailMessage .= 'Provencie: '.$account['shipping_provence']."\r\n";
-    $mailMessage .= 'Land: '.$account['shipping_country']."\r\n"."\r\n";
-
-    if (isset($account['remarks']) && $account['remarks'] != null) {
-        $mailMessage .= 'Opmerking: '."\r\n"; 
-        $mailMessage .= $account['remarks'];
+    if (isset($account['remarks']) && decrypt($account['remarks'], $iv) != null) {
+        $mailMessageBot .= 'Opmerking: '."\r\n"; 
+        $mailMessageBot .= decrypt($account['remarks'], $iv);
     }
 
     $mailHeaders = ['From' => $mailFrom,
-                    'Reply-To' => $mailReplyTo];
-
+                    'Reply-To' => $mailReplyTo,
+                    'MIME-Version' => '1.0',
+                    'Content-Type' => 'text/html; charset=ISO-8895-1'];
 
     // SENDING MAIL TO CUSTOMER
 
     // Set variables
     $mailFrom2 = 'webshop@universalelectro.nl';
     $mailReplyTo2 = 'sales@universalelectro.nl';
-    $mailTo2 = $account['email'];
+    $mailTo2 = decrypt($account['email'], $iv);
     $mailSubject2 = 'Quotation request';
-    $mailMessage2 = 'Your quotation request from '.$cart['timestamp']."\r\n"."\r\n";
+    
+    $mailMessageTop2 = 'Your quotation request from '.$cart['timestamp']."\r\n"."\r\n";
+
+    $mailMessageTop2 .= '<table>';
+    $mailMessageTop2 .= '<tr>';
+    $mailMessageTop2 .= '<td><img src="https://universalelectro.nl/includes/images/logo.png" style="max-width: 200px" /></td>';
+    $mailMessageTop2 .= '<td>';
+    $mailMessageTop2 .= 'Ordernumber: '.$cart['id'].'<br>';
+    $mailMessageTop2 .= 'Date: '.date('Y-m-d').'<br>';
+    $mailMessageTop2 .= 'Time: '.date('H:i:s').'<br>';
+    $mailMessageTop2 .= '</td>';
+    $mailMessageTop2 .= '</tr>';
+    $mailMessageTop2 .= '</table>';
+    $mailMessageTop2 .= "\r\n";
+
+    $mailMessageMid2 = '<table>';
+    $mailMessageMid2 .= '<tr>';
+    $mailMessageMid2 .= '<th colspan=2>Account information</th>';
+    $mailMessageMid2 .= '<th colspan=2>Billing information</th>';
+    $mailMessageMid2 .= '<th colspan=2>Shipping information</th>';
+    $mailMessageMid2 .= '</tr>';
+    $mailMessageMid2 .= '<tr>';
+    $mailMessageMid2 .= '<td>Name:<td><td>'.decrypt($account['firstname'], $iv).' '.decrypt($account['insertion'], $iv).' '.decrypt($account['lastname'], $iv).'</td>';
+    $mailMessageMid2 .= '<td>Adress:</td><td>'.decrypt($account['billing_street'], $iv).' '.decrypt($account['billing_housenumber'], $iv).'</td>';
+    $mailMessageMid2 .= '<td>Adress:</td><td>'.decrypt($account['shipping_street'], $iv).' '.decrypt($account['shipping_housenumber'], $iv).'</td>';
+    $mailMessageMid2 .= '</tr>';
+    $mailMessageMid2 .= '<tr>';
+    $mailMessageMid2 .= '<td>Email:</td><td>'.decrypt($account['email'], $iv).'</td>';
+    $mailMessageMid2 .= '<td>Postal code:</td><td>'.decrypt($account['billing_postalcode'], $iv).'</td>';
+    $mailMessageMid2 .= '<td>Postal code:</td><td>'.decrypt($account['shipping_postalcode'], $iv).'</td>';
+    $mailMessageMid2 .= '</tr>';
+    $mailMessageMid2 .= '<tr>';
+    $mailMessageMid2 .= '<td>Phone:</td><td>'.decrypt($account['phone'], $iv).'</td>';
+    $mailMessageMid2 .= '<td>City:</td><td>'.decrypt($account['billing_city'], $iv).'</td>';
+    $mailMessageMid2 .= '<td>City:</td><td>'.decrypt($account['shipping_city'], $iv).'</td>';
+    $mailMessageMid2 .= '</tr>';
+    $mailMessageMid2 .= '<tr>';
+    $mailMessageMid2 .= '<td>Company name:</td><td>'.decrypt($account['company_name'], $iv).'</td>';
+    $mailMessageMid2 .= '<td>Provence:</td><td>'.decrypt($account['billing_provence'], $iv).'</td>';
+    $mailMessageMid2 .= '<td>Provence:</td><td>'.decrypt($account['shipping_provence'], $iv).'</td>';
+    $mailMessageMid2 .= '</tr>';
+    $mailMessageMid2 .= '<tr>';
+    $mailMessageMid2 .= '<td>Tax number:</td><td>'.decrypt($account['taxnumber'], $iv).'</td>';
+    $mailMessageMid2 .= '<td>Country:</td><td>'.decrypt($account['billing_country'], $iv).'</td>';
+    $mailMessageMid2 .= '<td>Country:</td><td>'.decrypt($account['shipping_country'], $iv).'</td>';
+    $mailMessageMid2 .= '</tr>';
+    $mailMessageMid2 .= '</table>';
+
+    $mailMessageBot2 = '<table>';
+    $mailMessageBot2 .= '<tr>';
+    $mailMessageBot2 .= '<th>Aantal</th>';
+    $mailMessageBot2 .= '<th>Product</th>';
+    $mailMessageBot2 .= '<th>Merk</th>';
+    $mailMessageBot2 .= '</tr>';
 
     // Loop through quotation products
     foreach($products as $productKey => $productValue) {
@@ -87,42 +182,23 @@ if (filter_var($account['email'], FILTER_VALIDATE_EMAIL)) {
         // Get brand info
         $brand = $q->getBrandById($product['brand']);
 
-        $mailMessage2 .= '- '.$brand['name'].': ('.$product['amount'].'x) '.$product['name']."\r\n";
+        $mailMessageBot2 .= '<tr>';
+        $mailMessageBot2 .= '<td>'.$productValue['amount'].'x</td>';
+        $mailMessageBot2 .= '<td>'.$product['name'].'</td>';
+        $mailMessageBot2 .= '<td>'.$brand['name'].'</td>';
+        $mailMessageBot2 .= '</tr>';
+        $mailMessageBot2 .= "\r\n";
     }
 
-    $mailMessage2 .= "\r\n"."\r\n";
-
-    $mailMessage2 .= 'Accountgegevens: '."\r\n";
-    $mailMessage2 .= 'Naam: '.$account['firstname'].' '.$account['insertion'].' '.$account['lastname']."\r\n";
-    $mailMessage2 .= 'Email: '.$account['email']."\r\n";
-    $mailMessage2 .= 'Telefoon: '.$account['phone']."\r\n";
-    $mailMessage2 .= 'Bedrijfsnaam: '.$account['company_name']."\r\n";
-    $mailMessage2 .= 'BTW nummer: '.$account['taxnumber']."\r\n"."\r\n";
-
-    $mailMessage2 .= 'Factuurgegevens: '."\r\n";
-    $mailMessage2 .= 'Adres: '.$account['billing_street'].' '.$account['billing_housenumber']."\r\n";
-    $mailMessage2 .= 'Postcode: '.$account['billing_postalcode']."\r\n";
-    $mailMessage2 .= 'Plaats: '.$account['billing_city']."\r\n";
-    $mailMessage2 .= 'Provincie: '.$account['billing_provence']."\r\n";
-    $mailMessage2 .= 'Land: '.$account['billing_country']."\r\n"."\r\n";
-
-    $mailMessage2 .= 'Verzendgegevens: '."\r\n";
-    $mailMessage2 .= 'Adres: '.$account['shipping_street'].' '.$account['shipping_housenumber']."\r\n";
-    $mailMessage2 .= 'Postcode: '.$account['shipping_postalcode']."\r\n";
-    $mailMessage2 .= 'Plaats: '.$account['shipping_city']."\r\n";
-    $mailMessage2 .= 'Provencie: '.$account['shipping_provence']."\r\n";
-    $mailMessage2 .= 'Land: '.$account['shipping_country']."\r\n"."\r\n";
-
-    if (isset($account['remarks']) && $account['remarks'] != null) {
-        $mailMessage2 .= 'Opmerking: '."\r\n"; 
-        $mailMessage2 .= $account['remarks'];
-    }
+    $mailMessageBot2 .= '</table>';
 
     $mailHeaders2 = ['From' => $mailFrom2,
-                    'Reply-To' => $mailReplyTo2];
+                    'Reply-To' => $mailReplyTo2,
+                    'MIME-Version' => '1.0',
+                    'Content-Type' => 'text/html; charset=ISO-8895-1'];
 
-    // Sent mail    
-    if (mail($mailTo, $mailSubject, $mailMessage, $mailHeaders) && mail($mailTo2, $mailSubject2, $mailMessage2, $mailHeaders2)) {
+    // Send mail    
+    if (mail($mailTo, $mailSubject, $mailMessageTop.$mailMessageMid.$mailMessageBot, $mailHeaders) && mail($mailTo2, $mailSubject2, $mailMessageTop2.$mailMessageMid2.$mailMessageBot2, $mailHeaders2)) {
         
         // Message sent succesfully
 
@@ -137,9 +213,10 @@ if (filter_var($account['email'], FILTER_VALIDATE_EMAIL)) {
             <?= $language['nl_quote_sent']; ?>
         </main>
 <?php
-    } else {
 
+    } else {
         // Failed to sent message
+        
 ?>
         <main id="mainEnglish">
             <?= $language['en_quote_notsent']; ?>
@@ -152,7 +229,7 @@ if (filter_var($account['email'], FILTER_VALIDATE_EMAIL)) {
     }
 
 } else {
-    // Failed to sent message
+
 ?>
     <main id="mainEnglish">
         <?= $language['en_quote_notsent']; ?>
@@ -162,6 +239,7 @@ if (filter_var($account['email'], FILTER_VALIDATE_EMAIL)) {
         <?= $language['nl_quote_notsent']; ?>
     </main>
 <?php
+
 }
 
 ?>
