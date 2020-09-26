@@ -24,7 +24,7 @@ if (filter_var(decrypt($account['email'], $iv), FILTER_VALIDATE_EMAIL)) {
     // Set variables
     $mailFrom = 'webshop@universalelectro.nl';
     $mailReplyTo = decrypt($account['email'], $iv);
-    $mailTo = 'dj_beathoven@hotmail.com'; //'sales@universalelectro.nl';
+    $mailTo = 'sales@universalelectro.nl';
     $mailSubject = 'Offerteaanvraag van '.decrypt($account['lastname'], $iv).', '.decrypt($account['firstname'], $iv).' '.decrypt($account['insertion'], $iv);
     
     $mailMessageTop = 'Nieuwe offerteaanvraag van '.decrypt($account['lastname'], $iv).', '.decrypt($account['firstname'], $iv).' '.decrypt($account['insertion'], $iv)."\r\n"."\r\n";
@@ -48,7 +48,7 @@ if (filter_var(decrypt($account['email'], $iv), FILTER_VALIDATE_EMAIL)) {
     $mailMessageMid .= '<th colspan=2>Verzendgegevens</th>';
     $mailMessageMid .= '</tr>';
     $mailMessageMid .= '<tr>';
-    $mailMessageMid .= '<td style="width: 100px;">Naam:<td><td style="width: 200px;">'.decrypt($account['firstname'], $iv).' '.decrypt($account['insertion'], $iv).' '.decrypt($account['lastname'], $iv).'</td>';
+    $mailMessageMid .= '<td style="width: 100px;">Naam:</td><td style="width: 200px;">'.decrypt($account['firstname'], $iv).' '.decrypt($account['insertion'], $iv).' '.decrypt($account['lastname'], $iv).'</td>';
     $mailMessageMid .= '<td style="width: 100px;">Adres:</td><td style="width: 200px;">'.decrypt($account['billing_street'], $iv).' '.decrypt($account['billing_housenumber'], $iv).'</td>';
     $mailMessageMid .= '<td style="width: 100px;">Adres:</td><td style="width: 200px;">'.decrypt($account['shipping_street'], $iv).' '.decrypt($account['shipping_housenumber'], $iv).'</td>';
     $mailMessageMid .= '</tr>';
@@ -92,9 +92,9 @@ if (filter_var(decrypt($account['email'], $iv), FILTER_VALIDATE_EMAIL)) {
         $brand = $q->getBrandById($product['brand']);
 
         $mailMessageBot .= '<tr>';
-        $mailMessageBot .= '<td style="width: 40px;">'.$productValue['amount'].'x</td>';
-        $mailMessageBot .= '<td style="width: 300px;">'.$product['name'].'</td>';
-        $mailMessageBot .= '<td style="width: 150px;">'.$brand['name'].'</td>';
+        $mailMessageBot .= '<td style="width: 40px; text-align: left;">'.$productValue['amount'].'x</td>';
+        $mailMessageBot .= '<td style="width: 300px; text-align: left;">'.$product['name'].'</td>';
+        $mailMessageBot .= '<td style="width: 150px; text-align: left;">'.$brand['name'].'</td>';
         $mailMessageBot .= '</tr>';
         $mailMessageBot .= "\r\n";
     }
@@ -216,7 +216,7 @@ if (filter_var(decrypt($account['email'], $iv), FILTER_VALIDATE_EMAIL)) {
 
     } else {
         // Failed to sent message
-        
+
 ?>
         <main id="mainEnglish">
             <?= $language['en_quote_notsent']; ?>
