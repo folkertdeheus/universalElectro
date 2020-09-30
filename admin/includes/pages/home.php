@@ -6,7 +6,7 @@
 
 // Check if user is logged in when accessing this file
 if (login()) {
-
+/*
     // Get pageviews
     $pageviews = $q->pageviews();
 
@@ -37,7 +37,7 @@ if (login()) {
 
     // Sort descending
     arsort($count_countries);
-
+*/
 ?>
     <div class="menutop">
         <div class="menublock">
@@ -77,7 +77,7 @@ if (login()) {
 
     <div class="stats">
         <span>Website statistics</span>
-
+<!--
         <table>
             <tr>
                 <td>Total pageviews</td>

@@ -709,7 +709,7 @@ td.accountticket {
     /* Display */
     display: block;
     position: fixed;
-    z-index: 3;
+    z-index: 7;
 
     /* Positioning */
     top: 0px;
