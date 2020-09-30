@@ -369,24 +369,24 @@ if (login()) {
 
                             switch($ticketValue['priority']) {
                                 case '1':
-                                    $priority = $language['en_tickets_priolow'];
+                                    $priority = $language['nl_tickets_priolow'];
                                     break;
                                 case '2':
-                                    $priority = $language['en_tickets_priomed'];
+                                    $priority = $language['nl_tickets_priomed'];
                                     break;
                                 case '3':
-                                    $priority = $language['en_tickets_priohigh'];
+                                    $priority = $language['nl_tickets_priohigh'];
                                     break;
                                 case '4':
-                                    $priority = $language['en_tickets_priocrit'];
+                                    $priority = $language['nl_tickets_priocrit'];
                                     break;
                                 default:
-                                    $priority = $language['en_tickets_priomed'];
+                                    $priority = $language['nl_tickets_priomed'];
                             }
 ?>
                             <tr class="quotesummary" onclick="window.location='index.php?page=3&action=1&sub=2&id=<?= $ticketValue['id']; ?>'">
                                 <td class="accountticket"><?= $ticketValue['subject']; ?></td>
-                                <td class="accountticket"><?= $status['en_web_name']; ?></td>
+                                <td class="accountticket"><?= $status['nl_web_name']; ?></td>
                                 <td class="accountticket"><?= $category['name']; ?></td>
                                 <td class="accountticket"><?= $priority; ?></td>
                             </tr>
@@ -396,7 +396,7 @@ if (login()) {
                         </table>
 <?php
                     } else {
-                        echo $language['en_account_notickets'];
+                        echo $language['nl_account_notickets'];
                     }
 ?>
                     <a href="index.php?page=3&action=1"><?= $language['nl_account_newticket']; ?></a>
