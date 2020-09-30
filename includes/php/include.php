@@ -50,3 +50,6 @@ require_once(ADM.'decrypt.php');
 
 // Pageview
 require_once(PATH.'pageviews.php');
+
+// Quotation request sending
+require_once(PATH.'sendQuotation.php');
