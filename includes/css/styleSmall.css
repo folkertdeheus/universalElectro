@@ -1,25 +1,25 @@
 body {
     /* Body grid */
-    grid-template-columns: 1fr 600px 1fr;
-    grid-template-rows: 100px 140px 1fr;
+    grid-template-columns: 1fr 200px 400px 1fr;
+    grid-template-rows: 100px 100px 40px 1fr;
 }
-
+/*
 header {
     /* Grid placement in container */
-    grid-column: 1 / 4;
+ /*   grid-column: 1 / 4;
     grid-row: 1 / 3;
 
     /* Header grid */
-    display: grid;
+  /*  display: grid;
     grid-template-columns: 1fr 200px 400px 1fr;
     grid-template-rows: 100px 100px 40px;
 
     /* Header background image */
-    background: var(--background);
+ /*   background: var(--background);
     background-repeat: no-repeat;
     background-position: bottom 25% left 50%;
     background-size: cover;
-}
+}*/
 
 .headertop {
     /* Position */
@@ -37,6 +37,18 @@ header {
 
     /* Background */
     background-color: var(--grey);
+}
+
+.headersmall {
+    /* Display grid */
+    grid-column: 1 / 5;
+    grid-row: 2 / 3;
+
+    /* Background */
+    background-image: var(--background);
+    background-repeat: no-repeat;
+    background-position: bottom 25% left 50%;
+    background-size: cover;
 }
 
 .headerleft {
@@ -63,7 +75,7 @@ header {
     height: 100%;
 
     /* Background */
-    background-color: var(--grey);
+    /*background-color: var(--grey);*/
 
     /* Text style */
     color: var(--white);
@@ -106,9 +118,15 @@ header {
     /* Display flex */
     display: flex;
     flex-direction: row;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0px;
 
     /* Background */
     background-color: var(--grey);
+
+    /* Animation */
+    transition: 0.5s;
 }
 
 .menu a:link, .menu a:visited {
@@ -129,7 +147,7 @@ header {
 
 .container {
     /* Grid placement in body */
-    grid-column: 2 / 3;
+    grid-column: 2 / 4;
     grid-row: 4 / 5;
 
     /* Container grid */
@@ -137,7 +155,7 @@ header {
     grid-template-rows: auto auto 100px;
 
     /* Content gap between header and content */
-    margin-top: 20px;
+    /*margin-top: 20px;*/
 }
 
 main {

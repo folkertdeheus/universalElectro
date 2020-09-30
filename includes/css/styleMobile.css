@@ -9,45 +9,24 @@ body {
     display: none;
 }
 
-header {
-    /* Header grid display */
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: 50px 100px 100px 50px;
-}
+.headerleft {
+    width: 100vw;
+    height: 150px;
 
-.headertop {
-    /* Grid */
-    grid-column: 1 / 4;
-    grid-row: 1 / 3;
-
-    /* Header background image */
     background: var(--background);
     background-repeat: no-repeat;
     background-position: bottom 25% left 50%;
     background-size: cover;
 }
 
-.headerleft {
-    /* Grid */
-    grid-column: 2 / 3;
-    grid-row: 1 / 2;
-}
-
 .headerleft img {
     /* Image positioning in container */
-    width: 100%;
-    /*max-height: 100%;*/
-    /*margin-left: 25%;*/
-    z-index: 2;
-    position: relative;
+    width: 150px;
+    margin: 0 auto;
+    display: block;
 }
 
 .headermain {
-    /* Grid */
-    grid-column: 1 / 4;
-    grid-row: 3 / 4;
-
     /* Positioning */
     z-index: 1;
 
@@ -57,7 +36,7 @@ header {
     /* Text style */
     color: var(--white);
     font-size: 35px;
-    line-height: 100px;
+    line-height: 50px;
     text-align: center;
 }
 
@@ -67,14 +46,10 @@ header {
 }
 
 .headersub {
-    /* Grid */
-    grid-column: 1 / 4;
-    grid-row: 3 / 4;
-
     /* Positioning */
     position: relative;
     z-index: 3;
-    margin-top: 70px;
+    /*margin-top: 70px;*/
 
     /* Text styling */
     font-size: 20px;
@@ -93,16 +68,17 @@ header {
 
 .menu {
     /* Positioning in header */
-    grid-column: 1 / 4;
-    grid-row: 4 / 5;
-
     z-index: 4;
+    margin-top: 20px;
 
     /* Display flex */
     display: flex;
     flex-direction: row;
     justify-content: center;
     flex-wrap: wrap;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0px;
 
     /* Background */
     background-color: var(--grey);

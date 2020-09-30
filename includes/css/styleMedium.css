@@ -1,27 +1,30 @@
 body {
     /* Body grid */
-    grid-template-columns: 1fr 800px 1fr;
-    grid-template-rows: 100px 100px 240px 1fr;
+    grid-template-columns: 1fr 200px 600px 1fr;
+    grid-template-rows: 100px 100px 200px 40px 1fr;
 }
-
+/*
 header {
     /* Grid placement in container */
-    grid-column: 1 / 4;
+  /*  grid-column: 1 / 4;
     grid-row: 1 / 4;
 
     /* Header grid */
-    display: grid;
+  /*  display: grid;
     grid-template-columns: 1fr 200px 600px 1fr;
     grid-template-rows: 100px 100px 200px 40px;
 
     /* Background*/
-    background-color: var(--grey);
-}
+  /*  background-color: var(--grey);
+}*/
 
 .headerleft {
     /* Header left placement */
     grid-column: 2 / 3;
     grid-row: 1 / 3;
+
+    /* Animation */
+    transition: 0.5s;
 }
 
 .headerleft img {
@@ -33,6 +36,9 @@ header {
     /* Positioning to background image */
     z-index: 2;
     position: relative;
+
+    /* Animation */
+    transition: 0.5s;
 }
 
 .headermain {
@@ -48,6 +54,9 @@ header {
 
     /* Padding */
     padding-left: 20px;
+
+    /* Animation */
+    transition: 0.5s;
 }
 
 .headermain span {
@@ -90,9 +99,15 @@ header {
     /* Display flex */
     display: flex;
     flex-direction: row;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0px;
 
     /* Background */
     background-color: var(--grey);
+
+    /* Animation */
+    transition: 0.5s;
 }
 
 .menu a:link, .menu a:visited {
@@ -113,15 +128,15 @@ header {
 
 .container {
     /* Grid placement in body */
-    grid-column: 2 / 3;
-    grid-row: 4 / 5;
+    grid-column: 2 / 4;
+    grid-row: 5 / 6;
 
     /* Container grid */
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: repeat(3, auto);
 
     /* Content gap between header and content */
-    margin-top: 20px;
+    /*margin-top: 20px;*/
 }
 
 main {

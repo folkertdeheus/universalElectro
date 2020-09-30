@@ -6,20 +6,23 @@
 
 ?>
 
-<header>
+<!--<header>-->
     <div class="headertop">
     </div> <!-- headertop -->
 
     <div class="headerbottom">
     </div> <!-- headerbottom -->
 
-    <div class="headerleft">
-        <picture>
-            <img src="includes/images/logo.png" alt="Universal Electro Logo">
-        </picture>
+    <div class="headersmall">
+    </div> <!-- headersmall -->
+
+    <div class="headerleft" id="headerleft">
+       <!-- <picture> -->
+            <img src="includes/images/logo.png" alt="Universal Electro Logo" id="headerimage">
+         <!-- </picture> -->
     </div> <!-- headerleft -->
     
-    <div class="headermain">
+    <div class="headermain" id="headermain">
         Universal <span>Electro</span>
     </div> <!-- headermain -->
 
@@ -28,7 +31,7 @@
         <span id="nl_header"><?= $language['nl_header_text']; ?></span>
     </div> <!-- headersub -->
 
-    <nav class="menu">
+    <nav class="menu" id="menu">
 
         <a href="index.php" id="en_menu1"><?= $language['en_menu_home']; ?></a>
         <a href="index.php?page=1" id="en_menu2"><?= $language['en_menu_webshop']; ?></a>
@@ -72,4 +75,4 @@
 
     <div class="headerimage">
     </div> <!-- headerimage -->
-</header>
+<!--</header>-->

@@ -58,6 +58,7 @@ $language = $q->allLanguages();
     <script src="includes/js/cookienotice.js"></script>
     <script src="includes/js/changeImage.js"></script>
     <script src="includes/js/onload.js"></script>
+    <script src="includes/js/scroll.js"></script>
 </head>
 
 <body>
