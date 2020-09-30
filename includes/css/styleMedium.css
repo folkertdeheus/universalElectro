@@ -3,20 +3,6 @@ body {
     grid-template-columns: 1fr 200px 600px 1fr;
     grid-template-rows: 100px 100px 200px 40px 1fr;
 }
-/*
-header {
-    /* Grid placement in container */
-  /*  grid-column: 1 / 4;
-    grid-row: 1 / 4;
-
-    /* Header grid */
-  /*  display: grid;
-    grid-template-columns: 1fr 200px 600px 1fr;
-    grid-template-rows: 100px 100px 200px 40px;
-
-    /* Background*/
-  /*  background-color: var(--grey);
-}*/
 
 .headerleft {
     /* Header left placement */
@@ -134,9 +120,6 @@ header {
     /* Container grid */
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: repeat(3, auto);
-
-    /* Content gap between header and content */
-    /*margin-top: 20px;*/
 }
 
 main {

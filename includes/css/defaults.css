@@ -213,7 +213,7 @@ header {
 
 .headerimage {
     /* Header background image */
-    background: var(--background);
+    background: url(../images/background.png);
     background-repeat: no-repeat;
     background-position: bottom 25% left 50%;
     background-size: cover;

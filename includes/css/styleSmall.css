@@ -3,23 +3,6 @@ body {
     grid-template-columns: 1fr 200px 400px 1fr;
     grid-template-rows: 100px 100px 40px 1fr;
 }
-/*
-header {
-    /* Grid placement in container */
- /*   grid-column: 1 / 4;
-    grid-row: 1 / 3;
-
-    /* Header grid */
-  /*  display: grid;
-    grid-template-columns: 1fr 200px 400px 1fr;
-    grid-template-rows: 100px 100px 40px;
-
-    /* Header background image */
- /*   background: var(--background);
-    background-repeat: no-repeat;
-    background-position: bottom 25% left 50%;
-    background-size: cover;
-}*/
 
 .headertop {
     /* Position */
@@ -45,7 +28,7 @@ header {
     grid-row: 2 / 3;
 
     /* Background */
-    background-image: var(--background);
+    background-image: url(../images/background.png);
     background-repeat: no-repeat;
     background-position: bottom 25% left 50%;
     background-size: cover;
