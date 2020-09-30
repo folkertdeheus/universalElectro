@@ -6,7 +6,7 @@
  */
 
 // Check if the file should be executed
-if ($_GET['page'] == 1 && $_GET['action'] == 4) {
+if (isset($_GET['page']) && $_GET['page'] == 1 && isset($_GET['action']) && $_GET['action'] == 4) {
 
     // Get quotation from cookie
     $cart = $q->getLatestQuotationFromSession($_COOKIE['unele_shop']);
