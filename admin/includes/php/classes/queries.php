@@ -1705,11 +1705,15 @@ class Queries extends Db
      * @param string $referer
      * @param string $protocol
      * @param string $method
+     * @param string $city
+     * @param string $state
+     * @param string $country
+     * @param string $continent
      * @return int
      */
-    public function addPageview($ip, $agent, $referer, $protocol, $method) : int
+    public function addPageview($ip, $agent, $referer, $protocol, $method, $city, $state, $country, $continent) : int
     {
-        return $this->none('INSERT INTO `pageviews` (`ip`, `agent`, `referer`, `protocol`, `method`) VALUES (?, ?, ?, ?, ?)', array($ip, $agent, $referer, $protocol, $method));
+        return $this->none('INSERT INTO `pageviews` (`ip`, `agent`, `referer`, `protocol`, `method`, `city`, `state`, `country`, `continent`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', array($ip, $agent, $referer, $protocol, $method, $city, $state, $country, $continent));
     }
 
     /**

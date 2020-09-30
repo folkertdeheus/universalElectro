@@ -48,6 +48,9 @@ require_once(PATH.'webshopsession.php');
 // Decryption
 require_once(ADM.'decrypt.php');
 
+// Get IP Info
+require_once(ADM.'ipInfo.php');
+
 // Pageview
 require_once(PATH.'pageviews.php');
 
