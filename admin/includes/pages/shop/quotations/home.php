@@ -25,22 +25,26 @@ if (login()) {
 <?php
                     foreach($quotes as $quoteKey => $quoteValue) {
 
-                        // Get customer
-                        $customer = $q->getCustomer($quoteValue['customer']);
+                        // Check if customer send the quotation
+                        if (isset($quoteValue['customer']) && $quoteValue['customer'] != null) {
 
-                        // Set iv
-                        $iv = $customer['iv'];
+                            // Get customer
+                            $customer = $q->getCustomer($quoteValue['customer']);
 
-                        // Get quotation status
-                        $status = $q->getQuotationStatus($quoteValue['status']);
+                            // Set iv
+                            $iv = $customer['iv'];
+
+                            // Get quotation status
+                            $status = $q->getQuotationStatus($quoteValue['status']);
 ?>
-                        <tr id="row<?= $quoteKey+1; ?>class="quoterow" onclick="window.location='index.php?page=2&action=2&id=<?= $quoteValue['id']; ?>'">
-                            <td><?= $quoteValue['id']; ?></td>
-                            <td><?= $quoteValue['timestamp']; ?></td>
-                            <td><?= decrypt($customer['lastname'], $iv).', '.decrypt($customer['firstname'], $iv).' '.decrypt($customer['insertion'], $iv).' ('.$quoteValue['customer'].')'; ?></td>
-                            <td><?= $status['en_name']; ?></td>
-                        </tr>
+                            <tr id="row<?= $quoteKey+1; ?>" class="quoterow" onclick="window.location='index.php?page=2&action=2&id=<?= $quoteValue['id']; ?>'">
+                                <td><?= $quoteValue['id']; ?></td>
+                                <td><?= $quoteValue['timestamp']; ?></td>
+                                <td><?= decrypt($customer['lastname'], $iv).', '.decrypt($customer['firstname'], $iv).' '.decrypt($customer['insertion'], $iv).' ('.$quoteValue['customer'].')'; ?></td>
+                                <td><?= $status['en_name']; ?></td>
+                            </tr>
 <?php
+                        }
                     }
 ?>
                 </table>
