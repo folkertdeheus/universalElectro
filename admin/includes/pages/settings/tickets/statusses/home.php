@@ -46,6 +46,8 @@ if (login()) {
                 </table>
 <?php
             } else {
+
+                // No ticket statusses found
                 echo 'No ticket statusses';
             }
 ?>

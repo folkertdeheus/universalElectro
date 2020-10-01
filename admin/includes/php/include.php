@@ -22,6 +22,8 @@ require_once(PATH.'checkbox.php');
 require_once(CLAS.'queries.php');
 require_once(CLAS.'forms.php');
 require_once(CLAS.'login.php');
+
 require_once(PATH.'classes.php');
 require_once(PATH.'decrypt.php');
 require_once(PATH.'ipInfo.php');
+require_once(PATH.'priorities.php');

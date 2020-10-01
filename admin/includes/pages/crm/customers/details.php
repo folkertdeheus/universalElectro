@@ -7,6 +7,7 @@
 // Check if user is logged in when accessing this file
 if (login()) {
     
+    // Get all customer information
     $customer = $q->getCustomer($_GET['id']);
     $quotes = $q->getQuotationsFromCustomer($_GET['id']);
     $tickets = $q->getTicketsByCustomer($_GET['id']);
@@ -129,6 +130,7 @@ if (login()) {
                         }
 
                     } else {
+                        // No quotations found
 ?>
                         <tr>
                             <td colspan=2>No quotation requests</td>
@@ -159,6 +161,7 @@ if (login()) {
                         }
 
                     } else {
+                        // No tickets found
 ?>
                         <tr>
                             <td colspan=4>No tickets</td>

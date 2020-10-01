@@ -32,6 +32,7 @@ if (login()) {
                         <th class="icon"></th>
                     </tr>
 <?php
+                    // Loop through all messages
                     foreach($contact as $contactKey => $contactValue) {
 ?>
                         <tr id="row<?= $contactKey+1; ?>">
@@ -50,7 +51,9 @@ if (login()) {
                 <div class="pagebuttons" id="pagebuttons">
                 </div> <!-- pagebuttons -->
 <?php
-            } else {
+            } else 
+        
+                // No messages found
                 echo 'No contact messages';
             }
 ?>

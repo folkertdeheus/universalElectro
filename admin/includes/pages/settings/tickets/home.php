@@ -2,6 +2,7 @@
 
 /**
  * This file contains the tickets settings home page
+ * Menublocks commented out on purpose, too many interface items for customer
  */
 
 // Check if user is logged in when accessing this file

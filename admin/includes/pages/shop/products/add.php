@@ -35,6 +35,7 @@ if (login()) {
                 <label for="brands">Brand</label>
                 <select name="brands" id="brands" required >
 <?php
+                    // Loop through all brands
                     foreach($brands as $brandKey => $brandValue) {
 ?>
                         <option value="<?= $brandValue['id']; ?>"><?= $brandValue['name']; ?></option>
@@ -46,6 +47,7 @@ if (login()) {
                 <label for="categories">Category</label>
                 <select name="categories" id="categories" required >
 <?php
+                    // Loop through all categories
                     foreach($categories as $categoryKey => $categoryValue) {
 ?>
                         <option value="<?= $categoryValue['id']; ?>"><?= $categoryValue['nl_name']; ?></option>
@@ -60,6 +62,7 @@ if (login()) {
                     // Get conditions
                     $conditions = $q->allConditions();
 
+                    // Loop through all conditions
                     foreach($conditions as $conKey => $conValue) {
                         echo '<option value="'.$conValue['id'].'">'.$conValue['en_name'].'</option>';
                     }

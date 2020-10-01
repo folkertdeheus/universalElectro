@@ -10,6 +10,7 @@ if (login()) {
     // Get ticket category information
     $ticketCat = $q->getTicketCategory($_GET['id']);
 
+    // Set checkbox value for notification
     $notiCheck = null;
     if ($ticketCat['notification'] == 1) {
         $notiCheck = ' checked ';

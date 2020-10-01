@@ -7,6 +7,7 @@
 // Check if user is logged in when accessing this file
 if (login()) {
     
+    // Get customer information
     $customer = $q->getCustomer($_GET['id']);
 
     // Set iv for decryption

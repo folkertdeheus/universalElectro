@@ -19,26 +19,8 @@ if (login()) {
     // Get statuses
     $statuses = $q->getTicketStatusses();
 
-    switch($ticket['priority']) {
-        case '1':
-            $priority = 'Low';
-            break;
-
-        case '2':
-            $priority = 'Normal';
-            break;
-
-        case '3':
-            $priority = 'High';
-            break;
-        
-        case '4':
-            $priority = 'Critical';
-            break;
-    
-        default:
-            $priority = 'Normal';
-    }
+    // Switch priority to name
+    $priority = priorities($ticket['priority']);
 ?>
 
     <div class="content">

@@ -23,6 +23,7 @@ if (login()) {
                         <th>Status</th>
                     </tr>
 <?php
+                    // Loop through all quotations
                     foreach($quotes as $quoteKey => $quoteValue) {
 
                         // Check if customer send the quotation
@@ -56,6 +57,7 @@ if (login()) {
 <?php
     } else {
 
+        // No quotations found
         echo 'No quotations';
 
     }

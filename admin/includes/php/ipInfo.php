@@ -2,6 +2,7 @@
 
 /**
  * This file contains a function to retrieve locations from any ip adress
+ * Script from stackoverflow, missing documentation
  * 
  * @param string $i             The IP adress to look up
  * @param string $purpose       The information to look up, possible inputs:

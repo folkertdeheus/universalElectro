@@ -20,6 +20,7 @@ if (login()) {
                 <th>Description</th>
             </tr>
 <?php
+            // Loop through log rows
             foreach($logs as $logKey => $logValue) {
 ?>
                 <tr>

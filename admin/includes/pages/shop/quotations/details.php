@@ -38,6 +38,7 @@ if (login()) {
                         <td>
                             <select name="status" id="status">
 <?php
+                                // Loop through all quotation statusses
                                 foreach($q->allQuotationStatus() as $statusKey => $statusValue) {
 ?>
                                     <option value="<?= $statusValue['id']; ?>" <?php if($statusValue['id'] == $quotation['status']) { echo ' selected '; } ?>><?= $statusValue['en_name']; ?></option>
@@ -67,6 +68,7 @@ if (login()) {
                     <th>Article number</th>
                 </tr>
 <?php
+                // Loop through all products in quotation
                 foreach($products as $productKey => $productValue) {
 
                     // Get product

@@ -33,8 +33,12 @@ if (login()) {
                         <th class="icon"></th>
                     </tr>
 <?php
+                    // Loop through ticket categories
                     foreach($categories as $catKey => $catValue) {
+
+                        // Set notification value for displaying in table
                         $notification = "No";
+                        
                         if ($catValue['notification'] == 1) {
                             $notification = "Yes";
                         }

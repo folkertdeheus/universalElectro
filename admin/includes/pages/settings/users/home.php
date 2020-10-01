@@ -21,8 +21,10 @@ if (login()) {
             // If 1 or more users found, display table
             $countUsers = $q->countUsers();
 
+            // Check if there are users
             if ($countUsers > 0) {
 
+                // Get all users
                 $users = $q->allUsers();
 ?>
                 <table>
@@ -33,6 +35,7 @@ if (login()) {
                         <td class="icon">&nbsp;</td>
                     </tr>
 <?php
+                // Loop through all users
                 foreach($users as $userKey => $userValue) {
 
                     // Skip creator account
@@ -52,6 +55,7 @@ if (login()) {
 <?php
             } else {
 
+                // No users found
                 echo 'No users';
 
             }

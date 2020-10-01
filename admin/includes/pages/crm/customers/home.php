@@ -34,6 +34,7 @@ if (login()) {
                         <th class="icon"></th>
                     </tr>
 <?php
+                    // Loop through customers
                     foreach($customers as $customerKey => $customerValue) {
 
                         // Set iv for decryption
@@ -56,6 +57,8 @@ if (login()) {
                 </div> <!-- pagebuttons -->
 <?php
             } else {
+
+                // No customers
                 echo 'No customers';
             }
 ?>

@@ -7,6 +7,7 @@
 // Check if user is logged in
 if (login()) {
 
+    // Get homepage information
     $pages = $q->getPages();
 
 ?>

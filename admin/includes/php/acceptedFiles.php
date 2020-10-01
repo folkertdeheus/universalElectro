@@ -2,6 +2,8 @@
 
 /**
  * This file contains the accepted file formats for uploads
+ * $acceptedImageTypes is specifically for image files
+ * $acceptedFileTypes is globally for files, used in tickets
  */
 
 $acceptedImageTypes = [

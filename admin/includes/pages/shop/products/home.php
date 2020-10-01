@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains the brands management
+ * This file contains the products management
  */
 
 // Check if user is logged in when accessing this file
@@ -40,6 +40,7 @@ if (login()) {
                             <td class="icon">&nbsp;</td>
                         </tr>
 <?php
+                        // Loop through all products
                         foreach($products as $productsKey => $productsValue) {
 
                             // Get brand
@@ -66,12 +67,15 @@ if (login()) {
                     </div> <!-- pagebuttons -->
 <?php
                 } else {
+
+                    // No products found
                     echo 'No products';
                 }
 ?>
             </div> <!-- table -->
 <?php
         } else {
+            // No brands or categories found
 ?>
             <div class="toolbar">
                 <a href="index.php?page=2&action=4">Categories</a>

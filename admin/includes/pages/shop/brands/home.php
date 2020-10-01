@@ -34,6 +34,7 @@ if (login()) {
                         <td class="icon">&nbsp;</td>
                     </tr>
 <?php
+                    // Loop through brands
                     foreach($brands as $brandKey => $brandValue) {
 ?>
                         <tr id="row<?= $brandKey+1; ?>">
@@ -59,6 +60,8 @@ if (login()) {
                 </div> <!-- pagebuttons -->
 <?php
             } else {
+
+                // No brands found
                 echo 'No brands';
             }
 ?>

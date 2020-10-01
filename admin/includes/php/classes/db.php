@@ -36,7 +36,7 @@ class Db
      * It can be called from inside this class, or it's siblings
      * It takes no data, but it takes it's settings directly from the global connection variables
      */
-    public function fallback()
+    public function fallback() : void
     {
         if (!isset($this->db_pdo) || $this->db_pdo == null) {
 
@@ -63,7 +63,7 @@ class Db
      * @return array (multidimensional)
      */
 
-    public function all($query, $variables = array())
+    public function all($query, $variables = array()) : array
     {
         // Check connection
         $this->fallback();
@@ -91,7 +91,7 @@ class Db
      * @return array
      */
 
-    public function row($query, $variables = array())
+    public function row($query, $variables = array()) : array
     {
         // Check connection
         $this->fallback();
@@ -119,7 +119,7 @@ class Db
      * @return string
      */
         
-    public function one($query, $variables = array())
+    public function one($query, $variables = array()) : string
     {
         // Check connection
         $this->fallback();
@@ -147,7 +147,7 @@ class Db
      * @return string
      */
 
-    public function none($query, $variables = array())
+    public function none($query, $variables = array()) : string
     {
         // Check connection
         $this->fallback();
@@ -170,7 +170,7 @@ class Db
      * @return string
      */
 
-    public function last()
+    public function last() : int
     {
         // Check connection
         $this->fallback();

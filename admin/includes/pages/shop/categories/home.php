@@ -32,6 +32,7 @@ if (login()) {
                         <td class="icon">&nbsp;</td>
                     </tr>
 <?php
+                    // Loop through all categories
                     foreach($categories as $categoryKey => $categoryValue) {
 ?>
                         <tr id="row<?= $categoryKey+1; ?>">
@@ -49,6 +50,8 @@ if (login()) {
                 </div> <!-- pagebuttons -->
 <?php
             } else {
+
+                // No categories found
                 echo 'No categories';
             }
 ?>

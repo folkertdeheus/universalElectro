@@ -8,6 +8,7 @@
 // Check if user is logged in when accessing this file
 if (login()) {
 
+    // Get message information
     $contact = $q->getContact($_GET['id']);
 
 ?>
@@ -46,14 +47,8 @@ if (login()) {
             
             } else {
 
-                // Try to reconstruct customer
-                if (false) {
-
-                } else {
-
-                    // Message sent with customer id unknown
-                    echo 'No customer found';
-                }
+                // Message sent with customer id unknown
+                echo 'No customer found';
             }
 ?>
         </div> <!-- contactlink -->

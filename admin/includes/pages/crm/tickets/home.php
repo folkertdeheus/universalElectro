@@ -37,22 +37,8 @@ if (login()) {
                 // Get last message from ticket
                 $lastMessage = $q->getLastMessageFromTicket($ticketValue['id']);
 
-                switch($ticketValue['priority']) {
-                    case '1':
-                        $priority = 'Low';
-                        break;
-                    case '2':
-                        $priority = 'Normal';
-                        break;
-                    case '3':
-                        $priority = 'High';
-                        break;
-                    case '4':
-                        $priority = 'Critical';
-                        break;
-                    default:
-                        $priority = 'Normal';
-                }
+                // Get names of priorities
+                $priority = priorities($ticketValue['priority']);
 ?>
                 <div class="ticket<?php if ($ticketValue['priority'] == 4) { echo ' critical'; } ?>">
                     <a href="index.php?page=1&action=2&sub=1&id=<?= $ticketValue['id']; ?>">
@@ -95,6 +81,7 @@ if (login()) {
     
         } else {
 
+            // No tickets found
             echo 'No tickets';
 
         }

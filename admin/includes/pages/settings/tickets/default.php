@@ -21,12 +21,14 @@ if (login()) {
             
             case '2':
                 // Statusses
-               // require_once('includes/pages/settings/tickets/statusses/default.php');
+                // Commented out on purpose, too many interface items for customer
+             // require_once('includes/pages/settings/tickets/statusses/default.php');
                 break;
 
             case '3':
                 // Settings
-               // require_once('includes/pages/settings/tickets/settings/default.php');
+                // Commented out on purpose, too many interface items for customer
+             // require_once('includes/pages/settings/tickets/settings/default.php');
                 break;
             
             default:
