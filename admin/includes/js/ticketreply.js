@@ -1,3 +1,8 @@
+/**
+ * This file contains a style function for uploading a file on a ticket reply
+ * 
+ * @param {string} field 
+ */
 function ticketreply(field) {
     var value = document.getElementById(field).value;
 

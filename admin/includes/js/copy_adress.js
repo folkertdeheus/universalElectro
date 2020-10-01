@@ -1,3 +1,7 @@
+/**
+ * This file contains the function to copy shipping adress to billing adress in the create customer form
+ */
+
 function copy_adress()
 {
     var sAdress = document.getElementById('shipping_street').value;
