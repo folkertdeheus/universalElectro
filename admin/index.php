@@ -12,9 +12,9 @@ if(!isset($_SERVER["HTTPS"]) || $_SERVER["HTTPS"] != "on")
 session_start();
 
 // Set errors on
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+//ini_set('display_errors', 1);
+//ini_set('display_startup_errors', 1);
+//error_reporting(E_ALL);
 
 // Include php files
 include('includes/php/include.php');

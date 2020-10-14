@@ -16,9 +16,9 @@ if(!isset($_SERVER["HTTPS"]) || $_SERVER["HTTPS"] != "on")
 }
 
 // Error reporting, only on while in development, turn off when done
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+//ini_set('display_errors', 1);
+//ini_set('display_startup_errors', 1);
+//error_reporting(E_ALL);
 
 // Start sessions
 session_start();
