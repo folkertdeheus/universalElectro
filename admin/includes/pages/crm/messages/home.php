@@ -51,7 +51,7 @@ if (login()) {
                 <div class="pagebuttons" id="pagebuttons">
                 </div> <!-- pagebuttons -->
 <?php
-            } else 
+            } else {
         
                 // No messages found
                 echo 'No contact messages';
