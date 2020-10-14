@@ -4,8 +4,11 @@
  * This file contains the products overview 
  */
 
+// Secure cat
+$cat = htmlentities($_GET['cat']);
+
 // Get all products in category
-$products = $q->getProductsByCategory($_GET['cat']);
+$products = $q->getProductsByCategory($cat);
 
 ?>
 
@@ -20,7 +23,7 @@ $products = $q->getProductsByCategory($_GET['cat']);
 <?php
         foreach($products as $productKey => $productValue) {
 ?>
-            <a href="index.php?page=1&cat=<?= $_GET['cat']; ?>&product=<?= $productValue['id']; ?>">
+            <a href="index.php?page=1&cat=<?= $cat; ?>&product=<?= $productValue['id']; ?>">
                 <div class="webshop_category">
                     <div class="webshop_image">
 <?php
@@ -52,7 +55,7 @@ $products = $q->getProductsByCategory($_GET['cat']);
 <?php
         foreach($products as $productKey => $productValue) {
 ?>
-            <a href="index.php?page=1&cat=<?= $_GET['cat']; ?>&product=<?= $productValue['id']; ?>">
+            <a href="index.php?page=1&cat=<?= $cat; ?>&product=<?= $productValue['id']; ?>">
                 <div class="webshop_category">
                     <div class="webshop_image">
 <?php

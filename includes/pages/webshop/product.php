@@ -4,8 +4,11 @@
  * This file contains the product detailed view
  */
 
+// Secure product
+$prod = htmlentities($_GET['product']);
+
 // Get product information
-$product = $q->getProductById($_GET['product']);
+$product = $q->getProductById($prod);
 
 // Set accepted images types
 $acceptedFileTypes = $acceptedImageTypes;

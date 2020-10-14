@@ -9,8 +9,8 @@ $searchTerm = null;
 
 // Check if form is sent, run query
 if (isset($_POST['form']) && $_POST['form'] == 'search') { 
-    $searchTerm = $_POST['search'];
-    $result = $q->search(htmlentities($_POST['search']));
+    $searchTerm = htmlentities($_POST['search']);
+    $result = $q->search($searchTerm);
 }
 
 ?>
